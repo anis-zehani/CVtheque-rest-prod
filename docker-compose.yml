@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+
+  mycvtheque-front:
+    build: ../../AngularWorkspace/Cvtheque
+    depends_on:
+      - mycvtheque-rest
+    network_mode: "host"
+    ports:
+      - 4200:4200
+ 
+  mycvtheque-rest:
+    build: .
+    depends_on:
+      - mycvtheque-db
+    network_mode: "host"
+    ports:
+      - 8090:8090
+        
+  mycvtheque-db:
+    image: postgres
+    volumes:
+      - mypostgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=cvtheque
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=Az@zel84
+    ports:
+      - 5432:5432
+      
+  mycvtheque-nginx:
+    image: nginx:alpine
+    ports:
+      - 8000:80       
+volumes:
+  mypostgres-data:
