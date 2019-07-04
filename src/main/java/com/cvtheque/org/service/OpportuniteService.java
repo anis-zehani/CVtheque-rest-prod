@@ -1,0 +1,22 @@
+package com.cvtheque.org.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.cvtheque.org.model.Opportunite;
+
+public interface OpportuniteService {
+	
+	public List<Opportunite> getAllOpportunites(String etat);
+	
+	public Optional<Opportunite> getOpportunite(Long id);
+	
+	public Opportunite addOpportunite(Opportunite opportunite);
+	
+	public Opportunite editOpportunite(Opportunite opportunite);
+	
+	public Opportunite editEtatOpportunite(Opportunite opportunite);
+	
+	public void deleteOpportunite(Long id);
+
+}
