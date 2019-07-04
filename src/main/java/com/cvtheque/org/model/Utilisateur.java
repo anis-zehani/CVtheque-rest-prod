@@ -1,0 +1,141 @@
+package com.cvtheque.org.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+
+import lombok.Data;
+
+
+@Data
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+    name="DTYPE",
+    discriminatorType=DiscriminatorType.STRING
+    )
+public class Utilisateur implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+	
+    @Id
+    private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+	
+    @Column
+	private String identite;
+	
+    @Column
+	private String telephone;
+	
+    @Column
+	private String email;
+	
+	@Column
+	private String poste_occupe;
+	
+	@Column(length = 1024)
+	private String description_detaillee;
+	
+	@Column
+	private String login;
+	
+	@Column
+	private String password;
+	
+	@Column
+	private String urlPhoto;
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	Entreprise entreprise;
+
+	public Utilisateur() {
+		super();
+	}
+
+	public String getIdentite() {
+		return identite;
+	}
+
+	public void setIdentite(String identite) {
+		this.identite = identite;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPoste_occupe() {
+		return poste_occupe;
+	}
+
+	public void setPoste_occupe(String poste_occupe) {
+		this.poste_occupe = poste_occupe;
+	}
+
+	public String getDescription_detaillee() {
+		return description_detaillee;
+	}
+
+	public void setDescription_detaillee(String description_detaillee) {
+		this.description_detaillee = description_detaillee;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Long getId() {
+		return id;
+	}
+	
+	public String getUrlPhoto() {
+		return urlPhoto;
+	}
+
+	public void setUrlPhoto(String urlPhoto) {
+		this.urlPhoto = urlPhoto;
+	}
+
+	public Entreprise getEntreprise() {
+		return entreprise;
+	}
+
+	public void setEntreprise(Entreprise entreprise) {
+		this.entreprise = entreprise;
+	}
+
+}
