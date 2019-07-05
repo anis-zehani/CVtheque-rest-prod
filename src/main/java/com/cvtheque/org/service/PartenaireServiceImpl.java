@@ -130,7 +130,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 				//On supprime d'abord la photo si ce n'est pas un avatar
 				if(partenaire.getUrlPhoto() != null && partenaire.getUrlPhoto().startsWith(Consts.urlAvatar.replace("\"", ""))==false)
 				{
-					storageService.deletePhoto(partenaire.getUrlPhoto());
+					storageService.deletePhoto(Consts.rootLocation+partenaire.getUrlPhoto());
 				}
 			}
 			catch(NoSuchElementException e) 

@@ -92,13 +92,13 @@ public class ContactServiceImpl implements ContactService{
 		if(contactRepository.existsById(id))
 		{
 			Contact contact = contactRepository.getOne(id);
-			
+
 			try
 			{
 				//On supprime d'abord la photo si ce n'est pas un avatar
 				if(contact.getUrlPhoto() != null && contact.getUrlPhoto().startsWith(Consts.urlAvatar.replace("\"", ""))==false)
 				{
-					storageService.deletePhoto(contact.getUrlPhoto());
+					storageService.deletePhoto(Consts.rootLocation+contact.getUrlPhoto());
 				}
 			}
 			catch(NoSuchElementException e) 

@@ -245,19 +245,19 @@ public class CandidatServiceImpl implements CandidatService{
 				//On supprime d'abord la photo si ce n'est pas un avatar
 				if(candidat.getUrlPhoto() != null && candidat.getUrlPhoto().startsWith(Consts.urlAvatar.replace("\"", ""))==false)
 				{
-					storageService.deletePhoto(candidat.getUrlPhoto());
+					storageService.deletePhoto(Consts.rootLocation+candidat.getUrlPhoto());
 				}
 				
 				//On supprime le CV Odix du Disque
 				if(candidat.getCurriculum() != null && candidat.getCurriculum().getUrlCvOdix() != null)
 				{
-					storageService.deleteCvOdix(candidat.getCurriculum().getUrlCvOdix());
+					storageService.deleteCvOdix(Consts.rootLocation+candidat.getCurriculum().getUrlCvOdix());
 				}
 				
 				//On supprime le CV Original du Disque
 				if(candidat.getCurriculum() != null && candidat.getCurriculum().getUrlCvOriginal() != null)
 				{
-					storageService.deleteCvOriginal(candidat.getCurriculum().getUrlCvOriginal());
+					storageService.deleteCvOriginal(Consts.rootLocation+candidat.getCurriculum().getUrlCvOriginal());
 				}
 				
 			}

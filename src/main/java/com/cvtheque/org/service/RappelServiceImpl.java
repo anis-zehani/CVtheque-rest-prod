@@ -138,7 +138,7 @@ public class RappelServiceImpl implements RappelService{
 				//On supprime la pièce jointe si elle existe
 				if(rappel.getUrlFichier()!=null && rappel.getUrlFichier().startsWith(Consts.urlUploadsFiles.replace("\"", ""))==true)
 				{
-					storageService.deleteFichier(rappel.getUrlFichier());
+					storageService.deleteFichier(Consts.rootLocation+rappel.getUrlFichier());
 				}
 			}
 			catch(NoSuchElementException e) 

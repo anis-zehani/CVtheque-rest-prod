@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 public final class Consts {
 	
 			//Emplacament photo sur le serveur
-			public static final Path rootLocation = Paths.get("/");
+			public static final Path rootLocation = Paths.get("/var/tmp/uploads/");
 		 
 			//Emplacament photo sur le serveur
 			public static final Path rootLocationPhoto = Paths.get("/var/tmp/uploads/img/");
@@ -21,21 +21,21 @@ public final class Consts {
 			public static final Path rootLocationFichierRappel = Paths.get("/var/tmp/uploads/files/");
 			
 			//URL : uploads/img/
-			public static final String urlUploadsImg = "img/";
+			public static final String urlUploadsImg = "/img/";
 			
 			//URL : uploads/cvodix/
-			public static final String urlUploadsCvOdix = "cvodix/";
+			public static final String urlUploadsCvOdix = "/cvodix/";
 					
 			//URL : uploads/cvoriginal/
-			public static final String urlUploadsCvOriginal = "cvoriginal/";
+			public static final String urlUploadsCvOriginal = "/cvoriginal/";
 					
 			//URL : uploads/files/
-			public static final String urlUploadsFiles = "files/";
+			public static final String urlUploadsFiles = "/files/";
 			
 			//URL Avatar
-			public static final String urlAvatar = "assets/img/avatar.png";
+			public static final String urlAvatar = "/assets/img/avatar.png";
 			
 			//URL Money Avatar
-			public static final String urlMoney = "assets/img/money.png";
+			public static final String urlMoney = "/assets/img/money.png";
 	  
 }

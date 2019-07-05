@@ -15,9 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class StorageService {
 	
 	  //Emplacament photo sur le serveur
-	  private final Path rootLocation = Consts.rootLocation;
-	 
-	  //Emplacament photo sur le serveur
 	  private final Path rootLocationPhoto = Consts.rootLocationPhoto;
 	  
 	  //Emplacament cvodix sur le serveur
@@ -177,7 +174,7 @@ public class StorageService {
 	  //Supprime une seule photo via son Path
 	  public void deletePhoto(String filename) {
 
-		  File rootLocation = new File(this.rootLocation+"/"+filename);
+		  File rootLocation = new File(filename);
 		  try 
 		  {
 			  rootLocation.delete();
@@ -191,7 +188,7 @@ public class StorageService {
 	  //Supprime un CvOdix via son Path
 	  public void deleteCvOdix(String filename) {
 
-		  File rootLocation = new File(this.rootLocation+"/"+filename);
+		  File rootLocation = new File(filename);
 		  try 
 		  {
 			  rootLocation.delete();
@@ -205,7 +202,7 @@ public class StorageService {
 	  //Supprime un CvOriginal via son Path
 	  public void deleteCvOriginal(String filename) {
 
-		  File rootLocation = new File(this.rootLocation+"/"+filename);
+		  File rootLocation = new File(filename);
 		  try 
 		  {
 			  rootLocation.delete();
@@ -219,7 +216,7 @@ public class StorageService {
 	  //Supprime un seule fichier via son Path
 	  public void deleteFichier(String filename) {
 
-		  File rootLocation = new File(this.rootLocation+"/"+filename);
+		  File rootLocation = new File(filename);
 		  try 
 		  {
 			  rootLocation.delete();
