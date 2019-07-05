@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM openjdk:8-alpine
 ADD target/Cvtheque-1.jar Cvtheque-1.jar
 RUN mkdir -p /var/tmp/uploads && \
 	mkdir -p /var/tmp/uploads/img && \

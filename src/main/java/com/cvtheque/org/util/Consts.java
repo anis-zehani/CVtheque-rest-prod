@@ -21,16 +21,16 @@ public final class Consts {
 			public static final Path rootLocationFichierRappel = Paths.get("/var/tmp/uploads/files/");
 			
 			//URL : uploads/img/
-			public static final String urlUploadsImg = "/var/tmp/uploads/img/";
+			public static final String urlUploadsImg = "img/";
 			
 			//URL : uploads/cvodix/
-			public static final String urlUploadsCvOdix = "/var/tmp/uploads/cvodix/";
+			public static final String urlUploadsCvOdix = "cvodix/";
 					
 			//URL : uploads/cvoriginal/
-			public static final String urlUploadsCvOriginal = "/var/tmp/uploads/cvoriginal/";
+			public static final String urlUploadsCvOriginal = "cvoriginal/";
 					
 			//URL : uploads/files/
-			public static final String urlUploadsFiles = "/var/tmp/uploads/files/";
+			public static final String urlUploadsFiles = "files/";
 			
 			//URL Avatar
 			public static final String urlAvatar = "assets/img/avatar.png";
