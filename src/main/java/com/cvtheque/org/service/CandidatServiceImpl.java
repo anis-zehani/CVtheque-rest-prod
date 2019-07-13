@@ -203,6 +203,30 @@ public class CandidatServiceImpl implements CandidatService{
 			{
 				candidatToUpdate.setVisa(candidat.getVisa());
 			}
+			
+			/*
+			 * listeTechnologies : @ManyToMany
+			 */
+			if(candidat.getListeTechnologies() != null)
+			{
+				candidatToUpdate.setListeTechnologies(candidat.getListeTechnologies());
+			}
+			
+			/*
+			 * listeOpportunites : @ManyToMany
+			 */
+			if(candidat.getListeOpportunites() != null)
+			{
+				candidatToUpdate.setListeOpportunites(candidat.getListeOpportunites());
+			}
+			
+			/*
+			 * listeCertifications : @ManyToMany
+			 */
+			if(candidat.getListeCertifications() != null)
+			{
+				candidatToUpdate.setListeCertifications(candidat.getListeCertifications());
+			}
 
 			return candidatRepository.save(candidatToUpdate);
 		}
