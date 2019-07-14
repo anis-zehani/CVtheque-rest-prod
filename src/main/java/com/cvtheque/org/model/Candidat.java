@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-
-import javax.persistence.CascadeType;
 
 import lombok.Data;
 
@@ -93,13 +92,13 @@ public class Candidat extends Utilisateur{
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional=true)
 	private Curriculum curriculum;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Opportunite> listeOpportunites = new ArrayList<Opportunite>();
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Technologie> listeTechnologies = new ArrayList<Technologie>();
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Certification> listeCertifications = new ArrayList<Certification>();
 
 	public Candidat() {
