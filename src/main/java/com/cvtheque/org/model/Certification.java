@@ -1,5 +1,7 @@
 package com.cvtheque.org.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +13,13 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Certification {
+public class Certification implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1998921502004317093L;
 
-    @Id
+	@Id
     private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	
     @NotEmpty(message="Odix - certification ne peut pas être vide")

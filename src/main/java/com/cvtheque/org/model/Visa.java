@@ -1,5 +1,6 @@
 package com.cvtheque.org.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -14,8 +15,12 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Visa {
-	
+public class Visa implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3545362140070255221L;
+
 	@Id
 	private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	

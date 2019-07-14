@@ -25,10 +25,12 @@ import lombok.Data;
     discriminatorType=DiscriminatorType.STRING
     )
 public class Utilisateur implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3635172837730319055L;
 
-    private static final long serialVersionUID = 1L;
-	
-    @Id
+	@Id
     private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	
     @Column

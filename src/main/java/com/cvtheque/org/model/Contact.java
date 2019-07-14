@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Entity
 @DiscriminatorValue(value="Contact")
-public class Contact extends Utilisateur{
+public class Contact extends Utilisateur {
 	
 	private static final long serialVersionUID = 1L;
 	

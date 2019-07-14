@@ -1,5 +1,6 @@
 package com.cvtheque.org.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,10 +21,12 @@ import lombok.Data;
 @Data
 @Entity
 @DiscriminatorValue(value="Candidat")
-public class Candidat extends Utilisateur{
-	
-	private static final long serialVersionUID = 1L;
-	
+public class Candidat extends Utilisateur implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1004341819482868284L;
+
 	/**Les champs du candidat, hérités de la classe utilisateur :
 	 * 
 	 * id

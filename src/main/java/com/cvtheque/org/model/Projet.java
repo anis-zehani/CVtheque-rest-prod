@@ -1,5 +1,7 @@
 package com.cvtheque.org.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +12,12 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Projet {
-	
+public class Projet implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2987976139475982418L;
+
 	@Id
 	private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	

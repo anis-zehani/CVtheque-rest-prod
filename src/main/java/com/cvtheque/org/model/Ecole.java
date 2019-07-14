@@ -1,5 +1,7 @@
 package com.cvtheque.org.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +13,13 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Ecole {
-	
-    @Id
+public class Ecole implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -858562105980175964L;
+
+	@Id
     private @GeneratedValue(strategy = GenerationType.IDENTITY) Long idEcole;
 	
     @NotEmpty(message="Odix - école ne peut pas être vide")

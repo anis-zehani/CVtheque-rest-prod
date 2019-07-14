@@ -1,5 +1,6 @@
 package com.cvtheque.org.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -17,8 +18,12 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Rappel {
-	
+public class Rappel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9007698563424820307L;
+
 	@Id
 	private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	
@@ -44,8 +49,10 @@ public class Rappel {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	Projet projet;
 	
-	/*@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	Utilisateur utilisateur;*/
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	Utilisateur utilisateur;
+	*/
 
 	public Rappel() {
 		super();
@@ -107,13 +114,15 @@ public class Rappel {
 		this.projet = projet;
 	}
 
-	/*public Utilisateur getUtilisateur() {
+	/*
+	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
-	}*/
+	}
+	*/
 
 	public Long getId() {
 		return id;

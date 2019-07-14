@@ -1,5 +1,6 @@
 package com.cvtheque.org.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -16,9 +17,13 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Diplome {
-	
-    @Id
+public class Diplome implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7405930119584792399L;
+
+	@Id
     private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     
     @Column

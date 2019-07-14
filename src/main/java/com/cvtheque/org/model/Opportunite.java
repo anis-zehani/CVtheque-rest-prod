@@ -1,5 +1,6 @@
 package com.cvtheque.org.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -16,8 +17,12 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Opportunite {
-	
+public class Opportunite implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3301405585667329930L;
+
 	@Id
 	private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	
