@@ -89,7 +89,7 @@ public class CandidatServiceImpl implements CandidatService{
 			//update URL photo avec nouveau nom
 			candidat.setUrlPhoto(urlPhoto);
 
-			return candidatRepository.save(candidat);
+			return candidatRepository.saveAndFlush(candidat);
 		}
 		
 		return null;
@@ -117,7 +117,7 @@ public class CandidatServiceImpl implements CandidatService{
 				System.out.print("Erreur durant deleteCvOdix :"+e);
 			}
 			
-			return candidatRepository.save(candidat);
+			return candidatRepository.saveAndFlush(candidat);
 		}
 		
 			return null;
@@ -146,7 +146,7 @@ public class CandidatServiceImpl implements CandidatService{
 				System.out.print("Erreur durant CvOriginal :"+e);
 			}
 			
-			return candidatRepository.save(candidat);
+			return candidatRepository.saveAndFlush(candidat);
 		}
 		
 			return null;

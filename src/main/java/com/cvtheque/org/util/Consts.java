@@ -6,6 +6,40 @@ import java.nio.file.Paths;
 public final class Consts {
 	
 			//Emplacament photo sur le serveur
+			public static final Path rootLocation = Paths.get("/");
+		 
+			//Emplacament photo sur le serveur
+			public static final Path rootLocationPhoto = Paths.get("/");
+		  
+			//Emplacament cvodix sur le serveur
+			public static final Path rootLocationCvOdix = Paths.get("/");
+		  
+			//Emplacament cvoriginal sur le serveur
+			public static final Path rootLocationCvOriginal = Paths.get("/");
+		  
+			//Emplacament fichier sur le serveur
+			public static final Path rootLocationFichierRappel = Paths.get("/");
+			
+			//URL : uploads/img/
+			public static final String urlUploadsImg = "/";
+			
+			//URL : uploads/cvodix/
+			public static final String urlUploadsCvOdix = "/";
+					
+			//URL : uploads/cvoriginal/
+			public static final String urlUploadsCvOriginal = "/";
+					
+			//URL : uploads/files/
+			public static final String urlUploadsFiles = "/";
+			
+			//URL Avatar
+			public static final String urlAvatar = "";
+			
+			//URL Money Avatar
+			public static final String urlMoney = "";
+	
+	/*
+			//Emplacament photo sur le serveur
 			public static final Path rootLocation = Paths.get("/var/tmp/uploads/");
 		 
 			//Emplacament photo sur le serveur
@@ -37,5 +71,5 @@ public final class Consts {
 			
 			//URL Money Avatar
 			public static final String urlMoney = "/assets/img/money.png";
-	  
+	  */
 }
