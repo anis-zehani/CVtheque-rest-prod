@@ -6,19 +6,19 @@ import java.nio.file.Paths;
 public final class Consts {
 	
 			//Emplacament photo sur le serveur
-			public static final Path rootLocation = Paths.get("/usr/share/nginx/html");
+			public static final Path rootLocation = Paths.get("/");
 		 
 			//Emplacament photo sur le serveur
-			public static final Path rootLocationPhoto = Paths.get("/usr/share/nginx/html");
+			public static final Path rootLocationPhoto = Paths.get("/");
 		  
 			//Emplacament cvodix sur le serveur
-			public static final Path rootLocationCvOdix = Paths.get("/usr/share/nginx/html");
+			public static final Path rootLocationCvOdix = Paths.get("/");
 		  
 			//Emplacament cvoriginal sur le serveur
-			public static final Path rootLocationCvOriginal = Paths.get("/usr/share/nginx/html");
+			public static final Path rootLocationCvOriginal = Paths.get("/");
 		  
 			//Emplacament fichier sur le serveur
-			public static final Path rootLocationFichierRappel = Paths.get("/usr/share/nginx/html");
+			public static final Path rootLocationFichierRappel = Paths.get("/");
 			
 			//URL : uploads/img/
 			public static final String urlUploadsImg = "/";
