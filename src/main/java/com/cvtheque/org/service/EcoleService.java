@@ -11,9 +11,9 @@ public interface EcoleService {
 	
 	public Optional<Ecole> getEcole(Long id);
 	
-	public Ecole addEcole(Ecole école);
+	public Ecole addEcole(Ecole ecole);
 	
-	public Ecole editEcole(Ecole école);
+	public Ecole editEcole(Ecole ecole);
 	
 	public void deleteEcole(Long id);
 

@@ -13,7 +13,7 @@ public class ProjetServiceImpl implements ProjetService{
 	
 	private final ProjetRepository projetRepository;
 
-	private ProjetServiceImpl(ProjetRepository projetRepository) {
+	ProjetServiceImpl(ProjetRepository projetRepository) {
 		super();
 		this.projetRepository = projetRepository;
 	}

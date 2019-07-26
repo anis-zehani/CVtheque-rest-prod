@@ -26,32 +26,32 @@ public class ProjetController {
 	@Autowired
 	private final ProjetService projetService;
 	
-	private ProjetController(ProjetService projetService) {
+	ProjetController(ProjetService projetService) {
 		this.projetService = projetService;
 	}
 
 	@GetMapping()
-	List<Projet> getAllProjets() {
+	public List<Projet> getAllProjets() {
 	    return projetService.getAllProjets();
 	}
 	
 	@GetMapping("{id}")
-	Projet getProjet(@PathVariable Long id) {
+	public Projet getProjet(@PathVariable Long id) {
 		return projetService.getProjet(id);
 	}
 	
 	@PostMapping()
-	Projet addProjet(@Valid @RequestBody Projet projet) {
+	public Projet addProjet(@Valid @RequestBody Projet projet) {
 		return projetService.addProjet(projet);
 	}
 	
 	@PutMapping()
-	Projet editProjet(@Valid @RequestBody Projet projet) {
+	public Projet editProjet(@Valid @RequestBody Projet projet) {
 		return projetService.editProjet(projet);
 	}
 	
 	@DeleteMapping("{id}")
-	void deleteProjet(@PathVariable Long id) {
+	public void deleteProjet(@PathVariable Long id) {
 		projetService.deleteProjet(id);
 	}
 

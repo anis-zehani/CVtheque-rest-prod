@@ -35,28 +35,28 @@ public class CandidatController {
 	@Autowired
 	private final CandidatService candidatService;
 	
-	private CandidatController(CandidatService candidatService) {
+	CandidatController(CandidatService candidatService) {
 		this.candidatService = candidatService;
 	}
 
 	@GetMapping("/all/{etatCandidat}")
-	List<Candidat> getAllCandidats(@PathVariable String etatCandidat) {
+	public List<Candidat> getAllCandidats(@PathVariable String etatCandidat) {
 	    return candidatService.getAllCandidats(etatCandidat);
 	}
 	
 	@GetMapping("{id}")
-	Candidat getCandidat(@PathVariable Long id) {
+	public Candidat getCandidat(@PathVariable Long id) {
 		return candidatService.getCandidat(id);
 	}
 	
 	//Ajouter un candidat
 	@PostMapping()
-	Candidat addCandidat(@Valid @RequestBody Candidat candidat) {
+	public Candidat addCandidat(@Valid @RequestBody Candidat candidat) {
 		return candidatService.addCandidat(candidat);
 	}
 	
 	@PostMapping("addPhoto/{id}")
-	Candidat addPhoto(@PathVariable Long id, @RequestParam("photo") MultipartFile photo) {
+	public Candidat addPhoto(@PathVariable Long id, @RequestParam("photo") MultipartFile photo) {
 		//la photo est placée sur le serveur
 	    String urlPhoto =  storageService.addPhoto(photo);
 	    //la photo est affectée au candidat via son id
@@ -64,7 +64,7 @@ public class CandidatController {
 	}
 	
 	@PostMapping("addCvOdix/{id}")
-	Candidat addCvOdix(@PathVariable Long id, @RequestParam("cvOdix") MultipartFile cvOdix) {	
+	public Candidat addCvOdix(@PathVariable Long id, @RequestParam("cvOdix") MultipartFile cvOdix) {	
 		//le CvOdix est placé sur le serveur
 	    String urlCvOdix =  storageService.addCvOdix(cvOdix);
 	    //le CvOdix est affecté au candidat via son id
@@ -72,7 +72,7 @@ public class CandidatController {
 	}
 	
 	@PostMapping("addCvOriginal/{id}")
-	Candidat addCvOriginal(@PathVariable Long id, @RequestParam("cvOriginal") MultipartFile cvOriginal) {
+	public Candidat addCvOriginal(@PathVariable Long id, @RequestParam("cvOriginal") MultipartFile cvOriginal) {
 		//le CvOriginal est placé sur le serveur
 	    String urlCvOriginal =  storageService.addCvOriginal(cvOriginal);
 	    //le CvOriginal est affecté au candidat via son id
@@ -81,17 +81,17 @@ public class CandidatController {
 	
 	
 	@PutMapping()
-	Candidat editCandidat(@Valid @RequestBody Candidat candidat) {
+	public Candidat editCandidat(@Valid @RequestBody Candidat candidat) {
 		return candidatService.editCandidat(candidat);
 	}
 	
 	@PutMapping("/editEtat")
-	Candidat editEtatCandidat(@Valid @RequestBody Candidat candidat) {
+	public Candidat editEtatCandidat(@Valid @RequestBody Candidat candidat) {
 		return candidatService.editEtatCandidat(candidat);
 	}
 	
 	@DeleteMapping("{id}")
-	void deleteCandidat(@PathVariable Long id) {
+	public void deleteCandidat(@PathVariable Long id) {
 		candidatService.deleteCandidat(id);
 	}
 

@@ -5,71 +5,19 @@ import java.nio.file.Paths;
 
 public final class Consts {
 	
-			//Emplacament photo sur le serveur
-			public static final Path rootLocation = Paths.get("/");
+			//Emplacament photo sur le serveur physique : container Rest
+			public static final Path rootLocation = Paths.get("/uploads");
 		 
-			//Emplacament photo sur le serveur
-			public static final Path rootLocationPhoto = Paths.get("/");
+			//Emplacament photo sur le serveur physique : container Rest
+			public static final Path rootLocationPhoto = Paths.get("/uploads");
 		  
-			//Emplacament cvodix sur le serveur
-			public static final Path rootLocationCvOdix = Paths.get("/");
+			//Emplacament cvodix sur le serveur physique : container Rest
+			public static final Path rootLocationCvOdix = Paths.get("/uploads");
 		  
-			//Emplacament cvoriginal sur le serveur
-			public static final Path rootLocationCvOriginal = Paths.get("/");
+			//Emplacament cvoriginal sur le serveur physique : container Rest
+			public static final Path rootLocationCvOriginal = Paths.get("/uploads");
 		  
-			//Emplacament fichier sur le serveur
-			public static final Path rootLocationFichierRappel = Paths.get("/");
-			
-			//URL : uploads/img/
-			public static final String urlUploadsImg = "/";
-			
-			//URL : uploads/cvodix/
-			public static final String urlUploadsCvOdix = "/";
-					
-			//URL : uploads/cvoriginal/
-			public static final String urlUploadsCvOriginal = "/";
-					
-			//URL : uploads/files/
-			public static final String urlUploadsFiles = "/";
-			
-			//URL Avatar
-			public static final String urlAvatar = "";
-			
-			//URL Money Avatar
-			public static final String urlMoney = "";
-	
-	/*
-			//Emplacament photo sur le serveur
-			public static final Path rootLocation = Paths.get("/var/tmp/uploads/");
-		 
-			//Emplacament photo sur le serveur
-			public static final Path rootLocationPhoto = Paths.get("/var/tmp/uploads/img/");
-		  
-			//Emplacament cvodix sur le serveur
-			public static final Path rootLocationCvOdix = Paths.get("/var/tmp/uploads/cvodix/");
-		  
-			//Emplacament cvoriginal sur le serveur
-			public static final Path rootLocationCvOriginal = Paths.get("/var/tmp/uploads/cvoriginal/");
-		  
-			//Emplacament fichier sur le serveur
-			public static final Path rootLocationFichierRappel = Paths.get("/var/tmp/uploads/files/");
-			
-			//URL : uploads/img/
-			public static final String urlUploadsImg = "/img/";
-			
-			//URL : uploads/cvodix/
-			public static final String urlUploadsCvOdix = "/cvodix/";
-					
-			//URL : uploads/cvoriginal/
-			public static final String urlUploadsCvOriginal = "/cvoriginal/";
-					
-			//URL : uploads/files/
-			public static final String urlUploadsFiles = "/files/";
-			
-			//URL Avatar
-			public static final String urlAvatar = "/assets/img/avatar.png";
-			
-			//URL Money Avatar
-			public static final String urlMoney = "/assets/img/money.png";
-	  */
+			//Emplacament fichier sur le serveur physique : container Rest
+			public static final Path rootLocationFichierRappel = Paths.get("/uploads");
+
 }

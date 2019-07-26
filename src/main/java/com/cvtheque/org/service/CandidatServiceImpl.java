@@ -18,7 +18,7 @@ public class CandidatServiceImpl implements CandidatService{
 	private final CandidatRepository candidatRepository;
 	private final StorageService storageService;
 	
-	private CandidatServiceImpl(CandidatRepository candidatRepository, StorageService storageService) 
+	CandidatServiceImpl(CandidatRepository candidatRepository, StorageService storageService) 
 	{
 		super();
 		this.candidatRepository = candidatRepository;
@@ -50,7 +50,7 @@ public class CandidatServiceImpl implements CandidatService{
 		candidat.setEtatCandidat(Etat.True);
 		
 		//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
-		candidat.setUrlPhoto(Consts.urlAvatar.replace("\"", ""));
+		candidat.setUrlPhoto("");
 		
 		//Indispensable afin de créer un Objet CV au démarrage : util pour l'ajout des PJs
 		Curriculum cv = new Curriculum();
@@ -81,7 +81,7 @@ public class CandidatServiceImpl implements CandidatService{
 			Candidat candidat = candidatRepository.getOne(id);
 			
 			//delete ancienne photo : si elle existe dans le cas d'un Update
-			if(candidat.getUrlPhoto() != null && candidat.getUrlPhoto().startsWith(Consts.urlAvatar.replace("\"", ""))==false)
+			if(candidat.getUrlPhoto() != null)
 			{
 				storageService.deletePhoto(candidat.getUrlPhoto());
 			}
@@ -267,7 +267,7 @@ public class CandidatServiceImpl implements CandidatService{
 			{
 				
 				//On supprime d'abord la photo si ce n'est pas un avatar
-				if(candidat.getUrlPhoto() != null && candidat.getUrlPhoto().startsWith(Consts.urlAvatar.replace("\"", ""))==false)
+				if(candidat.getUrlPhoto() != null)
 				{
 					storageService.deletePhoto(Consts.rootLocation+candidat.getUrlPhoto());
 				}

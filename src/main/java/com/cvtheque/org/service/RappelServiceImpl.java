@@ -21,7 +21,7 @@ public class RappelServiceImpl implements RappelService{
 	private final RappelRepository rappelRepository;
 	private final StorageService storageService;
 
-	private RappelServiceImpl(RappelRepository rappelRepository, StorageService storageService) {
+	RappelServiceImpl(RappelRepository rappelRepository, StorageService storageService) {
 		super();
 		this.rappelRepository = rappelRepository;
 		this.storageService = storageService;
@@ -136,7 +136,7 @@ public class RappelServiceImpl implements RappelService{
 			try
 			{
 				//On supprime la pièce jointe si elle existe
-				if(rappel.getUrlFichier()!=null && rappel.getUrlFichier().startsWith(Consts.urlUploadsFiles.replace("\"", ""))==true)
+				if(rappel.getUrlFichier()!=null && rappel.getUrlFichier().startsWith(Consts.rootLocationFichierRappel.toString()+"/".replace("\"", ""))==true)
 				{
 					storageService.deleteFichier(Consts.rootLocation+rappel.getUrlFichier());
 				}

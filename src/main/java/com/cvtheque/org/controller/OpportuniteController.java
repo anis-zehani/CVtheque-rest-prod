@@ -27,37 +27,37 @@ public class OpportuniteController {
 	@Autowired
 	private final OpportuniteService opportuniteService;
 	
-	private OpportuniteController(OpportuniteService opportuniteService) {
+	OpportuniteController(OpportuniteService opportuniteService) {
 		this.opportuniteService = opportuniteService;
 	}
 
 	@GetMapping("/all/{etatOpportunite}")
-	List<Opportunite> getAllOpportunites(@PathVariable String etatOpportunite) {
+	public List<Opportunite> getAllOpportunites(@PathVariable String etatOpportunite) {
 	    return opportuniteService.getAllOpportunites(etatOpportunite);
 	}
 	
 	@GetMapping("{id}")
-	Optional<Opportunite> getOpportunite(@PathVariable Long id) {
+	public Optional<Opportunite> getOpportunite(@PathVariable Long id) {
 		return opportuniteService.getOpportunite(id);
 	}
 	
 	@PostMapping()
-	Opportunite addOpportunite(@Valid @RequestBody Opportunite opportunite) {
+	public Opportunite addOpportunite(@Valid @RequestBody Opportunite opportunite) {
 		return opportuniteService.addOpportunite(opportunite);
 	}
 	
 	@PutMapping()
-	Opportunite editOpportunite(@Valid @RequestBody Opportunite opportunite) {
+	public Opportunite editOpportunite(@Valid @RequestBody Opportunite opportunite) {
 		return opportuniteService.editOpportunite(opportunite);
 	}
 	
 	@PutMapping("/editEtat")
-	Opportunite editEtatOpportunite(@Valid @RequestBody Opportunite opportunite) {
+	public Opportunite editEtatOpportunite(@Valid @RequestBody Opportunite opportunite) {
 		return opportuniteService.editEtatOpportunite(opportunite);
 	}
 	
 	@DeleteMapping("{id}")
-	void deleteOpportunite(@PathVariable Long id) {
+	public void deleteOpportunite(@PathVariable Long id) {
 		opportuniteService.deleteOpportunite(id);
 	}
 

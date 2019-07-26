@@ -27,32 +27,32 @@ public class TechnologieController {
 	@Autowired
 	private final TechnologieService technologieService;
 	
-	private TechnologieController(TechnologieService technologieService) {
+	TechnologieController(TechnologieService technologieService) {
 		this.technologieService = technologieService;
 	}
 
 	@GetMapping()
-	List<Technologie> getAllTechnologies() {
+	public List<Technologie> getAllTechnologies() {
 	    return technologieService.getAllTechnologies();
 	}
 	
 	@GetMapping("{id}")
-	Optional<Technologie> getTechnologie(@PathVariable Long id) {
+	public Optional<Technologie> getTechnologie(@PathVariable Long id) {
 		return technologieService.getTechnologie(id);
 	}
 	
 	@PostMapping()
-	Technologie addTechnologie(@Valid @RequestBody Technologie technologie) {
+	public Technologie addTechnologie(@Valid @RequestBody Technologie technologie) {
 		return technologieService.addTechnologie(technologie);
 	}
 	
 	@PutMapping()
-	Technologie editTechnologie(@Valid @RequestBody Technologie technologie) {
+	public Technologie editTechnologie(@Valid @RequestBody Technologie technologie) {
 		return technologieService.editTechnologie(technologie);
 	}
 	
 	@DeleteMapping("{id}")
-	void deleteTechnologie(@PathVariable Long id) {
+	public void deleteTechnologie(@PathVariable Long id) {
 		technologieService.deleteTechnologie(id);
 	}
 

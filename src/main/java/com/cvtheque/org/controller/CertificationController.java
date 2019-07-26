@@ -27,32 +27,32 @@ public class CertificationController {
 	@Autowired
 	private final CertificationService certificationService;
 	
-	private CertificationController(CertificationService certificationService) {
+	CertificationController(CertificationService certificationService) {
 		this.certificationService = certificationService;
 	}
 
 	@GetMapping()
-	List<Certification> getAllCertifications() {
+	public List<Certification> getAllCertifications() {
 	    return certificationService.getAllCertifications();
 	}
 	
 	@GetMapping("{id}")
-	Optional<Certification> getCertification(@PathVariable Long id) {
+	public Optional<Certification> getCertification(@PathVariable Long id) {
 		return certificationService.getCertification(id);
 	}
 	
 	@PostMapping()
-	Certification addCertification(@Valid @RequestBody Certification certification) {
+	public Certification addCertification(@Valid @RequestBody Certification certification) {
 		return certificationService.addCertification(certification);
 	}
 	
 	@PutMapping()
-	Certification editCertification(@Valid @RequestBody Certification certification) {
+	public Certification editCertification(@Valid @RequestBody Certification certification) {
 		return certificationService.editCertification(certification);
 	}
 	
 	@DeleteMapping("{id}")
-	void deleteCertification(@PathVariable Long id) {
+	public void deleteCertification(@PathVariable Long id) {
 		certificationService.deleteCertification(id);
 	}
 

@@ -18,7 +18,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 	private final PartenaireRepository partenaireRepository;
 	private final StorageService storageService;
 
-	private PartenaireServiceImpl(PartenaireRepository partenaireRepository, StorageService storageService) {
+	PartenaireServiceImpl(PartenaireRepository partenaireRepository, StorageService storageService) {
 		super();
 		this.partenaireRepository = partenaireRepository;
 		this.storageService = storageService;
@@ -54,7 +54,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 		}
 		
 		//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
-		partenaire.setUrlPhoto(Consts.urlAvatar.replace("\"", ""));
+		partenaire.setUrlPhoto("");
 			
 		return partenaireRepository.save(partenaire);
 
@@ -68,7 +68,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 			Partenaire partenaire = partenaireRepository.getOne(id);
 			
 			//delete ancienne photo : si elle existe dans le cas d'un Update
-			if(partenaire.getUrlPhoto() != null && partenaire.getUrlPhoto().startsWith(Consts.urlAvatar.replace("\"", ""))==false)
+			if(partenaire.getUrlPhoto() != null)
 			{
 				storageService.deletePhoto(partenaire.getUrlPhoto());
 			}
@@ -128,7 +128,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 			try
 			{
 				//On supprime d'abord la photo si ce n'est pas un avatar
-				if(partenaire.getUrlPhoto() != null && partenaire.getUrlPhoto().startsWith(Consts.urlAvatar.replace("\"", ""))==false)
+				if(partenaire.getUrlPhoto() != null)
 				{
 					storageService.deletePhoto(Consts.rootLocation+partenaire.getUrlPhoto());
 				}

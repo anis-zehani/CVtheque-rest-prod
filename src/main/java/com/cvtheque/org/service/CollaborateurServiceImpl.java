@@ -13,7 +13,7 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 	
 	private final CollaborateurRepository collaborateurRepository;
 	
-	private CollaborateurServiceImpl(CollaborateurRepository collaborateurRepository) {
+	CollaborateurServiceImpl(CollaborateurRepository collaborateurRepository) {
 		super();
 		this.collaborateurRepository = collaborateurRepository;
 	}

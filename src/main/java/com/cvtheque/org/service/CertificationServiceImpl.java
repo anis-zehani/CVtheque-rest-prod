@@ -14,7 +14,7 @@ public class CertificationServiceImpl implements CertificationService{
 	
 	private final CertificationRepository certificationRepository;
 
-	private CertificationServiceImpl(CertificationRepository certificationRepository) {
+	CertificationServiceImpl(CertificationRepository certificationRepository) {
 		super();
 		this.certificationRepository = certificationRepository;
 	}

@@ -5,7 +5,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -15,18 +14,17 @@ import org.springframework.web.multipart.MultipartFile;
 public class StorageService {
 	
 	  //Emplacament photo sur le serveur
-	  private final Path rootLocationPhoto = Consts.rootLocationPhoto;
+	  private static final Path rootLocationPhoto = Consts.rootLocationPhoto;
 	  
 	  //Emplacament cvodix sur le serveur
-	  private final Path rootLocationCvOdix = Consts.rootLocationCvOdix;
+	  private static final Path rootLocationCvOdix = Consts.rootLocationCvOdix;
 	  
 	  //Emplacament cvoriginal sur le serveur
-	  private final Path rootLocationCvOriginal = Consts.rootLocationCvOriginal;
+	  private static final Path rootLocationCvOriginal = Consts.rootLocationCvOriginal;
 	  
 	  //Emplacament fichier sur le serveur
-	  private final Path rootLocationFichierRappel = Consts.rootLocationFichierRappel;
+	  private static final Path rootLocationFichierRappel = Consts.rootLocationFichierRappel;
 	  
-	  List<String> files = new ArrayList<String>();
 	  
 	  //Fonction qui crypte le nom de la photo et l'insére sur le disque
 	  public String addPhoto(MultipartFile file) {
@@ -37,14 +35,12 @@ public class StorageService {
 		    try 
 		    {
 		      this.savePhoto(file, filename);
-		      files.add(file.getOriginalFilename());
-		      message = Consts.urlUploadsImg.replace("\"", "")+filename;
+		      message = StorageService.rootLocationPhoto.toString().replace("\"", "")+"/"+filename;
 		      return message;
 		      
 		    } 
 		    catch (Exception e) 
 		    {
-		      message = "Erreur de chargement de l'image " + file.getOriginalFilename() + "!";
 		      return null;
 		    }
 		}
@@ -58,14 +54,12 @@ public class StorageService {
 		    try 
 		    {
 		      this.saveCvOdix(file, filename);
-		      files.add(file.getOriginalFilename());
-		      message = Consts.urlUploadsCvOdix.replace("\"", "")+filename;
+		      message = StorageService.rootLocationCvOdix.toString().replace("\"", "")+"/"+filename;
 		      return message;
 		      
 		    } 
 		    catch (Exception e) 
 		    {
-		      message = "Erreur de chargement du CvOdix " + file.getOriginalFilename() + "!";
 		      return null;
 		    }
 		}
@@ -79,14 +73,12 @@ public class StorageService {
 		    try 
 		    {
 		      this.saveCvOriginal(file, filename);
-		      files.add(file.getOriginalFilename());
-		      message = Consts.urlUploadsCvOriginal.replace("\"", "")+filename;
+		      message = StorageService.rootLocationCvOriginal.toString().replace("\"", "")+"/"+filename;
 		      return message;
 		      
 		    } 
 		    catch (Exception e) 
 		    {
-		      message = "Erreur de chargement du CvOriginal " + file.getOriginalFilename() + "!";
 		      return null;
 		    }
 		}
@@ -103,9 +95,8 @@ public class StorageService {
 		    try 
 		    {
 		      this.saveFichierRappel(file, filenameModified);
-		      files.add(file.getOriginalFilename());
 		      
-		      urlFichier = Consts.urlUploadsFiles.replace("\"", "")+filenameModified;
+		      urlFichier = StorageService.rootLocationFichierRappel.toString().replace("\"", "")+"/"+filenameModified;
 		      nomFichier = filenameOriginal;
 		      
 		      ArrayList<String> urls = new ArrayList<String>();
@@ -118,8 +109,7 @@ public class StorageService {
 		    } 
 		    catch (Exception e) 
 		    {
-		      //message = "Erreur de chargement du fichier " + file.getOriginalFilename() + "!";
-		      return null;
+		      return new ArrayList<String>();
 		    }
 		}
 	  
@@ -127,7 +117,7 @@ public class StorageService {
 	  public void savePhoto(MultipartFile file, String filename ) {
 	    try 
 	    {
-	      Files.copy(file.getInputStream(), this.rootLocationPhoto.resolve(filename));
+	      Files.copy(file.getInputStream(), StorageService.rootLocationPhoto.resolve(filename));
 	    } 
 	    catch (Exception e) 
 	    {
@@ -139,7 +129,7 @@ public class StorageService {
 	  public void saveCvOdix(MultipartFile file, String filename ) {
 		    try 
 		    {
-		      Files.copy(file.getInputStream(), this.rootLocationCvOdix.resolve(filename));
+		      Files.copy(file.getInputStream(), StorageService.rootLocationCvOdix.resolve(filename));
 		    } 
 		    catch (Exception e) 
 		    {
@@ -151,7 +141,7 @@ public class StorageService {
 	  public void saveCvOriginal(MultipartFile file, String filename ) {
 		    try 
 		    {
-		      Files.copy(file.getInputStream(), this.rootLocationCvOriginal.resolve(filename));
+		      Files.copy(file.getInputStream(), StorageService.rootLocationCvOriginal.resolve(filename));
 		    } 
 		    catch (Exception e) 
 		    {
@@ -163,7 +153,7 @@ public class StorageService {
 	  public void saveFichierRappel(MultipartFile file, String filename ) {
 	    try 
 	    {
-	      Files.copy(file.getInputStream(), this.rootLocationFichierRappel.resolve(filename));
+	      Files.copy(file.getInputStream(), StorageService.rootLocationFichierRappel.resolve(filename));
 	    } 
 	    catch (Exception e) 
 	    {
@@ -230,7 +220,7 @@ public class StorageService {
 	  //Retourne l'extention d'un fichier : image ou autre
 	  public String getExtensionByStringHandling(String filename) 
 	  {
-		    return "."+filename.substring(filename.lastIndexOf(".") + 1);
+		    return "."+filename.substring(filename.lastIndexOf('.') + 1);
 	  }
 	  
 	}

@@ -36,29 +36,29 @@ public class ContactController {
 	@Autowired
 	private final ContactService contactService;
 	
-	private ContactController(ContactService contactService) {
+	ContactController(ContactService contactService) {
 		this.contactService = contactService;
 	}
 
 	@GetMapping()
-	List<Contact> getAllContacts() {
+	public List<Contact> getAllContacts() {
 	    return contactService.getAllContacts();
 	}
 	
 	@GetMapping("{id}")
-	Optional<Contact> getContact(@PathVariable Long id) {
+	public Optional<Contact> getContact(@PathVariable Long id) {
 		return contactService.getContact(id);
 	}
 	
 	//Ajouter un Contact
 	@PostMapping()
-	Contact addContact(@Valid @RequestBody Contact contact) {
+	public Contact addContact(@Valid @RequestBody Contact contact) {
 		return contactService.addContact(contact);
 	}
 	
 	//Ajouter une photo à un Contact
 	@PostMapping("addPhoto/{id}")
-	Contact addPhoto(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+	public Contact addPhoto(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
 		//la photo est placée sur le serveur
 	    String urlPhoto =  storageService.addPhoto(file);
 	    //la photo est affectée au contact via son id
@@ -66,12 +66,12 @@ public class ContactController {
 	}
 	
 	@PutMapping()
-	Contact editContact(@Valid @RequestBody Contact contact) {
+	public Contact editContact(@Valid @RequestBody Contact contact) {
 		return contactService.editContact(contact);
 	}
 	
 	@DeleteMapping("{id}")
-	void deleteContact(@PathVariable Long id) {
+	public void deleteContact(@PathVariable Long id) {
 		contactService.deleteContact(id);
 	}
 

@@ -36,40 +36,28 @@ public class PartenaireController {
 	@Autowired
 	private final PartenaireService partenaireService;
 	
-	private PartenaireController(PartenaireService partenaireService) {
+	PartenaireController(PartenaireService partenaireService) {
 		this.partenaireService = partenaireService;
 	}
 
 	@GetMapping("/all/{etatPartenaire}")
-	List<Partenaire> getAllPartenaires(@PathVariable String etatPartenaire) {
+	public List<Partenaire> getAllPartenaires(@PathVariable String etatPartenaire) {
 	    return partenaireService.getAllPartenaires(etatPartenaire);
 	}
 	
 	@GetMapping("{id}")
-	Optional<Partenaire> getPartenaire(@PathVariable Long id) {
+	public Optional<Partenaire> getPartenaire(@PathVariable Long id) {
 		return partenaireService.getPartenaire(id);
 	}
-	
-	/*
-	 * Faire le tout dans un seul Request
-	@PostMapping()
-	Partenaire addPartenaire(@RequestPart("partenaire") Partenaire partenaire, @RequestPart("file") MultipartFile file) {
-		
-		Long partenaireId =  partenaireService.addPartenaire(partenaire).getId();
-		String urlPhoto =  storageService.addPhoto(file);
-		return partenaireService.addPhotoToPartenaire(partenaireId, urlPhoto);
-	}
-	*/
-	
 
 	@PostMapping()
-	Partenaire addPartenaire(@Valid @RequestBody Partenaire partenaire) {
+	public Partenaire addPartenaire(@Valid @RequestBody Partenaire partenaire) {
 		return partenaireService.addPartenaire(partenaire);
 	}
 	
 	//Ajouter une photo à un partenaire :
 	@PostMapping("addPhoto/{id}")
-	Partenaire addPhoto(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+	public Partenaire addPhoto(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
 	//la photo est placée sur le serveur
 	String urlPhoto =  storageService.addPhoto(file);
 	//la photo est affectée au partenaire via son id
@@ -79,17 +67,17 @@ public class PartenaireController {
 
 	
 	@PutMapping()
-	Partenaire editPartenaire(@Valid @RequestBody Partenaire partenaire) {
+	public Partenaire editPartenaire(@Valid @RequestBody Partenaire partenaire) {
 		return partenaireService.editPartenaire(partenaire);
 	}
 	
 	@PutMapping("/editEtat")
-	Partenaire editEtatPartenaire(@Valid @RequestBody Partenaire partenaire) {
+	public Partenaire editEtatPartenaire(@Valid @RequestBody Partenaire partenaire) {
 		return partenaireService.editEtatPartenaire(partenaire);
 	}
 	
 	@DeleteMapping("{id}")
-	void deletePartenaire(@PathVariable Long id) {
+	public void deletePartenaire(@PathVariable Long id) {
 		partenaireService.deletePartenaire(id);
 	}
 

@@ -27,32 +27,32 @@ public class CollaborateurController {
 	@Autowired
 	private final CollaborateurService collaborateurService;
 	
-	private CollaborateurController(CollaborateurService collaborateurService) {
+	CollaborateurController(CollaborateurService collaborateurService) {
 		this.collaborateurService = collaborateurService;
 	}
 
 	@GetMapping()
-	List<Collaborateur> getAllCollaborateurs() {
+	public List<Collaborateur> getAllCollaborateurs() {
 	    return collaborateurService.getAllCollaborateurs();
 	}
 	
 	@GetMapping("{id}")
-	Optional<Collaborateur> getCollaborateur(@PathVariable Long id) {
+	public Optional<Collaborateur> getCollaborateur(@PathVariable Long id) {
 		return collaborateurService.getCollaborateur(id);
 	}
 	
 	@PostMapping()
-	Collaborateur addCollaborateur(@Valid @RequestBody Collaborateur collaborateur) {
+	public Collaborateur addCollaborateur(@Valid @RequestBody Collaborateur collaborateur) {
 		return collaborateurService.addCollaborateur(collaborateur);
 	}
 	
 	@PutMapping()
-	Collaborateur editCollaborateur(@Valid @RequestBody Collaborateur collaborateur) {
+	public Collaborateur editCollaborateur(@Valid @RequestBody Collaborateur collaborateur) {
 		return collaborateurService.editCollaborateur(collaborateur);
 	}
 	
 	@DeleteMapping("{id}")
-	void deleteCollaborateur(@PathVariable Long id) {
+	public void deleteCollaborateur(@PathVariable Long id) {
 		collaborateurService.deleteCollaborateur(id);
 	}
 

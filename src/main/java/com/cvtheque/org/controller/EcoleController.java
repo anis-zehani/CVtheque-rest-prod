@@ -27,32 +27,32 @@ public class EcoleController {
 	@Autowired
 	private final EcoleService écoleService;
 	
-	private EcoleController(EcoleService écoleService) {
+	EcoleController(EcoleService écoleService) {
 		this.écoleService = écoleService;
 	}
 
 	@GetMapping()
-	List<Ecole> getAllEcoles() {
+	public List<Ecole> getAllEcoles() {
 	    return écoleService.getAllEcoles();
 	}
 	
 	@GetMapping("{id}")
-	Optional<Ecole> getEcole(@PathVariable Long id) {
+	public Optional<Ecole> getEcole(@PathVariable Long id) {
 		return écoleService.getEcole(id);
 	}
 	
 	@PostMapping()
-	Ecole addEcole(@Valid @RequestBody Ecole Ecole) {
+	public Ecole addEcole(@Valid @RequestBody Ecole Ecole) {
 		return écoleService.addEcole(Ecole);
 	}
 	
 	@PutMapping()
-	Ecole editEcole(@Valid @RequestBody Ecole Ecole) {
+	public Ecole editEcole(@Valid @RequestBody Ecole Ecole) {
 		return écoleService.editEcole(Ecole);
 	}
 	
 	@DeleteMapping("{id}")
-	void deleteEcole(@PathVariable Long id) {
+	public void deleteEcole(@PathVariable Long id) {
 		écoleService.deleteEcole(id);
 	}
 

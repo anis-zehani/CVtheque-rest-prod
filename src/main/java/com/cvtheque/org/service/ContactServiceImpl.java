@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.cvtheque.org.model.Contact;
 import com.cvtheque.org.repository.ContactRepository;
-import com.cvtheque.org.util.Consts;
 import com.cvtheque.org.util.StorageService;
 
 @Service
@@ -17,7 +16,7 @@ public class ContactServiceImpl implements ContactService{
 	private final ContactRepository contactRepository;
 	private final StorageService storageService;
 	
-	private ContactServiceImpl(ContactRepository contactRepository, StorageService storageService) {
+	ContactServiceImpl(ContactRepository contactRepository, StorageService storageService) {
 		super();
 		this.contactRepository = contactRepository;
 		this.storageService = storageService;
@@ -25,9 +24,7 @@ public class ContactServiceImpl implements ContactService{
 
 	public List<Contact> getAllContacts() {
 		
-		List<Contact> allContacts = contactRepository.findAll();
-		
-		return allContacts;
+		return contactRepository.findAll();
 	}
 
 	public Optional<Contact> getContact(Long id) {
@@ -43,7 +40,7 @@ public class ContactServiceImpl implements ContactService{
 			contact.setEntreprise(null);
 		}
 		//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
-		contact.setUrlPhoto(Consts.urlAvatar.replace("\"", ""));
+		contact.setUrlPhoto("");
 			
 		return contactRepository.save(contact);
 	}
@@ -56,7 +53,7 @@ public class ContactServiceImpl implements ContactService{
 			Contact contact = contactRepository.getOne(id);
 			
 			//delete ancienne photo : si elle existe dans le cas d'un Update
-			if(contact.getUrlPhoto() != null && contact.getUrlPhoto().startsWith(Consts.urlAvatar.replace("\"", ""))==false)
+			if(contact.getUrlPhoto() != null)
 			{
 				storageService.deletePhoto(contact.getUrlPhoto());
 			}
@@ -96,9 +93,9 @@ public class ContactServiceImpl implements ContactService{
 			try
 			{
 				//On supprime d'abord la photo si ce n'est pas un avatar
-				if(contact.getUrlPhoto() != null && contact.getUrlPhoto().startsWith(Consts.urlAvatar.replace("\"", ""))==false)
+				if(contact.getUrlPhoto() != null)
 				{
-					storageService.deletePhoto(Consts.rootLocation+contact.getUrlPhoto());
+					storageService.deletePhoto(contact.getUrlPhoto());
 				}
 			}
 			catch(NoSuchElementException e) 

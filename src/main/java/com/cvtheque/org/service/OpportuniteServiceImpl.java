@@ -9,14 +9,13 @@ import org.springframework.stereotype.Service;
 import com.cvtheque.org.model.Etat;
 import com.cvtheque.org.model.Opportunite;
 import com.cvtheque.org.repository.OpportuniteRepository;
-import com.cvtheque.org.util.Consts;
 
 @Service
 public class OpportuniteServiceImpl implements OpportuniteService {
 	
 	private final OpportuniteRepository opportuniteRepository;
 	
-	private OpportuniteServiceImpl(OpportuniteRepository opportuniteRepository) {
+	OpportuniteServiceImpl(OpportuniteRepository opportuniteRepository) {
 		super();
 		this.opportuniteRepository = opportuniteRepository;
 	}
@@ -51,7 +50,7 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 			}
 			
 			//On met l'image par défaut à toutes les opportunités : elle s'affiche si l'opportunité n'est liée à aucun partenaire
-			opportunite.setUrlPhotoOpportunite(Consts.urlMoney.replace("\"", ""));
+			opportunite.setUrlPhotoOpportunite("");
 
 			return opportuniteRepository.save(opportunite);
 	}
@@ -67,7 +66,7 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 			}
 			
 			//On met l'image par défaut à toutes les opportunités : elle s'affiche si l'opportunité n'est liée à aucun partenaire
-			opportunite.setUrlPhotoOpportunite(Consts.urlMoney.replace("\"", ""));
+			opportunite.setUrlPhotoOpportunite("");
 			
 			return opportuniteRepository.save(opportunite);
 		}

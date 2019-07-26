@@ -14,7 +14,7 @@ public class TechnologieServiceImpl implements TechnologieService{
 	
 	private final TechnologieRepository technologieRepository;
 
-	private TechnologieServiceImpl(TechnologieRepository technologieRepository) {
+	TechnologieServiceImpl(TechnologieRepository technologieRepository) {
 		super();
 		this.technologieRepository = technologieRepository;
 	}

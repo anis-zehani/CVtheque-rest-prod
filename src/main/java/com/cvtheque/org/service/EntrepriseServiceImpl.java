@@ -13,7 +13,7 @@ public class EntrepriseServiceImpl implements EntrepriseService{
 	
 	private final EntrepriseRepository entrepriseRepository;
 
-	private EntrepriseServiceImpl(EntrepriseRepository entrepriseRepository) {
+	EntrepriseServiceImpl(EntrepriseRepository entrepriseRepository) {
 		super();
 		this.entrepriseRepository = entrepriseRepository;
 	}

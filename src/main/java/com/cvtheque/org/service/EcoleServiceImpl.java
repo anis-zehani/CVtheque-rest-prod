@@ -13,7 +13,7 @@ public class EcoleServiceImpl implements EcoleService{
 	
 	private final EcoleRepository ecoleRepository;
 
-	private EcoleServiceImpl(EcoleRepository ecoleRepository) {
+	EcoleServiceImpl(EcoleRepository ecoleRepository) {
 		super();
 		this.ecoleRepository = ecoleRepository;
 	}
