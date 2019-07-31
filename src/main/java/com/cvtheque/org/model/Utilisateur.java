@@ -45,7 +45,7 @@ public class Utilisateur implements Serializable {
 	@Column
 	private String poste_occupe;
 	
-	@Column(length = 1024)
+	@Column(length = 4096)
 	private String description_detaillee;
 	
 	@Column
