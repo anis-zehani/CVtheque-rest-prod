@@ -1,6 +1,5 @@
 package com.cvtheque.org;
 
-import java.time.LocalDate;
 import javax.annotation.Resource;
 
 import org.springframework.boot.SpringApplication;
@@ -17,8 +16,7 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 		
-		System.out.print("Anis Zaheni : Odix - Gestion des recrutements is running ... : "
-				.concat(LocalDate.now().toString()));
+		System.out.print("Anis Zaheni : Odix - le sourcing rendu facile sur www.odix.fr");
 
 	}
 }
