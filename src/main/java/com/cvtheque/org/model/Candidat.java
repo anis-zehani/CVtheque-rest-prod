@@ -13,8 +13,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+
 
 import lombok.Data;
 
@@ -95,13 +98,22 @@ public class Candidat extends Utilisateur implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional=true)
 	private Curriculum curriculum;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany
+	@JoinTable(name = "candidat_opportunite",
+	joinColumns = { @JoinColumn(name = "fk_candidat") },
+	inverseJoinColumns = { @JoinColumn(name = "fk_opportunite") })
 	private List<Opportunite> listeOpportunites = new ArrayList<Opportunite>();
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany
+	@JoinTable(name = "candidat_technologie",
+	joinColumns = { @JoinColumn(name = "fk_candidat") },
+	inverseJoinColumns = { @JoinColumn(name = "fk_technologie") })
 	private List<Technologie> listeTechnologies = new ArrayList<Technologie>();
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany
+	@JoinTable(name = "candidat_certification",
+	joinColumns = { @JoinColumn(name = "fk_candidat") },
+	inverseJoinColumns = { @JoinColumn(name = "fk_certification") })
 	private List<Certification> listeCertifications = new ArrayList<Certification>();
 
 	public Candidat() {

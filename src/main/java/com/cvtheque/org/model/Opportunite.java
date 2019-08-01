@@ -2,6 +2,8 @@ package com.cvtheque.org.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
@@ -49,7 +52,13 @@ public class Opportunite implements Serializable {
 	private Etat etatOpportunite;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-	Partenaire responsableOpportunite;
+	private Partenaire responsableOpportunite;
+	
+	@ManyToMany(mappedBy="listeOpportunites")
+	private List<Candidat> listeCandidats = new ArrayList<Candidat>();
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<Technologie> technologiesOpportunite = new ArrayList<Technologie>();
 
 	public Opportunite() {
 		super();
@@ -125,6 +134,14 @@ public class Opportunite implements Serializable {
 
 	public void setResponsableOpportunite(Partenaire responsableOpportunite) {
 		this.responsableOpportunite = responsableOpportunite;
+	}
+
+	public List<Technologie> getTechnologiesOpportunite() {
+		return technologiesOpportunite;
+	}
+
+	public void setTechnologiesOpportunite(List<Technologie> technologiesOpportunite) {
+		this.technologiesOpportunite = technologiesOpportunite;
 	}
 
 }

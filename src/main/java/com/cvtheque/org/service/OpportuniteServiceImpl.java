@@ -68,6 +68,14 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 			//On met l'image par défaut à toutes les opportunités : elle s'affiche si l'opportunité n'est liée à aucun partenaire
 			opportunite.setUrlPhotoOpportunite("");
 			
+			/*
+			 * listeTechnologies : @ManyToMany : Attention ici
+			 */
+			if(opportunite.getTechnologiesOpportunite() != null)
+			{
+				opportunite.setTechnologiesOpportunite(opportunite.getTechnologiesOpportunite());
+			}
+			
 			return opportuniteRepository.save(opportunite);
 		}
 		
