@@ -60,23 +60,45 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 		
 		if(opportuniteRepository.existsById(opportunite.getId()))
 		{
-			if(opportunite.getResponsableOpportunite().getId() == null)
-			{
-				opportunite.setResponsableOpportunite(null);
-			}
+			
+			Opportunite opportuniteToUpdate = opportuniteRepository.getOne(opportunite.getId());
+			
+			opportuniteToUpdate.setTitreOpportunite(opportunite.getTitreOpportunite());
+			opportuniteToUpdate.setDescriptionOpportunite(opportunite.getDescriptionOpportunite());
+			opportuniteToUpdate.setDateAjout(opportunite.getDateAjout());
+			opportuniteToUpdate.setDateDemarrageSouhaitee(opportunite.getDateDemarrageSouhaitee());
+			opportuniteToUpdate.setTjmOpportunite(opportunite.getTjmOpportunite());
+			
 			
 			//On met l'image par défaut à toutes les opportunités : elle s'affiche si l'opportunité n'est liée à aucun partenaire
-			opportunite.setUrlPhotoOpportunite("");
+			opportuniteToUpdate.setUrlPhotoOpportunite("");
 			
-			/*
-			 * listeTechnologies : @ManyToMany : Attention ici
-			 */
-			if(opportunite.getTechnologiesOpportunite() != null)
+			if(opportunite.getResponsableOpportunite().getId() == null)
 			{
-				opportunite.setTechnologiesOpportunite(opportunite.getTechnologiesOpportunite());
+				opportuniteToUpdate.setResponsableOpportunite(null);
+			}
+			else
+			{
+				opportuniteToUpdate.setResponsableOpportunite(opportunite.getResponsableOpportunite());
 			}
 			
-			return opportuniteRepository.save(opportunite);
+			/*
+			 * listeCandidats : @ManyToMany
+			 */
+			if(opportunite.getListeCandidats() != null)
+			{
+				opportuniteToUpdate.setListeCandidats(opportunite.getListeCandidats());
+			}
+			
+			/*
+			 * listeTechnologies : @ManyToMany 
+			 */
+			if(opportunite.getListeTechnologies() != null)
+			{
+				opportuniteToUpdate.setListeTechnologies(opportunite.getListeTechnologies());
+			}
+			
+			return opportuniteRepository.save(opportuniteToUpdate);
 		}
 		
 		return null;

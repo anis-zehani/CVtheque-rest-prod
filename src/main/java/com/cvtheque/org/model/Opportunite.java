@@ -13,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -54,11 +56,14 @@ public class Opportunite implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Partenaire responsableOpportunite;
 	
+	@ManyToMany
+	@JoinTable(name = "opportunite_technologie",
+	joinColumns = { @JoinColumn(name = "fk_opportunite") },
+	inverseJoinColumns = { @JoinColumn(name = "fk_technologie") })
+	private List<Technologie> listeTechnologies = new ArrayList<Technologie>();
+	
 	@ManyToMany(mappedBy="listeOpportunites")
 	private List<Candidat> listeCandidats = new ArrayList<Candidat>();
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Technologie> technologiesOpportunite = new ArrayList<Technologie>();
 
 	public Opportunite() {
 		super();
@@ -136,12 +141,20 @@ public class Opportunite implements Serializable {
 		this.responsableOpportunite = responsableOpportunite;
 	}
 
-	public List<Technologie> getTechnologiesOpportunite() {
-		return technologiesOpportunite;
+	public List<Technologie> getListeTechnologies() {
+		return listeTechnologies;
 	}
 
-	public void setTechnologiesOpportunite(List<Technologie> technologiesOpportunite) {
-		this.technologiesOpportunite = technologiesOpportunite;
+	public void setListeTechnologies(List<Technologie> listeTechnologies) {
+		this.listeTechnologies = listeTechnologies;
+	}
+	
+	public List<Candidat> getListeCandidats() {
+	return listeCandidats;
+	}
+
+	public void setListeCandidats(List<Candidat> listeCandidats) {
+		this.listeCandidats = listeCandidats;
 	}
 
 }

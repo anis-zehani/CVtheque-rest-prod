@@ -58,4 +58,12 @@ public class Certification implements Serializable {
 		this.nomCertification = nomCertification;
 	}
 
+	public List<Candidat> getListeCandidats() {
+		return listeCandidats;
+	}
+
+	public void setListeCandidats(List<Candidat> listeCandidats) {
+		this.listeCandidats = listeCandidats;
+	}
+
 }

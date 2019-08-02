@@ -34,6 +34,9 @@ public class Technologie implements Serializable {
     @ManyToMany(mappedBy="listeTechnologies")
 	private List<Candidat> listeCandidats = new ArrayList<Candidat>();
     
+    @ManyToMany(mappedBy="listeTechnologies")
+	private List<Opportunite> listeOpportunites = new ArrayList<Opportunite>();
+    
     
 	public Technologie() {
 		super();
@@ -59,6 +62,22 @@ public class Technologie implements Serializable {
 
 	public void setNomTechnologie(String nomTechnologie) {
 		this.nomTechnologie = nomTechnologie;
+	}
+
+	public List<Candidat> getListeCandidats() {
+		return listeCandidats;
+	}
+
+	public void setListeCandidats(List<Candidat> listeCandidats) {
+		this.listeCandidats = listeCandidats;
+	}
+
+	public List<Opportunite> getListeOpportunites() {
+		return listeOpportunites;
+	}
+
+	public void setListeOpportunites(List<Opportunite> listeOpportunites) {
+		this.listeOpportunites = listeOpportunites;
 	}
 	
 }
