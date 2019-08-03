@@ -43,10 +43,10 @@ public class Utilisateur implements Serializable {
 	private String email;
 	
 	@Column
-	private String poste_occupe;
+	private String posteOccupe;
 	
 	@Column(length = 4096)
-	private String description_detaillee;
+	private String descriptionDetaillee;
 	
 	@Column
 	private String login;
@@ -88,20 +88,20 @@ public class Utilisateur implements Serializable {
 		this.email = email;
 	}
 
-	public String getPoste_occupe() {
-		return poste_occupe;
+	public String getPosteOccupe() {
+		return posteOccupe;
 	}
 
-	public void setPoste_occupe(String poste_occupe) {
-		this.poste_occupe = poste_occupe;
+	public void setPosteOccupe(String posteOccupe) {
+		this.posteOccupe = posteOccupe;
 	}
 
-	public String getDescription_detaillee() {
-		return description_detaillee;
+	public String getDescriptionDetaillee() {
+		return descriptionDetaillee;
 	}
 
-	public void setDescription_detaillee(String description_detaillee) {
-		this.description_detaillee = description_detaillee;
+	public void setDescriptionDetaillee(String descriptionDetaillee) {
+		this.descriptionDetaillee = descriptionDetaillee;
 	}
 
 	public String getLogin() {

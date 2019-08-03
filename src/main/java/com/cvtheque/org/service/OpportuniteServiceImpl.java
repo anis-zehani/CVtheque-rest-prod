@@ -85,10 +85,10 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 			/*
 			 * listeCandidats : @ManyToMany
 			 */
-			if(opportunite.getListeCandidats() != null)
+			/*if(opportunite.getListeCandidats() != null)
 			{
 				opportuniteToUpdate.setListeCandidats(opportunite.getListeCandidats());
-			}
+			}*/
 			
 			/*
 			 * listeTechnologies : @ManyToMany 

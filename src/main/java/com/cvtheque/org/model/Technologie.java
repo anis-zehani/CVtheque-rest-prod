@@ -31,11 +31,11 @@ public class Technologie implements Serializable {
     @Column(unique=true)
     private String nomTechnologie;
     
-    @ManyToMany(mappedBy="listeTechnologies")
+    /*@ManyToMany(mappedBy="listeTechnologies")
 	private List<Candidat> listeCandidats = new ArrayList<Candidat>();
     
     @ManyToMany(mappedBy="listeTechnologies")
-	private List<Opportunite> listeOpportunites = new ArrayList<Opportunite>();
+	private List<Opportunite> listeOpportunites = new ArrayList<Opportunite>();*/
     
     
 	public Technologie() {
@@ -64,7 +64,7 @@ public class Technologie implements Serializable {
 		this.nomTechnologie = nomTechnologie;
 	}
 
-	public List<Candidat> getListeCandidats() {
+	/*public List<Candidat> getListeCandidats() {
 		return listeCandidats;
 	}
 
@@ -78,6 +78,6 @@ public class Technologie implements Serializable {
 
 	public void setListeOpportunites(List<Opportunite> listeOpportunites) {
 		this.listeOpportunites = listeOpportunites;
-	}
+	}*/
 	
 }

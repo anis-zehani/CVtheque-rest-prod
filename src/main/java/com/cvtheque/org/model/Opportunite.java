@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -56,14 +57,14 @@ public class Opportunite implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Partenaire responsableOpportunite;
 	
-	@ManyToMany
-	@JoinTable(name = "opportunite_technologie",
-	joinColumns = { @JoinColumn(name = "fk_opportunite") },
-	inverseJoinColumns = { @JoinColumn(name = "fk_technologie") })
+	@ManyToMany(fetch = FetchType.LAZY)
+	/*@JoinTable(name = "opportunite_technologie",
+	joinColumns = { @JoinColumn(name = "fk_opportunite_technologie") },
+	inverseJoinColumns = { @JoinColumn(name = "fk_technologie_opportunite") })*/
 	private List<Technologie> listeTechnologies = new ArrayList<Technologie>();
 	
-	@ManyToMany(mappedBy="listeOpportunites")
-	private List<Candidat> listeCandidats = new ArrayList<Candidat>();
+	/*@ManyToMany(mappedBy="listeOpportunites")
+	private List<Candidat> listeCandidats = new ArrayList<Candidat>();*/
 
 	public Opportunite() {
 		super();
@@ -149,12 +150,12 @@ public class Opportunite implements Serializable {
 		this.listeTechnologies = listeTechnologies;
 	}
 	
-	public List<Candidat> getListeCandidats() {
+	/*public List<Candidat> getListeCandidats() {
 	return listeCandidats;
 	}
 
 	public void setListeCandidats(List<Candidat> listeCandidats) {
 		this.listeCandidats = listeCandidats;
-	}
+	}*/
 
 }

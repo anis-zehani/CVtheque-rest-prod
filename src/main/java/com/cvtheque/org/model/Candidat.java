@@ -98,22 +98,22 @@ public class Candidat extends Utilisateur implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional=true)
 	private Curriculum curriculum;
 	
-	@ManyToMany
-	@JoinTable(name = "candidat_opportunite",
-	joinColumns = { @JoinColumn(name = "fk_candidat") },
-	inverseJoinColumns = { @JoinColumn(name = "fk_opportunite") })
+	@ManyToMany(fetch = FetchType.LAZY)
+	/*@JoinTable(name = "candidat_opportunite",
+	joinColumns = { @JoinColumn(name = "fk_candidat_opportunite") },
+	inverseJoinColumns = { @JoinColumn(name = "fk_opportunite_candidat") })*/
 	private List<Opportunite> listeOpportunites = new ArrayList<Opportunite>();
 	
-	@ManyToMany
-	@JoinTable(name = "candidat_technologie",
-	joinColumns = { @JoinColumn(name = "fk_candidat") },
-	inverseJoinColumns = { @JoinColumn(name = "fk_technologie") })
+	@ManyToMany(fetch = FetchType.LAZY)
+	/*@JoinTable(name = "candidat_technologie",
+	joinColumns = { @JoinColumn(name = "fk_candidat_technologie") },
+	inverseJoinColumns = { @JoinColumn(name = "fk_technologie_candidat") })*/
 	private List<Technologie> listeTechnologies = new ArrayList<Technologie>();
 	
-	@ManyToMany
-	@JoinTable(name = "candidat_certification",
-	joinColumns = { @JoinColumn(name = "fk_candidat") },
-	inverseJoinColumns = { @JoinColumn(name = "fk_certification") })
+	@ManyToMany(fetch = FetchType.LAZY)
+	/*@JoinTable(name = "candidat_certification",
+	joinColumns = { @JoinColumn(name = "fk_candidat_certification") },
+	inverseJoinColumns = { @JoinColumn(name = "fk_certification_candidat") })*/
 	private List<Certification> listeCertifications = new ArrayList<Certification>();
 
 	public Candidat() {

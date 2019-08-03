@@ -163,8 +163,8 @@ public class CandidatServiceImpl implements CandidatService{
 			candidatToUpdate.setIdentite(candidat.getIdentite());
 			candidatToUpdate.setTelephone(candidat.getTelephone());
 			candidatToUpdate.setEmail(candidat.getEmail());
-			candidatToUpdate.setPoste_occupe(candidat.getPoste_occupe());
-			candidatToUpdate.setDescription_detaillee(candidat.getDescription_detaillee());
+			candidatToUpdate.setPosteOccupe(candidat.getPosteOccupe());
+			candidatToUpdate.setDescriptionDetaillee(candidat.getDescriptionDetaillee());
 			
 			/*
 			 * entreprise

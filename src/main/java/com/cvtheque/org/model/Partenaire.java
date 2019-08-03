@@ -1,15 +1,11 @@
 package com.cvtheque.org.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+
 
 import lombok.Data;
 
@@ -32,16 +28,13 @@ public class Partenaire extends Utilisateur {
 	 * password
 	 * entreprise : @ManyToOne
 	 * etatPartenaire : Actif/Inactif
-	 * listeCvSauvegardes : @OneToMany
+	 * listeCvSauvegardes : @OneToMany : Reste à faire
 	 */
 	
 	@Column
 	@Enumerated(EnumType.STRING)
 	private Etat etatPartenaire;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	private List<Curriculum> listeCvSauvegardes = new ArrayList<Curriculum>();
-
 	public Partenaire() {
 		super();
 	}
