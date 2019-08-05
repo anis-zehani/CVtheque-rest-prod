@@ -18,9 +18,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
+@JsonIdentityReference
+@JsonIgnoreProperties	
 @Data
 @Entity
 @DiscriminatorValue(value="Candidat")
@@ -99,23 +103,24 @@ public class Candidat extends Utilisateur implements Serializable {
 	private Curriculum curriculum;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	/*@JoinTable(name = "candidat_opportunite",
-	joinColumns = { @JoinColumn(name = "fk_candidat_opportunite") },
-	inverseJoinColumns = { @JoinColumn(name = "fk_opportunite_candidat") })*/
+	@JoinTable(name = "candidat_opportunite",
+	joinColumns = { @JoinColumn(name = "id_candidat") },
+	inverseJoinColumns = { @JoinColumn(name = "id_opportunite") })
 	private List<Opportunite> listeOpportunites = new ArrayList<Opportunite>();
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	/*@JoinTable(name = "candidat_technologie",
-	joinColumns = { @JoinColumn(name = "fk_candidat_technologie") },
-	inverseJoinColumns = { @JoinColumn(name = "fk_technologie_candidat") })*/
+	@JoinTable(name = "candidat_technologie",
+	joinColumns = { @JoinColumn(name = "id_candidat") },
+	inverseJoinColumns = { @JoinColumn(name = "id_technologie") })
 	private List<Technologie> listeTechnologies = new ArrayList<Technologie>();
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	/*@JoinTable(name = "candidat_certification",
-	joinColumns = { @JoinColumn(name = "fk_candidat_certification") },
-	inverseJoinColumns = { @JoinColumn(name = "fk_certification_candidat") })*/
+	@JoinTable(name = "candidat_certification",
+	joinColumns = { @JoinColumn(name = "id_candidat") },
+	inverseJoinColumns = { @JoinColumn(name = "id_certification") })
 	private List<Certification> listeCertifications = new ArrayList<Certification>();
 
+	
 	public Candidat() {
 		super();
 	}

@@ -81,15 +81,7 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 			{
 				opportuniteToUpdate.setResponsableOpportunite(opportunite.getResponsableOpportunite());
 			}
-			
-			/*
-			 * listeCandidats : @ManyToMany
-			 */
-			/*if(opportunite.getListeCandidats() != null)
-			{
-				opportuniteToUpdate.setListeCandidats(opportunite.getListeCandidats());
-			}*/
-			
+
 			/*
 			 * listeTechnologies : @ManyToMany 
 			 */
