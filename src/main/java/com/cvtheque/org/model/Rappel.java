@@ -57,6 +57,10 @@ public class Rappel implements Serializable {
 	public Rappel() {
 		super();
 	}
+	
+	public Long getId() {
+		return id;
+	}
 
 	public boolean getRemindMe() {
 		return remindMe;
@@ -123,9 +127,4 @@ public class Rappel implements Serializable {
 		this.utilisateur = utilisateur;
 	}
 	*/
-
-	public Long getId() {
-		return id;
-	}
-	
 }

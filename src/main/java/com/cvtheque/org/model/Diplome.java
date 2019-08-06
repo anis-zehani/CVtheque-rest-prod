@@ -29,12 +29,12 @@ public class Diplome implements Serializable {
     @Column
 	@Enumerated(EnumType.STRING)
 	private TypeDiplome typeDiplome;
-    
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-	Ecole ecole;
 
     @Column
 	private LocalDate dateObtentionDiplome;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+	Ecole ecole;
 
 	public Diplome() {
 		super();
@@ -56,14 +56,6 @@ public class Diplome implements Serializable {
 		this.typeDiplome = typeDiplome;
 	}
 
-	public Ecole getEcole() {
-		return ecole;
-	}
-
-	public void setEcole(Ecole ecole) {
-		this.ecole = ecole;
-	}
-
 	public LocalDate getDateObtentionDiplome() {
 		return dateObtentionDiplome;
 	}
@@ -71,5 +63,12 @@ public class Diplome implements Serializable {
 	public void setDateObtentionDiplome(LocalDate dateObtentionDiplome) {
 		this.dateObtentionDiplome = dateObtentionDiplome;
 	}
+	
+	public Ecole getEcole() {
+		return ecole;
+	}
 
+	public void setEcole(Ecole ecole) {
+		this.ecole = ecole;
+	}
 }

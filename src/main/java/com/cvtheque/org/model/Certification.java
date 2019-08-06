@@ -26,7 +26,6 @@ public class Certification implements Serializable {
     @Column(unique=true)
 	private String nomCertification;
     
-    
     public Certification() {
 		super();
 	}
@@ -52,5 +51,4 @@ public class Certification implements Serializable {
 	public void setNomCertification(String nomCertification) {
 		this.nomCertification = nomCertification;
 	}
-
 }

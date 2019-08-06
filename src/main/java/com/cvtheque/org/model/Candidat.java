@@ -14,10 +14,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -102,24 +102,23 @@ public class Candidat extends Utilisateur implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional=true)
 	private Curriculum curriculum;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "candidat_opportunite",
 	joinColumns = { @JoinColumn(name = "id_candidat") },
 	inverseJoinColumns = { @JoinColumn(name = "id_opportunite") })
 	private List<Opportunite> listeOpportunites = new ArrayList<Opportunite>();
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany
 	@JoinTable(name = "candidat_technologie",
 	joinColumns = { @JoinColumn(name = "id_candidat") },
 	inverseJoinColumns = { @JoinColumn(name = "id_technologie") })
 	private List<Technologie> listeTechnologies = new ArrayList<Technologie>();
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany
 	@JoinTable(name = "candidat_certification",
 	joinColumns = { @JoinColumn(name = "id_candidat") },
 	inverseJoinColumns = { @JoinColumn(name = "id_certification") })
 	private List<Certification> listeCertifications = new ArrayList<Certification>();
-
 	
 	public Candidat() {
 		super();
