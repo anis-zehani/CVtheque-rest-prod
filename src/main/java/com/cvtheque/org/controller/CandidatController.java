@@ -44,6 +44,12 @@ public class CandidatController {
 	    return candidatService.getAllCandidats(etatCandidat);
 	}
 	
+	//Lister les candidats par ID Opportunité
+	@GetMapping("/allCandidatByOpportunite/{id}")
+	public List<Candidat> getAllCandidatsByOpportunite(@PathVariable Long id) {
+	    return candidatService.getAllCandidatsByOpportunite(id);
+	}
+	
 	@GetMapping("{id}")
 	public Candidat getCandidat(@PathVariable Long id) {
 		return candidatService.getCandidat(id);

@@ -2,7 +2,6 @@ package com.cvtheque.org.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,13 +17,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.Data;
-
-@JsonIdentityReference
-@JsonIgnoreProperties	
+	
 @Data
 @Entity
 public class Opportunite implements Serializable {
@@ -65,12 +59,8 @@ public class Opportunite implements Serializable {
 	@JoinTable(name = "opportunite_technologie",
 	joinColumns = { @JoinColumn(name = "id_opportunite") },
 	inverseJoinColumns = { @JoinColumn(name = "id_technologie") })
-	private List<Technologie> listeTechnologies = new ArrayList<Technologie>();
+	private List<Technologie> listeTechnologies;
 	
-	//Attention : ne pas faire de Getter pour ce champs, il génére une erreur Jackson
-	@ManyToMany(mappedBy="listeOpportunites")
-    private List<Candidat> listeCandidats = new ArrayList<Candidat>();
-    
 	
 	public Opportunite() {
 		super();

@@ -8,6 +8,8 @@ public interface CandidatService {
 	
 	public List<Candidat> getAllCandidats(String etat);
 	
+	public List<Candidat> getAllCandidatsByOpportunite(Long id);
+	
 	public Candidat getCandidat(Long id);
 	
 	public Candidat addCandidat(Candidat candidat);

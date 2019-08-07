@@ -38,6 +38,13 @@ public class CandidatServiceImpl implements CandidatService{
 		}
 
 	}
+	
+	
+	//INNER JOIN : retourne les candidats par opportunité
+	public List<Candidat> getAllCandidatsByOpportunite(Long id){
+		
+		return candidatRepository.findAllCandidatsByOpportunite(id);
+	}
 
 	public Candidat getCandidat(Long id) {
 		return candidatRepository.getOne(id);
