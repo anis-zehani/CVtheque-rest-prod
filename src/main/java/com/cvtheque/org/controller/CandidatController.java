@@ -98,7 +98,13 @@ public class CandidatController {
 	
 	@DeleteMapping("{id}")
 	public void deleteCandidat(@PathVariable Long id) {
-		candidatService.deleteCandidat(id);
+			   candidatService.deleteCandidat(id);
+	}
+	
+	//Supprimer le lien entre un candidat et une opportunité
+	@DeleteMapping("/deleteLinkCandidatOpportunite/{idCandidat}/{idOpportunite}")
+	public void deleteLinkCandidatOpportunite(@PathVariable Long idCandidat, @PathVariable Long idOpportunite) {
+			   candidatService.deleteLinkCandidatOpportunite(idCandidat, idOpportunite);
 	}
 
 }

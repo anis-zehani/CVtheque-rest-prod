@@ -8,7 +8,9 @@ public interface CandidatService {
 	
 	public List<Candidat> getAllCandidats(String etat);
 	
-	public List<Candidat> getAllCandidatsByOpportunite(Long id);
+	public List<Candidat> getAllCandidatsByOpportunite(Long idCandidat);
+	
+	public void deleteLinkCandidatOpportunite(Long idCandidat, Long idOpportunite);
 	
 	public Candidat getCandidat(Long id);
 	

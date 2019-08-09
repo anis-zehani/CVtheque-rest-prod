@@ -41,9 +41,14 @@ public class CandidatServiceImpl implements CandidatService{
 	
 	
 	//INNER JOIN : retourne les candidats par opportunité
-	public List<Candidat> getAllCandidatsByOpportunite(Long id){
+	public List<Candidat> getAllCandidatsByOpportunite(Long idCandidat){
 		
-		return candidatRepository.findAllCandidatsByOpportunite(id);
+		return candidatRepository.findAllCandidatsByOpportunite(idCandidat);
+	}
+	
+	//Supprimer le lien entre un candidat et une opportunité
+	public void deleteLinkCandidatOpportunite(Long idCandidat, Long idOpportunite) {
+		 	   candidatRepository.deleteLinkCandidatOpportunite(idCandidat, idOpportunite);
 	}
 
 	public Candidat getCandidat(Long id) {
