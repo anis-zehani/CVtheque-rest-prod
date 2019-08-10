@@ -26,6 +26,9 @@ public class Technologie implements Serializable {
     @Column(unique=true)
     private String nomTechnologie;
     
+	@Column(length = 4096)
+	private String descriptionDetaillee;
+    
 	public Technologie() {
 		super();
 	}
@@ -50,6 +53,14 @@ public class Technologie implements Serializable {
 
 	public void setNomTechnologie(String nomTechnologie) {
 		this.nomTechnologie = nomTechnologie;
+	}
+
+	public String getDescriptionDetaillee() {
+		return descriptionDetaillee;
+	}
+
+	public void setDescriptionDetaillee(String descriptionDetaillee) {
+		this.descriptionDetaillee = descriptionDetaillee;
 	}
 	
 }
