@@ -61,6 +61,12 @@ public class Opportunite implements Serializable {
 	inverseJoinColumns = { @JoinColumn(name = "id_technologie") })
 	private List<Technologie> listeTechnologies;
 	
+	@ManyToMany
+	@JoinTable(name = "opportunite_certification",
+	joinColumns = { @JoinColumn(name = "id_opportunite") },
+	inverseJoinColumns = { @JoinColumn(name = "id_certification") })
+	private List<Technologie> listeCertifications;
+	
 	
 	public Opportunite() {
 		super();
@@ -144,5 +150,13 @@ public class Opportunite implements Serializable {
 
 	public void setListeTechnologies(List<Technologie> listeTechnologies) {
 		this.listeTechnologies = listeTechnologies;
+	}
+
+	public List<Technologie> getListeCertifications() {
+		return listeCertifications;
+	}
+
+	public void setListeCertifications(List<Technologie> listeCertifications) {
+		this.listeCertifications = listeCertifications;
 	}
 }

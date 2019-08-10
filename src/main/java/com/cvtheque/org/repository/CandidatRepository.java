@@ -20,11 +20,11 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 
 	List<Candidat> findByEtatCandidat(@Param("etatCandidat") Etat etatCandidat);
 	
-	//INNER JOIN : JPQL
+	//INNER JOIN : JPQL : La liste des candidats pour une Opportunité
 	@Query("FROM Candidat c INNER JOIN c.listeOpportunites c1 ON c1.id = :idCandidat")
 	List<Candidat> findAllCandidatsByOpportunite(@Param("idCandidat") Long idCandidat);
 	
-	//Native Query = true
+	//Native Query = true : Supprimer le lien entre un candidat et une opportunité
 	@Modifying
 	@Transactional
 	@Query(value = 
@@ -32,4 +32,12 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 			+ "c.id_candidat = ?1 AND c.id_opportunite =?2"
 			, nativeQuery = true)
 	void deleteLinkCandidatOpportunite(@Param("idOpportunite") Long idOpportunite, @Param("idCandidat") Long idCandidat);
+	
+	//INNER JOIN : JPQL : La liste des candidats pour une Technologie
+	@Query("FROM Candidat c INNER JOIN c.listeTechnologies c1 ON c1.id = :idTechnologie")
+	List<Candidat> findAllCandidatsByTechnologie(@Param("idTechnologie") Long idTechnologie);
+	
+	//INNER JOIN : JPQL : La liste des candidats pour une Certification
+	@Query("FROM Candidat c INNER JOIN c.listeCertifications c1 ON c1.id = :idCertification")
+	List<Candidat> findAllCandidatsByCertification(@Param("idCertification") Long idCertification);
 }

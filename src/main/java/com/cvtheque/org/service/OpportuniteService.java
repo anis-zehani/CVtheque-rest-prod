@@ -9,6 +9,12 @@ public interface OpportuniteService {
 	
 	public List<Opportunite> getAllOpportunites(String etat);
 	
+	public List<Opportunite> getAllOpportunitesByPartenaire(Long idPartenaire);
+	
+	public List<Opportunite> getAllOpportunitesByTechnologie(Long idTechnologie);
+	
+	public List<Opportunite> getAllOpportunitesByCertification(Long idCertification);
+	
 	public Optional<Opportunite> getOpportunite(Long id);
 	
 	public Opportunite addOpportunite(Opportunite opportunite);

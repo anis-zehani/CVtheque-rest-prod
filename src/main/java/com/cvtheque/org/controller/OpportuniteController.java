@@ -36,6 +36,24 @@ public class OpportuniteController {
 	    return opportuniteService.getAllOpportunites(etatOpportunite);
 	}
 	
+	//La liste des Opportunités pour un Partenaire
+	@GetMapping("/allOpportunitesByPartenaire/{id}")
+	public List<Opportunite> getAllOpportunitesByPartenaire(@PathVariable Long id) {
+	    return opportuniteService.getAllOpportunitesByPartenaire(id);
+	}
+	
+	//La liste des Opportunités pour une Technologie
+	@GetMapping("/allOpportunitesByTechnologie/{id}")
+	public List<Opportunite> getAllOpportunitesByTechnologie(@PathVariable Long id) {
+		return opportuniteService.getAllOpportunitesByTechnologie(id);
+	}
+	
+	//La liste des Opportunités pour une Certification
+	@GetMapping("/allOpportunitesByCertification/{id}")
+	public List<Opportunite> getAllOpportunitesByCertification(@PathVariable Long id) {
+		return opportuniteService.getAllOpportunitesByCertification(id);
+	}
+	
 	@GetMapping("{id}")
 	public Optional<Opportunite> getOpportunite(@PathVariable Long id) {
 		return opportuniteService.getOpportunite(id);

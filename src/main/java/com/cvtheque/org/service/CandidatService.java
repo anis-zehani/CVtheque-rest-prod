@@ -10,6 +10,10 @@ public interface CandidatService {
 	
 	public List<Candidat> getAllCandidatsByOpportunite(Long idCandidat);
 	
+	public List<Candidat> getAllCandidatsByTechnologie(Long idTechnologie);
+	
+	public List<Candidat> getAllCandidatsByCertification(Long idCertification);
+	
 	public void deleteLinkCandidatOpportunite(Long idCandidat, Long idOpportunite);
 	
 	public Candidat getCandidat(Long id);

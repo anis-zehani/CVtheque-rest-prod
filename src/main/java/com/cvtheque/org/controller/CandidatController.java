@@ -45,9 +45,21 @@ public class CandidatController {
 	}
 	
 	//Lister les candidats par ID Opportunité
-	@GetMapping("/allCandidatByOpportunite/{id}")
+	@GetMapping("/allCandidatsByOpportunite/{id}")
 	public List<Candidat> getAllCandidatsByOpportunite(@PathVariable Long id) {
 	    return candidatService.getAllCandidatsByOpportunite(id);
+	}
+	
+	//Lister les candidats par ID Technologie
+	@GetMapping("/allCandidatsByTechnologie/{id}")
+	public List<Candidat> getAllCandidatsByTechnologie(@PathVariable Long id) {
+	    return candidatService.getAllCandidatsByTechnologie(id);
+	}
+	
+	//Lister les candidats par ID Certification
+	@GetMapping("/allCandidatsByCertification/{id}")
+	public List<Candidat> getAllCandidatsByCertification(@PathVariable Long id) {
+	    return candidatService.getAllCandidatsByCertification(id);
 	}
 	
 	@GetMapping("{id}")

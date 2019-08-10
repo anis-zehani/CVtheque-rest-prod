@@ -32,7 +32,23 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 		}
 
 	}
-
+	
+	//INNER JOIN : JPQL : La liste des Opportunités pour un Partenaire
+	public List<Opportunite> getAllOpportunitesByPartenaire(Long idPartenaire) {
+		return opportuniteRepository.findAllOpportunitesByPartenaire(idPartenaire);
+	}
+	
+	//INNER JOIN : JPQL : La liste des Opportunités pour une Technologie
+	public List<Opportunite> getAllOpportunitesByTechnologie(Long idTechnologie) {
+		return opportuniteRepository.findAllOpportunitesByTechnologie(idTechnologie);
+	}
+	
+	//INNER JOIN : JPQL : La liste des Opportunités pour une Certification
+	public List<Opportunite> getAllOpportunitesByCertification(Long idCertification){
+		return opportuniteRepository.findAllOpportunitesByCertification(idCertification);
+	}
+	
+	
 	public Optional<Opportunite> getOpportunite(Long id) {
 		return opportuniteRepository.findById(id);
 	}

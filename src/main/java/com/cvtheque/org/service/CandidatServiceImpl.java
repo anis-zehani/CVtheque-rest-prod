@@ -40,10 +40,22 @@ public class CandidatServiceImpl implements CandidatService{
 	}
 	
 	
-	//INNER JOIN : retourne les candidats par opportunité
+	//INNER JOIN : retourne les candidats par Opportunité
 	public List<Candidat> getAllCandidatsByOpportunite(Long idCandidat){
 		
 		return candidatRepository.findAllCandidatsByOpportunite(idCandidat);
+	}
+	
+	//INNER JOIN : retourne les candidats par Technologie
+	public List<Candidat> getAllCandidatsByTechnologie(Long idTechnologie){
+			
+		return candidatRepository.findAllCandidatsByTechnologie(idTechnologie);
+	}
+		
+	//INNER JOIN : retourne les candidats par Certification
+	public List<Candidat> getAllCandidatsByCertification(Long idCertification){
+			
+		return candidatRepository.findAllCandidatsByCertification(idCertification);
 	}
 	
 	//Supprimer le lien entre un candidat et une opportunité
