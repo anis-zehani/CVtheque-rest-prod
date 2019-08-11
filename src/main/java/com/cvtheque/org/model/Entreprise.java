@@ -25,6 +25,9 @@ public class Entreprise implements Serializable {
 	@NotEmpty(message="Odix - entreprise ne peut pas être vide")
     @Column(unique=true)
 	private String nomEntreprise;
+	
+	@Column(length = 4096)
+	private String descriptionDetaillee;
 
 	public Entreprise() {
 		super();
@@ -52,4 +55,11 @@ public class Entreprise implements Serializable {
 		this.nomEntreprise = nomEntreprise;
 	}
 
+	public String getDescriptionDetaillee() {
+		return descriptionDetaillee;
+	}
+
+	public void setDescriptionDetaillee(String descriptionDetaillee) {
+		this.descriptionDetaillee = descriptionDetaillee;
+	}
 }
