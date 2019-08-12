@@ -54,13 +54,9 @@ public interface OpportuniteRepository extends JpaRepository<Opportunite, Long> 
 	@Query("FROM Opportunite o WHERE o.responsableOpportunite.id = :idPartenaire")
 	List<Opportunite> findAllOpportunitesByPartenaire(@Param("idPartenaire") Long idPartenaire);
 	
-	//Native Query = true : UPDATE le lien entre une opportunité et un partenaire
+	//Native Query = true : UPDATE le lien entre une opportunité et un partenaire : met responsableOpportunite à NULL
 	@Modifying
 	@Transactional
-	@Query(value = 
-			"UPDATE Opportunite o SET "
-			+ "responsable_opportunite_id = 'null' WHERE "
-			+ "o.id =?1 AND o.responsable_opportunite_id =?2"
-			, nativeQuery = true)
-	void updateLinkOpportunitePartenaire(@Param("idOpportunite") Long idOpportunite, @Param("idPartenaire") Long idPartenaire);
+	@Query("UPDATE Opportunite o SET o.responsableOpportunite = null WHERE o.id = :idOpportunite")
+	void updateLinkOpportunitePartenaire(@Param("idOpportunite") Long idOpportunite);
 }

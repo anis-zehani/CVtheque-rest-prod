@@ -31,6 +31,6 @@ public interface OpportuniteService {
 	
 	public void deleteLinkOpportuniteCertification(Long idOpportunite, Long idCertification);
 	
-	public void updateLinkOpportunitePartenaire(Long idOpportunite, Long idPartenaire);
+	public void updateLinkOpportunitePartenaire(Long idOpportunite);
 
 }

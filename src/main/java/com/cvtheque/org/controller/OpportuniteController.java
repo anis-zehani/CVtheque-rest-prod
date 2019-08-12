@@ -91,10 +91,10 @@ public class OpportuniteController {
 		opportuniteService.deleteLinkOpportuniteCertification(idOpportunite, idCertification);
 	}
 	
-	//Update le lien entre une opportunité et un partenaire
-	@PutMapping("/updateLinkOpportunitePartenaire/{idOpportunite}/{idPartenaire}")
-	public void updateLinkOpportunitePartenaire(@PathVariable Long idOpportunite, @PathVariable Long idPartenaire) {
-		opportuniteService.updateLinkOpportunitePartenaire(idOpportunite, idPartenaire);
+	//Update le lien entre une opportunité et un partenaire : met responsableOpportunite à NULL
+	@PutMapping("/updateLinkOpportunitePartenaire/{idOpportunite}")
+	public void updateLinkOpportunitePartenaire(@PathVariable Long idOpportunite) {
+		opportuniteService.updateLinkOpportunitePartenaire(idOpportunite);
 	}
 		
 

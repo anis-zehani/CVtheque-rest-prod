@@ -59,9 +59,9 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 			   opportuniteRepository.deleteLinkOpportuniteCertification(idOpportunite, idCertification);
 	}
 	
-	//Update le lien entre une opportunité et un partenaire
-	public void updateLinkOpportunitePartenaire(Long idOpportunite, Long idPartenaire) {
-			   opportuniteRepository.updateLinkOpportunitePartenaire(idOpportunite, idPartenaire);
+	//Update le lien entre une opportunité et un partenaire : met responsableOpportunite à NULL
+	public void updateLinkOpportunitePartenaire(Long idOpportunite) {
+			   opportuniteRepository.updateLinkOpportunitePartenaire(idOpportunite);
 	}
 	
 	
