@@ -16,6 +16,10 @@ public interface CandidatService {
 	
 	public void deleteLinkCandidatOpportunite(Long idCandidat, Long idOpportunite);
 	
+	public void deleteLinkCandidatTechnologie(Long idCandidat, Long idTechnologie);
+	
+	public void deleteLinkCandidatCertification(Long idCandidat, Long idCertification);
+	
 	public Candidat getCandidat(Long id);
 	
 	public Candidat addCandidat(Candidat candidat);

@@ -31,13 +31,35 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 			"DELETE FROM candidat_opportunite c WHERE "
 			+ "c.id_candidat = ?1 AND c.id_opportunite =?2"
 			, nativeQuery = true)
-	void deleteLinkCandidatOpportunite(@Param("idOpportunite") Long idOpportunite, @Param("idCandidat") Long idCandidat);
+	void deleteLinkCandidatOpportunite(@Param("idCandidat") Long idCandidat, @Param("idOpportunite") Long idOpportunite);
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	//INNER JOIN : JPQL : La liste des candidats pour une Technologie
 	@Query("FROM Candidat c INNER JOIN c.listeTechnologies c1 ON c1.id = :idTechnologie")
 	List<Candidat> findAllCandidatsByTechnologie(@Param("idTechnologie") Long idTechnologie);
 	
+	//Native Query = true : Supprimer le lien entre un candidat et une technologie
+	@Modifying
+	@Transactional
+	@Query(value = 
+			"DELETE FROM candidat_technologie c WHERE "
+			+ "c.id_candidat = ?1 AND c.id_technologie =?2"
+			, nativeQuery = true)
+	void deleteLinkCandidatTechnologie(@Param("idCandidat") Long idCandidat, @Param("idTechnologie") Long idTechnologie);
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	//INNER JOIN : JPQL : La liste des candidats pour une Certification
 	@Query("FROM Candidat c INNER JOIN c.listeCertifications c1 ON c1.id = :idCertification")
 	List<Candidat> findAllCandidatsByCertification(@Param("idCertification") Long idCertification);
+	
+	//Native Query = true : Supprimer le lien entre un candidat et une certification
+	@Modifying
+	@Transactional
+	@Query(value = 
+			"DELETE FROM candidat_certification c WHERE "
+			+ "c.id_candidat = ?1 AND c.id_certification =?2"
+			, nativeQuery = true)
+	void deleteLinkCandidatCertification(@Param("idCandidat") Long idCandidat, @Param("idCertification") Long idCertification);
 }

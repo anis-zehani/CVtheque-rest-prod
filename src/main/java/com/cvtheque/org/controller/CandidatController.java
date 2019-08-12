@@ -118,5 +118,17 @@ public class CandidatController {
 	public void deleteLinkCandidatOpportunite(@PathVariable Long idCandidat, @PathVariable Long idOpportunite) {
 			   candidatService.deleteLinkCandidatOpportunite(idCandidat, idOpportunite);
 	}
+	
+	//Supprimer le lien entre un candidat et une technologie
+	@DeleteMapping("/deleteLinkCandidatTechnologie/{idCandidat}/{idTechnologie}")
+	public void deleteLinkCandidatTechnologie(@PathVariable Long idCandidat, @PathVariable Long idTechnologie) {
+			   candidatService.deleteLinkCandidatTechnologie(idCandidat, idTechnologie);
+	}
+	
+	//Supprimer le lien entre un candidat et une certification
+	@DeleteMapping("/deleteLinkCandidatCertification/{idCandidat}/{idCertification}")
+	public void deleteLinkCandidatCertification(@PathVariable Long idCandidat, @PathVariable Long idCertification) {
+			   candidatService.deleteLinkCandidatCertification(idCandidat, idCertification);
+	}
 
 }

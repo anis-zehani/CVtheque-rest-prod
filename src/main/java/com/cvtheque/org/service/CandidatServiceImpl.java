@@ -62,6 +62,16 @@ public class CandidatServiceImpl implements CandidatService{
 	public void deleteLinkCandidatOpportunite(Long idCandidat, Long idOpportunite) {
 		 	   candidatRepository.deleteLinkCandidatOpportunite(idCandidat, idOpportunite);
 	}
+	
+	//Supprimer le lien entre un candidat et une technologie
+	public void deleteLinkCandidatTechnologie(Long idCandidat, Long idTechnologie) {
+			 	candidatRepository.deleteLinkCandidatTechnologie(idCandidat, idTechnologie);
+	}
+	
+	//Supprimer le lien entre un candidat et une certification
+	public void deleteLinkCandidatCertification(Long idCandidat, Long idCertification) {
+				candidatRepository.deleteLinkCandidatCertification(idCandidat, idCertification);
+	}
 
 	public Candidat getCandidat(Long id) {
 		return candidatRepository.getOne(id);
