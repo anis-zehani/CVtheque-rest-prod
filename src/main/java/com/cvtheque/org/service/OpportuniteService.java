@@ -17,12 +17,20 @@ public interface OpportuniteService {
 	
 	public Optional<Opportunite> getOpportunite(Long id);
 	
+	
 	public Opportunite addOpportunite(Opportunite opportunite);
 	
 	public Opportunite editOpportunite(Opportunite opportunite);
 	
 	public Opportunite editEtatOpportunite(Opportunite opportunite);
 	
+	
 	public void deleteOpportunite(Long id);
+	
+	public void deleteLinkOpportuniteTechnologie(Long idOpportunite, Long idTechnologie);
+	
+	public void deleteLinkOpportuniteCertification(Long idOpportunite, Long idCertification);
+	
+	public void updateLinkOpportunitePartenaire(Long idOpportunite, Long idPartenaire);
 
 }

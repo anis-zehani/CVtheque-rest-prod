@@ -49,6 +49,22 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 	}
 	
 	
+	//Supprimer le lien entre une opportunité et une technologie
+	public void deleteLinkOpportuniteTechnologie(Long idOpportunite, Long idTechnologie) {
+			   opportuniteRepository.deleteLinkOpportuniteTechnologie(idOpportunite, idTechnologie);
+	}
+	
+	//Supprimer le lien entre une opportunité et une certification
+	public void deleteLinkOpportuniteCertification(Long idOpportunite, Long idCertification) {
+			   opportuniteRepository.deleteLinkOpportuniteCertification(idOpportunite, idCertification);
+	}
+	
+	//Update le lien entre une opportunité et un partenaire
+	public void updateLinkOpportunitePartenaire(Long idOpportunite, Long idPartenaire) {
+			   opportuniteRepository.updateLinkOpportunitePartenaire(idOpportunite, idPartenaire);
+	}
+	
+	
 	public Optional<Opportunite> getOpportunite(Long id) {
 		return opportuniteRepository.findById(id);
 	}

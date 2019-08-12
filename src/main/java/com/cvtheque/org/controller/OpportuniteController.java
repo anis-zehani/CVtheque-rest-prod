@@ -78,5 +78,24 @@ public class OpportuniteController {
 	public void deleteOpportunite(@PathVariable Long id) {
 		opportuniteService.deleteOpportunite(id);
 	}
+	
+	//Supprimer le lien entre une opportunité et une technologie
+	@DeleteMapping("/deleteLinkOpportuniteTechnologie/{idOpportunite}/{idTechnologie}")
+	public void deleteLinkOpportuniteTechnologie(@PathVariable Long idOpportunite, @PathVariable Long idTechnologie) {
+		opportuniteService.deleteLinkOpportuniteTechnologie(idOpportunite, idTechnologie);
+	}
+	
+	//Supprimer le lien entre une opportunité et une certification
+	@DeleteMapping("/deleteLinkOpportuniteCertification/{idOpportunite}/{idCertification}")
+	public void deleteLinkOpportuniteCertification(@PathVariable Long idOpportunite, @PathVariable Long idCertification) {
+		opportuniteService.deleteLinkOpportuniteCertification(idOpportunite, idCertification);
+	}
+	
+	//Update le lien entre une opportunité et un partenaire
+	@PutMapping("/updateLinkOpportunitePartenaire/{idOpportunite}/{idPartenaire}")
+	public void updateLinkOpportunitePartenaire(@PathVariable Long idOpportunite, @PathVariable Long idPartenaire) {
+		opportuniteService.updateLinkOpportunitePartenaire(idOpportunite, idPartenaire);
+	}
+		
 
 }

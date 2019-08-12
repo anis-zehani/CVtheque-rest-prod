@@ -14,13 +14,8 @@ public interface CandidatService {
 	
 	public List<Candidat> getAllCandidatsByCertification(Long idCertification);
 	
-	public void deleteLinkCandidatOpportunite(Long idCandidat, Long idOpportunite);
-	
-	public void deleteLinkCandidatTechnologie(Long idCandidat, Long idTechnologie);
-	
-	public void deleteLinkCandidatCertification(Long idCandidat, Long idCertification);
-	
 	public Candidat getCandidat(Long id);
+	
 	
 	public Candidat addCandidat(Candidat candidat);
 	
@@ -28,7 +23,15 @@ public interface CandidatService {
 	
 	public Candidat editEtatCandidat(Candidat candidat);
 	
+	
 	public void deleteCandidat(Long id);
+	
+	public void deleteLinkCandidatOpportunite(Long idCandidat, Long idOpportunite);
+	
+	public void deleteLinkCandidatTechnologie(Long idCandidat, Long idTechnologie);
+	
+	public void deleteLinkCandidatCertification(Long idCandidat, Long idCertification);
+	
 
 	public Candidat addPhotoToCandidat(Long id, String urlPhoto);
 	
