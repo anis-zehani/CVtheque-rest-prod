@@ -97,6 +97,15 @@ public class CandidatController {
 	    return candidatService.addCvOriginalToCandidat(id, urlCvOriginal);
 	}
 	
+	@PostMapping("addCandidatsToOpportunite/{idOpportunite}")
+	public void addCandidatsToOpportunite(@PathVariable Long idOpportunite, @RequestParam("listeFinaleCandidats") ArrayList<Long> listeFinaleCandidats) {
+		//On récupère idOpportunité + ArrayList des id des Candidats puis on appelle le service pour faire les aggrégations
+		System.out.print("Anis Zaheni : idOpportunite : "+idOpportunite);
+		System.out.print("Anis Zaheni : listeFinaleCandidats : "+listeFinaleCandidats);
+		
+		System.out.print("Anis Zaheni : Fin : ");
+	}
+	
 	
 	@PutMapping()
 	public Candidat editCandidat(@Valid @RequestBody Candidat candidat) {
