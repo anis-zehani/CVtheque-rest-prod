@@ -15,6 +15,6 @@ public interface TechnologieService {
 	
 	public Technologie editTechnologie(Technologie technologie);
 	
-	public void deleteTechnologie(Long id);
+	public boolean deleteTechnologie(Long id);
 
 }

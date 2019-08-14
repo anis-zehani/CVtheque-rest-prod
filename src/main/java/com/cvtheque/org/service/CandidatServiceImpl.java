@@ -2,7 +2,6 @@ package com.cvtheque.org.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
@@ -159,7 +158,7 @@ public class CandidatServiceImpl implements CandidatService{
 				
 				candidat.getCurriculum().setUrlCvOdix(urlCvOdix);
 			}
-			catch(NoSuchElementException e) 
+			catch(Exception e) 
 			{
 				System.out.print("Erreur durant deleteCvOdix :"+e);
 			}
@@ -188,7 +187,7 @@ public class CandidatServiceImpl implements CandidatService{
 				
 				candidat.getCurriculum().setUrlCvOriginal(urlCvOriginal);
 			}
-			catch(NoSuchElementException e) 
+			catch(Exception e) 
 			{
 				System.out.print("Erreur durant CvOriginal :"+e);
 			}
@@ -332,7 +331,7 @@ public class CandidatServiceImpl implements CandidatService{
 				}
 				
 			}
-			catch(NoSuchElementException e) 
+			catch(Exception e) 
 			{
 				System.out.print("Erreur durant deleteCandidat :"+e);
 			}

@@ -52,8 +52,8 @@ public class TechnologieController {
 	}
 	
 	@DeleteMapping("{id}")
-	public void deleteTechnologie(@PathVariable Long id) {
-		technologieService.deleteTechnologie(id);
+	public boolean deleteTechnologie(@PathVariable Long id) {
+		return technologieService.deleteTechnologie(id);
 	}
 
 }

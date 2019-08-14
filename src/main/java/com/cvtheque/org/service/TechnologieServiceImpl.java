@@ -48,12 +48,21 @@ public class TechnologieServiceImpl implements TechnologieService{
 	}
 	
 	//Supprimer une technologie
-	public void deleteTechnologie(Long id) 
+	public boolean deleteTechnologie(Long id) 
 	{
 		if(technologieRepository.existsById(id))
 		{
+			try 
+			{
 			technologieRepository.deleteById(id);
+			return true;
+			}
+			catch(Exception e) 
+			{
+				System.out.print("Erreur durant deleteTechnologie :"+e);
+			}
 		}
+		return false;
 	}
 
 }

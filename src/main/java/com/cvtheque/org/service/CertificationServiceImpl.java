@@ -48,12 +48,21 @@ public class CertificationServiceImpl implements CertificationService{
 	}
 	
 	//Supprimer une certification
-	public void deleteCertification(Long id) 
+	public boolean deleteCertification(Long id) 
 	{
 		if(certificationRepository.existsById(id))
 		{
-			certificationRepository.deleteById(id);
+			try 
+			{
+				certificationRepository.deleteById(id);
+			return true;
+			}
+			catch(Exception e) 
+			{
+				System.out.print("Erreur durant deleteCertification :"+e);
+			}
 		}
+		return false;
 	}
 
 }

@@ -15,6 +15,6 @@ public interface CertificationService {
 	
 	public Certification editCertification(Certification certification);
 	
-	public void deleteCertification(Long id);
+	public boolean deleteCertification(Long id);
 
 }
