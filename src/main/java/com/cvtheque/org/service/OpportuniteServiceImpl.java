@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.cvtheque.org.model.Candidat;
 import com.cvtheque.org.model.Etat;
 import com.cvtheque.org.model.Opportunite;
 import com.cvtheque.org.repository.OpportuniteRepository;
@@ -14,10 +15,12 @@ import com.cvtheque.org.repository.OpportuniteRepository;
 public class OpportuniteServiceImpl implements OpportuniteService {
 	
 	private final OpportuniteRepository opportuniteRepository;
+	private final CandidatService candidatService;
 	
-	OpportuniteServiceImpl(OpportuniteRepository opportuniteRepository) {
+	OpportuniteServiceImpl(OpportuniteRepository opportuniteRepository, CandidatService candidatService) {
 		super();
 		this.opportuniteRepository = opportuniteRepository;
+		this.candidatService = candidatService;
 	}
 
 	public List<Opportunite> getAllOpportunites(String etatOpportunite) {
@@ -150,11 +153,23 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 	}
 
 	//Supprimer une opportunité
-	public void deleteOpportunite(Long id) {
+	public void deleteOpportunite(Long idOpportunite) {
 		
-		if(opportuniteRepository.existsById(id))
+		if(opportuniteRepository.existsById(idOpportunite))
 		{
-			opportuniteRepository.deleteById(id);
+			//On récupére les Candidats liés à cette Opportunités 
+			List<Candidat> listeCandidats = candidatService.getAllCandidatsByOpportunite(idOpportunite);
+			
+			//On supprime les liens clés étrangères dans la table jointure
+			if(!listeCandidats.isEmpty())
+			{
+				for(int i=0;i<listeCandidats.size();i++)
+				{
+					candidatService.deleteLinkCandidatOpportunite(listeCandidats.get(i).getId(), idOpportunite);
+				}
+			}
+			
+			opportuniteRepository.deleteById(idOpportunite);
 		}
 	}
 }

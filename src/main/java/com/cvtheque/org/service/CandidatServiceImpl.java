@@ -1,5 +1,6 @@
 package com.cvtheque.org.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -41,9 +42,9 @@ public class CandidatServiceImpl implements CandidatService{
 	
 	
 	//INNER JOIN : retourne les candidats par Opportunité
-	public List<Candidat> getAllCandidatsByOpportunite(Long idCandidat){
+	public List<Candidat> getAllCandidatsByOpportunite(Long idOpportunite){
 		
-		return candidatRepository.findAllCandidatsByOpportunite(idCandidat);
+		return candidatRepository.findAllCandidatsByOpportunite(idOpportunite);
 	}
 	
 	//INNER JOIN : retourne les candidats par Technologie
@@ -75,6 +76,18 @@ public class CandidatServiceImpl implements CandidatService{
 
 	public Candidat getCandidat(Long id) {
 		return candidatRepository.getOne(id);
+	}
+	
+	//Créer un lien entre des candidats et une opportunité
+	public void addCandidatsToOpportunite(Long idOpportunite, ArrayList<Candidat> listeCandidats) {
+		
+		if(idOpportunite != null && !listeCandidats.isEmpty())
+		{
+			for(int i=0;i<listeCandidats.size();i++)
+			{
+				candidatRepository.addCandidatToOpportunite(listeCandidats.get(i).getId(), idOpportunite);
+			}
+		}
 	}
 
 	//Ajouter un candidat

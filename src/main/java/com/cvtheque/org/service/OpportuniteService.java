@@ -25,7 +25,7 @@ public interface OpportuniteService {
 	public Opportunite editEtatOpportunite(Opportunite opportunite);
 	
 	
-	public void deleteOpportunite(Long id);
+	public void deleteOpportunite(Long idOpportunite);
 	
 	public void deleteLinkOpportuniteTechnologie(Long idOpportunite, Long idTechnologie);
 	

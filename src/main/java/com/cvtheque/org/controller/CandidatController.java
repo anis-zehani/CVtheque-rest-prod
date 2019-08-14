@@ -97,13 +97,11 @@ public class CandidatController {
 	    return candidatService.addCvOriginalToCandidat(id, urlCvOriginal);
 	}
 	
+	//Permet de lier des candidats à une opportunité récement créée
 	@PostMapping("addCandidatsToOpportunite/{idOpportunite}")
-	public void addCandidatsToOpportunite(@PathVariable Long idOpportunite, @RequestParam("listeFinaleCandidats") ArrayList<Long> listeFinaleCandidats) {
-		//On récupère idOpportunité + ArrayList des id des Candidats puis on appelle le service pour faire les aggrégations
-		System.out.print("Anis Zaheni : idOpportunite : "+idOpportunite);
-		System.out.print("Anis Zaheni : listeFinaleCandidats : "+listeFinaleCandidats);
-		
-		System.out.print("Anis Zaheni : Fin : ");
+	public void addCandidatsToOpportunite(@PathVariable Long idOpportunite, @RequestBody ArrayList<Candidat> listeCandidats) {
+
+		candidatService.addCandidatsToOpportunite(idOpportunite, listeCandidats);
 	}
 	
 	

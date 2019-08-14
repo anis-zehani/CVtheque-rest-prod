@@ -1,5 +1,6 @@
 package com.cvtheque.org.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cvtheque.org.model.Candidat;
@@ -8,7 +9,7 @@ public interface CandidatService {
 	
 	public List<Candidat> getAllCandidats(String etat);
 	
-	public List<Candidat> getAllCandidatsByOpportunite(Long idCandidat);
+	public List<Candidat> getAllCandidatsByOpportunite(Long idOpportunite);
 	
 	public List<Candidat> getAllCandidatsByTechnologie(Long idTechnologie);
 	
@@ -18,6 +19,8 @@ public interface CandidatService {
 	
 	
 	public Candidat addCandidat(Candidat candidat);
+	
+	public void addCandidatsToOpportunite(Long idOpportunite, ArrayList<Candidat> listeCandidats);
 	
 	public Candidat editCandidat(Candidat candidat);
 	
