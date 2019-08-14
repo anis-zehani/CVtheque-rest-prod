@@ -78,8 +78,13 @@ public class CandidatServiceImpl implements CandidatService{
 	}
 	
 	//Créer un lien entre des candidats et une opportunité
-	public void addCandidatsToOpportunite(Long idOpportunite, ArrayList<Candidat> listeCandidats) {
+	public void addCandidatsToOpportunite(Long idOpportunite, ArrayList<Candidat> listeCandidats, boolean withDeletion) {
 		
+		if(withDeletion)
+		{
+
+			candidatRepository.deleteAllCandidatsByOpportunite(idOpportunite);
+		}
 		if(idOpportunite != null && !listeCandidats.isEmpty())
 		{
 			for(int i=0;i<listeCandidats.size();i++)

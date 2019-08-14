@@ -20,7 +20,7 @@ public interface CandidatService {
 	
 	public Candidat addCandidat(Candidat candidat);
 	
-	public void addCandidatsToOpportunite(Long idOpportunite, ArrayList<Candidat> listeCandidats);
+	public void addCandidatsToOpportunite(Long idOpportunite, ArrayList<Candidat> listeCandidats, boolean withDeletion);
 	
 	public Candidat editCandidat(Candidat candidat);
 	

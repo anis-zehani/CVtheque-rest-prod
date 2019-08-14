@@ -98,10 +98,10 @@ public class CandidatController {
 	}
 	
 	//Permet de lier des candidats à une opportunité récement créée
-	@PostMapping("addCandidatsToOpportunite/{idOpportunite}")
-	public void addCandidatsToOpportunite(@PathVariable Long idOpportunite, @RequestBody ArrayList<Candidat> listeCandidats) {
+	@PostMapping("addCandidatsToOpportunite/{idOpportunite}/{withDeletion}")
+	public void addCandidatsToOpportunite(@PathVariable Long idOpportunite, @RequestBody ArrayList<Candidat> listeCandidats, @PathVariable boolean withDeletion) {
 
-		candidatService.addCandidatsToOpportunite(idOpportunite, listeCandidats);
+		candidatService.addCandidatsToOpportunite(idOpportunite, listeCandidats, withDeletion);
 	}
 	
 	
