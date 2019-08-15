@@ -58,6 +58,12 @@ public class CandidatServiceImpl implements CandidatService{
 		return candidatRepository.findAllCandidatsByCertification(idCertification);
 	}
 	
+	//retourne les candidats par Entreprise
+	public List<Candidat> getAllCandidatsByEntreprise(Long idEntreprise){
+			
+		return candidatRepository.findAllCandidatsByEntreprise(idEntreprise);
+	}
+	
 	//Supprimer le lien entre un candidat et une opportunité
 	public void deleteLinkCandidatOpportunite(Long idCandidat, Long idOpportunite) {
 		 	   candidatRepository.deleteLinkCandidatOpportunite(idCandidat, idOpportunite);

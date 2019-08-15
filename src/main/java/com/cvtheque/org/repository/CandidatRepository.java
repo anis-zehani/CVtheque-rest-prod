@@ -79,4 +79,11 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 			+ "c.id_candidat = ?1 AND c.id_certification =?2"
 			, nativeQuery = true)
 	void deleteLinkCandidatCertification(@Param("idCandidat") Long idCandidat, @Param("idCertification") Long idCertification);
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+	//La liste des candidats pour une Entreprise
+	@Query("FROM Candidat c WHERE c.entreprise.idEntreprise = :idEntreprise")
+	List<Candidat> findAllCandidatsByEntreprise(@Param("idEntreprise") Long idEntreprise);
+
 }

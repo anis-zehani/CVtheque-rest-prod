@@ -15,6 +15,8 @@ public interface CandidatService {
 	
 	public List<Candidat> getAllCandidatsByCertification(Long idCertification);
 	
+	public List<Candidat> getAllCandidatsByEntreprise(Long idEntreprise);
+	
 	public Candidat getCandidat(Long id);
 	
 	

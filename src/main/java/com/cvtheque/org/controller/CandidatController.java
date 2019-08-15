@@ -62,6 +62,12 @@ public class CandidatController {
 	    return candidatService.getAllCandidatsByCertification(id);
 	}
 	
+	//Lister les candidats par ID Entreprise
+	@GetMapping("/allCandidatsByEntreprise/{id}")
+	public List<Candidat> getAllCandidatsByEntreprise(@PathVariable Long id) {
+	    return candidatService.getAllCandidatsByEntreprise(id);
+	}
+	
 	@GetMapping("{id}")
 	public Candidat getCandidat(@PathVariable Long id) {
 		return candidatService.getCandidat(id);
