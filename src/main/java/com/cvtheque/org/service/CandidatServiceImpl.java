@@ -312,7 +312,17 @@ public class CandidatServiceImpl implements CandidatService{
 			
 			return null;
 	}
-
+	
+	//Update le lien entre un candidat et une entreprise : met entreprise à NULL
+	public void updateLinkCandidatEntreprise(Long idCandidat) {
+		
+		if(candidatRepository.existsById(idCandidat))
+		{
+			candidatRepository.updateLinkCandidatEntreprise(idCandidat);
+		}
+		
+	}
+	
 	//Supprimer un candidat
 	public void deleteCandidat(Long id) {
 		

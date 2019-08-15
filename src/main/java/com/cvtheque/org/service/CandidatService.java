@@ -28,6 +28,8 @@ public interface CandidatService {
 	
 	public Candidat editEtatCandidat(Candidat candidat);
 	
+	public void updateLinkCandidatEntreprise(Long idCandidat);
+	
 	
 	public void deleteCandidat(Long id);
 	

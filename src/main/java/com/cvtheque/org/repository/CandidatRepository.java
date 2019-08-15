@@ -46,9 +46,9 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 	@Modifying
 	@Transactional
 	@Query(value = 
-				"INSERT INTO candidat_opportunite (id_candidat, id_opportunite) "
-				+ "VALUES(?1 , ?2)"
-				, nativeQuery = true)
+			"INSERT INTO candidat_opportunite (id_candidat, id_opportunite) "
+			+ "VALUES(?1 , ?2)"
+			, nativeQuery = true)
 	void addCandidatToOpportunite(@Param("idCandidat") Long idCandidat, @Param("idOpportunite") Long idOpportunite);
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -85,5 +85,11 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 	//La liste des candidats pour une Entreprise
 	@Query("FROM Candidat c WHERE c.entreprise.idEntreprise = :idEntreprise")
 	List<Candidat> findAllCandidatsByEntreprise(@Param("idEntreprise") Long idEntreprise);
+	
+	//UPDATE le lien entre un candiat et une entreprise : met entreprise à NULL
+	@Modifying
+	@Transactional
+	@Query("UPDATE Candidat c SET c.entreprise = null WHERE c.id = :idCandidat")
+	void updateLinkCandidatEntreprise(@Param("idCandidat") Long idCandidat);
 
 }

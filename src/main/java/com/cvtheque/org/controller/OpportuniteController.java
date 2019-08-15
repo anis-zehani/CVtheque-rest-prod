@@ -74,6 +74,12 @@ public class OpportuniteController {
 		return opportuniteService.editEtatOpportunite(opportunite);
 	}
 	
+	//Update le lien entre une opportunité et un partenaire : met responsableOpportunite à NULL
+	@PutMapping("/updateLinkOpportunitePartenaire/{idOpportunite}")
+	public void updateLinkOpportunitePartenaire(@PathVariable Long idOpportunite) {
+		opportuniteService.updateLinkOpportunitePartenaire(idOpportunite);
+	}
+	
 	@DeleteMapping("{id}")
 	public void deleteOpportunite(@PathVariable Long id) {
 		opportuniteService.deleteOpportunite(id);
@@ -89,13 +95,6 @@ public class OpportuniteController {
 	@DeleteMapping("/deleteLinkOpportuniteCertification/{idOpportunite}/{idCertification}")
 	public void deleteLinkOpportuniteCertification(@PathVariable Long idOpportunite, @PathVariable Long idCertification) {
 		opportuniteService.deleteLinkOpportuniteCertification(idOpportunite, idCertification);
-	}
-	
-	//Update le lien entre une opportunité et un partenaire : met responsableOpportunite à NULL
-	@PutMapping("/updateLinkOpportunitePartenaire/{idOpportunite}")
-	public void updateLinkOpportunitePartenaire(@PathVariable Long idOpportunite) {
-		opportuniteService.updateLinkOpportunitePartenaire(idOpportunite);
-	}
-		
+	}	
 
 }

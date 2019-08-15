@@ -121,6 +121,12 @@ public class CandidatController {
 		return candidatService.editEtatCandidat(candidat);
 	}
 	
+	//Update le lien entre un candidat et une entreprise : met entreprise à NULL
+	@PutMapping("/updateLinkCandidatEntreprise")
+	public void updateLinkCandidatEntreprise(@Valid @RequestBody Long idCandidat) {
+			   candidatService.updateLinkCandidatEntreprise(idCandidat);
+	}
+	
 	@DeleteMapping("{id}")
 	public void deleteCandidat(@PathVariable Long id) {
 			   candidatService.deleteCandidat(id);
