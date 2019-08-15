@@ -52,8 +52,8 @@ public class EntrepriseController {
 	}
 	
 	@DeleteMapping("{id}")
-	public void deleteEntreprise(@PathVariable Long id) {
-		entrepriseService.deleteEntreprise(id);
+	public boolean deleteEntreprise(@PathVariable Long id) {
+		return entrepriseService.deleteEntreprise(id);
 	}
 
 }

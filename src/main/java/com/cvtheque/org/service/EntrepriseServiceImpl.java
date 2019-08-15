@@ -47,12 +47,21 @@ public class EntrepriseServiceImpl implements EntrepriseService{
 	}
 	
 	//Supprimer une entreprise
-	public void deleteEntreprise(Long id)
+	public boolean deleteEntreprise(Long id)
 	{
 		if(entrepriseRepository.existsById(id))
 		{
-			entrepriseRepository.deleteById(id);
+			try 
+			{
+				entrepriseRepository.deleteById(id);
+				return true;
+			}
+			catch(Exception e) 
+			{
+				System.out.print("Erreur durant deleteEntreprise :"+e);
+			}
 		}
+		return false;
 	}
 
 }

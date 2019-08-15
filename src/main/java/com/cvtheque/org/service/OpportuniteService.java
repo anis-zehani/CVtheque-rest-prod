@@ -22,7 +22,7 @@ public interface OpportuniteService {
 	public Opportunite addOpportunite(Opportunite opportunite);
 	
 	//Add Opportunité To Certification
-	public void addOpportunitesToCertification(Long idOCertification, ArrayList<Opportunite> listeOpportunites, boolean withDeletion);
+	//public void addOpportunitesToCertification(Long idOCertification, ArrayList<Opportunite> listeOpportunites, boolean withDeletion);
 	
 	public Opportunite editOpportunite(Opportunite opportunite);
 	

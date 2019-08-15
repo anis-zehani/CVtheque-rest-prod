@@ -15,6 +15,6 @@ public interface EntrepriseService {
 	
 	public Entreprise editEntreprise(Entreprise entreprise);
 	
-	public void deleteEntreprise(Long id);
+	public boolean deleteEntreprise(Long id);
 
 }
