@@ -1,5 +1,6 @@
 package com.cvtheque.org.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,9 @@ public interface OpportuniteService {
 	
 	
 	public Opportunite addOpportunite(Opportunite opportunite);
+	
+	//Add Opportunité To Certification
+	public void addOpportunitesToCertification(Long idOCertification, ArrayList<Opportunite> listeOpportunites, boolean withDeletion);
 	
 	public Opportunite editOpportunite(Opportunite opportunite);
 	

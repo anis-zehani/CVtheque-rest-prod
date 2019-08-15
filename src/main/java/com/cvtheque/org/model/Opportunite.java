@@ -65,7 +65,7 @@ public class Opportunite implements Serializable {
 	@JoinTable(name = "opportunite_certification",
 	joinColumns = { @JoinColumn(name = "id_opportunite") },
 	inverseJoinColumns = { @JoinColumn(name = "id_certification") })
-	private List<Technologie> listeCertifications;
+	private List<Certification> listeCertifications;
 	
 	
 	public Opportunite() {
@@ -152,11 +152,11 @@ public class Opportunite implements Serializable {
 		this.listeTechnologies = listeTechnologies;
 	}
 
-	public List<Technologie> getListeCertifications() {
+	public List<Certification> getListeCertifications() {
 		return listeCertifications;
 	}
 
-	public void setListeCertifications(List<Technologie> listeCertifications) {
+	public void setListeCertifications(List<Certification> listeCertifications) {
 		this.listeCertifications = listeCertifications;
 	}
 }

@@ -46,6 +46,24 @@ public interface OpportuniteRepository extends JpaRepository<Opportunite, Long> 
 			+ "o.id_opportunite = ?1 AND o.id_certification =?2"
 			, nativeQuery = true)
 	void deleteLinkOpportuniteCertification(@Param("idOpportunite") Long idOpportunite, @Param("idCertification") Long idCertification);
+	
+	//Native Query = true : Supprimer tous les liens entre les opportunités et une certification
+	@Modifying
+	@Transactional
+	@Query(value = 
+			"DELETE FROM opportunite_certification o WHERE "
+			+ "o.id_certification =?1"
+			, nativeQuery = true)
+	void deleteAllOpportunitesByCertification(@Param("idCertification") Long idCertification);
+		
+	//Native Query = true : Créer un lien entre une opportunité et une certification
+	@Modifying
+	@Transactional
+	@Query(value = 
+			"INSERT INTO opportunite_certification (id_opportunite, id_certification) "
+			+ "VALUES(?1 , ?2)"
+			, nativeQuery = true)
+	void addOpportuniteToCertification(@Param("idOpportunite") Long idOpportunite, @Param("idCertification") Long idCertification);
 		
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		

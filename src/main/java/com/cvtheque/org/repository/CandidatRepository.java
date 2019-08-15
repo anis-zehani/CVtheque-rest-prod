@@ -24,15 +24,6 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 	@Query("FROM Candidat c INNER JOIN c.listeOpportunites c1 ON c1.id = :idOpportunite")
 	List<Candidat> findAllCandidatsByOpportunite(@Param("idOpportunite") Long idOpportunite);
 	
-	//Native Query = true : Supprimer tous les liens entre les candidats et une opportunité
-	@Modifying
-	@Transactional
-	@Query(value = 
-			"DELETE FROM candidat_opportunite c WHERE "
-			+ "c.id_opportunite =?1"
-			, nativeQuery = true)
-	void deleteAllCandidatsByOpportunite(@Param("idOpportunite") Long idOpportunite);
-	
 	//Native Query = true : Supprimer le lien entre un candidat et une opportunité
 	@Modifying
 	@Transactional
@@ -41,6 +32,15 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 			+ "c.id_candidat = ?1 AND c.id_opportunite =?2"
 			, nativeQuery = true)
 	void deleteLinkCandidatOpportunite(@Param("idCandidat") Long idCandidat, @Param("idOpportunite") Long idOpportunite);
+	
+	//Native Query = true : Supprimer tous les liens entre les candidats et une opportunité
+	@Modifying
+	@Transactional
+	@Query(value = 
+			"DELETE FROM candidat_opportunite c WHERE "
+			+ "c.id_opportunite =?1"
+			, nativeQuery = true)
+	void deleteAllCandidatsByOpportunite(@Param("idOpportunite") Long idOpportunite);
 	
 	//Native Query = true : Créer un lien entre un candidat et une opportunité
 	@Modifying
