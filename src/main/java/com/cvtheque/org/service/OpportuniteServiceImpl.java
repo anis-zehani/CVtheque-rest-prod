@@ -125,6 +125,14 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 				opportuniteToUpdate.setListeTechnologies(opportunite.getListeTechnologies());
 			}
 			
+			/*
+			 * listeCertifications : @ManyToMany 
+			 */
+			if(opportunite.getListeCertifications() != null)
+			{
+				opportuniteToUpdate.setListeCertifications(opportunite.getListeCertifications());
+			}
+			
 			return opportuniteRepository.save(opportuniteToUpdate);
 		}
 		
