@@ -62,6 +62,11 @@ public class RappelController {
 	    return rappelService.getAllRappelsByProjet(projetService.getProjet(idProjet));
 	}
 	
+	@GetMapping("/allRappelsByPriorite/{valeurPriorite}")
+	public List<Rappel> getAllRappelsByPriorite(@PathVariable String valeurPriorite) {
+	    return rappelService.getAllRappelsByPriorite(valeurPriorite);
+	}
+	
 	@GetMapping("{id}")
 	public Rappel getRappel(@PathVariable Long id) {
 		return rappelService.getRappel(id);

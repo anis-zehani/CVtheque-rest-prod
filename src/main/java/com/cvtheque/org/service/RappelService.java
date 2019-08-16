@@ -15,6 +15,8 @@ public interface RappelService {
 	
 	public List<Rappel> getAllRappelsByProjet(Projet projet);
 	
+	public List<Rappel> getAllRappelsByPriorite(String valeurPriorite);
+	
 	public Rappel getRappel(Long id);
 	
 	public Rappel addRappel(Rappel rappel);

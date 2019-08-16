@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.cvtheque.org.model.Priorite;
 import com.cvtheque.org.model.Projet;
 import com.cvtheque.org.model.Rappel;
 
@@ -23,5 +24,7 @@ public interface RappelRepository extends JpaRepository<Rappel, Long> {
 	
 	@Query("SELECT r FROM Rappel r where r.dateEcheance > :dateDebut and r.dateEcheance < :dateFin")
 	List<Rappel> findByNext7Days(@Param("dateDebut") LocalDate dateDebut, @Param("dateFin") LocalDate dateFin);
+	
+	List<Rappel> findByPriorite(@Param("priorite") Priorite priorite);
 	
 }

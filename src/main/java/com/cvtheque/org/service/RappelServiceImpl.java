@@ -49,6 +49,11 @@ public class RappelServiceImpl implements RappelService{
 	    return rappelRepository.findByProjet(projet);
 	}
 	
+	public List<Rappel> getAllRappelsByPriorite(String valeurPriorite){
+		//Il faut convertir le String en Enum via valueOf
+		return rappelRepository.findByPriorite(Priorite.valueOf(valeurPriorite));
+	}
+	
 	public Rappel getRappel(Long id) {
 		return rappelRepository.getOne(id);
 	}
