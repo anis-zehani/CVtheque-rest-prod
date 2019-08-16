@@ -49,6 +49,12 @@ public class PartenaireController {
 	public Optional<Partenaire> getPartenaire(@PathVariable Long id) {
 		return partenaireService.getPartenaire(id);
 	}
+	
+	//Liste des Partenaires Par Entreprise
+	@GetMapping("/allPartenairesByEntreprise/{idEntreprise}")
+	public List<Partenaire> getAllPartenairesByEntreprise(@PathVariable Long idEntreprise) {
+	    return partenaireService.getAllPartenairesByEntreprise(idEntreprise);
+	}
 
 	@PostMapping()
 	public Partenaire addPartenaire(@Valid @RequestBody Partenaire partenaire) {

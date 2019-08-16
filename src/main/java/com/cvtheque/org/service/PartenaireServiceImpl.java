@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.cvtheque.org.model.Entreprise;
 import com.cvtheque.org.model.Etat;
 import com.cvtheque.org.model.Partenaire;
 import com.cvtheque.org.repository.PartenaireRepository;
@@ -38,6 +39,13 @@ public class PartenaireServiceImpl implements PartenaireService{
 
 	}
 
+	public List<Partenaire> getAllPartenairesByEntreprise(Long idEntreprise){
+		
+			Entreprise entreprise = new Entreprise();
+			entreprise.setIdEntreprise(idEntreprise);
+			
+			return partenaireRepository.findAllByEntreprise(entreprise);
+	}
 	public Optional<Partenaire> getPartenaire(Long id) {
 		return partenaireRepository.findById(id);
 	}

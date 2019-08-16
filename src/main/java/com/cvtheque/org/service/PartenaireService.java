@@ -9,6 +9,8 @@ public interface PartenaireService {
 	
 	public List<Partenaire> getAllPartenaires(String etat);
 	
+	public List<Partenaire> getAllPartenairesByEntreprise(Long idEntreprise);
+	
 	public Optional<Partenaire> getPartenaire(Long id);
 	
 	public Partenaire addPartenaire(Partenaire partenaire);
