@@ -71,7 +71,6 @@ public class PartenaireController {
 
 	}
 
-	
 	@PutMapping()
 	public Partenaire editPartenaire(@Valid @RequestBody Partenaire partenaire) {
 		return partenaireService.editPartenaire(partenaire);
@@ -80,6 +79,12 @@ public class PartenaireController {
 	@PutMapping("/editEtat")
 	public Partenaire editEtatPartenaire(@Valid @RequestBody Partenaire partenaire) {
 		return partenaireService.editEtatPartenaire(partenaire);
+	}
+	
+	//UPDATE le lien entre un partenaire et une entreprise : met entreprise à NULL
+	@PutMapping("/updateLinkPartenaireEntreprise/{idPartenaire}")
+	public void updateLinkPartenaireEntreprise(@PathVariable Long idPartenaire) {
+		partenaireService.updateLinkPartenaireEntreprise(idPartenaire);
 	}
 	
 	@DeleteMapping("{id}")

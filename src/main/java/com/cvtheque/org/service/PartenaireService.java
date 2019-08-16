@@ -19,6 +19,8 @@ public interface PartenaireService {
 	
 	public Partenaire editEtatPartenaire(Partenaire partenaire);
 	
+	public void updateLinkPartenaireEntreprise(Long idPartenaire);
+	
 	public void deletePartenaire(Long id);
 
 	public Partenaire addPhotoToPartenaire(Long id, String urlPhoto);

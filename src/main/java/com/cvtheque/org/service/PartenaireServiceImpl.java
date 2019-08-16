@@ -126,6 +126,14 @@ public class PartenaireServiceImpl implements PartenaireService{
 		return null;
 	}
 
+	//UPDATE le lien entre un partenaire et une entreprise : met entreprise à NULL
+	public void updateLinkPartenaireEntreprise(Long idPartenaire) {
+		if(partenaireRepository.existsById(idPartenaire))
+		{
+			partenaireRepository.updateLinkPartenaireEntreprise(idPartenaire);
+		}
+	}
+	
 	//Supprimer un partenaire
 	public void deletePartenaire(Long id) {
 		
@@ -143,7 +151,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 			}
 			catch(NoSuchElementException e) 
 			{
-				System.out.print("Erreur durant deleteCandidat :"+e);
+				System.out.print("Erreur durant deletePartenaire :"+e);
 			}
 			
 			//On supprime la ligne de la base

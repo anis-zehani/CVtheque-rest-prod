@@ -2,7 +2,11 @@ package com.cvtheque.org.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +22,13 @@ public interface PartenaireRepository extends JpaRepository<Partenaire, Long> {
 	List<Partenaire> findByEtatPartenaire(@Param("etatPartenaire") Etat etatPartenaire);
 	
 	List<Partenaire> findAllByEntreprise(@Param("entreprise") Entreprise entreprise);
+	
+
+	//UPDATE le lien entre un partenaire et une entreprise : met entreprise à NULL
+	@Modifying
+	@Transactional
+	@Query("UPDATE Partenaire p SET p.entreprise = null WHERE p.id = :idPartenaire")
+	void updateLinkPartenaireEntreprise(@Param("idPartenaire") Long idPartenaire);
+
 	
 }
