@@ -154,5 +154,10 @@ public class RappelServiceImpl implements RappelService{
 			rappelRepository.deleteById(id);
 		}
 	}
+	
+	public void deleteAllRappelsByProjet(Projet projet) {
+			
+			rappelRepository.deleteAllRappelsByProjet(projet);
+	}
 
 }

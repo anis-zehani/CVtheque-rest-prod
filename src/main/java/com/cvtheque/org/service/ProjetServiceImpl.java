@@ -12,10 +12,12 @@ import com.cvtheque.org.repository.ProjetRepository;
 public class ProjetServiceImpl implements ProjetService{
 	
 	private final ProjetRepository projetRepository;
+	private final RappelService rappelService;
 
-	ProjetServiceImpl(ProjetRepository projetRepository) {
+	ProjetServiceImpl(ProjetRepository projetRepository, RappelService rappelService) {
 		super();
 		this.projetRepository = projetRepository;
+		this.rappelService = rappelService;
 	}
 	
 	public List<Projet> getAllProjets() {
@@ -51,6 +53,12 @@ public class ProjetServiceImpl implements ProjetService{
 	{
 		if(projetRepository.existsById(id))
 		{
+			//On supprime d'abord les Rappels liés à ce projet
+			Projet projet = this.getProjet(id);
+			
+			rappelService.deleteAllRappelsByProjet(projet);
+			
+			//Finalement on supprime le projet lui même
 			projetRepository.deleteById(id);
 		}
 	}

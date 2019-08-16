@@ -25,6 +25,8 @@ public interface RappelService {
 	
 	public void deleteRappel(Long id);
 	
+	public void deleteAllRappelsByProjet(Projet projet);
+	
 	public Rappel addFichierToRappel(Long id, String urlFichier, String nomFichier);
 
 }
