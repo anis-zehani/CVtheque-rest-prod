@@ -1,5 +1,6 @@
 package com.cvtheque.org.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,12 @@ public class OpportuniteController {
 	@GetMapping("/allOpportunitesByTechnologie/{id}")
 	public List<Opportunite> getAllOpportunitesByTechnologie(@PathVariable Long id) {
 		return opportuniteService.getAllOpportunitesByTechnologie(id);
+	}
+	
+	@GetMapping("/allOpportunitesByListTechnologies/{listTechnologies}")
+	//La liste des Opportunités qui ont une Technologie au moins dans la liste fournie
+	public List<Opportunite> getAllOpportunitesByListTechnologies(@PathVariable ArrayList<Long> listTechnologies){
+		return opportuniteService.getAllOpportunitesByListTechnologies(listTechnologies);
 	}
 	
 	//La liste des Opportunités pour une Certification

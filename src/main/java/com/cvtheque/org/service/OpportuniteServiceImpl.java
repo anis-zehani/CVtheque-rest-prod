@@ -1,6 +1,7 @@
 package com.cvtheque.org.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,12 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 	//INNER JOIN : JPQL : La liste des Opportunités pour une Technologie
 	public List<Opportunite> getAllOpportunitesByTechnologie(Long idTechnologie) {
 		return opportuniteRepository.findAllOpportunitesByTechnologie(idTechnologie);
+	}
+	
+	//La liste des opportunites qui ont une Technologie au moins dans la liste fournie
+	public List<Opportunite> getAllOpportunitesByListTechnologies(ArrayList<Long> listTechnologies){
+		
+		return opportuniteRepository.findAllOpportunitesByListTechnologies(listTechnologies);
 	}
 	
 	//INNER JOIN : JPQL : La liste des Opportunités pour une Certification

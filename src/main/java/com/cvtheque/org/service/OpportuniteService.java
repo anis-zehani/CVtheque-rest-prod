@@ -1,5 +1,6 @@
 package com.cvtheque.org.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,8 @@ public interface OpportuniteService {
 	public List<Opportunite> getAllOpportunitesByPartenaire(Long idPartenaire);
 	
 	public List<Opportunite> getAllOpportunitesByTechnologie(Long idTechnologie);
+	
+	public List<Opportunite> getAllOpportunitesByListTechnologies(ArrayList<Long> listTechnologies);
 	
 	public List<Opportunite> getAllOpportunitesByCertification(Long idCertification);
 	

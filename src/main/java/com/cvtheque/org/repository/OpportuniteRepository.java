@@ -1,5 +1,6 @@
 package com.cvtheque.org.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -22,6 +23,13 @@ public interface OpportuniteRepository extends JpaRepository<Opportunite, Long> 
 	//INNER JOIN : JPQL : La liste des Opportunités pour une Technologie
 	@Query("FROM Opportunite o INNER JOIN o.listeTechnologies o1 ON o1.id = :idTechnologie")
 	List<Opportunite> findAllOpportunitesByTechnologie(@Param("idTechnologie") Long idTechnologie);
+	
+	//INNER JOIN : JPQL : La liste des opportunites qui ont une Technologie au moins dans la liste fournie
+	//@Query("FROM Opportunite c INNER JOIN c.listeTechnologies c1 ON c1.id IN :listTechnologies")
+	@Query(value = 
+			"FROM Opportunite o WHERE "
+			+ "EXISTS(FROM o.listeTechnologies o1 WHERE o1.id IN :listTechnologies)")
+	List<Opportunite> findAllOpportunitesByListTechnologies(@Param("listTechnologies") ArrayList<Long> listTechnologies);
 	
 	//Native Query = true : Supprimer le lien entre une opportunité et une technologie
 	@Modifying
