@@ -56,6 +56,12 @@ public class CandidatController {
 	    return candidatService.getAllCandidatsByTechnologie(id);
 	}
 	
+	@GetMapping("/allCandidatsByListTechnologies/{listTechnologies}")
+	//La liste des candidats qui ont une Technologie au moins dans la liste fournie
+	public List<Candidat> getAllCandidatsByListTechnologies(@PathVariable ArrayList<Long> listTechnologies){
+		return candidatService.getAllCandidatsByListTechnologies(listTechnologies);
+	}
+	
 	//Lister les candidats par ID Certification
 	@GetMapping("/allCandidatsByCertification/{id}")
 	public List<Candidat> getAllCandidatsByCertification(@PathVariable Long id) {

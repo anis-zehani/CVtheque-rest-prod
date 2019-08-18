@@ -13,6 +13,8 @@ public interface CandidatService {
 	
 	public List<Candidat> getAllCandidatsByTechnologie(Long idTechnologie);
 	
+	public List<Candidat> getAllCandidatsByListTechnologies(ArrayList<Long> listTechnologies);
+	
 	public List<Candidat> getAllCandidatsByCertification(Long idCertification);
 	
 	public List<Candidat> getAllCandidatsByEntreprise(Long idEntreprise);

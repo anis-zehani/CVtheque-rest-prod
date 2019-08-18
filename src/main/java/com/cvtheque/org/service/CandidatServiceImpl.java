@@ -51,6 +51,12 @@ public class CandidatServiceImpl implements CandidatService{
 			
 		return candidatRepository.findAllCandidatsByTechnologie(idTechnologie);
 	}
+	
+	//La liste des candidats qui ont une Technologie au moins dans la liste fournie
+	public List<Candidat> getAllCandidatsByListTechnologies(ArrayList<Long> listTechnologies){
+		
+		return candidatRepository.findAllCandidatsByListTechnologies(listTechnologies);
+	}
 		
 	//INNER JOIN : retourne les candidats par Certification
 	public List<Candidat> getAllCandidatsByCertification(Long idCertification){
