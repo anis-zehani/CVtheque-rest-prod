@@ -56,11 +56,16 @@ public class JavaMailSenderService {
 	/**
 	 * How to use it :
 	 * STEP 1 :
+	 * 
 	 * @Autowired
 	 * JavaMailSenderService mailService;
+	 * 
 	 * STEP 2 :
+	 * 
 	 * mailService.sendSimpleMessage("azaheni@smartgraphe.com", "Test Subject", "Test Contenu");
+	 * 
 	 * OR
+	 * 
 	   mailService.sendEmailWithAttachment("azaheni@smartgraphe.com", "Test Subject");
 	 */
 
