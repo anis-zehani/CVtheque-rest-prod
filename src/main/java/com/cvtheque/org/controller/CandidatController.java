@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,16 +30,16 @@ public class CandidatController {
 	
 	@Autowired
 	StorageService storageService;
+	
+	@Autowired
+	private final CandidatService candidatService;
 	 
 	List<String> files = new ArrayList<String>();
 	  
-	@Autowired
-	private final CandidatService candidatService;
-	
 	CandidatController(CandidatService candidatService) {
 		this.candidatService = candidatService;
 	}
-
+	
 	@GetMapping("/all/{etatCandidat}")
 	public List<Candidat> getAllCandidats(@PathVariable String etatCandidat) {
 	    return candidatService.getAllCandidats(etatCandidat);

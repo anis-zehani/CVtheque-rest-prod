@@ -49,17 +49,19 @@ public class Rappel implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	Projet projet;
 	
-	/*
-	 * @ManyToOne(fetch = FetchType.LAZY, optional = false)
-	Utilisateur utilisateur;
-	*/
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	private Utilisateur utilisateur;
 
 	public Rappel() {
 		super();
 	}
-	
+
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public boolean getRemindMe() {
@@ -118,7 +120,6 @@ public class Rappel implements Serializable {
 		this.projet = projet;
 	}
 
-	/*
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
@@ -126,5 +127,4 @@ public class Rappel implements Serializable {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	*/
 }

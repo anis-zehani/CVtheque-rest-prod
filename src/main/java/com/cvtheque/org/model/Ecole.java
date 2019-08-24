@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
@@ -25,6 +27,9 @@ public class Ecole implements Serializable {
     @NotEmpty(message="Odix - école ne peut pas être vide")
     @Column(unique=true)
 	private String nomEcole;
+    
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	private Utilisateur utilisateur;
 
     public Ecole() {
 		super();
@@ -51,5 +56,12 @@ public class Ecole implements Serializable {
 	public void setNomEcole(String nomEcole) {
 		this.nomEcole = nomEcole;
 	}
-    
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	} 
 }
