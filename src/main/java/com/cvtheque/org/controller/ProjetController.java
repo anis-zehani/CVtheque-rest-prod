@@ -20,7 +20,7 @@ import com.cvtheque.org.service.ProjetService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/projet")
+@RequestMapping("/api/projet")
 public class ProjetController {
 	
 	@Autowired

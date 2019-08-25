@@ -25,7 +25,7 @@ import com.cvtheque.org.util.StorageService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/partenaire")
+@RequestMapping("/api/partenaire")
 public class PartenaireController {
 	
 	@Autowired

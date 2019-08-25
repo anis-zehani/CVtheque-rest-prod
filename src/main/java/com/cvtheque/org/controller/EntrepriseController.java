@@ -21,7 +21,7 @@ import com.cvtheque.org.service.EntrepriseService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/entreprise")
+@RequestMapping("/api/entreprise")
 public class EntrepriseController {
 	
 	@Autowired

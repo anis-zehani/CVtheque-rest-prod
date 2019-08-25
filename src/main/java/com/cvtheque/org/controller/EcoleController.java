@@ -21,7 +21,7 @@ import com.cvtheque.org.service.EcoleService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/ecole")
+@RequestMapping("/api/ecole")
 public class EcoleController {
 	
 	@Autowired

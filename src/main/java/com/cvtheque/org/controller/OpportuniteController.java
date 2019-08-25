@@ -22,7 +22,7 @@ import com.cvtheque.org.service.OpportuniteService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/opportunite")
+@RequestMapping("/api/opportunite")
 public class OpportuniteController {
 	 
 	@Autowired

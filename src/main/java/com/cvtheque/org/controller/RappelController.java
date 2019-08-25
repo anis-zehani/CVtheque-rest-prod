@@ -25,7 +25,7 @@ import com.cvtheque.org.util.StorageService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/rappel")
+@RequestMapping("/api/rappel")
 public class RappelController {
 	
 	@Autowired

@@ -21,7 +21,7 @@ import com.cvtheque.org.service.CertificationService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/certification")
+@RequestMapping("/api/certification")
 public class CertificationController {
 	
 	@Autowired

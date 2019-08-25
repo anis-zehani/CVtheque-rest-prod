@@ -21,7 +21,7 @@ import com.cvtheque.org.service.TechnologieService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/technologie")
+@RequestMapping("/api/technologie")
 public class TechnologieController {
 	
 	@Autowired
