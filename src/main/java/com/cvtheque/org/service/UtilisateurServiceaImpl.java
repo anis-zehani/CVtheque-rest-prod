@@ -1,10 +1,11 @@
 package com.cvtheque.org.service;
 
-import com.cvtheque.org.model.Utilisateur;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UtilisateurServiceaImpl implements UtilisateurService{
 	
-	public void authenticate(Utilisateur utilisateur) {
+	public void authenticate() {
 		System.out.print("UtilisateurServiceaImpl");
 	}
 
