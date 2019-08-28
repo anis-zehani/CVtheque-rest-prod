@@ -43,7 +43,7 @@ public class JwtAuthenticationController {
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 		
-		System.out.println("Token has been created :" + token);
+		System.out.println("Token has been created");
 
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
