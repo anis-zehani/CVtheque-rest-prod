@@ -3,6 +3,8 @@ package com.cvtheque.org.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cvtheque.org.model.Etat;
@@ -17,6 +19,9 @@ public class CandidatServiceImpl implements CandidatService{
 	
 	private final CandidatRepository candidatRepository;
 	private final StorageService storageService;
+	
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
 	
 	CandidatServiceImpl(CandidatRepository candidatRepository, StorageService storageService) 
 	{
@@ -132,6 +137,9 @@ public class CandidatServiceImpl implements CandidatService{
 			//Obligatoire pour @ManyToOne
 			candidat.getDiplome().setEcole(null);
 		}
+		
+		//Encoder le Password avant de l'insérer dans la base
+		candidat.setPassword(bcryptEncoder.encode(candidat.getPassword()));
 		
 		return  candidatRepository.save(candidat);
 	}
@@ -289,6 +297,20 @@ public class CandidatServiceImpl implements CandidatService{
 			if(candidat.getListeCertifications() != null)
 			{
 				candidatToUpdate.setListeCertifications(candidat.getListeCertifications());
+			}
+			
+			//Récupérer le password affiché sur le formulaire
+			String passwordFormulaire = candidat.getPassword();
+			
+			// Si le Password Affiché est différent de celui qui est stocké : on change le password
+			if(passwordFormulaire.compareTo(candidatRepository.findPasswordByIdentite(candidat.getIdentite()).getPassword()) != 0)
+			{
+				candidatToUpdate.setPassword(bcryptEncoder.encode(candidat.getPassword()));
+			}
+			// Sinon on réinsére l'ancien password
+			else
+			{
+				candidatToUpdate.setPassword(candidatRepository.findPasswordByIdentite(candidat.getIdentite()).getPassword());
 			}
 
 			return candidatRepository.save(candidatToUpdate);

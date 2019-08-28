@@ -1,6 +1,8 @@
 package com.cvtheque.org.controller;
 
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +26,8 @@ import com.cvtheque.org.service.JwtUserDetailsService;
 @RestController
 @RequestMapping("/api/utilisateur")
 public class JwtAuthenticationController {
+	
+	protected final Log logger = LogFactory.getLog(getClass());
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -43,7 +47,7 @@ public class JwtAuthenticationController {
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 		
-		System.out.println("Token has been created");
+		logger.warn("JWT Token has been created");
 
 		return ResponseEntity.ok(new JwtResponse(token));
 	}

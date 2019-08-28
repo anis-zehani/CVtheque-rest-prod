@@ -3,6 +3,8 @@ package com.cvtheque.org.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cvtheque.org.model.Collaborateur;
@@ -12,6 +14,9 @@ import com.cvtheque.org.repository.CollaborateurRepository;
 public class CollaborateurServiceImpl implements CollaborateurService{
 	
 	private final CollaborateurRepository collaborateurRepository;
+	
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
 	
 	CollaborateurServiceImpl(CollaborateurRepository collaborateurRepository) {
 		super();
@@ -31,6 +36,9 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 		
 		if(collaborateurRepository.findByIdentite(collaborateur.getIdentite()) == null)
 		{
+			//Encoder le Password avant de l'insérer dans la base
+			collaborateur.setPassword(bcryptEncoder.encode(collaborateur.getPassword()));
+			
 			return collaborateurRepository.save(collaborateur);
 		}
 		return null;
@@ -41,6 +49,20 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 		
 		if(collaborateurRepository.existsById(collaborateur.getId()))
 		{
+			//Récupérer le password affiché sur le formulaire
+			String passwordFormulaire = collaborateur.getPassword();
+			
+			// Si le Password Affiché est différent de celui qui est stocké : on change le password
+			if(passwordFormulaire.compareTo(collaborateurRepository.findPasswordByIdentite(collaborateur.getIdentite()).getPassword()) != 0)
+			{
+				collaborateur.setPassword(bcryptEncoder.encode(collaborateur.getPassword()));
+			}
+			// Sinon on réinsére l'ancien password
+			else
+			{
+				collaborateur.setPassword(collaborateurRepository.findPasswordByIdentite(collaborateur.getIdentite()).getPassword());
+			}
+			
 			return collaborateurRepository.save(collaborateur);
 		}
 		return null;

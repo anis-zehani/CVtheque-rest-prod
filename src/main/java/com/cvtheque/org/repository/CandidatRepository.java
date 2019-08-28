@@ -18,6 +18,8 @@ import com.cvtheque.org.model.Etat;
 public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 	
 	Candidat findByIdentite(@Param("identite") String identite);
+	
+	Candidat findPasswordByIdentite(@Param("identite") String identite);
 
 	List<Candidat> findByEtatCandidat(@Param("etatCandidat") Etat etatCandidat);
 	

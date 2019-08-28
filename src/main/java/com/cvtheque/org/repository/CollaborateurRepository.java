@@ -10,5 +10,7 @@ import com.cvtheque.org.model.Collaborateur;
 public interface CollaborateurRepository extends JpaRepository<Collaborateur, Long> {
 	
 	Collaborateur findByIdentite(@Param("identite") String identite);
+	
+	Collaborateur findPasswordByIdentite(@Param("identite") String identite);
 
 }

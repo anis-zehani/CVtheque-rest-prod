@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cvtheque.org.model.Entreprise;
@@ -18,6 +20,9 @@ public class PartenaireServiceImpl implements PartenaireService{
 
 	private final PartenaireRepository partenaireRepository;
 	private final StorageService storageService;
+	
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
 
 	PartenaireServiceImpl(PartenaireRepository partenaireRepository, StorageService storageService) {
 		super();
@@ -63,6 +68,9 @@ public class PartenaireServiceImpl implements PartenaireService{
 		
 		//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
 		partenaire.setUrlPhoto("");
+		
+		//Encoder le Password avant de l'insérer dans la base
+		partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
 			
 		return partenaireRepository.save(partenaire);
 
@@ -95,11 +103,26 @@ public class PartenaireServiceImpl implements PartenaireService{
 		//L'Update url photo se fait en haut dans la fonction addPhotoToPartenaire
 		if(partenaireRepository.existsById(partenaire.getId()))
 		{
+			//Récupérer le password affiché sur le formulaire
+			String passwordFormulaire = partenaire.getPassword();
+			
 			if(partenaire.getEntreprise().getIdEntreprise() == null)
 			{
 				partenaire.setEntreprise(null);
 			}
-
+			
+			
+			// Si le Password Affiché est différent de celui qui est stocké : on change le password
+			if(passwordFormulaire.compareTo(partenaireRepository.findPasswordByIdentite(partenaire.getIdentite()).getPassword()) != 0)
+			{
+				partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
+			}
+			// Sinon on réinsére l'ancien password
+			else
+			{
+				partenaire.setPassword(partenaireRepository.findPasswordByIdentite(partenaire.getIdentite()).getPassword());
+			}
+			
 			return partenaireRepository.save(partenaire);
 		}
 		return null;
