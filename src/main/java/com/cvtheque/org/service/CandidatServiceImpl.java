@@ -303,7 +303,7 @@ public class CandidatServiceImpl implements CandidatService{
 			String passwordFormulaire = candidat.getPassword();
 			
 			// Si le Password Affiché est différent de celui qui est stocké : on change le password
-			if(passwordFormulaire.compareTo(candidatRepository.findPasswordByIdentite(candidat.getIdentite()).getPassword()) != 0)
+			if(!passwordFormulaire.equals(candidatRepository.findPasswordByIdentite(candidat.getIdentite()).getPassword()))
 			{
 				candidatToUpdate.setPassword(bcryptEncoder.encode(candidat.getPassword()));
 			}

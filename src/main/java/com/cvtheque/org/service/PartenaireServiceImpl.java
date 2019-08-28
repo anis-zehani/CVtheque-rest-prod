@@ -69,8 +69,12 @@ public class PartenaireServiceImpl implements PartenaireService{
 		//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
 		partenaire.setUrlPhoto("");
 		
-		//Encoder le Password avant de l'insérer dans la base
-		partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
+		if(partenaire.getPassword() != null)
+		{
+			//Encoder le Password avant de l'insérer dans la base
+			partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
+		}
+
 			
 		return partenaireRepository.save(partenaire);
 
@@ -112,8 +116,8 @@ public class PartenaireServiceImpl implements PartenaireService{
 			}
 			
 			
-			// Si le Password Affiché est différent de celui qui est stocké : on change le password
-			if(passwordFormulaire.compareTo(partenaireRepository.findPasswordByIdentite(partenaire.getIdentite()).getPassword()) != 0)
+			// Si le Password récupéré est différent de celui qui est stocké : on change le password
+			if(!passwordFormulaire.equals(partenaireRepository.findPasswordByIdentite(partenaire.getIdentite()).getPassword()))
 			{
 				partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
 			}

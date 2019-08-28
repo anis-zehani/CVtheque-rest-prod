@@ -36,9 +36,12 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 		
 		if(collaborateurRepository.findByIdentite(collaborateur.getIdentite()) == null)
 		{
-			//Encoder le Password avant de l'insérer dans la base
-			collaborateur.setPassword(bcryptEncoder.encode(collaborateur.getPassword()));
-			
+			if(collaborateur.getPassword() != null)
+			{
+				//Encoder le Password avant de l'insérer dans la base
+				collaborateur.setPassword(bcryptEncoder.encode(collaborateur.getPassword()));
+			}
+
 			return collaborateurRepository.save(collaborateur);
 		}
 		return null;
@@ -52,8 +55,8 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 			//Récupérer le password affiché sur le formulaire
 			String passwordFormulaire = collaborateur.getPassword();
 			
-			// Si le Password Affiché est différent de celui qui est stocké : on change le password
-			if(passwordFormulaire.compareTo(collaborateurRepository.findPasswordByIdentite(collaborateur.getIdentite()).getPassword()) != 0)
+			// Si le Password récupéré est différent de celui qui est stocké : on change le password
+			if(!passwordFormulaire.equals(collaborateurRepository.findPasswordByIdentite(collaborateur.getIdentite()).getPassword()))
 			{
 				collaborateur.setPassword(bcryptEncoder.encode(collaborateur.getPassword()));
 			}
