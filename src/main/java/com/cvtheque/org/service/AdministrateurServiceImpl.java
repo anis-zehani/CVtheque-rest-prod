@@ -29,6 +29,7 @@ public class AdministrateurServiceImpl implements AdministrateurService{
 			Administrateur anis = new Administrateur();
 			anis.setUsername("anis");
 			anis.setPassword(bcryptEncoder.encode("Az@zel84"));
+			anis.setIdentite("Anis Zaheni");
 			administrateurRepository.save(anis);
 		}
 		
