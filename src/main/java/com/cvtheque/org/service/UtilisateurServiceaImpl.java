@@ -19,5 +19,9 @@ public class UtilisateurServiceaImpl implements UtilisateurService{
 	public Utilisateur findByUsername(String username) {
 		return utilisateurRepository.findByUsername(username);
 	}
+	
+	public String getUserRole(String username) {
+		return utilisateurRepository.getUserRole(username);
+	}
 
 }

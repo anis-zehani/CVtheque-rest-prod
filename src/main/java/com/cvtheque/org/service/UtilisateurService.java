@@ -5,5 +5,7 @@ import com.cvtheque.org.model.Utilisateur;
 public interface UtilisateurService {
 	
 	public Utilisateur findByUsername(String username);
+	
+	public String getUserRole(String username);
 
 }
