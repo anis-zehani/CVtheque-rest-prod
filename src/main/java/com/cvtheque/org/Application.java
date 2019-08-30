@@ -8,14 +8,12 @@ import com.cvtheque.org.service.AdministrateurService;
 
 @SpringBootApplication
 public class Application {
-	
-	//@Resource
-	//StorageService storageService;
-	
 
+	
 	public static void main(String[] args) {
 		
 		ApplicationContext applicationContext = SpringApplication.run(Application.class, args);
+		//Si SuperAdmin n'existe pas, je le met en place
 		AdministrateurService administrateurService = applicationContext.getBean(AdministrateurService.class);
 		administrateurService.verifyOrAddAdmin();
         
