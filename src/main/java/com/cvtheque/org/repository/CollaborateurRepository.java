@@ -11,6 +11,6 @@ public interface CollaborateurRepository extends JpaRepository<Collaborateur, Lo
 	
 	Collaborateur findByIdentite(@Param("identite") String identite);
 	
-	Collaborateur findPasswordByIdentite(@Param("identite") String identite);
+	String findPasswordByUsername(@Param("username") String username);
 
 }

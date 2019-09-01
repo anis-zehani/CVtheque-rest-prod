@@ -107,24 +107,24 @@ public class PartenaireServiceImpl implements PartenaireService{
 		//L'Update url photo se fait en haut dans la fonction addPhotoToPartenaire
 		if(partenaireRepository.existsById(partenaire.getId()))
 		{
-			//Récupérer le password affiché sur le formulaire
-			String passwordFormulaire = partenaire.getPassword();
 			
 			if(partenaire.getEntreprise().getIdEntreprise() == null)
 			{
 				partenaire.setEntreprise(null);
 			}
 			
+			//Récupérer le password affiché sur le formulaire
+			String passwordFormulaire = partenaire.getPassword();
 			
 			// Si le Password récupéré est différent de celui qui est stocké : on change le password
-			if(!passwordFormulaire.equals(partenaireRepository.findPasswordByIdentite(partenaire.getIdentite()).getPassword()))
+			if(!passwordFormulaire.equals(partenaireRepository.findPasswordByUsername(partenaire.getUsername())))
 			{
 				partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
 			}
 			// Sinon on réinsére l'ancien password
 			else
 			{
-				partenaire.setPassword(partenaireRepository.findPasswordByIdentite(partenaire.getIdentite()).getPassword());
+				partenaire.setPassword(partenaireRepository.findPasswordByUsername(partenaire.getUsername()));
 			}
 			
 			return partenaireRepository.save(partenaire);

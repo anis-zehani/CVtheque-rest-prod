@@ -19,7 +19,7 @@ public interface PartenaireRepository extends JpaRepository<Partenaire, Long> {
 	
 	Partenaire findByIdentite(@Param("identite") String identite);
 	
-	Partenaire findPasswordByIdentite(@Param("identite") String identite);
+	String findPasswordByUsername(@Param("username") String username);
 	
 	List<Partenaire> findByEtatPartenaire(@Param("etatPartenaire") Etat etatPartenaire);
 	

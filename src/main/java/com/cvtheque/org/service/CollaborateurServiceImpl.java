@@ -56,14 +56,14 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 			String passwordFormulaire = collaborateur.getPassword();
 			
 			// Si le Password récupéré est différent de celui qui est stocké : on change le password
-			if(!passwordFormulaire.equals(collaborateurRepository.findPasswordByIdentite(collaborateur.getIdentite()).getPassword()))
+			if(!passwordFormulaire.equals(collaborateurRepository.findPasswordByUsername(collaborateur.getUsername())))
 			{
 				collaborateur.setPassword(bcryptEncoder.encode(collaborateur.getPassword()));
 			}
 			// Sinon on réinsére l'ancien password
 			else
 			{
-				collaborateur.setPassword(collaborateurRepository.findPasswordByIdentite(collaborateur.getIdentite()).getPassword());
+				collaborateur.setPassword(collaborateurRepository.findPasswordByUsername(collaborateur.getUsername()));
 			}
 			
 			return collaborateurRepository.save(collaborateur);

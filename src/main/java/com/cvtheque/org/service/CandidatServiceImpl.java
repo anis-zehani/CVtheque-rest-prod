@@ -139,7 +139,7 @@ public class CandidatServiceImpl implements CandidatService{
 		}
 		
 		//Encoder le Password avant de l'insérer dans la base
-		//candidat.setPassword(bcryptEncoder.encode(candidat.getPassword()));
+		candidat.setPassword(bcryptEncoder.encode(candidat.getPassword()));
 		
 		return  candidatRepository.save(candidat);
 	}
@@ -303,14 +303,14 @@ public class CandidatServiceImpl implements CandidatService{
 			String passwordFormulaire = candidat.getPassword();
 			
 			// Si le Password Affiché est différent de celui qui est stocké : on change le password
-			if(!passwordFormulaire.equals(candidatRepository.findPasswordByIdentite(candidat.getIdentite()).getPassword()))
+			if(!passwordFormulaire.equals(candidatRepository.findPasswordByUsername(candidat.getUsername())))
 			{
-				//candidatToUpdate.setPassword(bcryptEncoder.encode(candidat.getPassword()));
+				candidatToUpdate.setPassword(bcryptEncoder.encode(candidat.getPassword()));
 			}
 			// Sinon on réinsére l'ancien password
 			else
 			{
-				//candidatToUpdate.setPassword(candidatRepository.findPasswordByIdentite(candidat.getIdentite()).getPassword());
+				candidatToUpdate.setPassword(candidatRepository.findPasswordByUsername(candidat.getUsername()));
 			}
 
 			return candidatRepository.save(candidatToUpdate);

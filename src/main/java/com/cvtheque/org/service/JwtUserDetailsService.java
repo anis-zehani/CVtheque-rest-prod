@@ -1,8 +1,11 @@
 package com.cvtheque.org.service;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,7 +28,15 @@ public class JwtUserDetailsService implements UserDetailsService {
 		if (utilisateur == null) {
 			throw new UsernameNotFoundException("Utilisateur not found with username: " + username);
 		}
-		return new org.springframework.security.core.userdetails.User(utilisateur.getUsername(), utilisateur.getPassword(), new ArrayList<>());
+		
+		//Je récupére la GrantedAuthority à partir du service que j'ai crée, en fait c'est le dtype : Ex 'Administrateur'
+		Set<GrantedAuthority> grantedAuthorities = new HashSet<>(); 
+		grantedAuthorities.add(new SimpleGrantedAuthority(utilisateurService.getUserRole(username)));
+
+		return new org.springframework.security.core.userdetails.User(
+				utilisateur.getUsername(), 
+				utilisateur.getPassword(), 
+				grantedAuthorities);
 		
 	}
 }
