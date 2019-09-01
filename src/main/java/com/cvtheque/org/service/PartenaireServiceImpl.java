@@ -115,16 +115,18 @@ public class PartenaireServiceImpl implements PartenaireService{
 			
 			//Récupérer le password affiché sur le formulaire
 			String passwordFormulaire = partenaire.getPassword();
+			//Récupérer le password actuel dans la BDD
+			String passwordBDD = partenaireRepository.findByUsername(partenaire.getUsername()).getPassword();
 			
 			// Si le Password récupéré est différent de celui qui est stocké : on change le password
-			if(!passwordFormulaire.equals(partenaireRepository.findPasswordByUsername(partenaire.getUsername())))
+			if(!passwordFormulaire.equals(passwordBDD))
 			{
 				partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
 			}
 			// Sinon on réinsére l'ancien password
 			else
 			{
-				partenaire.setPassword(partenaireRepository.findPasswordByUsername(partenaire.getUsername()));
+				partenaire.setPassword(passwordBDD);
 			}
 			
 			return partenaireRepository.save(partenaire);

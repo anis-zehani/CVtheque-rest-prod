@@ -54,16 +54,18 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 		{
 			//Récupérer le password affiché sur le formulaire
 			String passwordFormulaire = collaborateur.getPassword();
+			//Récupérer le password actuel dans la BDD
+			String passwordBDD = collaborateurRepository.findByUsername(collaborateur.getUsername()).getPassword();
 			
 			// Si le Password récupéré est différent de celui qui est stocké : on change le password
-			if(!passwordFormulaire.equals(collaborateurRepository.findPasswordByUsername(collaborateur.getUsername())))
+			if(!passwordFormulaire.equals(passwordBDD))
 			{
 				collaborateur.setPassword(bcryptEncoder.encode(collaborateur.getPassword()));
 			}
 			// Sinon on réinsére l'ancien password
 			else
 			{
-				collaborateur.setPassword(collaborateurRepository.findPasswordByUsername(collaborateur.getUsername()));
+				collaborateur.setPassword(passwordBDD);
 			}
 			
 			return collaborateurRepository.save(collaborateur);

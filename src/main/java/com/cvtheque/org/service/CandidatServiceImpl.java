@@ -301,16 +301,18 @@ public class CandidatServiceImpl implements CandidatService{
 			
 			//Récupérer le password affiché sur le formulaire
 			String passwordFormulaire = candidat.getPassword();
+			//Récupérer le password actuel dans la BDD
+			String passwordBDD = candidatRepository.findByUsername(candidat.getUsername()).getPassword();
 			
 			// Si le Password Affiché est différent de celui qui est stocké : on change le password
-			if(!passwordFormulaire.equals(candidatRepository.findPasswordByUsername(candidat.getUsername())))
+			if(!passwordFormulaire.equals(passwordBDD))
 			{
 				candidatToUpdate.setPassword(bcryptEncoder.encode(candidat.getPassword()));
 			}
 			// Sinon on réinsére l'ancien password
 			else
 			{
-				candidatToUpdate.setPassword(candidatRepository.findPasswordByUsername(candidat.getUsername()));
+				candidatToUpdate.setPassword(passwordBDD);
 			}
 
 			return candidatRepository.save(candidatToUpdate);
