@@ -15,13 +15,17 @@ public class UtilisateurServiceaImpl implements UtilisateurService{
 		this.utilisateurRepository = utilisateurRepository;
 	}
 
+	
+	public Utilisateur getUtilisateurById(Long id) {
+		return utilisateurRepository.findUtilisateurById(id);
+	}
 
-	public Utilisateur findByUsername(String username) {
-		return utilisateurRepository.findByUsername(username);
+	public Utilisateur getUtilisateurByUsername(String username) {
+		return utilisateurRepository.findUtilisateurByUsername(username);
 	}
 	
-	public String getUserRole(String username) {
-		return utilisateurRepository.getUserRole(username);
+	public String getUtilisateurRoleByUsername(String username) {
+		return utilisateurRepository.findUtilisateurRoleByUsername(username);
 	}
 
 }

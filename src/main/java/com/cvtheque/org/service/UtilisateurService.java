@@ -4,8 +4,10 @@ import com.cvtheque.org.model.Utilisateur;
 
 public interface UtilisateurService {
 	
-	public Utilisateur findByUsername(String username);
+	public Utilisateur getUtilisateurById(Long id);
 	
-	public String getUserRole(String username);
+	public Utilisateur getUtilisateurByUsername(String username);
+	
+	public String getUtilisateurRoleByUsername(String username);
 
 }

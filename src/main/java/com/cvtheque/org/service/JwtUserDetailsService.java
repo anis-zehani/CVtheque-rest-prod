@@ -23,7 +23,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		Utilisateur utilisateur = utilisateurService.findByUsername(username);
+		Utilisateur utilisateur = utilisateurService.getUtilisateurByUsername(username);
 		
 		if (utilisateur == null) {
 			throw new UsernameNotFoundException("Utilisateur not found with username: " + username);
@@ -31,7 +31,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		
 		//Je récupére la GrantedAuthority à partir du service que j'ai crée, en fait c'est le dtype : Ex 'Administrateur'
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>(); 
-		grantedAuthorities.add(new SimpleGrantedAuthority(utilisateurService.getUserRole(username)));
+		grantedAuthorities.add(new SimpleGrantedAuthority(utilisateurService.getUtilisateurRoleByUsername(username)));
 
 		return new org.springframework.security.core.userdetails.User(
 				utilisateur.getUsername(), 

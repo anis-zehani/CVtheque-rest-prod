@@ -10,8 +10,10 @@ import com.cvtheque.org.model.Utilisateur;
 @Repository
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 	
-	Utilisateur findByUsername(@Param("username") String username);
+	Utilisateur findUtilisateurById(@Param("id") Long id);
+	
+	Utilisateur findUtilisateurByUsername(@Param("username") String username);
 	
 	@Query(value = "SELECT dtype FROM utilisateur u WHERE u.username like ?1 ", nativeQuery = true)
-	String getUserRole(@Param("username") String username);
+	String findUtilisateurRoleByUsername(@Param("username") String username);
 }

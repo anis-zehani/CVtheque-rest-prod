@@ -60,9 +60,9 @@ public class JwtTokenUtil implements Serializable {
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 		
-		claims.put("id", utilisateurService.findByUsername(userDetails.getUsername()).getId());
-		claims.put("identite", utilisateurService.findByUsername(userDetails.getUsername()).getIdentite());
-		claims.put("role", utilisateurService.getUserRole(userDetails.getUsername()));
+		claims.put("id", utilisateurService.getUtilisateurByUsername(userDetails.getUsername()).getId());
+		claims.put("identite", utilisateurService.getUtilisateurByUsername(userDetails.getUsername()).getIdentite());
+		claims.put("role", utilisateurService.getUtilisateurRoleByUsername(userDetails.getUsername()));
 		
 		//C'est le rôle en fait, mais juste il a été récupéré à partir de userDetails et nons pas du service que j'ai fais
 		//claims.put("Authorities", userDetails.getAuthorities().iterator().next().getAuthority());

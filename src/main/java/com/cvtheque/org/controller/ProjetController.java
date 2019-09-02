@@ -30,9 +30,12 @@ public class ProjetController {
 		this.projetService = projetService;
 	}
 
-	@GetMapping()
-	public List<Projet> getAllProjets() {
-	    return projetService.getAllProjets();
+	@GetMapping("/allProjetsByIdUtilisateur/{idUtilisateur}")
+	public List<Projet> getAllProjetsByIdUtilisateur(@PathVariable Long idUtilisateur) {
+		
+		List<Projet> projets = projetService.getAllProjets(idUtilisateur);
+		
+	    return projets;
 	}
 	
 	@GetMapping("{id}")

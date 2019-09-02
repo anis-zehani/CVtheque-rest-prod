@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.cvtheque.org.model.Projet;
+import com.cvtheque.org.model.Utilisateur;
 import com.cvtheque.org.repository.ProjetRepository;
 
 
@@ -13,15 +14,20 @@ public class ProjetServiceImpl implements ProjetService{
 	
 	private final ProjetRepository projetRepository;
 	private final RappelService rappelService;
+	private final UtilisateurService utilisateurService;
 
-	ProjetServiceImpl(ProjetRepository projetRepository, RappelService rappelService) {
+	ProjetServiceImpl(ProjetRepository projetRepository, RappelService rappelService, UtilisateurService utilisateurService) {
 		super();
 		this.projetRepository = projetRepository;
 		this.rappelService = rappelService;
+		this.utilisateurService = utilisateurService;
 	}
 	
-	public List<Projet> getAllProjets() {
-	    return projetRepository.findAll();
+	public List<Projet> getAllProjets(Long idUtilisateur) {
+		
+		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
+	    
+		return projetRepository.findAllByUtilisateur(utilisateur);
 	}
 	
 	public Projet getProjet(Long id) {

@@ -6,7 +6,7 @@ import com.cvtheque.org.model.Projet;
 
 public interface ProjetService {
 	
-	public List<Projet> getAllProjets();
+	public List<Projet> getAllProjets(Long idUtilisateur);
 	
 	public Projet getProjet(Long id);
 	
