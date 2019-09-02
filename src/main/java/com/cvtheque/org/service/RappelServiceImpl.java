@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.cvtheque.org.model.Priorite;
 import com.cvtheque.org.model.Projet;
 import com.cvtheque.org.model.Rappel;
+import com.cvtheque.org.model.Utilisateur;
 import com.cvtheque.org.repository.RappelRepository;
 import com.cvtheque.org.util.Consts;
 import com.cvtheque.org.util.StorageService;
@@ -20,38 +21,55 @@ public class RappelServiceImpl implements RappelService{
 	
 	private final RappelRepository rappelRepository;
 	private final StorageService storageService;
+	private final UtilisateurService utilisateurService;
 
-	RappelServiceImpl(RappelRepository rappelRepository, StorageService storageService) {
+	RappelServiceImpl(RappelRepository rappelRepository, StorageService storageService, UtilisateurService utilisateurService) {
 		super();
 		this.rappelRepository = rappelRepository;
 		this.storageService = storageService;
+		this.utilisateurService = utilisateurService;
 	}
 	
 	//Retourne tous les rappels sans filtre
-	public List<Rappel> getAllRappels() {
-	    return rappelRepository.findAll();
+	public List<Rappel> getAllRappels(Long idUtilisateur) {
+		
+		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
+		
+	    return rappelRepository.findAllByUtilisateur(utilisateur);
 	}
 	
 	//Retourne les rappels de Today
-	public List<Rappel> getAllRappelsByToday() {
+	public List<Rappel> getAllRappelsByToday(Long idUtilisateur) {
+		
+		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
 		LocalDate dateToday = LocalDate.now(); 
-	    return rappelRepository.findByToday(dateToday);
+		
+	    return rappelRepository.findByToday(dateToday, utilisateur);
 	}
 	
 	//Retourne les rappels des Next 7 Days
-	public List<Rappel> getAllRappelsByNext7Days() {
+	public List<Rappel> getAllRappelsByNext7Days(Long idUtilisateur) {
+		
+		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
 		LocalDate dateDebut = LocalDate.now(); 
 		LocalDate dateFin = dateDebut.plus(Period.ofDays(7));
-	    return rappelRepository.findByNext7Days(dateDebut, dateFin);
+		
+	    return rappelRepository.findByNext7Days(dateDebut, dateFin, utilisateur);
 	}
 	
-	public List<Rappel> getAllRappelsByProjet(Projet projet) {
-	    return rappelRepository.findByProjet(projet);
+	public List<Rappel> getAllRappelsByProjetAndUtilisateur(Projet projet, Long idUtilisateur) {
+		
+		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
+		
+	    return rappelRepository.findByProjetAndUtilisateur(projet, utilisateur);
 	}
 	
-	public List<Rappel> getAllRappelsByPriorite(String valeurPriorite){
+	public List<Rappel> getAllRappelsByPrioriteAndUtilisateur(String valeurPriorite, Long idUtilisateur){
+		
+		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
+		
 		//Il faut convertir le String en Enum via valueOf
-		return rappelRepository.findByPriorite(Priorite.valueOf(valeurPriorite));
+		return rappelRepository.findByPrioriteAndUtilisateur(Priorite.valueOf(valeurPriorite), utilisateur);
 	}
 	
 	public Rappel getRappel(Long id) {

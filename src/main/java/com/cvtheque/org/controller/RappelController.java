@@ -42,29 +42,40 @@ public class RappelController {
 		this.projetService = projetService;
 	}
 
-	@GetMapping()
-	public List<Rappel> getAllRappels() {
-	    return rappelService.getAllRappels();
+	// Tous les rappels par idUtilisateur
+	@GetMapping("/allRappelsByIdUtilisateur/{idUtilisateur}")
+	public List<Rappel> getAlllRappelsByIdUtilisateur(@PathVariable Long idUtilisateur) {
+		
+		List<Rappel> rappels = rappelService.getAllRappels(idUtilisateur);
+	    return rappels;
 	}
 	
-	@GetMapping("/allRappelsByToday")
-	public List<Rappel> getAllRappelsByToday() {
-	    return rappelService.getAllRappelsByToday();
+	@GetMapping("/allRappelsByToday/{idUtilisateur}")
+	public List<Rappel> getAllRappelsByToday(@PathVariable Long idUtilisateur) {
+		
+		List<Rappel> rappels = rappelService.getAllRappelsByToday(idUtilisateur);
+		return rappels;
 	}
 	
-	@GetMapping("/allRappelsByNext7Days")
-	public List<Rappel> getAllRappelsByNext7Days() {
-	    return rappelService.getAllRappelsByNext7Days();
+	@GetMapping("/allRappelsByNext7Days/{idUtilisateur}")
+	public List<Rappel> getAllRappelsByNext7Days(@PathVariable Long idUtilisateur) {
+		
+		List<Rappel> rappels = rappelService.getAllRappelsByNext7Days(idUtilisateur);
+		return rappels;
 	}
 	
-	@GetMapping("/allRappelsByProjet/{idProjet}")
-	public List<Rappel> getAllRappelsByProjet(@PathVariable Long idProjet) {
-	    return rappelService.getAllRappelsByProjet(projetService.getProjet(idProjet));
+	@GetMapping("/allRappelsByProjet/{idProjet}/{idUtilisateur}")
+	public List<Rappel> getAllRappelsByProjet(@PathVariable Long idProjet, @PathVariable Long idUtilisateur) {
+		
+		List<Rappel> rappels = rappelService.getAllRappelsByProjetAndUtilisateur(projetService.getProjet(idProjet), idUtilisateur);
+		return rappels;
 	}
 	
-	@GetMapping("/allRappelsByPriorite/{valeurPriorite}")
-	public List<Rappel> getAllRappelsByPriorite(@PathVariable String valeurPriorite) {
-	    return rappelService.getAllRappelsByPriorite(valeurPriorite);
+	@GetMapping("/allRappelsByPriorite/{valeurPriorite}/{idUtilisateur}")
+	public List<Rappel> getAllRappelsByPriorite(@PathVariable String valeurPriorite, @PathVariable Long idUtilisateur) {
+		
+		List<Rappel> rappels = rappelService.getAllRappelsByPrioriteAndUtilisateur(valeurPriorite, idUtilisateur);
+	    return rappels;
 	}
 	
 	@GetMapping("{id}")

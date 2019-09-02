@@ -14,21 +14,24 @@ import org.springframework.stereotype.Repository;
 import com.cvtheque.org.model.Priorite;
 import com.cvtheque.org.model.Projet;
 import com.cvtheque.org.model.Rappel;
+import com.cvtheque.org.model.Utilisateur;
 
 @Repository
 public interface RappelRepository extends JpaRepository<Rappel, Long> {
 	
+	List<Rappel> findAllByUtilisateur(@Param("utilisateur") Utilisateur utilisateur);
+	
+	@Query("SELECT r FROM Rappel r where r.dateEcheance =:date AND r.utilisateur =:utilisateur")
+	List<Rappel> findByToday(@Param("date") LocalDate date, @Param("utilisateur") Utilisateur utilisateur);
+	
+	@Query("SELECT r FROM Rappel r WHERE r.dateEcheance > :dateDebut AND r.dateEcheance < :dateFin AND r.utilisateur =:utilisateur")
+	List<Rappel> findByNext7Days(@Param("dateDebut") LocalDate dateDebut, @Param("dateFin") LocalDate dateFin, @Param("utilisateur") Utilisateur utilisateur);
+	
+	List<Rappel> findByProjetAndUtilisateur(@Param("projet") Projet projet, @Param("utilisateur") Utilisateur utilisateur);
+	
+	List<Rappel> findByPrioriteAndUtilisateur(@Param("priorite") Priorite priorite, @Param("utilisateur") Utilisateur utilisateur);
+	
 	Rappel findByDetailsRappel(@Param("detailsRappel") String detailsRappel);
-	
-	List<Rappel> findByProjet(@Param("projet") Projet projet);
-	
-	@Query("SELECT r FROM Rappel r where r.dateEcheance =:date")
-	List<Rappel> findByToday(@Param("date") LocalDate date);
-	
-	@Query("SELECT r FROM Rappel r where r.dateEcheance > :dateDebut and r.dateEcheance < :dateFin")
-	List<Rappel> findByNext7Days(@Param("dateDebut") LocalDate dateDebut, @Param("dateFin") LocalDate dateFin);
-	
-	List<Rappel> findByPriorite(@Param("priorite") Priorite priorite);
 	
 	//Native Query = true : Supprimer tous les rappels appartenant à un projet
 	@Modifying

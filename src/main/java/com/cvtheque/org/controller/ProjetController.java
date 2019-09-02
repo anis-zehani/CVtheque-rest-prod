@@ -35,7 +35,6 @@ public class ProjetController {
 	public List<Projet> getAllProjetsByIdUtilisateur(@PathVariable Long idUtilisateur) {
 		
 		List<Projet> projets = projetService.getAllProjets(idUtilisateur);
-		
 	    return projets;
 	}
 	
