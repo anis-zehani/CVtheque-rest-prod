@@ -30,6 +30,7 @@ public class ProjetController {
 		this.projetService = projetService;
 	}
 
+	// Tous les projets par idUtilisateur
 	@GetMapping("/allProjetsByIdUtilisateur/{idUtilisateur}")
 	public List<Projet> getAllProjetsByIdUtilisateur(@PathVariable Long idUtilisateur) {
 		
@@ -43,11 +44,13 @@ public class ProjetController {
 		return projetService.getProjet(id);
 	}
 	
+	// Ajouter un projet pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Projet)
 	@PostMapping()
 	public Projet addProjet(@Valid @RequestBody Projet projet) {
 		return projetService.addProjet(projet);
 	}
 	
+	// Modifier un projet pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Projet)
 	@PutMapping()
 	public Projet editProjet(@Valid @RequestBody Projet projet) {
 		return projetService.editProjet(projet);
