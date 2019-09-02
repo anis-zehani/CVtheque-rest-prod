@@ -7,7 +7,7 @@ import com.cvtheque.org.model.Contact;
 
 public interface ContactService {
 	
-	public List<Contact> getAllContacts();
+	public List<Contact> getAllContacts(Long idUtilisateur);
 	
 	public Optional<Contact> getContact(Long id);
 	

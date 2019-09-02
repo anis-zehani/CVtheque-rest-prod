@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.cvtheque.org.model.Contact;
+import com.cvtheque.org.model.Utilisateur;
 import com.cvtheque.org.repository.ContactRepository;
 import com.cvtheque.org.util.StorageService;
 
@@ -15,16 +16,20 @@ public class ContactServiceImpl implements ContactService{
 	
 	private final ContactRepository contactRepository;
 	private final StorageService storageService;
+	private final UtilisateurService utilisateurService;
 	
-	ContactServiceImpl(ContactRepository contactRepository, StorageService storageService) {
+	ContactServiceImpl(ContactRepository contactRepository, StorageService storageService, UtilisateurService utilisateurService) {
 		super();
 		this.contactRepository = contactRepository;
 		this.storageService = storageService;
+		this.utilisateurService = utilisateurService;
 	}
 
-	public List<Contact> getAllContacts() {
+	public List<Contact> getAllContacts(Long idUtilisateur) {
 		
-		return contactRepository.findAll();
+		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
+		
+		return contactRepository.findAllByUtilisateur(utilisateur);
 	}
 
 	public Optional<Contact> getContact(Long id) {

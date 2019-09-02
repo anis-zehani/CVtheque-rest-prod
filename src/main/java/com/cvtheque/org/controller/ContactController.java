@@ -40,9 +40,12 @@ public class ContactController {
 		this.contactService = contactService;
 	}
 
-	@GetMapping()
-	public List<Contact> getAllContacts() {
-	    return contactService.getAllContacts();
+	// Tous les contacts par idUtilisateur
+	@GetMapping("/allContactsByIdUtilisateur/{idUtilisateur}")
+	public List<Contact> getAllContacts(@PathVariable Long idUtilisateur) {
+		
+		List<Contact> contacts = contactService.getAllContacts(idUtilisateur);
+	    return contacts;
 	}
 	
 	@GetMapping("{id}")
@@ -50,7 +53,7 @@ public class ContactController {
 		return contactService.getContact(id);
 	}
 	
-	//Ajouter un Contact
+	//Ajouter un Contact pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Contact)
 	@PostMapping()
 	public Contact addContact(@Valid @RequestBody Contact contact) {
 		return contactService.addContact(contact);
@@ -65,6 +68,7 @@ public class ContactController {
 	    return contactService.addPhotoToContact(id, urlPhoto);
 	}
 	
+	// Modifier un Contact pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Contact)
 	@PutMapping()
 	public Contact editContact(@Valid @RequestBody Contact contact) {
 		return contactService.editContact(contact);

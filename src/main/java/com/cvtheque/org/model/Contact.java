@@ -2,6 +2,8 @@ package com.cvtheque.org.model;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -22,8 +24,19 @@ public class Contact extends Utilisateur {
 	 * urlPhoto
 	 * entreprise : @ManyToOne
 	 */
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	private Utilisateur utilisateur;
 
 	public Contact() {
 		super();
+	}
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 }
