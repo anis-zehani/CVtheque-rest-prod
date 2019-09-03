@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
@@ -87,6 +88,9 @@ public class Candidat extends Utilisateur implements Serializable {
 	
 	@Column
 	private Date dateEpuisementPasseport;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	private Utilisateur utilisateur;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional=true)
 	private Diplome diplome;
@@ -221,6 +225,14 @@ public class Candidat extends Utilisateur implements Serializable {
 
 	public void setDateEpuisementPasseport(Date dateEpuisementPasseport) {
 		this.dateEpuisementPasseport = dateEpuisementPasseport;
+	}
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	public Diplome getDiplome() {

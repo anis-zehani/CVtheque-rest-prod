@@ -52,8 +52,13 @@ public class Opportunite implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Etat etatOpportunite;
 	
+	//C'est le partenaire
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Partenaire responsableOpportunite;
+	
+	//C'est la personne qui a inséré l'opportunité : ça peut être un Administrateur ou Partenaire (redondance)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	private Utilisateur utilisateur;
 	
 	@ManyToMany
 	@JoinTable(name = "opportunite_technologie",
@@ -142,6 +147,14 @@ public class Opportunite implements Serializable {
 
 	public void setResponsableOpportunite(Partenaire responsableOpportunite) {
 		this.responsableOpportunite = responsableOpportunite;
+	}
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	public List<Technologie> getListeTechnologies() {
