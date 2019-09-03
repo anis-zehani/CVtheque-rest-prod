@@ -41,11 +41,13 @@ public class EntrepriseController {
 		return entrepriseService.getEntreprise(id);
 	}
 	
+	//Ajouter une Entreprise pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Entreprise)
 	@PostMapping()
 	public Entreprise addEntreprise(@Valid @RequestBody Entreprise entreprise) {
 		return entrepriseService.addEntreprise(entreprise);
 	}
 	
+	//Modifier une Entreprise pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Entreprise)
 	@PutMapping()
 	public Entreprise editEntreprise(@Valid @RequestBody Entreprise entreprise) {
 		return entrepriseService.editEntreprise(entreprise);

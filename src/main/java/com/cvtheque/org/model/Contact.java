@@ -23,6 +23,7 @@ public class Contact extends Utilisateur {
 	 * description_detaillee
 	 * urlPhoto
 	 * entreprise : @ManyToOne
+	 * utilisateur : @ManyToOne
 	 */
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)

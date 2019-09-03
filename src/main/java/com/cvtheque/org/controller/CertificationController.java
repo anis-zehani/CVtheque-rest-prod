@@ -41,11 +41,13 @@ public class CertificationController {
 		return certificationService.getCertification(id);
 	}
 	
+	//Ajouter une Certification pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Certification)
 	@PostMapping()
 	public Certification addCertification(@Valid @RequestBody Certification certification) {
 		return certificationService.addCertification(certification);
 	}
 	
+	//Modifier une Certification pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Certification)
 	@PutMapping()
 	public Certification editCertification(@Valid @RequestBody Certification certification) {
 		return certificationService.editCertification(certification);

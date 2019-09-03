@@ -41,11 +41,13 @@ public class EcoleController {
 		return écoleService.getEcole(id);
 	}
 	
+	//Ajouter une Ecole pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Ecole)
 	@PostMapping()
 	public Ecole addEcole(@Valid @RequestBody Ecole Ecole) {
 		return écoleService.addEcole(Ecole);
 	}
 	
+	//Modifier une Ecole pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Ecole)
 	@PutMapping()
 	public Ecole editEcole(@Valid @RequestBody Ecole Ecole) {
 		return écoleService.editEcole(Ecole);

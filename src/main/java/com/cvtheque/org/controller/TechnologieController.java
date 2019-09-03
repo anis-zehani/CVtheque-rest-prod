@@ -41,11 +41,13 @@ public class TechnologieController {
 		return technologieService.getTechnologie(id);
 	}
 	
+	//Ajouter une Technologie pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Technologie)
 	@PostMapping()
 	public Technologie addTechnologie(@Valid @RequestBody Technologie technologie) {
 		return technologieService.addTechnologie(technologie);
 	}
 	
+	//Modifier une Technologie pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Technologie)
 	@PutMapping()
 	public Technologie editTechnologie(@Valid @RequestBody Technologie technologie) {
 		return technologieService.editTechnologie(technologie);

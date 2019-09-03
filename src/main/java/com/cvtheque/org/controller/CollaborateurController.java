@@ -41,11 +41,13 @@ public class CollaborateurController {
 		return collaborateurService.getCollaborateur(id);
 	}
 	
+	//Ajouter un Collaborateur pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Collaborateur)
 	@PostMapping()
 	public Collaborateur addCollaborateur(@Valid @RequestBody Collaborateur collaborateur) {
 		return collaborateurService.addCollaborateur(collaborateur);
 	}
 	
+	//Modifier un Collaborateur pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Collaborateur)
 	@PutMapping()
 	public Collaborateur editCollaborateur(@Valid @RequestBody Collaborateur collaborateur) {
 		return collaborateurService.editCollaborateur(collaborateur);
