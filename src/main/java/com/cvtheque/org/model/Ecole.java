@@ -28,6 +28,9 @@ public class Ecole implements Serializable {
     @Column(unique=true)
 	private String nomEcole;
     
+	@Column(length = 4096)
+	private String descriptionDetaillee;
+    
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
 
@@ -55,6 +58,14 @@ public class Ecole implements Serializable {
 
 	public void setNomEcole(String nomEcole) {
 		this.nomEcole = nomEcole;
+	}
+	
+	public String getDescriptionDetaillee() {
+		return descriptionDetaillee;
+	}
+
+	public void setDescriptionDetaillee(String descriptionDetaillee) {
+		this.descriptionDetaillee = descriptionDetaillee;
 	}
 
 	public Utilisateur getUtilisateur() {
