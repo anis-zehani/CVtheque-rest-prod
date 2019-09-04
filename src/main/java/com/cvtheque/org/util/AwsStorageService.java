@@ -13,12 +13,14 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.Bucket;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 @Service
 public class AwsStorageService {
 	
+	/*********************            https://www.baeldung.com/aws-s3-java           *********************************************
 	/******************************************* CREDENTIALS AND INITIATION ******************************************************/
 	
 	// Create a client connection to access Amazon S3
@@ -85,19 +87,65 @@ public class AwsStorageService {
 	public void uploadObject(String bucketName, String objectKey, String file) {
 		s3client.putObject(
 				  bucketName, 
-				  objectKey, // "Document/hello.txt"
-				  new File(file) // new File("/Users/user/Document/hello.txt")
+				  objectKey, // Eg : "Document/hello.txt"
+				  new File(file) // Eg : new File("/Users/user/Document/hello.txt")
 				);
 	}
+	
+	/**
+	 * We can copy an object by calling copyObject() method on our s3client which accepts four parameters:
+	 * 
+	 * @param oldBucketName : source bucket name
+	 * @param oldObjectKey  : object key in source bucket
+	 * @param newBucketName : destination bucket name (it can be same as source)
+	 * @param newObjectKey  : object key in destination bucket
+	 * 
+	 * Note: We can use a combination of copyObject() method deleteObject() for performing moving and renaming tasks. 
+	 * This will involve copying the object first and then deleting it from its old location.
+	 */
+	// Copy an Object
+	public void copyObject(String oldBucketName, String oldObjectKey, String newBucketName, String newObjectKey) {
+		s3client.copyObject(oldBucketName, oldObjectKey, newBucketName, newObjectKey);
+	}
+
 	
 	/**
 	 * To delete an Object, we'll call deleteObject() method on s3client and pass the bucket name and object key
 	 * @param bucketName
 	 * @param objectKey
 	 */
-	// Delete and Object
+	// Delete an Object
 	public void deleteObject(String bucketName,String objectKey) {
 		s3client.deleteObject(bucketName,objectKey); // s3client.deleteObject("baeldung-bucket","picture/pic.png");
+	}
+	
+	
+	/**
+	 * To delete multiple objects at once, we'll first create the DeleteObjectsRequest object and pass the bucket name to its constructor. 
+	 * Then we'll pass an array of all the object keys that we want to delete.
+	 * Once we have this DeleteObjectsRequest object, we can pass it to deleteObjects() method of our s3client as an argument. 
+	 * If successful, then this will delete all objects that we have supplied:
+	 * @param bucketName
+	 * @param objectKeys
+	 */
+	// Delete Multiple Objects
+	public void deleteMultipleObjects(String bucketName,String objectKeys[]) {	 
+		DeleteObjectsRequest delObjReq = new DeleteObjectsRequest(bucketName).withKeys(objectKeys);
+		s3client.deleteObjects(delObjReq); // Eg : String objectKeys[] = { "document/hello.txt", "document/pic.png"};
+	}
+	
+	
+	
+	/**
+	 * To download an object, we'll first use the getObject() method on s3client which will return an S3Object object. 
+	 * Once we get this, we'll call getObjectContent() on this to get an S3ObjectInputStream object which behaves like a conventional Java InputStream.
+	 * @param bucketName
+	 * @param objectKey
+	 */
+	public void downloadObject(String bucketName, String objectKey) {
+		//S3Object s3object = s3client.getObject(bucketName, objectKey);
+		//S3ObjectInputStream inputStream = s3object.getObjectContent();
+		//FileUtils.copyInputStreamToFile(inputStream, new File("/Users/user/Desktop/hello.txt"));
 	}
 
 }
