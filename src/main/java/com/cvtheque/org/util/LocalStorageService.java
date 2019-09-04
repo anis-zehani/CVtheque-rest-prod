@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
  
 @Service
-public class StorageService {
+public class LocalStorageService {
 	
 	  //Emplacament photo sur le serveur
 	  private static final Path rootLocationPhoto = Consts.rootLocationPhoto;
@@ -35,7 +35,7 @@ public class StorageService {
 		    try 
 		    {
 		      this.savePhoto(file, filename);
-		      message = StorageService.rootLocationPhoto.toString().replace("\"", "")+"/"+filename;
+		      message = LocalStorageService.rootLocationPhoto.toString().replace("\"", "")+"/"+filename;
 		      return message;
 		      
 		    } 
@@ -54,7 +54,7 @@ public class StorageService {
 		    try 
 		    {
 		      this.saveCvOdix(file, filename);
-		      message = StorageService.rootLocationCvOdix.toString().replace("\"", "")+"/"+filename;
+		      message = LocalStorageService.rootLocationCvOdix.toString().replace("\"", "")+"/"+filename;
 		      return message;
 		      
 		    } 
@@ -73,7 +73,7 @@ public class StorageService {
 		    try 
 		    {
 		      this.saveCvOriginal(file, filename);
-		      message = StorageService.rootLocationCvOriginal.toString().replace("\"", "")+"/"+filename;
+		      message = LocalStorageService.rootLocationCvOriginal.toString().replace("\"", "")+"/"+filename;
 		      return message;
 		      
 		    } 
@@ -96,7 +96,7 @@ public class StorageService {
 		    {
 		      this.saveFichierRappel(file, filenameModified);
 		      
-		      urlFichier = StorageService.rootLocationFichierRappel.toString().replace("\"", "")+"/"+filenameModified;
+		      urlFichier = LocalStorageService.rootLocationFichierRappel.toString().replace("\"", "")+"/"+filenameModified;
 		      nomFichier = filenameOriginal;
 		      
 		      ArrayList<String> urls = new ArrayList<String>();
@@ -117,7 +117,7 @@ public class StorageService {
 	  public void savePhoto(MultipartFile file, String filename ) {
 	    try 
 	    {
-	      Files.copy(file.getInputStream(), StorageService.rootLocationPhoto.resolve(filename));
+	      Files.copy(file.getInputStream(), LocalStorageService.rootLocationPhoto.resolve(filename));
 	    } 
 	    catch (Exception e) 
 	    {
@@ -129,7 +129,7 @@ public class StorageService {
 	  public void saveCvOdix(MultipartFile file, String filename ) {
 		    try 
 		    {
-		      Files.copy(file.getInputStream(), StorageService.rootLocationCvOdix.resolve(filename));
+		      Files.copy(file.getInputStream(), LocalStorageService.rootLocationCvOdix.resolve(filename));
 		    } 
 		    catch (Exception e) 
 		    {
@@ -141,7 +141,7 @@ public class StorageService {
 	  public void saveCvOriginal(MultipartFile file, String filename ) {
 		    try 
 		    {
-		      Files.copy(file.getInputStream(), StorageService.rootLocationCvOriginal.resolve(filename));
+		      Files.copy(file.getInputStream(), LocalStorageService.rootLocationCvOriginal.resolve(filename));
 		    } 
 		    catch (Exception e) 
 		    {
@@ -153,7 +153,7 @@ public class StorageService {
 	  public void saveFichierRappel(MultipartFile file, String filename ) {
 	    try 
 	    {
-	      Files.copy(file.getInputStream(), StorageService.rootLocationFichierRappel.resolve(filename));
+	      Files.copy(file.getInputStream(), LocalStorageService.rootLocationFichierRappel.resolve(filename));
 	    } 
 	    catch (Exception e) 
 	    {

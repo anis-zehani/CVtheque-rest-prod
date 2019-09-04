@@ -12,18 +12,18 @@ import com.cvtheque.org.model.Candidat;
 import com.cvtheque.org.model.Curriculum;
 import com.cvtheque.org.repository.CandidatRepository;
 import com.cvtheque.org.util.Consts;
-import com.cvtheque.org.util.StorageService;
+import com.cvtheque.org.util.LocalStorageService;
 
 @Service
 public class CandidatServiceImpl implements CandidatService{
 	
 	private final CandidatRepository candidatRepository;
-	private final StorageService storageService;
+	private final LocalStorageService storageService;
 	
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
 	
-	CandidatServiceImpl(CandidatRepository candidatRepository, StorageService storageService) 
+	CandidatServiceImpl(CandidatRepository candidatRepository, LocalStorageService storageService) 
 	{
 		super();
 		this.candidatRepository = candidatRepository;

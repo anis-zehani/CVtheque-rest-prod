@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 import com.cvtheque.org.model.Contact;
 import com.cvtheque.org.model.Utilisateur;
 import com.cvtheque.org.repository.ContactRepository;
-import com.cvtheque.org.util.StorageService;
+import com.cvtheque.org.util.LocalStorageService;
 
 @Service
 public class ContactServiceImpl implements ContactService{
 	
 	private final ContactRepository contactRepository;
-	private final StorageService storageService;
+	private final LocalStorageService storageService;
 	private final UtilisateurService utilisateurService;
 	
-	ContactServiceImpl(ContactRepository contactRepository, StorageService storageService, UtilisateurService utilisateurService) {
+	ContactServiceImpl(ContactRepository contactRepository, LocalStorageService storageService, UtilisateurService utilisateurService) {
 		super();
 		this.contactRepository = contactRepository;
 		this.storageService = storageService;

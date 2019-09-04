@@ -13,18 +13,18 @@ import com.cvtheque.org.model.Etat;
 import com.cvtheque.org.model.Partenaire;
 import com.cvtheque.org.repository.PartenaireRepository;
 import com.cvtheque.org.util.Consts;
-import com.cvtheque.org.util.StorageService;
+import com.cvtheque.org.util.LocalStorageService;
 
 @Service
 public class PartenaireServiceImpl implements PartenaireService{
 
 	private final PartenaireRepository partenaireRepository;
-	private final StorageService storageService;
+	private final LocalStorageService storageService;
 	
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
 
-	PartenaireServiceImpl(PartenaireRepository partenaireRepository, StorageService storageService) {
+	PartenaireServiceImpl(PartenaireRepository partenaireRepository, LocalStorageService storageService) {
 		super();
 		this.partenaireRepository = partenaireRepository;
 		this.storageService = storageService;

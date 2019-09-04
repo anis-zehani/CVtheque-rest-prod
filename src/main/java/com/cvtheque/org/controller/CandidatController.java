@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cvtheque.org.model.Candidat;
 import com.cvtheque.org.service.CandidatService;
-import com.cvtheque.org.util.StorageService;
+import com.cvtheque.org.util.LocalStorageService;
 
 @CrossOrigin
 @RestController
@@ -29,7 +29,7 @@ import com.cvtheque.org.util.StorageService;
 public class CandidatController {
 	
 	@Autowired
-	StorageService storageService;
+	LocalStorageService storageService;
 	
 	@Autowired
 	private final CandidatService candidatService;

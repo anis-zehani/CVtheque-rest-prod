@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cvtheque.org.model.Contact;
 import com.cvtheque.org.service.ContactService;
-import com.cvtheque.org.util.StorageService;
+import com.cvtheque.org.util.LocalStorageService;
 
 @CrossOrigin
 @RestController
@@ -29,7 +29,7 @@ import com.cvtheque.org.util.StorageService;
 public class ContactController {
 	
 	@Autowired
-	StorageService storageService;
+	LocalStorageService storageService;
 	 
 	List<String> files = new ArrayList<String>();
 	  

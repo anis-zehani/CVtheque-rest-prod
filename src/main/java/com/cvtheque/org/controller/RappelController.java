@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cvtheque.org.model.Rappel;
 import com.cvtheque.org.service.ProjetService;
 import com.cvtheque.org.service.RappelService;
-import com.cvtheque.org.util.StorageService;
+import com.cvtheque.org.util.LocalStorageService;
 
 @CrossOrigin
 @RestController
@@ -29,7 +29,7 @@ import com.cvtheque.org.util.StorageService;
 public class RappelController {
 	
 	@Autowired
-	StorageService storageService;
+	LocalStorageService storageService;
 	
 	@Autowired
 	private final RappelService rappelService;
