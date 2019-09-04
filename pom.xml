@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 		<groupId>com.cvtheque.org</groupId>
-		<artifactId>Cvtheque</artifactId>
+		<artifactId>cvtheque-odix</artifactId>
 		<version>1</version>
-		<name>Cvtheque</name>
-		<description>Gestion des recrutements</description>
+		<name>cvtheque</name>
+		<description>Odix : le sourcing rendu facile</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -69,8 +69,16 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
-
 		
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk 
+			AWS SDK dependency
+		-->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk</artifactId>
+		    <version>1.11.623</version>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
