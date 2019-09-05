@@ -1,5 +1,6 @@
 package com.cvtheque.org.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,10 +19,10 @@ import lombok.Data;
 @Data
 @Entity
 @DiscriminatorValue(value="Partenaire")
-public class Partenaire extends Utilisateur {
+public class Partenaire extends Utilisateur implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -2652463772687522895L;
+
 	/**Les champs remplis pour le partenaire sont uniquement :
 	 * 
 	 * Identite
@@ -52,6 +53,13 @@ public class Partenaire extends Utilisateur {
 	inverseJoinColumns = { @JoinColumn(name = "id_candidat") })
 	private List<Candidat> candidatsFavoris;
 	
+	// Liste des opportunités favories pour un partenaire
+	@OneToMany
+	@JoinTable(name = "partenaire_opportunites_favoris",
+	joinColumns = { @JoinColumn(name = "id_partenaire") },
+	inverseJoinColumns = { @JoinColumn(name = "id_opportunite") })
+	private List<Opportunite> opportunitesFavoris;
+	
 	public Partenaire() {
 		super();
 	}
@@ -79,4 +87,13 @@ public class Partenaire extends Utilisateur {
 	public void setCandidatsFavoris(List<Candidat> candidatsFavoris) {
 		this.candidatsFavoris = candidatsFavoris;
 	}
+
+	public List<Opportunite> getOpportunitesFavoris() {
+		return opportunitesFavoris;
+	}
+
+	public void setOpportunitesFavoris(List<Opportunite> opportunitesFavoris) {
+		this.opportunitesFavoris = opportunitesFavoris;
+	}
+
 }
