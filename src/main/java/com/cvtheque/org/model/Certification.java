@@ -31,6 +31,7 @@ public class Certification implements Serializable {
 	@Column(length = 4096)
 	private String descriptionDetaillee;
 	
+	// Pour regrouper les certifications par IdUtilisateur
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
     

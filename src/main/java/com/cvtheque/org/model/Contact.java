@@ -26,18 +26,19 @@ public class Contact extends Utilisateur {
 	 * utilisateur : @ManyToOne
 	 */
 	
+	// Pour regrouper les contacts par IdUtilisateur : qui a inséré ce contact
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
 
-	public Contact() {
-		super();
-	}
-	
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
+	}
+	
+	public Contact() {
+		super();
 	}
 }

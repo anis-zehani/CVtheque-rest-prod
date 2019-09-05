@@ -49,6 +49,7 @@ public class Rappel implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	Projet projet;
 	
+	// Pour regrouper les rappels par IdUtilisateur : qui a inséré ce rappel
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
 

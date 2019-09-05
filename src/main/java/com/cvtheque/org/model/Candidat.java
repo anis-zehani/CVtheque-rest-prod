@@ -89,9 +89,6 @@ public class Candidat extends Utilisateur implements Serializable {
 	@Column
 	private Date dateEpuisementPasseport;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-	private Utilisateur utilisateur;
-	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional=true)
 	private Diplome diplome;
 	
@@ -100,6 +97,10 @@ public class Candidat extends Utilisateur implements Serializable {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional=true)
 	private Curriculum curriculum;
+	
+	// Pour regrouper les candidats par IdUtilisateur : qui a inséré ce candidat (pour le moment c'est l'Administrateur)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	private Utilisateur utilisateur;
 	
 	@ManyToMany
 	@JoinTable(name = "candidat_opportunite",

@@ -31,6 +31,7 @@ public class Ecole implements Serializable {
 	@Column(length = 4096)
 	private String descriptionDetaillee;
     
+	// Pour regrouper les écoles par IdUtilisateur : qui a inséré cette école
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
 

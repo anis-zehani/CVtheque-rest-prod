@@ -29,6 +29,7 @@ public class Projet implements Serializable {
 	@Column(length = 1024)
 	private String detailsProjet;
 	
+	// Pour regrouper les projets par IdUtilisateur : qui a inséré ce projet
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
 

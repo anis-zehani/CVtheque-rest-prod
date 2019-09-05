@@ -22,8 +22,8 @@ public class Application {
 		this.aws = aws;
 		//Si SuperAdmin n'existe pas, je le met en place
 		this.administrateurService.verifyOrAddAdmin();
-		this.aws.listAllBuckets();
-		this.aws.listAllObjects("cvtheque-smartgraphe");
+		//this.aws.listAllBuckets();
+		//this.aws.listAllObjects("cvtheque-smartgraphe");
 	}
 
 

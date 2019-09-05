@@ -56,7 +56,7 @@ public class Opportunite implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Partenaire responsableOpportunite;
 	
-	//C'est la personne qui a inséré l'opportunité : ça peut être un Administrateur ou Partenaire (redondance)
+	//C'est la personne qui a inséré l'opportunité :  : qui a inséré cette opportunité, ça peut être un Administrateur ou Partenaire
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
 	

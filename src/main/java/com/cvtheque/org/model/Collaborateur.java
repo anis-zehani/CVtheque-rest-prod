@@ -23,6 +23,7 @@ public class Collaborateur extends Utilisateur {
 	 * utilisateur : @ManyToOne
 	 */
 	
+	// Pour regrouper les collaborateurs par IdUtilisateur
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
 

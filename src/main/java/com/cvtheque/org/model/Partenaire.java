@@ -5,7 +5,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -28,12 +29,16 @@ public class Partenaire extends Utilisateur {
 	 * password
 	 * entreprise : @ManyToOne
 	 * etatPartenaire : Actif/Inactif
-	 * listeCvSauvegardes : @OneToMany : Reste à faire
+	 * utilisateur : @ManyToOne
 	 */
 	
 	@Column
 	@Enumerated(EnumType.STRING)
 	private Etat etatPartenaire;
+	
+	// Pour regrouper les partenaires par IdUtilisateur : qui a inséré ce partenaire (pour le moment c'est l'Administrateur)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	private Utilisateur utilisateur;
 	
 	public Partenaire() {
 		super();
@@ -45,5 +50,13 @@ public class Partenaire extends Utilisateur {
 
 	public void setEtatPartenaire(Etat etatPartenaire) {
 		this.etatPartenaire = etatPartenaire;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 }

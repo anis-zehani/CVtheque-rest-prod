@@ -31,6 +31,7 @@ public class Entreprise implements Serializable {
 	@Column(length = 4096)
 	private String descriptionDetaillee;
 	
+	// Pour regrouper les entreprises par IdUtilisateur : qui a inséré cette entreprise 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
 

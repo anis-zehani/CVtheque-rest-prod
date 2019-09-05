@@ -31,6 +31,7 @@ public class Technologie implements Serializable {
 	@Column(length = 4096)
 	private String descriptionDetaillee;
 	
+	// Pour regrouper les technologies par IdUtilisateur : qui a inséré cette technologie
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
     
