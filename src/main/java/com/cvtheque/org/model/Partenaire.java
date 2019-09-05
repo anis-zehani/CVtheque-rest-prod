@@ -1,12 +1,17 @@
 package com.cvtheque.org.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -40,6 +45,13 @@ public class Partenaire extends Utilisateur {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
 	
+	// Liste des candidats favoris pour un partenaire
+	@OneToMany
+	@JoinTable(name = "partenaire_candidats_favoris",
+	joinColumns = { @JoinColumn(name = "id_partenaire") },
+	inverseJoinColumns = { @JoinColumn(name = "id_candidat") })
+	private List<Candidat> candidatsFavoris;
+	
 	public Partenaire() {
 		super();
 	}
@@ -58,5 +70,13 @@ public class Partenaire extends Utilisateur {
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
+	}
+
+	public List<Candidat> getCandidatsFavoris() {
+		return candidatsFavoris;
+	}
+
+	public void setCandidatsFavoris(List<Candidat> candidatsFavoris) {
+		this.candidatsFavoris = candidatsFavoris;
 	}
 }
