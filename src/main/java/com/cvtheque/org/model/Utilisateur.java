@@ -1,6 +1,7 @@
 package com.cvtheque.org.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -12,7 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -59,6 +63,20 @@ public class Utilisateur implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	Entreprise entreprise;
+	
+	// Liste des candidats favoris pour un Utilisateur (Partenaire / Administrateur)
+	@OneToMany
+	@JoinTable(name = "utilisateur_candidats_favoris",
+	joinColumns = { @JoinColumn(name = "id_utilisateur") },
+	inverseJoinColumns = { @JoinColumn(name = "id_candidat") })
+	private List<Candidat> candidatsFavoris;
+		
+	// Liste des opportunités favories pour un partenaire (Partenaire / Administrateur)
+	@OneToMany
+	@JoinTable(name = "utilisateur_opportunites_favoris",
+	joinColumns = { @JoinColumn(name = "id_utilisateur") },
+	inverseJoinColumns = { @JoinColumn(name = "id_opportunite") })
+	private List<Opportunite> opportunitesFavoris;	
 
 	public Utilisateur() {
 		super();
@@ -138,6 +156,22 @@ public class Utilisateur implements Serializable {
 
 	public void setEntreprise(Entreprise entreprise) {
 		this.entreprise = entreprise;
+	}
+
+	public List<Candidat> getCandidatsFavoris() {
+		return candidatsFavoris;
+	}
+
+	public void setCandidatsFavoris(List<Candidat> candidatsFavoris) {
+		this.candidatsFavoris = candidatsFavoris;
+	}
+
+	public List<Opportunite> getOpportunitesFavoris() {
+		return opportunitesFavoris;
+	}
+
+	public void setOpportunitesFavoris(List<Opportunite> opportunitesFavoris) {
+		this.opportunitesFavoris = opportunitesFavoris;
 	}
 
 }
