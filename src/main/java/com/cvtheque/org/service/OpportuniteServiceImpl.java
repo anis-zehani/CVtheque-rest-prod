@@ -111,6 +111,7 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 			opportuniteToUpdate.setDateAjout(opportunite.getDateAjout());
 			opportuniteToUpdate.setDateDemarrageSouhaitee(opportunite.getDateDemarrageSouhaitee());
 			opportuniteToUpdate.setTjmOpportunite(opportunite.getTjmOpportunite());
+			opportuniteToUpdate.setVisibiliteOpportunite(opportunite.getVisibiliteOpportunite());
 			
 			
 			//On met l'image par défaut à toutes les opportunités : elle s'affiche si l'opportunité n'est liée à aucun partenaire
