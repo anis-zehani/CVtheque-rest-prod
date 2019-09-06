@@ -10,7 +10,7 @@ public interface OpportuniteService {
 	
 	public List<Opportunite> getAllOpportunites(String etat);
 	
-	public List<Opportunite> getAllOpportunitesPublicAndPrivateByPartenaire(Long idPartenaire);
+	public List<Opportunite> getAllOpportunitesPublicAndPrivateByPartenaire(String etat, Long idPartenaire);
 	
 	public List<Opportunite> getAllOpportunitesByPartenaire(Long idPartenaire);
 	

@@ -42,9 +42,9 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 	 * Retourne les Opportunités Publique + les Opportunités Privée du Partenaire connecté
 	 * @param idPartenaire
 	 */
-	public List<Opportunite> getAllOpportunitesPublicAndPrivateByPartenaire(Long idPartenaire) {
+	public List<Opportunite> getAllOpportunitesPublicAndPrivateByPartenaire(String etat, Long idPartenaire) {
 		
-		List<Opportunite> liste = opportuniteRepository.findAllOpportunitesPublicAndPrivateByPartenaire(idPartenaire);
+		List<Opportunite> liste = opportuniteRepository.findAllOpportunitesPublicAndPrivateByPartenaire(etat, idPartenaire);
 		
 		return liste;
 	}
