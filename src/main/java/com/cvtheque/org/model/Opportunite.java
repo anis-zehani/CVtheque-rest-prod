@@ -52,6 +52,10 @@ public class Opportunite implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Etat etatOpportunite;
 	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private Visibilite visibiliteOpportunite;
+	
 	//C'est le partenaire
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Partenaire responsableOpportunite;
@@ -139,6 +143,14 @@ public class Opportunite implements Serializable {
 
 	public void setEtatOpportunite(Etat etatOpportunite) {
 		this.etatOpportunite = etatOpportunite;
+	}
+
+	public Visibilite getVisibiliteOpportunite() {
+		return visibiliteOpportunite;
+	}
+
+	public void setVisibiliteOpportunite(Visibilite visibiliteOpportunite) {
+		this.visibiliteOpportunite = visibiliteOpportunite;
 	}
 
 	public Partenaire getResponsableOpportunite() {

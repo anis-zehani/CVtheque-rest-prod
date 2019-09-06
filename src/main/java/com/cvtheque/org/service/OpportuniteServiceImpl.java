@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.cvtheque.org.model.Candidat;
 import com.cvtheque.org.model.Etat;
 import com.cvtheque.org.model.Opportunite;
+import com.cvtheque.org.model.Visibilite;
 import com.cvtheque.org.repository.OpportuniteRepository;
 
 @Service
@@ -162,6 +163,27 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 				opportuniteToUpdate.setEtatOpportunite(Etat.True);
 			}
 			
+			return opportuniteRepository.save(opportuniteToUpdate);
+		}
+		return null;
+	}
+	
+	//Modifier l'état d'une Opportunité : Active/Inactive
+	public Opportunite editVisibiliteOpportunite(Opportunite opportunite) {
+			
+		if(opportuniteRepository.existsById(opportunite.getId()))
+		{
+			Opportunite opportuniteToUpdate = opportuniteRepository.getOne(opportunite.getId());
+				
+			if(opportuniteToUpdate.getVisibiliteOpportunite().equals(Visibilite.Public))
+			{
+				opportuniteToUpdate.setVisibiliteOpportunite(Visibilite.Private);
+			}
+			else 
+			{
+				opportuniteToUpdate.setVisibiliteOpportunite(Visibilite.Public);
+			}
+				
 			return opportuniteRepository.save(opportuniteToUpdate);
 		}
 		return null;
