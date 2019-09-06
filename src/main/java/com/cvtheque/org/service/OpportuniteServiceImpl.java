@@ -38,6 +38,17 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 
 	}
 	
+	/**Datagrid Opportunité avec un Profil Partenaire
+	 * Retourne les Opportunités Publique + les Opportunités Privée du Partenaire connecté
+	 * @param idPartenaire
+	 */
+	public List<Opportunite> getAllOpportunitesPublicAndPrivateByPartenaire(Long idPartenaire) {
+		
+		List<Opportunite> liste = opportuniteRepository.findAllOpportunitesPublicAndPrivateByPartenaire(idPartenaire);
+		
+		return liste;
+	}
+	
 	//INNER JOIN : JPQL : La liste des Opportunités pour un Partenaire
 	public List<Opportunite> getAllOpportunitesByPartenaire(Long idPartenaire) {
 		return opportuniteRepository.findAllOpportunitesByPartenaire(idPartenaire);

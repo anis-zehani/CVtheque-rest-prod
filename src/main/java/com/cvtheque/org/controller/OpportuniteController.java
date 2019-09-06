@@ -37,6 +37,12 @@ public class OpportuniteController {
 	    return opportuniteService.getAllOpportunites(etatOpportunite);
 	}
 	
+	// Retourne les Opportunités Publique + les Opportunités Privée du Partenaire connecté
+	@GetMapping("/allOpportunitesPublicAndPrivateByPartenaire/{id}")
+	public List<Opportunite> getAllOpportunitesPublicAndPrivateByPartenaire(@PathVariable Long id) {
+	    return opportuniteService.getAllOpportunitesPublicAndPrivateByPartenaire(id);
+	}
+	
 	//La liste des Opportunités pour un Partenaire
 	@GetMapping("/allOpportunitesByPartenaire/{id}")
 	public List<Opportunite> getAllOpportunitesByPartenaire(@PathVariable Long id) {

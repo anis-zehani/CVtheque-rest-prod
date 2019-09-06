@@ -10,6 +10,8 @@ public interface OpportuniteService {
 	
 	public List<Opportunite> getAllOpportunites(String etat);
 	
+	public List<Opportunite> getAllOpportunitesPublicAndPrivateByPartenaire(Long idPartenaire);
+	
 	public List<Opportunite> getAllOpportunitesByPartenaire(Long idPartenaire);
 	
 	public List<Opportunite> getAllOpportunitesByTechnologie(Long idTechnologie);

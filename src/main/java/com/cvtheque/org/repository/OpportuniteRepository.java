@@ -19,6 +19,16 @@ public interface OpportuniteRepository extends JpaRepository<Opportunite, Long> 
 	
 	List<Opportunite> findByEtatOpportunite(@Param("etatOpportunite") Etat etatOpportunite);
 	
+	/**Datagrid Opportunité avec un Profil Partenaire
+	 * Retourne les Opportunités Publique + les Opportunités Privée du Partenaire connecté
+	 * @param idPartenaire
+	 */
+	@Query(value = 
+			"SELECT * FROM Opportunite o WHERE"
+			+ " o.visibilite_opportunite like 'Public' OR (o.visibilite_opportunite like 'Private' AND o.utilisateur_id = ?1)"
+			, nativeQuery = true)
+	List<Opportunite> findAllOpportunitesPublicAndPrivateByPartenaire(@Param("idPartenaire") Long idPartenaire);
+	
 
 	//INNER JOIN : JPQL : La liste des Opportunités pour une Technologie
 	@Query("FROM Opportunite o INNER JOIN o.listeTechnologies o1 ON o1.id = :idTechnologie")
