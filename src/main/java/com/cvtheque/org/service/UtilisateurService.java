@@ -19,15 +19,15 @@ public interface UtilisateurService {
 	 * Les Favoris sont : Candidat / Opportunite
 	 */
 	
-	public void addCandidatToFavoris(Long idUtilisateur, Long idCandidat);
+	public void addCandidatToFavorisUtilisateur(Long idUtilisateur, Long idCandidat);
 	
-	public void deleteCandidatFromFavoris(Long idUtilisateur, Long idCandidat);
+	public void deleteCandidatFromFavorisUtilisateur(Long idUtilisateur, Long idCandidat);
 	
 	public List<Candidat> getAllCandidatsFavorisForUtilisateur(Long idUtilisateur);
 	
-	public void addOpportuniteToFavoris(Long idUtilisateur, Long idOpportunite);
+	public void addOpportuniteToFavorisUtilisateur(Long idUtilisateur, Long idOpportunite);
 	
-	public void deleteOpportuniteFromFavoris(Long idUtilisateur, Long idOpportunite);
+	public void deleteOpportuniteFromFavorisUtilisateur(Long idUtilisateur, Long idOpportunite);
 	
 	public List<Opportunite> getAllOpportunitesFavorisForUtilisateur(Long idUtilisateur);
 

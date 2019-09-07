@@ -34,7 +34,7 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 			"INSERT INTO utilisateur_candidats_favoris (id_utilisateur, id_candidat) "
 			+ "VALUES(?1 , ?2)"
 			, nativeQuery = true)
-	void addCandidatToFavoris(@Param("idUtilisateur") Long idUtilisateur, @Param("idCandidat") Long idCandidat);
+	void addCandidatToFavorisUtilisateur(@Param("idUtilisateur") Long idUtilisateur, @Param("idCandidat") Long idCandidat);
 	
 	@Modifying
 	@Transactional
@@ -42,7 +42,7 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 			"DELETE FROM utilisateur_candidats_favoris u WHERE "
 			+ " u.id_utilisateur = ?1 AND u.id_candidat =?2"
 			, nativeQuery = true)
-	void deleteCandidatFromFavoris(@Param("idUtilisateur") Long idUtilisateur, @Param("idCandidat") Long idCandidat);
+	void deleteCandidatFromFavorisUtilisateur(@Param("idUtilisateur") Long idUtilisateur, @Param("idCandidat") Long idCandidat);
 	
 	@Query(value = "SELECT id_candidat FROM utilisateur_candidats_favoris u WHERE u.id_utilisateur like ?1 ", nativeQuery = true)
 	List<Candidat> getAllCandidatsFavorisForUtilisateur(@Param("idUtilisateur") Long idUtilisateur);
@@ -54,7 +54,7 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 			"INSERT INTO utilisateur_opportunites_favoris (id_utilisateur, id_opportunite) "
 			+ "VALUES(?1 , ?2)"
 			, nativeQuery = true)
-	void addOpportuniteToFavoris(@Param("idUtilisateur") Long idUtilisateur, @Param("idOpportunite") Long idOpportunite);
+	void addOpportuniteToFavorisUtilisateur(@Param("idUtilisateur") Long idUtilisateur, @Param("idOpportunite") Long idOpportunite);
 	
 	@Modifying
 	@Transactional
@@ -62,7 +62,7 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 			"DELETE FROM utilisateur_opportunites_favoris u WHERE "
 			+ " u.id_utilisateur = ?1 AND u.id_opportunite =?2"
 			, nativeQuery = true)
-	void deleteOpportuniteFromFavoris(@Param("idUtilisateur") Long idUtilisateur, @Param("idOpportunite") Long idOpportunite);
+	void deleteOpportuniteFromFavorisUtilisateur(@Param("idUtilisateur") Long idUtilisateur, @Param("idOpportunite") Long idOpportunite);
 	
 	@Query(value = "SELECT id_opportunite FROM utilisateur_opportunites_favoris u WHERE u.id_utilisateur like ?1 ", nativeQuery = true)
 	List<Opportunite> getAllOpportunitesFavorisForUtilisateur(@Param("idUtilisateur") Long idUtilisateur);

@@ -34,16 +34,16 @@ public class UtilisateurServiceaImpl implements UtilisateurService{
 
 
 	@Override
-	public void addCandidatToFavoris(Long idUtilisateur, Long idCandidat) {
+	public void addCandidatToFavorisUtilisateur(Long idUtilisateur, Long idCandidat) {
 		
-		utilisateurRepository.addCandidatToFavoris(idUtilisateur, idCandidat);
+		utilisateurRepository.addCandidatToFavorisUtilisateur(idUtilisateur, idCandidat);
 	}
 
 
 	@Override
-	public void deleteCandidatFromFavoris(Long idUtilisateur, Long idCandidat) {
+	public void deleteCandidatFromFavorisUtilisateur(Long idUtilisateur, Long idCandidat) {
 		
-		utilisateurRepository.deleteCandidatFromFavoris(idUtilisateur, idCandidat);
+		utilisateurRepository.deleteCandidatFromFavorisUtilisateur(idUtilisateur, idCandidat);
 	}
 
 
@@ -57,16 +57,16 @@ public class UtilisateurServiceaImpl implements UtilisateurService{
 
 
 	@Override
-	public void addOpportuniteToFavoris(Long idUtilisateur, Long idOpportunite) {
+	public void addOpportuniteToFavorisUtilisateur(Long idUtilisateur, Long idOpportunite) {
 		
-		utilisateurRepository.addOpportuniteToFavoris(idUtilisateur, idOpportunite);
+		utilisateurRepository.addOpportuniteToFavorisUtilisateur(idUtilisateur, idOpportunite);
 	}
 
 
 	@Override
-	public void deleteOpportuniteFromFavoris(Long idUtilisateur, Long idOpportunite) {
+	public void deleteOpportuniteFromFavorisUtilisateur(Long idUtilisateur, Long idOpportunite) {
 		
-		utilisateurRepository.deleteOpportuniteFromFavoris(idUtilisateur, idOpportunite);
+		utilisateurRepository.deleteOpportuniteFromFavorisUtilisateur(idUtilisateur, idOpportunite);
 	}
 
 
