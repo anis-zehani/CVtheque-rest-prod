@@ -35,43 +35,47 @@ public class UtilisateurServiceaImpl implements UtilisateurService{
 
 	@Override
 	public void addCandidatToFavoris(Long idUtilisateur, Long idCandidat) {
-		// TODO Auto-generated method stub
 		
+		utilisateurRepository.addCandidatToFavoris(idUtilisateur, idCandidat);
 	}
 
 
 	@Override
 	public void deleteCandidatFromFavoris(Long idUtilisateur, Long idCandidat) {
-		// TODO Auto-generated method stub
 		
+		utilisateurRepository.deleteCandidatFromFavoris(idUtilisateur, idCandidat);
 	}
 
 
 	@Override
 	public List<Candidat> getAllCandidatsFavorisForUtilisateur(Long idUtilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Candidat> liste = utilisateurRepository.getAllCandidatsFavorisForUtilisateur(idUtilisateur);
+		
+		return liste;
 	}
 
 
 	@Override
 	public void addOpportuniteToFavoris(Long idUtilisateur, Long idOpportunite) {
-		// TODO Auto-generated method stub
 		
+		utilisateurRepository.addOpportuniteToFavoris(idUtilisateur, idOpportunite);
 	}
 
 
 	@Override
 	public void deleteOpportuniteFromFavoris(Long idUtilisateur, Long idOpportunite) {
-		// TODO Auto-generated method stub
 		
+		utilisateurRepository.deleteOpportuniteFromFavoris(idUtilisateur, idOpportunite);
 	}
 
 
 	@Override
 	public List<Opportunite> getAllOpportunitesFavorisForUtilisateur(Long idUtilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Opportunite> liste = utilisateurRepository.getAllOpportunitesFavorisForUtilisateur(idUtilisateur);
+		
+		return liste;
 	}
 
 }
