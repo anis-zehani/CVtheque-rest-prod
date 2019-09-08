@@ -35,31 +35,31 @@ public class UtilisateurController {
 	}
 	
 	@DeleteMapping("/deleteCandidatFromFavorisUtilisateur/{idUtilisateur}/{idCandidat}")
-	public void deleteCandidatFromFavorisUtilisateur(Long idUtilisateur, Long idCandidat) {
+	public void deleteCandidatFromFavorisUtilisateur(@PathVariable Long idUtilisateur, @PathVariable Long idCandidat) {
 		
 		utilisateurService.deleteCandidatFromFavorisUtilisateur(idUtilisateur, idCandidat);
 	}
 	
 	@GetMapping("/getAllCandidatsFavorisForUtilisateur/{idUtilisateur}")
-	public List<Candidat> getAllCandidatsFavorisForUtilisateur(Long idUtilisateur){
+	public List<Candidat> getAllCandidatsFavorisForUtilisateur(@PathVariable Long idUtilisateur){
 		
 		return utilisateurService.getAllCandidatsFavorisForUtilisateur(idUtilisateur);
 	}
 	
 	@PostMapping("/addOpportuniteToFavorisUtilisateur/{idUtilisateur}/{idOpportunite}")
-	public void addOpportuniteToFavorisUtilisateur(Long idUtilisateur, Long idOpportunite) {
+	public void addOpportuniteToFavorisUtilisateur(@PathVariable Long idUtilisateur, @PathVariable Long idOpportunite) {
 		
 		utilisateurService.addOpportuniteToFavorisUtilisateur(idUtilisateur, idOpportunite);
 	}
 	
 	@DeleteMapping("/deleteOpportuniteFromFavorisUtilisateur/{idUtilisateur}/{idOpportunite}")
-	public void deleteOpportuniteFromFavorisUtilisateur(Long idUtilisateur, Long idOpportunite) {
+	public void deleteOpportuniteFromFavorisUtilisateur(@PathVariable Long idUtilisateur, @PathVariable Long idOpportunite) {
 		
 		utilisateurService.deleteOpportuniteFromFavorisUtilisateur(idUtilisateur, idOpportunite);
 	}
 	
 	@GetMapping("/getAllOpportunitesFavorisForUtilisateur/{idUtilisateur}")
-	public List<Opportunite> getAllOpportunitesFavorisForUtilisateur(Long idUtilisateur){
+	public List<Opportunite> getAllOpportunitesFavorisForUtilisateur(@PathVariable Long idUtilisateur){
 		
 		return utilisateurService.getAllOpportunitesFavorisForUtilisateur(idUtilisateur);
 	}

@@ -1,7 +1,5 @@
 package com.cvtheque.org.repository;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,8 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.cvtheque.org.model.Candidat;
-import com.cvtheque.org.model.Opportunite;
 import com.cvtheque.org.model.Utilisateur;
 
 @Repository
@@ -43,10 +39,7 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 			+ " u.id_utilisateur = ?1 AND u.id_candidat =?2"
 			, nativeQuery = true)
 	void deleteCandidatFromFavorisUtilisateur(@Param("idUtilisateur") Long idUtilisateur, @Param("idCandidat") Long idCandidat);
-	
-	@Query(value = "SELECT id_candidat FROM utilisateur_candidats_favoris u WHERE u.id_utilisateur like ?1 ", nativeQuery = true)
-	List<Candidat> getAllCandidatsFavorisForUtilisateur(@Param("idUtilisateur") Long idUtilisateur);
-	
+
 	
 	@Modifying
 	@Transactional
@@ -63,8 +56,5 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 			+ " u.id_utilisateur = ?1 AND u.id_opportunite =?2"
 			, nativeQuery = true)
 	void deleteOpportuniteFromFavorisUtilisateur(@Param("idUtilisateur") Long idUtilisateur, @Param("idOpportunite") Long idOpportunite);
-	
-	@Query(value = "SELECT id_opportunite FROM utilisateur_opportunites_favoris u WHERE u.id_utilisateur like ?1 ", nativeQuery = true)
-	List<Opportunite> getAllOpportunitesFavorisForUtilisateur(@Param("idUtilisateur") Long idUtilisateur);
 	
 }

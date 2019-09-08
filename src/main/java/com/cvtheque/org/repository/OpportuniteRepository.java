@@ -96,4 +96,15 @@ public interface OpportuniteRepository extends JpaRepository<Opportunite, Long> 
 	@Transactional
 	@Query("UPDATE Opportunite o SET o.responsableOpportunite = null WHERE o.id = :idOpportunite")
 	void updateLinkOpportunitePartenaire(@Param("idOpportunite") Long idOpportunite);
+	
+	
+	/**
+	 * Liste des opportunités favories pour un Utilisateur (Administrateur/Partenaire)
+	 * @param idUtilisateur
+	 * @return List<Opportunite> 
+	 */
+	@Query(value = "SELECT * FROM opportunite op WHERE "
+			+ " op.id IN (SELECT id_opportunite FROM utilisateur_opportunites_favoris u WHERE u.id_utilisateur = ?1) ", nativeQuery = true)
+	List<Opportunite> getAllOpportunitesFavorisForUtilisateur(@Param("idUtilisateur") Long idUtilisateur);
+	
 }
