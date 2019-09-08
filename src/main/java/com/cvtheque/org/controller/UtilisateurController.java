@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cvtheque.org.model.Candidat;
-import com.cvtheque.org.model.Opportunite;
 import com.cvtheque.org.service.UtilisateurService;
 
 @CrossOrigin
@@ -56,11 +55,5 @@ public class UtilisateurController {
 	public void deleteOpportuniteFromFavorisUtilisateur(@PathVariable Long idUtilisateur, @PathVariable Long idOpportunite) {
 		
 		utilisateurService.deleteOpportuniteFromFavorisUtilisateur(idUtilisateur, idOpportunite);
-	}
-	
-	@GetMapping("/getAllOpportunitesFavorisForUtilisateur/{idUtilisateur}")
-	public List<Opportunite> getAllOpportunitesFavorisForUtilisateur(@PathVariable Long idUtilisateur){
-		
-		return utilisateurService.getAllOpportunitesFavorisForUtilisateur(idUtilisateur);
 	}
 }

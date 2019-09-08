@@ -38,6 +38,18 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 
 	}
 	
+	/**
+	 * Liste des opportunités favories pour un Utilisateur (Administrateur/Partenaire)
+	 * @param idUtilisateur
+	 * @return List<Opportunite> 
+	 */
+	public List<Opportunite> getAllOpportunitesFavorisForUtilisateur(Long idUtilisateur) {
+		
+		List<Opportunite> liste = opportuniteRepository.getAllOpportunitesFavorisForUtilisateur(idUtilisateur);
+		
+		return liste;
+	}
+	
 	/**Datagrid Opportunité avec un Profil Partenaire
 	 * Retourne les Opportunités Publique + les Opportunités Privée du Partenaire connecté
 	 * @param idPartenaire

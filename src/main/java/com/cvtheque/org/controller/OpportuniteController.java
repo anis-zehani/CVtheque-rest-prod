@@ -37,6 +37,13 @@ public class OpportuniteController {
 	    return opportuniteService.getAllOpportunites(etatOpportunite);
 	}
 	
+	//Liste des opportunités favories pour un Utilisateur (Administrateur/Partenaire)
+	@GetMapping("/getAllOpportunitesFavorisForUtilisateur/{idUtilisateur}")
+	public List<Opportunite> getAllOpportunitesFavorisForUtilisateur(@PathVariable Long idUtilisateur){
+		
+		return opportuniteService.getAllOpportunitesFavorisForUtilisateur(idUtilisateur);
+	}
+	
 	// Retourne les Opportunités Publique + les Opportunités Privée du Partenaire connecté
 	@GetMapping("/allOpportunitesPublicAndPrivateByPartenaire/{etatOpportunite}/{id}")
 	public List<Opportunite> getAllOpportunitesPublicAndPrivateByPartenaire(@PathVariable String etatOpportunite, @PathVariable Long id) {
