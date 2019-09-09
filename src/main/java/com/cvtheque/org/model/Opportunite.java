@@ -58,7 +58,7 @@ public class Opportunite implements Serializable {
 	
 	//C'est le partenaire
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-	private Partenaire responsableOpportunite;
+	private Utilisateur responsableOpportunite;
 	
 	//C'est la personne qui a inséré l'opportunité :  : qui a inséré cette opportunité, ça peut être un Administrateur ou Partenaire
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
@@ -153,11 +153,11 @@ public class Opportunite implements Serializable {
 		this.visibiliteOpportunite = visibiliteOpportunite;
 	}
 
-	public Partenaire getResponsableOpportunite() {
+	public Utilisateur getResponsableOpportunite() {
 		return responsableOpportunite;
 	}
 
-	public void setResponsableOpportunite(Partenaire responsableOpportunite) {
+	public void setResponsableOpportunite(Utilisateur responsableOpportunite) {
 		this.responsableOpportunite = responsableOpportunite;
 	}
 	

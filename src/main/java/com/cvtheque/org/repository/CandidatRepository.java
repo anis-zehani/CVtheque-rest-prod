@@ -102,16 +102,4 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 	@Transactional
 	@Query("UPDATE Candidat c SET c.entreprise = null WHERE c.id = :idCandidat")
 	void updateLinkCandidatEntreprise(@Param("idCandidat") Long idCandidat);
-	
-	
-	/**
-	 * Liste des candidats favoris pour un Utilisateur (Administrateur/Partenaire)
-	 * @param idUtilisateur
-	 * @return List<Candidat> 
-	 */
-	@Query(value = "SELECT * FROM utilisateur ut WHERE "
-			+ " ut.id IN (SELECT id_candidat FROM utilisateur_candidats_favoris u WHERE u.id_utilisateur = ?1) ", nativeQuery = true)
-	List<Candidat> getAllCandidatsFavorisForUtilisateur(@Param("idUtilisateur") Long idUtilisateur);
-	
-
 }
