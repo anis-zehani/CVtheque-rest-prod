@@ -11,4 +11,8 @@ public interface OpportunitesFavorisRepository  extends JpaRepository<Opportunit
 
 	List<OpportunitesFavoris> findByIdUtilisateur(@Param("idUtilisateur") Long idUtilisateur);
 	
+	// Vérifie si une Opportunité existe dèja dans la liste des favoris d'un Utilisateur
+	OpportunitesFavoris findByIdUtilisateurAndIdOpportunite(
+			@Param("idUtilisateur") Long idUtilisateur, 
+			@Param("idOpportunite") Long idOpportunite);
 }

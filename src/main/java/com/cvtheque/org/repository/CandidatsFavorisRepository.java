@@ -13,4 +13,8 @@ public interface CandidatsFavorisRepository  extends JpaRepository<CandidatsFavo
 	
 	List<CandidatsFavoris> findByIdUtilisateur(@Param("idUtilisateur") Long idUtilisateur);
 	
+	// Vérifie si un Candidat existe dèja dans la liste des favoris d'un Utilisateur
+	CandidatsFavoris findByIdUtilisateurAndIdCandidat(
+			@Param("idUtilisateur") Long idUtilisateur, 
+			@Param("idCandidat") Long idCandidat);
 }

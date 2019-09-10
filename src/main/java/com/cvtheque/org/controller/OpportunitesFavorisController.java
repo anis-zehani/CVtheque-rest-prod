@@ -43,5 +43,11 @@ public class OpportunitesFavorisController {
 		
 		opportunitesFavorisService.deleteOpportuniteFromFavorisToUtilisateur(idOpportuniteFavorie);
 	}
+	
+	@GetMapping("/checkIfOpportuniteExistsDansFavorisUtilisateur/{idUtilisateur}/{idOpportunite}")
+	public boolean checkIfOpportuniteExistsDansFavorisUtilisateur(Long idUtilisateur, Long idOpportunite) {
+		
+		return opportunitesFavorisService.checkIfOpportuniteExistsDansFavorisUtilisateur(idUtilisateur, idOpportunite);
+	}
 
 }

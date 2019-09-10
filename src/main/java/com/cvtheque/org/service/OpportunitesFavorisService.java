@@ -11,4 +11,6 @@ public interface OpportunitesFavorisService {
 	public OpportunitesFavoris addOpportuniteToFavorisToUtilisateur(OpportunitesFavoris opportunitesFavoris);
 	
 	public void deleteOpportuniteFromFavorisToUtilisateur(Long idOpportuniteFavorie);
+	
+	public boolean checkIfOpportuniteExistsDansFavorisUtilisateur(Long idUtilisateur, Long idOpportunite);
 }

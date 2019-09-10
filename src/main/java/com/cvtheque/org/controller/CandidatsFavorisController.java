@@ -44,4 +44,11 @@ public class CandidatsFavorisController {
 		candidatsFavorisService.deleteCandidatFromFavorisToUtilisateur(idCandidatFavori);
 	}
 	
+	// Vérifie si un Candidat existe dèja dans la liste des favoris d'un Utilisateur
+	@GetMapping("/checkIfCandidatExistsDansFavorisUtilisateur/{idUtilisateur}/{idCandidat}")
+	public boolean checkIfCandidatExistsDansFavorisUtilisateur(@PathVariable Long idUtilisateur, @PathVariable Long idCandidat) {
+		
+		return candidatsFavorisService.checkIfCandidatExistsDansFavorisUtilisateur(idUtilisateur, idCandidat);
+	}
+	
 }

@@ -11,4 +11,6 @@ public interface CandidatsFavorisService {
 	public CandidatsFavoris addCandidatToFavorisToUtilisateur(CandidatsFavoris candidatsFavoris);
 	
 	public void deleteCandidatFromFavorisToUtilisateur(Long idCandidatFavori);
+	
+	public boolean checkIfCandidatExistsDansFavorisUtilisateur(Long idUtilisateur, Long idUCandidat);
 }
