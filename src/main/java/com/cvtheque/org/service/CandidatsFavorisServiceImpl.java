@@ -26,6 +26,14 @@ public class CandidatsFavorisServiceImpl implements CandidatsFavorisService {
 		return liste;
 	}
 	
+	// Vérifie si un Candidat existe dèja dans la liste des favoris d'un Utilisateur
+	public boolean checkIfCandidatExistsDansFavorisUtilisateur(Long idUtilisateur, Long idCandidat) {
+		
+		if(candidatsFavorisRepository.findByIdUtilisateurAndIdCandidat(idUtilisateur, idCandidat) != null)
+			return true;
+		return false;
+	}
+	
 	// Ajouter un Candidat Favoris à un Utilisateur
 	public CandidatsFavoris addCandidatToFavorisToUtilisateur(CandidatsFavoris candidatsFavoris) {
 		
@@ -37,14 +45,4 @@ public class CandidatsFavorisServiceImpl implements CandidatsFavorisService {
 		
 		candidatsFavorisRepository.deleteById(idCandidatFavori);
 	}
-	
-	// Vérifie si un Candidat existe dèja dans la liste des favoris d'un Utilisateur
-	public boolean checkIfCandidatExistsDansFavorisUtilisateur(Long idUtilisateur, Long idCandidat) {
-		
-		if(candidatsFavorisRepository.findByIdUtilisateurAndIdCandidat(idUtilisateur, idCandidat) != null)
-			return true;
-		return false;
-	}
-	
-
 }

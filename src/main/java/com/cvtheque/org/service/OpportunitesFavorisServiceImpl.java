@@ -24,6 +24,14 @@ public class OpportunitesFavorisServiceImpl implements OpportunitesFavorisServic
 		
 		return liste;
 	}
+	
+	// Vérifie si une Opportunité existe dèja dans la liste des favoris d'un Utilisateur
+	public boolean checkIfOpportuniteExistsDansFavorisUtilisateur(Long idUtilisateur, Long idOpportunite) {
+		
+		if(opportunitesFavorisRepository.findByIdUtilisateurAndIdOpportunite(idUtilisateur, idOpportunite) != null)
+			return true;
+		return false;
+	}
 
 	// Ajouter une Opportunité Favorite à un Utilisateur
 	public OpportunitesFavoris addOpportuniteToFavorisToUtilisateur(OpportunitesFavoris opportunitesFavoris) {
@@ -36,15 +44,4 @@ public class OpportunitesFavorisServiceImpl implements OpportunitesFavorisServic
 		
 		opportunitesFavorisRepository.deleteById(idOpportuniteFavorie);
 	}
-	
-	// Vérifie si une Opportunité existe dèja dans la liste des favoris d'un Utilisateur
-	public boolean checkIfOpportuniteExistsDansFavorisUtilisateur(Long idUtilisateur, Long idOpportunite) {
-		
-		if(opportunitesFavorisRepository.findByIdUtilisateurAndIdOpportunite(idUtilisateur, idOpportunite) != null)
-			return true;
-		return false;
-	}
-	
-	
-
 }

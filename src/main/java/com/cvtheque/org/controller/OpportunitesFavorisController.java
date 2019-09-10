@@ -30,6 +30,13 @@ public class OpportunitesFavorisController {
 		return opportunitesFavorisService.getAllOpportunitesFavorisForUtilisateur(idUtilisateur);
 	}
 	
+	// Vérifie si une Opportunité existe dèja dans la liste des favoris d'un Utilisateur
+	@GetMapping("/checkIfOpportuniteExistsDansFavorisUtilisateur/{idUtilisateur}/{idOpportunite}")
+	public boolean checkIfOpportuniteExistsDansFavorisUtilisateur(@PathVariable Long idUtilisateur, @PathVariable Long idOpportunite) {
+		
+		return opportunitesFavorisService.checkIfOpportuniteExistsDansFavorisUtilisateur(idUtilisateur, idOpportunite);
+	}
+	
 	// Ajouter une Opportunité Favorite à un Utilisateur
 	@PostMapping("/addOpportuniteToFavorisToUtilisateur")
 	public OpportunitesFavoris addOpportuniteToFavorisToUtilisateur(@RequestBody OpportunitesFavoris opportunitesFavoris) {
@@ -43,11 +50,4 @@ public class OpportunitesFavorisController {
 		
 		opportunitesFavorisService.deleteOpportuniteFromFavorisToUtilisateur(idOpportuniteFavorie);
 	}
-	
-	@GetMapping("/checkIfOpportuniteExistsDansFavorisUtilisateur/{idUtilisateur}/{idOpportunite}")
-	public boolean checkIfOpportuniteExistsDansFavorisUtilisateur(Long idUtilisateur, Long idOpportunite) {
-		
-		return opportunitesFavorisService.checkIfOpportuniteExistsDansFavorisUtilisateur(idUtilisateur, idOpportunite);
-	}
-
 }
