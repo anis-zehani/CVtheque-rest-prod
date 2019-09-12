@@ -21,11 +21,15 @@ public interface OpportuniteRepository extends JpaRepository<Opportunite, Long> 
 	
 	/**Datagrid Opportunité avec un Profil Partenaire
 	 * Retourne les Opportunités Publique + les Opportunités Privée du Partenaire connecté
+	 * Opportunité que lui a ajouté ou bien que Odix a ajouté et l'a indiqué comme étant le responsable
 	 * @param idPartenaire
 	 */
 	@Query(value = 
 			"SELECT * FROM Opportunite o WHERE"
-			+ " (o.visibilite_opportunite like 'Public' OR (o.visibilite_opportunite like 'Private' AND o.utilisateur_id = ?2)) "
+			+ " (o.visibilite_opportunite like 'Public' "
+			+ " OR (o.visibilite_opportunite like 'Private' AND o.utilisateur_id = ?2) "
+			+ " OR (o.visibilite_opportunite like 'Private' AND o.responsable_opportunite_id = ?2)"
+			+ " ) "
 			+ " AND o.etat_opportunite like ?1"
 			, nativeQuery = true)
 	List<Opportunite> findAllOpportunitesPublicAndPrivateByPartenaire(@Param("etat") String etat, @Param("idPartenaire") Long idPartenaire);
@@ -36,7 +40,6 @@ public interface OpportuniteRepository extends JpaRepository<Opportunite, Long> 
 	List<Opportunite> findAllOpportunitesByTechnologie(@Param("idTechnologie") Long idTechnologie);
 	
 	//INNER JOIN : JPQL : La liste des opportunites qui ont une Technologie au moins dans la liste fournie
-	//@Query("FROM Opportunite c INNER JOIN c.listeTechnologies c1 ON c1.id IN :listTechnologies")
 	@Query(value = 
 			"FROM Opportunite o WHERE "
 			+ "EXISTS(FROM o.listeTechnologies o1 WHERE o1.id IN :listTechnologies)")

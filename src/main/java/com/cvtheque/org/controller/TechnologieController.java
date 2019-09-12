@@ -1,7 +1,6 @@
 package com.cvtheque.org.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -37,7 +36,7 @@ public class TechnologieController {
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Technologie> getTechnologie(@PathVariable Long id) {
+	public Technologie getTechnologie(@PathVariable Long id) {
 		return technologieService.getTechnologie(id);
 	}
 	

@@ -31,6 +31,12 @@ public class Technologie implements Serializable {
 	@Column(length = 4096)
 	private String descriptionDetaillee;
 	
+	@Column
+	private Integer statNombreCandidatsLies;
+	
+	@Column
+	private Integer statNombreOpportuniteLiees;
+	
 	// Pour regrouper les technologies par IdUtilisateur : qui a inséré cette technologie
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
@@ -67,6 +73,22 @@ public class Technologie implements Serializable {
 
 	public void setDescriptionDetaillee(String descriptionDetaillee) {
 		this.descriptionDetaillee = descriptionDetaillee;
+	}
+
+	public Integer getStatNombreCandidatsLies() {
+		return statNombreCandidatsLies;
+	}
+
+	public void setStatNombreCandidatsLies(Integer statNombreCandidatsLies) {
+		this.statNombreCandidatsLies = statNombreCandidatsLies;
+	}
+
+	public Integer getStatNombreOpportuniteLiees() {
+		return statNombreOpportuniteLiees;
+	}
+
+	public void setStatNombreOpportuniteLiees(Integer statNombreOpportuniteLiees) {
+		this.statNombreOpportuniteLiees = statNombreOpportuniteLiees;
 	}
 
 	public Utilisateur getUtilisateur() {

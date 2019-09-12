@@ -1,7 +1,6 @@
 package com.cvtheque.org.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,11 +19,20 @@ public class TechnologieServiceImpl implements TechnologieService{
 	}
 	
 	public List<Technologie> getAllTechnologies() {
-	    return technologieRepository.findAll();
+		
+		List<Technologie> listeTechnologies = technologieRepository.findAll();
+		/**
+		 * Ici soit :
+		 * 1-Je fais une boucle FOR afin de calculer : les candidats liés et les opportunités liées
+		 * 2-Je récupère les champs candidats liés et les opportunités liées à partir du CRON
+		 */
+		
+		return listeTechnologies;
 	}
 	
-	public Optional<Technologie> getTechnologie(Long id) {
-		return technologieRepository.findById(id);
+	public Technologie getTechnologie(Long id) {
+		
+		return technologieRepository.getOne(id);
 	}
 	
 	//Ajouter une technologie
@@ -63,6 +71,12 @@ public class TechnologieServiceImpl implements TechnologieService{
 			}
 		}
 		return false;
+	}
+	
+	// Statistiques : UPDATE le nombre des Candidats liés et des Opportunités liées à une Technologie
+	public void updateNombreCandidatsAndNombreOpportunitesStats(Long idTechnologie, Integer nombreCandidats, Integer nombreOpportunites) {
+		
+		technologieRepository.updateNombreCandidatsAndNombreOpportunitesStats(idTechnologie, nombreCandidats, nombreOpportunites);
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -52,6 +53,15 @@ public class JavaMailSenderService {
         javaMailSender.send(message);
 
     }
+	
+	/*@Scheduled(fixedRate = 3000)
+	public void cron() {
+
+		String newLine = System.getProperty("line.separator");
+		System.out.println(newLine);
+		System.out.print("Anis Zaheni : Odix - le sourcing rendu facile : ");
+		
+	}*/
 	
 	/**
 	 * How to use it :
