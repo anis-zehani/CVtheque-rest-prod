@@ -31,7 +31,7 @@ public class Statistiques {
 	}
 	
 	// UPDATE le nombre des Candidats liés et des Opportunités liées à une Technologie : chaque 15 minutes
-	@Scheduled(fixedRate = 900000)
+	@Scheduled(fixedRate = 300000)
 	public void cronCandidatsAndOpportunitesByTechnologie() {
 		
 		Integer nombreCandidats = 0;

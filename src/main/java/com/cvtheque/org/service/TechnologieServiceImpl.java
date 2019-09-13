@@ -1,12 +1,13 @@
 package com.cvtheque.org.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.cvtheque.org.model.Technologie;
 import com.cvtheque.org.repository.TechnologieRepository;
-
 
 @Service
 public class TechnologieServiceImpl implements TechnologieService{
@@ -88,6 +89,20 @@ public class TechnologieServiceImpl implements TechnologieService{
 		List<Technologie> listeOpportunitesByTechnologie = technologieRepository.opportunitesByTechnologie();
 		
 		return listeOpportunitesByTechnologie;
+	}
+	
+	// Retourne la somme des Candidats liés et des opportunités liées pour toutes les technologies
+	public Map<String, Integer> sumCandiatsAndOpportunitesByTechnologies(){
+		
+		List<Integer> listeSumsCandidats = technologieRepository.sumCandiatsByTechnologies();
+		List<Integer> listeSumsOpportunites = technologieRepository.sumOpportunitesByTechnologies();
+		
+		Map<String, Integer> map = new HashMap<>();
+		
+		map.put("statNombreCandidatsLies", listeSumsCandidats.get(0));
+		map.put("statNombreOpportunitesLiees", listeSumsOpportunites.get(0));
+		
+		return map;
 	}
 
 }

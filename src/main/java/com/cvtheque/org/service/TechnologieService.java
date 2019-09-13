@@ -1,6 +1,7 @@
 package com.cvtheque.org.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cvtheque.org.model.Technologie;
 
@@ -21,4 +22,6 @@ public interface TechnologieService {
 	public List<Technologie> candidatsByTechnologie();
 	
 	public List<Technologie> opportunitesByTechnologie();
+	
+	public Map<String, Integer> sumCandiatsAndOpportunitesByTechnologies();
 }

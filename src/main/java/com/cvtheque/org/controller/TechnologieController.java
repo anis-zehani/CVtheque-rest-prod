@@ -1,6 +1,7 @@
 package com.cvtheque.org.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -40,14 +41,23 @@ public class TechnologieController {
 		return technologieService.getTechnologie(id);
 	}
 
+	// Retourne la liste des 5 premières technologies ORDER BY le nombre des candidats qu'il y a pour elle
 	@GetMapping("/candidatsByTechnologie")
 	public List<Technologie> getCandidatsByTechnologie() {
 	    return technologieService.candidatsByTechnologie();
 	}
 	
+	// Retourne la liste des 5 premières technologies ORDER BY le nombre des opportunités qu'il y a pour elle
 	@GetMapping("/opportunitesByTechnologie")
 	public List<Technologie> getOpportunitesByTechnologie() {
 	    return technologieService.opportunitesByTechnologie();
+	}
+	
+	// Retourne la somme des Candidats liés et des opportunités liées pour toutes les technologies
+	@GetMapping("/sumCandiatsAndOpportunitesByTechnologies")
+	public Map<String, Integer> sumCandiatsAndOpportunitesByTechnologies(){
+		
+		return technologieService.sumCandiatsAndOpportunitesByTechnologies();
 	}
 	
 	//Ajouter une Technologie pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Technologie)

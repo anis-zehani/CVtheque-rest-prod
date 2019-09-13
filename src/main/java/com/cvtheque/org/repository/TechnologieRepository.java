@@ -36,4 +36,12 @@ public interface TechnologieRepository extends JpaRepository<Technologie, Long> 
 			+ " ORDER BY t.stat_nombre_opportunites_liees DESC"
 			+ " LIMIT 5", nativeQuery = true)
 	List<Technologie> opportunitesByTechnologie();
+	
+	// Retourne la somme des Candidats liés à toutes les technologies
+	@Query(value="SELECT SUM(t.stat_nombre_candidats_lies) FROM Technologie t", nativeQuery = true)
+	List<Integer> sumCandiatsByTechnologies();
+	
+	// Retourne la somme des opportunités liées à toutes les technologies
+	@Query(value="SELECT SUM(t.stat_nombre_opportunites_liees) FROM Technologie t", nativeQuery = true)
+	List<Integer> sumOpportunitesByTechnologies();
 }
