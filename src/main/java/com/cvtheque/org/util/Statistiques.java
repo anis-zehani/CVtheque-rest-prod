@@ -47,15 +47,6 @@ public class Statistiques {
 			nombreOpportunites = opportuniteRepository.findAllOpportunitesByTechnologie(idTechnologie).size();
 			
 			technologieService.updateNombreCandidatsAndNombreOpportunitesStats(idTechnologie, nombreCandidats, nombreOpportunites);	
-			
-			/*String newLine = System.getProperty("line.separator");
-			
-			System.out.print("Technologie : " + listeTechnologies.get(i).getNomTechnologie());
-			System.out.println(newLine);
-			System.out.print("nombreCandidats : " + nombreCandidats);
-			System.out.println(newLine);
-			System.out.print("nombreOpportunites : " + nombreOpportunites);
-			System.out.println(newLine);*/
 		}
 	}
 	

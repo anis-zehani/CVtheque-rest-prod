@@ -29,7 +29,7 @@ public class TechnologieController {
 	TechnologieController(TechnologieService technologieService) {
 		this.technologieService = technologieService;
 	}
-
+	
 	@GetMapping()
 	public List<Technologie> getAllTechnologies() {
 	    return technologieService.getAllTechnologies();
@@ -38,6 +38,16 @@ public class TechnologieController {
 	@GetMapping("{id}")
 	public Technologie getTechnologie(@PathVariable Long id) {
 		return technologieService.getTechnologie(id);
+	}
+
+	@GetMapping("/candidatsByTechnologie")
+	public List<Technologie> getCandidatsByTechnologie() {
+	    return technologieService.candidatsByTechnologie();
+	}
+	
+	@GetMapping("/opportunitesByTechnologie")
+	public List<Technologie> getOpportunitesByTechnologie() {
+	    return technologieService.opportunitesByTechnologie();
 	}
 	
 	//Ajouter une Technologie pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Technologie)

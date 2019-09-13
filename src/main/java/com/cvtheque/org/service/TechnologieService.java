@@ -18,4 +18,7 @@ public interface TechnologieService {
 	
 	public void updateNombreCandidatsAndNombreOpportunitesStats(Long idTechnologie, Integer nombreCandidats, Integer nombreOpportunites);
 
+	public List<Technologie> candidatsByTechnologie();
+	
+	public List<Technologie> opportunitesByTechnologie();
 }

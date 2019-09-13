@@ -21,12 +21,7 @@ public class TechnologieServiceImpl implements TechnologieService{
 	public List<Technologie> getAllTechnologies() {
 		
 		List<Technologie> listeTechnologies = technologieRepository.findAll();
-		/**
-		 * Ici soit :
-		 * 1-Je fais une boucle FOR afin de calculer : les candidats liés et les opportunités liées
-		 * 2-Je récupère les champs candidats liés et les opportunités liées à partir du CRON
-		 */
-		
+
 		return listeTechnologies;
 	}
 	
@@ -77,6 +72,22 @@ public class TechnologieServiceImpl implements TechnologieService{
 	public void updateNombreCandidatsAndNombreOpportunitesStats(Long idTechnologie, Integer nombreCandidats, Integer nombreOpportunites) {
 		
 		technologieRepository.updateNombreCandidatsAndNombreOpportunitesStats(idTechnologie, nombreCandidats, nombreOpportunites);
+	}
+	
+	// Retourne la liste des 5 premières technologies ORDER BY le nombre des candidats qu'il y a pour elle
+	public List<Technologie> candidatsByTechnologie(){
+		
+		List<Technologie> listeCandidatByTechnologie = technologieRepository.candidatsByTechnologie();
+		
+		return listeCandidatByTechnologie;
+	}
+	
+	// Retourne la liste des 5 premières technologies ORDER BY le nombre des opportunités qu'il y a pour elle
+	public List<Technologie> opportunitesByTechnologie(){
+		
+		List<Technologie> listeOpportunitesByTechnologie = technologieRepository.opportunitesByTechnologie();
+		
+		return listeOpportunitesByTechnologie;
 	}
 
 }
