@@ -41,7 +41,7 @@ public class Statistiques {
 		this.partenaireRepository = partenaireRepository;
 	}
 	
-	// UPDATE le nombre des Candidats liés et des Opportunités liées à une Technologie : chaque 15 minutes
+	// UPDATE le nombre des Candidats liés et des Opportunités liées à une Technologie : chaque 5 minutes
 	@Scheduled(fixedRate = 300000)
 	public void cronCandidatsAndOpportunitesByTechnologie() {
 		
@@ -61,7 +61,7 @@ public class Statistiques {
 		}
 	}
 	
-	// UPDATE le nombre des Candidats liés et des Partenaires liés à une Entreprise : chaque 15 minutes
+	// UPDATE le nombre des Candidats liés et des Partenaires liés à une Entreprise : chaque 5 minutes
 	@Scheduled(fixedRate = 300000)
 	public void cronCandidatsAndPartenairesByEntreprise() {
 		

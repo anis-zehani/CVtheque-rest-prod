@@ -38,11 +38,11 @@ public interface EntrepriseRepository extends JpaRepository<Entreprise, Long> {
 	List<Entreprise> partenairesByEntreprise();
 		
 	// Retourne la somme des Candidats liés à toutes les Entreprises
-	@Query(value="SELECT SUM(t.stat_nombre_candidats_lies) FROM Entreprise e", nativeQuery = true)
+	@Query(value="SELECT SUM(e.stat_nombre_candidats_lies) FROM Entreprise e", nativeQuery = true)
 	List<Integer> sumCandiatsByEntreprises();
 		
 	// Retourne la somme des Partenaires liés à toutes les Entreprises
-	@Query(value="SELECT SUM(t.stat_nombre_partenaires_lies) FROM Entreprise e", nativeQuery = true)
+	@Query(value="SELECT SUM(e.stat_nombre_partenaires_lies) FROM Entreprise e", nativeQuery = true)
 	List<Integer> sumPartenairesByEntreprises();
 
 }
