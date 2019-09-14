@@ -23,5 +23,5 @@ public interface TechnologieService {
 	
 	public List<Technologie> opportunitesByTechnologie();
 	
-	public Map<Integer, Integer> sumCandiatsAndOpportunitesByTechnologies();
+	public Map<String, Integer> sumCandiatsAndOpportunitesByTechnologies();
 }

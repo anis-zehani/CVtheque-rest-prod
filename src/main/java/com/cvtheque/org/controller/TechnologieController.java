@@ -55,7 +55,7 @@ public class TechnologieController {
 	
 	// Retourne la somme des Candidats liés et des opportunités liées pour toutes les technologies
 	@GetMapping("/sumCandiatsAndOpportunitesByTechnologies")
-	public Map<Integer, Integer> sumCandiatsAndOpportunitesByTechnologies(){
+	public Map<String, Integer> sumCandiatsAndOpportunitesByTechnologies(){
 		
 		return technologieService.sumCandiatsAndOpportunitesByTechnologies();
 	}
