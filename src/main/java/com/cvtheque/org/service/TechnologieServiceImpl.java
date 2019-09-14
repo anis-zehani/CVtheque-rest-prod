@@ -92,15 +92,15 @@ public class TechnologieServiceImpl implements TechnologieService{
 	}
 	
 	// Retourne la somme des Candidats liés et des opportunités liées pour toutes les technologies
-	public Map<String, Integer> sumCandiatsAndOpportunitesByTechnologies(){
+	public Map<Integer, Integer> sumCandiatsAndOpportunitesByTechnologies(){
 		
 		List<Integer> listeSumsCandidats = technologieRepository.sumCandiatsByTechnologies();
 		List<Integer> listeSumsOpportunites = technologieRepository.sumOpportunitesByTechnologies();
 		
-		Map<String, Integer> map = new HashMap<>();
+		Map<Integer, Integer> map = new HashMap<>();
 		
-		map.put("statNombreCandidatsLies", listeSumsCandidats.get(0));
-		map.put("statNombreOpportunitesLiees", listeSumsOpportunites.get(0));
+		map.put(0, listeSumsCandidats.get(0));
+		map.put(1, listeSumsOpportunites.get(0));
 		
 		return map;
 	}
