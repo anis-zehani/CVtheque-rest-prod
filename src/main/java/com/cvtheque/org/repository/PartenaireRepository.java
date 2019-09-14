@@ -25,11 +25,6 @@ public interface PartenaireRepository extends JpaRepository<Partenaire, Long> {
 	
 	List<Partenaire> findAllByEntreprise(@Param("entreprise") Entreprise entreprise);
 	
-
-	//INNER JOIN : JPQL : La liste des Partenaires pour une Entreprise
-	@Query("FROM Partenaire p INNER JOIN p.listeEntreprises p1 ON p1.idEntreprise = :idEntreprise")
-	List<Partenaire> findAllPartenairesByEntreprise(@Param("idEntreprise") Long idEntreprise);
-	
 	//UPDATE le lien entre un partenaire et une entreprise : met entreprise à NULL
 	@Modifying
 	@Transactional

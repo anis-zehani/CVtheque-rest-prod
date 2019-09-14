@@ -75,7 +75,7 @@ public class Statistiques {
 			Long idEntreprise = listeEntreprises.get(i).getIdEntreprise();
 			
 			nombreCandidats = candidatRepository.findAllCandidatsByEntreprise(idEntreprise).size();
-			nombrePartenaires = partenaireRepository.findAllPartenairesByEntreprise(idEntreprise).size();
+			nombrePartenaires = partenaireRepository.findAllByEntreprise(listeEntreprises.get(i)).size();
 			
 			entrepriseService.updateNombreCandidatsAndNombrePartenairesStats(idEntreprise, nombreCandidats, nombrePartenaires);	
 		}
