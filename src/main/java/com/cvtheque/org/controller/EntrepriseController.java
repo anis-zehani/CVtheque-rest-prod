@@ -1,6 +1,7 @@
 package com.cvtheque.org.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -39,6 +40,24 @@ public class EntrepriseController {
 	@GetMapping("{id}")
 	public Optional<Entreprise> getEntreprise(@PathVariable Long id) {
 		return entrepriseService.getEntreprise(id);
+	}
+	
+	// Retourne la liste des 5 premières Entreprises ORDER BY le nombre des Candidats qu'il y a pour elle
+	@GetMapping("/candidatsByEntreprise")
+	public List<Entreprise> getCandidatsByEntreprise() {
+		return entrepriseService.candidatsByEntreprise();
+	}
+		
+	// Retourne la liste des 5 premières Entreprises ORDER BY le nombre des Partenaires qu'il y a pour elle
+	@GetMapping("/partenairesByEntreprise")
+	public List<Entreprise> getPartenairesByEntreprise() {
+		return entrepriseService.partenairesByEntreprise();
+	}
+		
+	// Retourne la somme des Candidats liés et des Partenaires liés pour toutes les Entreprises
+	@GetMapping("/sumCandiatsAndPartenairesByEntreprises")
+	public Map<String, Integer> sumCandiatsAndPartenairesByEntreprises(){
+		return entrepriseService.sumCandiatsAndPartenairesByEntreprises();
 	}
 	
 	//Ajouter une Entreprise pour un utilisateur : (idUtilisateur existe dans l'objet Utilisateur envoyé à l'intérieur de l'objet Entreprise)

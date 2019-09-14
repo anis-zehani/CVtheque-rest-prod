@@ -70,20 +70,23 @@ public class TechnologieServiceImpl implements TechnologieService{
 	}
 	
 	// Statistiques : UPDATE le nombre des Candidats liés et des Opportunités liées à une Technologie
+	@Override
 	public void updateNombreCandidatsAndNombreOpportunitesStats(Long idTechnologie, Integer nombreCandidats, Integer nombreOpportunites) {
 		
 		technologieRepository.updateNombreCandidatsAndNombreOpportunitesStats(idTechnologie, nombreCandidats, nombreOpportunites);
 	}
 	
 	// Retourne la liste des 5 premières technologies ORDER BY le nombre des candidats qu'il y a pour elle
+	@Override
 	public List<Technologie> candidatsByTechnologie(){
 		
-		List<Technologie> listeCandidatByTechnologie = technologieRepository.candidatsByTechnologie();
+		List<Technologie> listeCandidatsByTechnologie = technologieRepository.candidatsByTechnologie();
 		
-		return listeCandidatByTechnologie;
+		return listeCandidatsByTechnologie;
 	}
 	
 	// Retourne la liste des 5 premières technologies ORDER BY le nombre des opportunités qu'il y a pour elle
+	@Override
 	public List<Technologie> opportunitesByTechnologie(){
 		
 		List<Technologie> listeOpportunitesByTechnologie = technologieRepository.opportunitesByTechnologie();
@@ -92,6 +95,7 @@ public class TechnologieServiceImpl implements TechnologieService{
 	}
 	
 	// Retourne la somme des Candidats liés et des opportunités liées pour toutes les technologies
+	@Override
 	public Map<String, Integer> sumCandiatsAndOpportunitesByTechnologies(){
 		
 		List<Integer> listeSumsCandidats = technologieRepository.sumCandiatsByTechnologies();

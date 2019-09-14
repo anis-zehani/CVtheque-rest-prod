@@ -31,6 +31,12 @@ public class Entreprise implements Serializable {
 	@Column(length = 4096)
 	private String descriptionDetaillee;
 	
+	@Column
+	private Integer statNombreCandidatsLies;
+	
+	@Column
+	private Integer statNombrePartenairesLies;
+	
 	// Pour regrouper les entreprises par IdUtilisateur : qui a inséré cette entreprise 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
@@ -59,6 +65,22 @@ public class Entreprise implements Serializable {
 
 	public void setNomEntreprise(String nomEntreprise) {
 		this.nomEntreprise = nomEntreprise;
+	}
+
+	public Integer getStatNombreCandidatsLies() {
+		return statNombreCandidatsLies;
+	}
+
+	public void setStatNombreCandidatsLies(Integer statNombreCandidatsLies) {
+		this.statNombreCandidatsLies = statNombreCandidatsLies;
+	}
+
+	public Integer getStatNombrePartenairesLies() {
+		return statNombrePartenairesLies;
+	}
+
+	public void setStatNombrePartenairesLies(Integer statNombrePartenairesLies) {
+		this.statNombrePartenairesLies = statNombrePartenairesLies;
 	}
 
 	public String getDescriptionDetaillee() {

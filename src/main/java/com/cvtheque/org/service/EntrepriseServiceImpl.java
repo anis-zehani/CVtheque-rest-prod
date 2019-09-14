@@ -1,6 +1,8 @@
 package com.cvtheque.org.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -63,5 +65,47 @@ public class EntrepriseServiceImpl implements EntrepriseService{
 		}
 		return false;
 	}
+	
+	// Statistiques : UPDATE le nombre des Candidats liés et des Partenaires liés à une Technologie
+	@Override
+	public void updateNombreCandidatsAndNombrePartenairesStats(Long idEntreprise, Integer nombreCandidats, Integer nombrePartenaires) {
+		
+		entrepriseRepository.updateNombreCandidatsAndNombrePartenairesStats(idEntreprise, nombreCandidats, nombrePartenaires);
+	}
+
+	// Retourne la liste des 5 premières Entreprises ORDER BY le nombre des Candidats qu'il y a pour elle
+	@Override
+	public List<Entreprise> candidatsByEntreprise() {
+		
+		List<Entreprise> listeCandidatsByEntreprise = entrepriseRepository.candidatsByEntreprise();
+		
+		return listeCandidatsByEntreprise;
+	}
+
+	// Retourne la liste des 5 premières Entreprises ORDER BY le nombre des Partenaires qu'il y a pour elle
+	@Override
+	public List<Entreprise> partenairesByEntreprise() {
+		
+		List<Entreprise> listePartenairesByEntreprise = entrepriseRepository.partenairesByEntreprise();
+		
+		return listePartenairesByEntreprise;
+	}
+
+	// Retourne la somme des Candidats liés et des Partenaires liés pour toutes les Entreprises
+	@Override
+	public Map<String, Integer> sumCandiatsAndPartenairesByEntreprises() {
+		
+		List<Integer> listeSumsCandidats = entrepriseRepository.sumCandiatsByEntreprises();
+		List<Integer> listeSumsPartenaires = entrepriseRepository.sumPartenairesByEntreprises();
+		
+		Map<String, Integer> map = new HashMap<>();
+		
+		map.put("sumCandidatsLies", listeSumsCandidats.get(0));
+		map.put("sumPartenairesLies", listeSumsPartenaires.get(0));
+		
+		return map;
+	}
+	
+	
 
 }
