@@ -33,7 +33,7 @@ public class Utilisateur implements Serializable {
 	@Id
     private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	
-    @Column
+	@Column(unique = true)
 	private String identite;
 	
     @Column
@@ -48,7 +48,7 @@ public class Utilisateur implements Serializable {
 	@Column(length = 4096)
 	private String descriptionDetaillee;
 	
-	@Column
+	@Column(unique = true)
 	private String username;
 	
 	@Column

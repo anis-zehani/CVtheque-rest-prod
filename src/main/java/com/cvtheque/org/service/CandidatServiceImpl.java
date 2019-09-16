@@ -97,15 +97,11 @@ public class CandidatServiceImpl implements CandidatService{
 	//Créer un lien entre des candidats et une opportunité
 	public void addCandidatsToOpportunite(Long idOpportunite, ArrayList<Candidat> listeCandidats, boolean withDeletion) {
 		
-		if(withDeletion)
-		{
-
+		if(withDeletion) {
 			candidatRepository.deleteAllCandidatsByOpportunite(idOpportunite);
 		}
-		if(idOpportunite != null && !listeCandidats.isEmpty())
-		{
-			for(int i=0;i<listeCandidats.size();i++)
-			{
+		if(idOpportunite != null && !listeCandidats.isEmpty()) {
+			for(int i=0;i<listeCandidats.size();i++) {
 				candidatRepository.addCandidatToOpportunite(listeCandidats.get(i).getId(), idOpportunite);
 			}
 		}
@@ -114,6 +110,8 @@ public class CandidatServiceImpl implements CandidatService{
 	//Ajouter un candidat
 	public Candidat addCandidat(Candidat candidat) {
 		
+		if(candidatRepository.findByIdentite(candidat.getIdentite()) == null &&
+				candidatRepository.findByUsername(candidat.getUsername()) == null) {
 		//Par défaut, le candidat est activé
 		candidat.setEtatCandidat(Etat.True);
 		
@@ -125,23 +123,21 @@ public class CandidatServiceImpl implements CandidatService{
 		candidat.setCurriculum(cv);
 			
 		//Entreprise : Si le user n'a pas ajouté une Entreprise
-		if(candidat.getEntreprise().getIdEntreprise() == null)
-		{
+		if(candidat.getEntreprise().getIdEntreprise() == null) {
 			//Obligatoire pour @ManyToOne
 			candidat.setEntreprise(null);
 		}
-		
 		//Ecole : Si le user n'a pas ajouté une Ecole pour un Diplome
-		if(candidat.getDiplome().getEcole().getIdEcole() == null)
-		{
+		if(candidat.getDiplome().getEcole().getIdEcole() == null) {
 			//Obligatoire pour @ManyToOne
 			candidat.getDiplome().setEcole(null);
 		}
-		
 		//Encoder le Password avant de l'insérer dans la base
 		candidat.setPassword(bcryptEncoder.encode(candidat.getPassword()));
 		
 		return  candidatRepository.save(candidat);
+		}
+	return null;
 	}
 	
 	//Affecter une photo à un candidat (fonction appelée dans Ajout + Update)
@@ -227,8 +223,9 @@ public class CandidatServiceImpl implements CandidatService{
 	public Candidat editCandidat(Candidat candidat) {
 		
 		//L'Update url photo se fait en haut dans la fonction addPhotoToCandidat
-		if(candidatRepository.existsById(candidat.getId()))
-		{
+		if(candidatRepository.existsById(candidat.getId()) && 
+				candidatRepository.findByIdentite(candidat.getIdentite()) == null &&
+				candidatRepository.findByUsername(candidat.getUsername()) == null) {
 			Candidat candidatToUpdate = candidatRepository.getOne(candidat.getId());
 			
 			candidatToUpdate.setIdentite(candidat.getIdentite());
@@ -317,8 +314,7 @@ public class CandidatServiceImpl implements CandidatService{
 
 			return candidatRepository.save(candidatToUpdate);
 		}
-		
-			return null;
+		return null;
 	}
 	
 	//Modifier l'état d'un Candidat : Actif/Inactif

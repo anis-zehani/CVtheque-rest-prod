@@ -39,22 +39,23 @@ public class ContactServiceImpl implements ContactService{
 	//Ajouter un contact
 	public Contact addContact(Contact contact) {
 		
-		if(contact.getEntreprise().getIdEntreprise() == null)
-		{
-			//Obligatoire pour @ManyToOne
-			contact.setEntreprise(null);
+		if(contactRepository.findByIdentite(contact.getIdentite()) == null) {
+			if(contact.getEntreprise().getIdEntreprise() == null) {
+				//Obligatoire pour @ManyToOne
+				contact.setEntreprise(null);
+			}
+			//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
+			contact.setUrlPhoto("");
+				
+			return contactRepository.save(contact);
 		}
-		//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
-		contact.setUrlPhoto("");
-			
-		return contactRepository.save(contact);
+		return null;
 	}
 	
 	//Affecter une photo à un contact (fonction appelée dans Ajout + Update)
 	public Contact addPhotoToContact(Long id, String urlPhoto) {
 		
-		if(contactRepository.existsById(id))
-		{
+		if(contactRepository.existsById(id)) {
 			Contact contact = contactRepository.getOne(id);
 			
 			//delete ancienne photo : si elle existe dans le cas d'un Update
@@ -76,13 +77,10 @@ public class ContactServiceImpl implements ContactService{
 	public Contact editContact(Contact contact) {
 		
 		//L'Update url photo se fait en haut dans la fonction addPhotoToContact
-		if(contactRepository.existsById(contact.getId()))
-		{
-			if(contact.getEntreprise().getIdEntreprise() == null)
-			{
+		if(contactRepository.existsById(contact.getId()) && contactRepository.findByIdentite(contact.getIdentite()) == null) {
+			if(contact.getEntreprise().getIdEntreprise() == null) {
 				contact.setEntreprise(null);
 			}
-
 			return contactRepository.save(contact);
 		}
 		return null;

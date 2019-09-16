@@ -58,25 +58,25 @@ public class PartenaireServiceImpl implements PartenaireService{
 	//Ajouter un partenaire
 	public Partenaire addPartenaire(Partenaire partenaire) {
 		
-		//Par défaut, le partenaire est activé
-		partenaire.setEtatPartenaire(Etat.True);
+		if(partenaireRepository.findByIdentite(partenaire.getIdentite()) == null &&
+				partenaireRepository.findByUsername(partenaire.getUsername()) == null) {
+			//Par défaut, le partenaire est activé
+			partenaire.setEtatPartenaire(Etat.True);
+	
+			if(partenaire.getEntreprise().getIdEntreprise() == null) {
+				partenaire.setEntreprise(null);
+			}
 			
-		if(partenaire.getEntreprise().getIdEntreprise() == null)
-		{
-			partenaire.setEntreprise(null);
-		}
-		
-		//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
-		partenaire.setUrlPhoto("");
-		
-		if(partenaire.getPassword() != null)
-		{
-			//Encoder le Password avant de l'insérer dans la base
-			partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
-		}
-
+			//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
+			partenaire.setUrlPhoto("");
 			
-		return partenaireRepository.save(partenaire);
+			if(partenaire.getPassword() != null) {
+				//Encoder le Password avant de l'insérer dans la base
+				partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
+			}	
+			return partenaireRepository.save(partenaire);
+			}
+		return null;
 
 	}
 	
@@ -105,30 +105,25 @@ public class PartenaireServiceImpl implements PartenaireService{
 	public Partenaire editPartenaire(Partenaire partenaire) {
 		
 		//L'Update url photo se fait en haut dans la fonction addPhotoToPartenaire
-		if(partenaireRepository.existsById(partenaire.getId()))
-		{
-			
-			if(partenaire.getEntreprise().getIdEntreprise() == null)
-			{
+		if(partenaireRepository.existsById(partenaire.getId()) && 
+				partenaireRepository.findByIdentite(partenaire.getIdentite()) == null &&
+				partenaireRepository.findByUsername(partenaire.getUsername()) == null) {
+			if(partenaire.getEntreprise().getIdEntreprise() == null) {
 				partenaire.setEntreprise(null);
 			}
-			
 			//Récupérer le password affiché sur le formulaire
 			String passwordFormulaire = partenaire.getPassword();
 			//Récupérer le password actuel dans la BDD
 			String passwordBDD = partenaireRepository.findByUsername(partenaire.getUsername()).getPassword();
 			
 			// Si le Password récupéré est différent de celui qui est stocké : on change le password
-			if(!passwordFormulaire.equals(passwordBDD))
-			{
+			if(!passwordFormulaire.equals(passwordBDD)) {
 				partenaire.setPassword(bcryptEncoder.encode(partenaire.getPassword()));
 			}
 			// Sinon on réinsére l'ancien password
-			else
-			{
+			else {
 				partenaire.setPassword(passwordBDD);
 			}
-			
 			return partenaireRepository.save(partenaire);
 		}
 		return null;

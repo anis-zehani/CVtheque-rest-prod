@@ -33,9 +33,9 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 
 	//Ajouter un collaborateur
 	public Collaborateur addCollaborateur(Collaborateur collaborateur) {
-		
-		if(collaborateurRepository.findByIdentite(collaborateur.getIdentite()) == null)
-		{
+		//Si l'identité et le username n'existent pas
+		if(collaborateurRepository.findByIdentite(collaborateur.getIdentite()) == null && 
+				collaborateurRepository.findByUsername(collaborateur.getUsername()) == null){
 			if(collaborateur.getPassword() != null)
 			{
 				//Encoder le Password avant de l'insérer dans la base
@@ -50,7 +50,9 @@ public class CollaborateurServiceImpl implements CollaborateurService{
 	//Modifier un collaborateur
 	public Collaborateur editCollaborateur(Collaborateur collaborateur) {
 		
-		if(collaborateurRepository.existsById(collaborateur.getId()))
+		if(collaborateurRepository.existsById(collaborateur.getId()) &&
+				collaborateurRepository.findByIdentite(collaborateur.getIdentite()) == null && 
+				collaborateurRepository.findByUsername(collaborateur.getUsername()) == null)
 		{
 			//Récupérer le password affiché sur le formulaire
 			String passwordFormulaire = collaborateur.getPassword();
