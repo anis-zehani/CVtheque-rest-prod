@@ -20,6 +20,8 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 	Candidat findByIdentite(@Param("identite") String identite);
 	
 	Candidat findByUsername(@Param("username") String username);
+	
+	Candidat findByEmail(@Param("email") String email);
 
 	List<Candidat> findByEtatCandidat(@Param("etatCandidat") Etat etatCandidat);
 	
