@@ -30,6 +30,7 @@ public class AdministrateurServiceImpl implements AdministrateurService{
 			superAdmin.setUsername("anis");
 			superAdmin.setPassword("$2a$10$tWZVsDODx11zOTpm/jdVU.Aw6GV0iHy12KE58boDl6.80eodnqngS");
 			superAdmin.setIdentite("Anis Zaheni");
+			superAdmin.setEmail("azaheni@smartgraphe.com");
 			administrateurRepository.save(superAdmin);
 		}
 		

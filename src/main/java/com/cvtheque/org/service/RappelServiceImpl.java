@@ -30,7 +30,7 @@ public class RappelServiceImpl implements RappelService{
 		this.utilisateurService = utilisateurService;
 	}
 	
-	//Retourne tous les rappels sans filtre
+	//Retourne tous les rappels sans filtre par User
 	public List<Rappel> getAllRappels(Long idUtilisateur) {
 		
 		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
@@ -38,7 +38,7 @@ public class RappelServiceImpl implements RappelService{
 	    return rappelRepository.findAllByUtilisateur(utilisateur);
 	}
 	
-	//Retourne les rappels de Today
+	//Retourne les rappels de Today par User
 	public List<Rappel> getAllRappelsByToday(Long idUtilisateur) {
 		
 		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
@@ -47,7 +47,7 @@ public class RappelServiceImpl implements RappelService{
 	    return rappelRepository.findByToday(dateToday, utilisateur);
 	}
 	
-	//Retourne les rappels des Next 7 Days
+	//Retourne les rappels des Next 7 Days par User
 	public List<Rappel> getAllRappelsByNext7Days(Long idUtilisateur) {
 		
 		Utilisateur utilisateur = utilisateurService.getUtilisateurById(idUtilisateur);
@@ -70,6 +70,14 @@ public class RappelServiceImpl implements RappelService{
 		
 		//Il faut convertir le String en Enum via valueOf
 		return rappelRepository.findByPrioriteAndUtilisateur(Priorite.valueOf(valeurPriorite), utilisateur);
+	}
+	
+	//Retourne tous les rappels de Today : All Users
+	public List<Rappel> getAllRappelsByTodayAndAllUsers() {
+		
+		LocalDate dateToday = LocalDate.now(); 
+		
+	    return rappelRepository.findByTodayAndAllUsers(dateToday);
 	}
 	
 	public Rappel getRappel(Long id) {

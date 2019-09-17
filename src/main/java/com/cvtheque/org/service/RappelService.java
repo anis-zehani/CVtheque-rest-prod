@@ -17,6 +17,8 @@ public interface RappelService {
 	
 	public List<Rappel> getAllRappelsByPrioriteAndUtilisateur(String valeurPriorite, Long idUtilisateur);
 	
+	public List<Rappel> getAllRappelsByTodayAndAllUsers();
+	
 	public Rappel getRappel(Long id);
 	
 	public Rappel addRappel(Rappel rappel);

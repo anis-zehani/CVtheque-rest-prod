@@ -46,11 +46,11 @@ public class Rappel implements Serializable {
 	@Column
 	private String nomFichier;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
 	Projet projet;
 	
 	// Pour regrouper les rappels par IdUtilisateur : qui a inséré ce rappel
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
 	private Utilisateur utilisateur;
 
 	public Rappel() {

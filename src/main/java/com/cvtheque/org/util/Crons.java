@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.cvtheque.org.model.Entreprise;
+import com.cvtheque.org.model.Rappel;
 import com.cvtheque.org.model.Technologie;
 import com.cvtheque.org.repository.CandidatRepository;
 import com.cvtheque.org.repository.EntrepriseRepository;
@@ -14,10 +15,11 @@ import com.cvtheque.org.repository.OpportuniteRepository;
 import com.cvtheque.org.repository.PartenaireRepository;
 import com.cvtheque.org.repository.TechnologieRepository;
 import com.cvtheque.org.service.EntrepriseService;
+import com.cvtheque.org.service.RappelService;
 import com.cvtheque.org.service.TechnologieService;
 
 @Service
-public class Statistiques {
+public class Crons {
 	
 	@Autowired
 	TechnologieService technologieService;
@@ -25,23 +27,29 @@ public class Statistiques {
 	@Autowired
 	EntrepriseService entrepriseService;
 	
+	@Autowired
+	JavaMailSenderService javaMailSenderService;
+	
 	private final TechnologieRepository technologieRepository;
 	private final OpportuniteRepository opportuniteRepository;
 	private final CandidatRepository candidatRepository;
 	private final EntrepriseRepository entrepriseRepository;
 	private final PartenaireRepository partenaireRepository;
+	private final RappelService rappelService;
 	
-	public Statistiques(TechnologieRepository technologieRepository, OpportuniteRepository opportuniteRepository,
-			CandidatRepository candidatRepository, EntrepriseRepository entrepriseRepository, PartenaireRepository partenaireRepository) {
+	public Crons(TechnologieRepository technologieRepository, OpportuniteRepository opportuniteRepository,
+			CandidatRepository candidatRepository, EntrepriseRepository entrepriseRepository, PartenaireRepository partenaireRepository,
+			RappelService rappelService) {
 		super();
 		this.technologieRepository = technologieRepository;
 		this.opportuniteRepository = opportuniteRepository;
 		this.candidatRepository = candidatRepository;
 		this.entrepriseRepository = entrepriseRepository;
 		this.partenaireRepository = partenaireRepository;
+		this.rappelService = rappelService;
 	}
 	
-	// UPDATE le nombre des Candidats liés et des Opportunités liées à une Technologie : chaque 5 minutes
+	// Statistiques : UPDATE le nombre des Candidats liés et des Opportunités liées à une Technologie : chaque 5 minutes
 	@Scheduled(fixedRate = 300000)
 	public void cronCandidatsAndOpportunitesByTechnologie() {
 		
@@ -61,7 +69,7 @@ public class Statistiques {
 		}
 	}
 	
-	// UPDATE le nombre des Candidats liés et des Partenaires liés à une Entreprise : chaque 5 minutes
+	// Statistiques : UPDATE le nombre des Candidats liés et des Partenaires liés à une Entreprise : chaque 5 minutes
 	@Scheduled(fixedRate = 300000)
 	public void cronCandidatsAndPartenairesByEntreprise() {
 		
@@ -81,6 +89,32 @@ public class Statistiques {
 		}
 	}
 	
-	
+	//Chaque jour à 6 heure du matin Europe/London Time
+	// @Scheduled(fixedRate = 60000) : chaque 1 minute (pour les tests)
+	@Scheduled(cron="0 0 6 * * *", zone="Europe/London")
+	public void cronSendEmailsRappels() {
+		
+		List<Rappel> allRappelsByTodayAndAllUsers = rappelService.getAllRappelsByTodayAndAllUsers();
+		
+		for(int i=0; i < allRappelsByTodayAndAllUsers.size(); i++) {
+			
+			Rappel rappel = allRappelsByTodayAndAllUsers.get(i);
+			String emailTo = rappel.getUtilisateur().getEmail();
+			
+			if(emailTo != null && emailTo.length()>0) {
+				String subjectEmail = "Rappel du : " + rappel.getDateEcheance();
+				String dateRappel = "Date : " + rappel.getDateEcheance().toString() + "\r\n";
+				String prioriteRappel = "Priorité : " + rappel.getPriorite().toString() + "\r\n";
+				String detailsRappel = "Détails : " + rappel.getDetailsRappel() + "\r\n";
+				
+				String textEmail = dateRappel + prioriteRappel + detailsRappel;
+				
+				javaMailSenderService.sendSimpleMessage(
+						emailTo, 
+						subjectEmail, 
+						textEmail);
+			}
+		}
+	}
 
 }

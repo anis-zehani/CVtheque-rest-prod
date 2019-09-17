@@ -24,6 +24,9 @@ public interface RappelRepository extends JpaRepository<Rappel, Long> {
 	@Query("SELECT r FROM Rappel r where r.dateEcheance =:date AND r.utilisateur =:utilisateur")
 	List<Rappel> findByToday(@Param("date") LocalDate date, @Param("utilisateur") Utilisateur utilisateur);
 	
+	@Query("SELECT r FROM Rappel r where r.dateEcheance =:date AND r.remindMe = TRUE ")
+	List<Rappel> findByTodayAndAllUsers(@Param("date") LocalDate date);
+	
 	@Query("SELECT r FROM Rappel r WHERE r.dateEcheance > :dateDebut AND r.dateEcheance < :dateFin AND r.utilisateur =:utilisateur")
 	List<Rappel> findByNext7Days(@Param("dateDebut") LocalDate dateDebut, @Param("dateFin") LocalDate dateFin, @Param("utilisateur") Utilisateur utilisateur);
 	
