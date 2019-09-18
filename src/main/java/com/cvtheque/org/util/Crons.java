@@ -90,7 +90,7 @@ public class Crons {
 	}
 	
 	//Chaque jour à 6 heure du matin Europe/London Time
-	// @Scheduled(fixedRate = 60000) : chaque 1 minute (pour les tests)
+	//@Scheduled(fixedRate = 30000) // : chaque 1 minute (pour les tests)
 	@Scheduled(cron="0 0 6 * * *", zone="Europe/London")
 	public void cronSendEmailsRappels() {
 		

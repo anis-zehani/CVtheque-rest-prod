@@ -1,6 +1,6 @@
 package com.cvtheque.org.repository;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -61,12 +61,14 @@ public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 	@Query("FROM Candidat c INNER JOIN c.listeTechnologies c1 ON c1.id = :idTechnologie")
 	List<Candidat> findAllCandidatsByTechnologie(@Param("idTechnologie") Long idTechnologie);
 	
-	//INNER JOIN : JPQL : La liste des candidats qui ont une Technologie au moins dans la liste fournie
-	//@Query("FROM Candidat c INNER JOIN c.listeTechnologies c1 ON c1.id IN :listTechnologies")
+	
 	@Query(value = 
-			"FROM Candidat c WHERE "
-			+ "EXISTS(FROM c.listeTechnologies c1 WHERE c1.id IN :listTechnologies)")
-	List<Candidat> findAllCandidatsByListTechnologies(@Param("listTechnologies") ArrayList<Long> listTechnologies);
+			"SELECT * FROM utilisateur u WHERE u.id  IN "
+			+ " (SELECT DISTINCT id_candidat FROM candidat_technologie t1"
+					+ " INNER JOIN (SELECT * FROM technologie te WHERE te.id IN ?1) t2"
+					+ " ON t1.id_technologie = t2.id"
+			+ " )", nativeQuery = true)
+	List<Candidat> findAllCandidatsByListTechnologies(@Param("listTechnologies") Collection<Long> listTechnologies);
 	
 	
 	//Native Query = true : Supprimer le lien entre un candidat et une technologie
