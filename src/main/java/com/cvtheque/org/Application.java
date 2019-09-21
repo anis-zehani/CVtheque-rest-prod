@@ -15,13 +15,13 @@ public class Application {
 	@Autowired
 	private final AdministrateurService administrateurService;
 	
-	@Autowired
-	private final AwsStorageService aws;
+	//@Autowired
+	//private final AwsStorageService aws;
 
 	public Application(AdministrateurService administrateurService, AwsStorageService aws) {
 		super();
 		this.administrateurService = administrateurService;
-		this.aws = aws;
+		//this.aws = aws;
 		//Si SuperAdmin n'existe pas, je le met en place
 		this.administrateurService.verifyOrAddAdmin();
 		//this.aws.listAllBuckets();
