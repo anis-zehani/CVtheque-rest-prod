@@ -70,15 +70,35 @@
 			<version>0.9.1</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk 
-			AWS SDK dependency
-		-->
+		<!-- https://mvnrepository.com/artifact/net.minidev/json-smart -->
+		<dependency>
+		    <groupId>net.minidev</groupId>
+		    <artifactId>json-smart</artifactId>
+		    <version>1.0.9</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20190722</version>
+		</dependency>
+		
+		
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk AWS SDK dependency -->
 		<dependency>
 		    <groupId>com.amazonaws</groupId>
 		    <artifactId>aws-java-sdk</artifactId>
 		    <version>1.11.623</version>
 		</dependency>
-
+		
+		<!-- Social LinkedIn Spring Boot Starter -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-social-linkedin</artifactId>
+		    <version>1.5.22.RELEASE</version>
+		</dependency>
+		
 	</dependencies>
 
 	<dependencyManagement>

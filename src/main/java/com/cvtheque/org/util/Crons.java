@@ -89,9 +89,8 @@ public class Crons {
 		}
 	}
 	
-	//Chaque jour à 6 heure du matin Europe/London Time
-	//@Scheduled(fixedRate = 30000) // : chaque 1 minute (pour les tests)
-	@Scheduled(cron="0 0 6 * * *", zone="Europe/London")
+	//Chaque jour à 7 heure du matin
+	@Scheduled(cron="0 0 7 * * *")
 	public void cronSendEmailsRappels() {
 		
 		List<Rappel> allRappelsByTodayAndAllUsers = rappelService.getAllRappelsByTodayAndAllUsers();
@@ -109,10 +108,7 @@ public class Crons {
 				
 				String textEmail = dateRappel + prioriteRappel + detailsRappel;
 				
-				javaMailSenderService.sendSimpleMessage(
-						emailTo, 
-						subjectEmail, 
-						textEmail);
+				javaMailSenderService.sendSimpleMessage(emailTo, subjectEmail, textEmail);
 			}
 		}
 	}

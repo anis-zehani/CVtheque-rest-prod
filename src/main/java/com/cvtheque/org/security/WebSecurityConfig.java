@@ -56,7 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// We don't need CSRF for this example
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
-				.authorizeRequests().antMatchers("/api/utilisateur/authenticate", "/api/utilisateur/register").permitAll()
+				.authorizeRequests().antMatchers("/api/utilisateur/authenticate", 
+						"/api/utilisateur/register", "/api/utilisateur/linkedIn", "/api/utilisateur/redirectLinkedIn/**").permitAll()
 				//.antMatchers("/api/partenaires/**").hasRole("Administrateur")
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 				// all other requests need to be authenticated
