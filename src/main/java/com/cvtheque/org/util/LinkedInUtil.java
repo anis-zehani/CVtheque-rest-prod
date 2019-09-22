@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -26,10 +25,15 @@ public class LinkedInUtil {
 	
 	private LinkedInConnectionFactory lfactory;
 	
+	String id;
+	String firstName;
+	String lastName;
+	String emailAddress;
+	String profilePicture;
+	
 	public JSONObject connectWithLinkedIn() {
 		
         lfactory = new LinkedInConnectionFactory(env.getProperty("linkedin.consumerKey"), env.getProperty("linkedin.consumerSecret"));
-
 		OAuth2Operations operations = lfactory.getOAuthOperations();
 		OAuth2Parameters params = new OAuth2Parameters();
 
@@ -47,40 +51,48 @@ public class LinkedInUtil {
 	public JSONObject redirectLinkedIn(String code, String state) throws Exception {
 		
         lfactory = new LinkedInConnectionFactory(env.getProperty("linkedin.consumerKey"), env.getProperty("linkedin.consumerSecret"));
-        		
 		OAuth2Operations operations = lfactory.getOAuthOperations();
-		AccessGrant accessToken = operations.exchangeForAccess(code, "http://localhost:4200/redirectLinkedIn", null);
+		AccessGrant accessToken = operations.exchangeForAccess(code, env.getProperty("linkedin.redirectUri"), null);
 		
-		System.out.println("AccessToken is : " + accessToken.getAccessToken());
+		//System.out.println("AccessToken is : " + accessToken.getAccessToken());
 		
-		//URL pour le r_liteprofile
-		String urlLiteProfile = "https://api.linkedin.com/v2/me?projection";
+		//### r_liteprofile
+		JSONObject jsonObject = (JSONObject)callToLinkedIn(env.getProperty("linkedin.urlLiteProfile"), accessToken); 
+		id = (String)jsonObject.get("id");
+		firstName = (String)jsonObject.get("localizedFirstName");
+		lastName = (String)jsonObject.get("localizedLastName");
 		
-		JSONObject jsonRLiteprofile = new JSONObject();
+		//### r_emailaddress
+		jsonObject = (JSONObject)callToLinkedIn(env.getProperty("linkedin.urlEmailaddress"), accessToken); 
 		
-		JSONObject jo = (JSONObject)callToLinkedIn(urlLiteProfile, accessToken); 
-		
-		@SuppressWarnings("rawtypes")
-		Map profilePicture = (Map)jo.get("profilePicture");
-		
-		jsonRLiteprofile.put("id", (String)jo.get("id"));
-		jsonRLiteprofile.put("firstName", (String)jo.get("localizedFirstName"));
-		jsonRLiteprofile.put("lastName", (String)jo.get("localizedLastName"));
-		jsonRLiteprofile.put("profilePicture", (String)profilePicture.get("displayImage"));
-		
-		//URL pour le r_emailaddress
-		String urlEmail ="https://api.linkedin.com/v2/clientAwareMemberHandles?q=members&projection=(elements*(handle~))";
-		
-		jo = (JSONObject)callToLinkedIn(urlEmail, accessToken); 
-		
-		for (Object o : (JSONArray)jo.get("elements")) {
-			JSONObject ca = (JSONObject) o;
-			JSONObject email = (JSONObject) ca.get("handle~");
-			
-			jsonRLiteprofile.put("emailAddress", email.get("emailAddress"));
+		for (Object object : (JSONArray)jsonObject.get("elements")) {
+			JSONObject objectCasted = (JSONObject) object;
+			JSONObject email = (JSONObject) objectCasted.get("handle~");
+			emailAddress = (String)email.get("emailAddress");
 		}
+		
+		//### ProfilePicture
+		jsonObject = (JSONObject)callToLinkedIn(env.getProperty("linkedin.urlProfilePicture"), accessToken); 
+		
+		JSONObject mapProfilePicture = (JSONObject)jsonObject.get("profilePicture");
+		JSONObject displayImage = (JSONObject) mapProfilePicture.get("displayImage~");
 
-		return jsonRLiteprofile;
+		for (Object object : (JSONArray)displayImage.get("elements")) {
+			JSONObject objectCasted = (JSONObject) object;
+			JSONArray identifiers = (JSONArray) objectCasted.get("identifiers");
+			JSONObject identifiers0 = (JSONObject) identifiers.get(0);
+			profilePicture = (String)identifiers0.get("identifier");
+		}
+		
+		//Remlissage du JSONObject Final
+		JSONObject jsonProfile = new JSONObject();
+		jsonProfile.put("id", id);
+		jsonProfile.put("firstName", firstName);
+		jsonProfile.put("lastName", lastName);
+		jsonProfile.put("emailAddress", emailAddress);
+		jsonProfile.put("profilePicture", profilePicture);
+		
+		return jsonProfile;
 	}
 	
 	public JSONObject callToLinkedIn(String url, AccessGrant accessToken) throws Exception {
@@ -106,7 +118,7 @@ public class LinkedInUtil {
 		@SuppressWarnings("deprecation")
 		Object json = new JSONParser().parse(responseStrBuilder.toString()); 
 		
-		System.out.println("Response is : " + responseStrBuilder.toString());
+		//System.out.println("Response is : " + responseStrBuilder.toString());
 		
 		return (JSONObject) json;
 	}
