@@ -25,7 +25,7 @@ public class LinkedinUtil {
 	
 	private LinkedInConnectionFactory lfactory;
 	
-	String id;
+	String idLinkedin;
 	String firstName;
 	String lastName;
 	String emailAddress;
@@ -61,7 +61,7 @@ public class LinkedinUtil {
 		
 		//### r_liteprofile
 		JSONObject jsonObject = (JSONObject)callToLinkedIn(env.getProperty("linkedin.urlLiteProfile"), accessToken); 
-		id = (String)jsonObject.get("id");
+		idLinkedin = (String)jsonObject.get("id");
 		firstName = (String)jsonObject.get("localizedFirstName");
 		lastName = (String)jsonObject.get("localizedLastName");
 		
@@ -89,7 +89,7 @@ public class LinkedinUtil {
 		
 		//Remlissage du JSONObject Final
 		JSONObject jsonProfile = new JSONObject();
-		jsonProfile.put("id", id);
+		jsonProfile.put("idLinkedin", idLinkedin);
 		jsonProfile.put("firstName", firstName);
 		jsonProfile.put("lastName", lastName);
 		jsonProfile.put("emailAddress", emailAddress);

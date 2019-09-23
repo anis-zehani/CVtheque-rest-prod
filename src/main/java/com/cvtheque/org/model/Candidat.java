@@ -45,6 +45,9 @@ public class Candidat extends Utilisateur implements Serializable {
 	 */
 
 	@Column
+	private String idLinkedin;
+	
+	@Column
 	private LocalDate dateDeNaissance;
 	
 	@Column
@@ -122,6 +125,14 @@ public class Candidat extends Utilisateur implements Serializable {
 	
 	public Candidat() {
 		super();
+	}
+
+	public String getIdLinkedin() {
+		return idLinkedin;
+	}
+
+	public void setIdLinkedin(String idLinkedin) {
+		this.idLinkedin = idLinkedin;
 	}
 
 	public LocalDate getDateDeNaissance() {

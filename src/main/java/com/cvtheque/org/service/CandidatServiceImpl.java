@@ -96,6 +96,11 @@ public class CandidatServiceImpl implements CandidatService{
 		return candidatRepository.getOne(id);
 	}
 	
+	//Cherche le candidat via son idLinkedin
+	public Candidat getCandidatByIdLinkedin(String idLinkedin) {
+		return candidatRepository.findByIdLinkedin(idLinkedin);
+	}
+	
 	//Créer un lien entre des candidats et une opportunité
 	public void addCandidatsToOpportunite(Long idOpportunite, ArrayList<Candidat> listeCandidats, boolean withDeletion) {
 		
