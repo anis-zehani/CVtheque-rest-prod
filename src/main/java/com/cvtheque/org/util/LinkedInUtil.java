@@ -36,7 +36,6 @@ public class LinkedInUtil {
         lfactory = new LinkedInConnectionFactory(env.getProperty("linkedin.consumerKey"), env.getProperty("linkedin.consumerSecret"));
 		OAuth2Operations operations = lfactory.getOAuthOperations();
 		OAuth2Parameters params = new OAuth2Parameters();
-
 	    params.setRedirectUri(env.getProperty("linkedin.redirectUri"));
 		params.setScope(env.getProperty("linkedin.scope"));
 		params.setState(env.getProperty("linkedin.state"));
@@ -52,9 +51,13 @@ public class LinkedInUtil {
 		
         lfactory = new LinkedInConnectionFactory(env.getProperty("linkedin.consumerKey"), env.getProperty("linkedin.consumerSecret"));
 		OAuth2Operations operations = lfactory.getOAuthOperations();
-		AccessGrant accessToken = operations.exchangeForAccess(code, env.getProperty("linkedin.redirectUri"), null);
+		OAuth2Parameters params = new OAuth2Parameters();
+		params.setScope(env.getProperty("linkedin.scope"));
+		params.setState(env.getProperty("linkedin.state"));
 		
-		//System.out.println("AccessToken is : " + accessToken.getAccessToken());
+		AccessGrant accessToken = operations.exchangeForAccess(code, env.getProperty("linkedin.redirectUri"), params);
+		
+		System.out.println("AccessToken is : " + accessToken.getAccessToken());
 		
 		//### r_liteprofile
 		JSONObject jsonObject = (JSONObject)callToLinkedIn(env.getProperty("linkedin.urlLiteProfile"), accessToken); 

@@ -96,7 +96,7 @@
 		    <artifactId>spring-boot-starter-social-linkedin</artifactId>
 		    <version>1.5.22.RELEASE</version>
 		</dependency>
-	
+		
 	</dependencies>
 
 	<dependencyManagement>
