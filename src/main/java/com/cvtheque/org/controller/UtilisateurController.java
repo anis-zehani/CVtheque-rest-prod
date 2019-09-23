@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cvtheque.org.util.LinkedInUtil;
+import com.cvtheque.org.util.LinkedinUtil;
 
 import net.minidev.json.JSONObject;
 
@@ -18,18 +18,18 @@ import net.minidev.json.JSONObject;
 public class UtilisateurController {
 	
 	@Autowired
-	LinkedInUtil linkedInUtil;
+	LinkedinUtil linkedInUtil;
 	
-	@GetMapping(value = "/linkedIn")
-	public JSONObject connectWithLinkedIn() {
+	@GetMapping(value = "/code-linkedin")
+	public JSONObject codeLinkedin() {
 		
-		return linkedInUtil.connectWithLinkedIn();
+		return linkedInUtil.codeLinkedin();
 	}
 	
-	@PostMapping("/redirectLinkedIn/{code}/{state}")
-	public JSONObject redirectLinkedIn(@PathVariable String code, @PathVariable String state) throws Exception {
+	@PostMapping("/redirect-linkedin/{code}/{state}")
+	public JSONObject redirectLinkedin(@PathVariable String code, @PathVariable String state) throws Exception {
 		
-		JSONObject profileLinkedIn = linkedInUtil.redirectLinkedIn(code, state);
+		JSONObject profileLinkedIn = linkedInUtil.redirectLinkedin(code, state);
 		
 		return profileLinkedIn;
 	}

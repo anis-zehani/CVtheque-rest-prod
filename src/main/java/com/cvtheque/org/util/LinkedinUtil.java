@@ -18,7 +18,7 @@ import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 
 @Service
-public class LinkedInUtil {
+public class LinkedinUtil {
 	
 	@Autowired
 	private Environment env;
@@ -31,7 +31,7 @@ public class LinkedInUtil {
 	String emailAddress;
 	String profilePicture;
 	
-	public JSONObject connectWithLinkedIn() {
+	public JSONObject codeLinkedin() {
 		
         lfactory = new LinkedInConnectionFactory(env.getProperty("linkedin.consumerKey"), env.getProperty("linkedin.consumerSecret"));
 		OAuth2Operations operations = lfactory.getOAuthOperations();
@@ -47,7 +47,7 @@ public class LinkedInUtil {
 		return urlJson;
 	}
 
-	public JSONObject redirectLinkedIn(String code, String state) throws Exception {
+	public JSONObject redirectLinkedin(String code, String state) throws Exception {
 		
         lfactory = new LinkedInConnectionFactory(env.getProperty("linkedin.consumerKey"), env.getProperty("linkedin.consumerSecret"));
 		OAuth2Operations operations = lfactory.getOAuthOperations();
