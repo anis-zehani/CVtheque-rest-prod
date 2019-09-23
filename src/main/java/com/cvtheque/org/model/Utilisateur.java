@@ -39,7 +39,7 @@ public class Utilisateur implements Serializable {
     @Column
 	private String telephone;
 	
-    @Column
+    @Column(unique = true)
 	private String email;
 	
 	@Column

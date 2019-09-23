@@ -113,8 +113,8 @@ public class CandidatServiceImpl implements CandidatService{
 	public Candidat addCandidat(Candidat candidat) {
 		
 		if(candidatRepository.findByIdentite(candidat.getIdentite()) == null &&
-				candidatRepository.findByUsername(candidat.getUsername()) == null &&
-					candidatRepository.findByEmail(candidat.getEmail()) == null) {
+		   candidatRepository.findByUsername(candidat.getUsername()) == null &&
+		   candidatRepository.findByEmail(candidat.getEmail()) == null) {
 		//Par défaut, le candidat est activé
 		candidat.setEtatCandidat(Etat.True);
 		
@@ -227,9 +227,9 @@ public class CandidatServiceImpl implements CandidatService{
 		
 		//L'Update url photo se fait en haut dans la fonction addPhotoToCandidat
 		if(candidatRepository.existsById(candidat.getId()) && 
-				candidatRepository.findByIdentite(candidat.getIdentite()) == null &&
-					candidatRepository.findByUsername(candidat.getUsername()) == null &&
-						candidatRepository.findByEmail(candidat.getEmail()) == null) {
+				candidat.getIdentite() != "" &&
+				candidat.getUsername() != "" &&
+				candidat.getEmail() != "") {
 			
 			Candidat candidatToUpdate = candidatRepository.getOne(candidat.getId());
 			

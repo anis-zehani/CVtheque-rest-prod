@@ -14,6 +14,8 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
 	
 	Contact findByIdentite(@Param("identite") String identite);
 	
+	Contact findByEmail(@Param("email") String email);
+	
 	List<Contact> findAllByUtilisateur(@Param("utilisateur") Utilisateur utilisateur);
 	
 }

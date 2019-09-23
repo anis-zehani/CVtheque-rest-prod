@@ -39,7 +39,9 @@ public class ContactServiceImpl implements ContactService{
 	//Ajouter un contact
 	public Contact addContact(Contact contact) {
 		
-		if(contactRepository.findByIdentite(contact.getIdentite()) == null) {
+		if(contactRepository.findByIdentite(contact.getIdentite()) == null &&
+		   contactRepository.findByEmail(contact.getEmail()) == null) {
+			
 			if(contact.getEntreprise().getIdEntreprise() == null) {
 				//Obligatoire pour @ManyToOne
 				contact.setEntreprise(null);
@@ -77,7 +79,10 @@ public class ContactServiceImpl implements ContactService{
 	public Contact editContact(Contact contact) {
 		
 		//L'Update url photo se fait en haut dans la fonction addPhotoToContact
-		if(contactRepository.existsById(contact.getId()) && contactRepository.findByIdentite(contact.getIdentite()) == null) {
+		if(contactRepository.existsById(contact.getId()) && 
+		   contact.getIdentite() != "" && 
+		   contact.getEmail() != "") {
+			
 			if(contact.getEntreprise().getIdEntreprise() == null) {
 				contact.setEntreprise(null);
 			}

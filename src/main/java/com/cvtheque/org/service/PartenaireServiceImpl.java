@@ -59,7 +59,9 @@ public class PartenaireServiceImpl implements PartenaireService{
 	public Partenaire addPartenaire(Partenaire partenaire) {
 		
 		if(partenaireRepository.findByIdentite(partenaire.getIdentite()) == null &&
-				partenaireRepository.findByUsername(partenaire.getUsername()) == null) {
+		   partenaireRepository.findByUsername(partenaire.getUsername()) == null &&
+		   partenaireRepository.findByEmail(partenaire.getEmail()) == null) {
+			
 			//Par défaut, le partenaire est activé
 			partenaire.setEtatPartenaire(Etat.True);
 	
@@ -106,8 +108,10 @@ public class PartenaireServiceImpl implements PartenaireService{
 		
 		//L'Update url photo se fait en haut dans la fonction addPhotoToPartenaire
 		if(partenaireRepository.existsById(partenaire.getId()) && 
-				partenaireRepository.findByIdentite(partenaire.getIdentite()) == null &&
-				partenaireRepository.findByUsername(partenaire.getUsername()) == null) {
+		   partenaire.getIdentite() != "" &&
+		   partenaire.getUsername() == "" &&
+		   partenaire.getEmail() != "") {
+			
 			if(partenaire.getEntreprise().getIdEntreprise() == null) {
 				partenaire.setEntreprise(null);
 			}

@@ -21,6 +21,8 @@ public interface PartenaireRepository extends JpaRepository<Partenaire, Long> {
 	
 	Partenaire findByUsername(@Param("username") String username);
 	
+	Partenaire findByEmail(@Param("email") String email);
+	
 	List<Partenaire> findByEtatPartenaire(@Param("etatPartenaire") Etat etatPartenaire);
 	
 	List<Partenaire> findAllByEntreprise(@Param("entreprise") Entreprise entreprise);
