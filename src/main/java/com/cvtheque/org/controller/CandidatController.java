@@ -75,7 +75,7 @@ public class CandidatController {
 	    return candidatService.getAllCandidatsByEntreprise(id);
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("/oneCandidat/{id}")
 	public Candidat getCandidat(@PathVariable Long id) {
 		return candidatService.getCandidat(id);
 	}
