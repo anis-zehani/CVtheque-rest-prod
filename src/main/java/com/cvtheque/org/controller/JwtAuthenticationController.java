@@ -38,6 +38,7 @@ public class JwtAuthenticationController {
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
 
+	// On passe ici pour authentifier un utilisateur via le formulaire login
 	@PostMapping("/authenticate")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
@@ -52,6 +53,7 @@ public class JwtAuthenticationController {
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 
+	//Méthode qui compare les Credentials (username, password) avec ce qui existe dans la base
 	private void authenticate(String username, String password) throws Exception {
 		try 
 		{

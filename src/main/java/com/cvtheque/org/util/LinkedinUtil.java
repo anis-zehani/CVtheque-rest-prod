@@ -5,13 +5,21 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Service;
+
+import com.cvtheque.org.model.JwtResponse;
+import com.cvtheque.org.security.JwtTokenUtil;
+import com.cvtheque.org.service.JwtUserDetailsService;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -20,10 +28,18 @@ import net.minidev.json.parser.JSONParser;
 @Service
 public class LinkedinUtil {
 	
+	protected final Log logger = LogFactory.getLog(getClass());
+	
 	@Autowired
 	private Environment env;
 	
 	private LinkedInConnectionFactory lfactory;
+	
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+	
+	@Autowired
+	private JwtUserDetailsService userDetailsService;
 	
 	String idLinkedin;
 	String firstName;
@@ -124,6 +140,24 @@ public class LinkedinUtil {
 		//System.out.println("Response is : " + responseStrBuilder.toString());
 		
 		return (JSONObject) json;
+	}
+	
+	public ResponseEntity<?> createAuthenticationToken(String username, String password) throws Exception {
+
+		/*
+		 * ICI on ne fait pas appel à la méthode authenticate(username, password) comme on fait si le login provient d'un formulaire (voir méthode 
+		 * createAuthenticationToken de JwtAuthenticationController.
+		 * Raison : le login provient dèja de Linkedin, donc la personne est dèja authentifiée, en plus si on veut récupérer le mot de passe
+		 * de cette personne à partir de la base, on va récupérer le mot de passe codé, et vu qu'il est codé alors il ne sera pas reconnu par spring security
+		 * on aura une erreur 401 (utilisateur non reconnu) car Spring va coder le password déja codé et va le comparer, alors le résultat sera négatif
+		 */
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+		final String token = jwtTokenUtil.generateToken(userDetails);
+		
+		logger.warn("JWT Token has been created");
+
+		return ResponseEntity.ok(new JwtResponse(token));
 	}
 }
 
