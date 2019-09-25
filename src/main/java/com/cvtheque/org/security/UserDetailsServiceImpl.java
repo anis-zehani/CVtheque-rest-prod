@@ -1,4 +1,4 @@
-package com.cvtheque.org.service;
+package com.cvtheque.org.security;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,10 +12,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.cvtheque.org.model.Utilisateur;
+import com.cvtheque.org.service.UtilisateurService;
 
 
 @Service
-public class JwtUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
 	UtilisateurService utilisateurService;
@@ -30,13 +31,13 @@ public class JwtUserDetailsService implements UserDetailsService {
 		}
 		
 		//Je récupére la GrantedAuthority à partir du service que j'ai crée, en fait c'est le dtype : Ex 'Administrateur'
-		Set<GrantedAuthority> grantedAuthorities = new HashSet<>(); 
-		grantedAuthorities.add(new SimpleGrantedAuthority(utilisateurService.getUtilisateurRoleByUsername(username)));
+		Set<GrantedAuthority> ROLES = new HashSet<>(); 
+		ROLES.add(new SimpleGrantedAuthority(utilisateurService.getUtilisateurRoleByUsername(username)));
 
 		return new org.springframework.security.core.userdetails.User(
 				utilisateur.getUsername(), 
 				utilisateur.getPassword(), 
-				grantedAuthorities);
+				ROLES);
 		
 	}
 }

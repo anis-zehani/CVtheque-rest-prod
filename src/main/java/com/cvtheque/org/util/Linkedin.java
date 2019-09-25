@@ -17,16 +17,16 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Service;
 
-import com.cvtheque.org.model.JwtResponse;
+import com.cvtheque.org.security.JwtResponseModel;
 import com.cvtheque.org.security.JwtTokenUtil;
-import com.cvtheque.org.service.JwtUserDetailsService;
+import com.cvtheque.org.security.UserDetailsServiceImpl;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 
 @Service
-public class LinkedinUtil {
+public class Linkedin {
 	
 	protected final Log logger = LogFactory.getLog(getClass());
 	
@@ -39,7 +39,7 @@ public class LinkedinUtil {
 	private JwtTokenUtil jwtTokenUtil;
 	
 	@Autowired
-	private JwtUserDetailsService userDetailsService;
+	private UserDetailsServiceImpl userDetailsService;
 	
 	String idLinkedin;
 	String firstName;
@@ -157,7 +157,7 @@ public class LinkedinUtil {
 		
 		logger.warn("JWT Token has been created");
 
-		return ResponseEntity.ok(new JwtResponse(token));
+		return ResponseEntity.ok(new JwtResponseModel(token));
 	}
 }
 

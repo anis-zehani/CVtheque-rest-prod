@@ -1,14 +1,14 @@
-package com.cvtheque.org.model;
+package com.cvtheque.org.security;
 
 import java.io.Serializable;
 
-public class JwtResponse implements Serializable {
+public class JwtResponseModel implements Serializable {
 
 	private static final long serialVersionUID = -3464859428302712078L;
 	
 	private final String jwttoken;
 
-	public JwtResponse(String jwttoken) {
+	public JwtResponseModel(String jwttoken) {
 		this.jwttoken = jwttoken;
 	}
 

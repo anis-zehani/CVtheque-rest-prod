@@ -1,0 +1,54 @@
+package com.cvtheque.org.controller;
+
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cvtheque.org.security.AuthenticationManagerIpml;
+import com.cvtheque.org.security.JwtRequestModel;
+import com.cvtheque.org.security.JwtResponseModel;
+import com.cvtheque.org.security.JwtTokenUtil;
+import com.cvtheque.org.security.UserDetailsServiceImpl;
+
+
+@CrossOrigin
+@RestController
+@RequestMapping("/api/utilisateur")
+public class AuthenticationController {
+	
+	protected final Log logger = LogFactory.getLog(getClass());
+
+	@Autowired
+	private AuthenticationManagerIpml authenticationManager;
+
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+
+	@Autowired
+	private UserDetailsServiceImpl userDetailsService;
+
+	// Authentifier un utilisateur via le formulaire de Login
+	@PostMapping("/authenticate")
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequestModel authenticationRequest) throws Exception {
+		
+		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+
+		final String token = jwtTokenUtil.generateToken(userDetails);
+		
+		logger.warn("JWT Token has been created");
+
+		return ResponseEntity.ok(new JwtResponseModel(token));
+	}
+}
+

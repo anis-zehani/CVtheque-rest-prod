@@ -21,7 +21,7 @@ import com.cvtheque.org.model.TypeDiplome;
 import com.cvtheque.org.model.TypeVisa;
 import com.cvtheque.org.model.Visa;
 import com.cvtheque.org.service.CandidatService;
-import com.cvtheque.org.util.LinkedinUtil;
+import com.cvtheque.org.util.Linkedin;
 
 import net.minidev.json.JSONObject;
 
@@ -31,7 +31,7 @@ import net.minidev.json.JSONObject;
 public class UtilisateurController {
 	
 	@Autowired
-	LinkedinUtil linkedInUtil;
+	Linkedin linkedInUtil;
 	
 	@Autowired
 	CandidatService candidatService;

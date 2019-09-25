@@ -1,8 +1,8 @@
-package com.cvtheque.org.model;
+package com.cvtheque.org.security;
 
 import java.io.Serializable;
 
-public class JwtRequest implements Serializable {
+public class JwtRequestModel implements Serializable {
 
 	private static final long serialVersionUID = -4789498506806581590L;
 	
@@ -10,10 +10,10 @@ public class JwtRequest implements Serializable {
 	private String password;
 	
 	//need default constructor for JSON Parsing
-	public JwtRequest()
+	public JwtRequestModel()
 	{}
 
-	public JwtRequest(String username, String password) {
+	public JwtRequestModel(String username, String password) {
 		this.setUsername(username);
 		this.setPassword(password);
 	}
