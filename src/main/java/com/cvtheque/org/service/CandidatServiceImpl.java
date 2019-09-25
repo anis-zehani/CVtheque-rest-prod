@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.cvtheque.org.model.Etat;
 import com.cvtheque.org.model.Candidat;
 import com.cvtheque.org.model.Curriculum;
+import com.cvtheque.org.model.Etat;
 import com.cvtheque.org.repository.CandidatRepository;
 import com.cvtheque.org.util.Consts;
 import com.cvtheque.org.util.LocalStorageService;
@@ -29,6 +29,7 @@ public class CandidatServiceImpl implements CandidatService{
 		this.candidatRepository = candidatRepository;
 		this.storageService = storageService;
 	}
+
 
 	public List<Candidat> getAllCandidats(String etatCandidat) {
 		

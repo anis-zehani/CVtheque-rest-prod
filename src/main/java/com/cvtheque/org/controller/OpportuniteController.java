@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class OpportuniteController {
 		this.opportuniteService = opportuniteService;
 	}
 
+	//@Secured("ROLE_ADMINISTRATEUR")
 	@GetMapping("/all/{etatOpportunite}")
 	public List<Opportunite> getAllOpportunites(@PathVariable String etatOpportunite) {
 	    return opportuniteService.getAllOpportunites(etatOpportunite);

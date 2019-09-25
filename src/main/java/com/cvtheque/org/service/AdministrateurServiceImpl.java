@@ -22,7 +22,7 @@ public class AdministrateurServiceImpl implements AdministrateurService{
 	 */
 	public void verifyOrAddAdmin(){
 		
-		Administrateur admin =  administrateurRepository.verifyAdmin("Administrateur");
+		Administrateur admin =  administrateurRepository.verifyAdmin("ROLE_ADMINISTRATEUR");
 		
 		if(admin == null)
 		{

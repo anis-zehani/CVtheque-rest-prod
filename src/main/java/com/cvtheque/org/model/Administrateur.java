@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@DiscriminatorValue(value="Administrateur")
+@DiscriminatorValue(value="ROLE_ADMINISTRATEUR")
 public class Administrateur extends Utilisateur {
 	
 	private static final long serialVersionUID = 1L;

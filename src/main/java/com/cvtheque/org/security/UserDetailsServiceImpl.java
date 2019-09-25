@@ -30,14 +30,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("Utilisateur not found with username: " + username);
 		}
 		
-		//Je récupére la GrantedAuthority à partir du service que j'ai crée, en fait c'est le dtype : Ex 'Administrateur'
+		//Je récupére la GrantedAuthority de le BDD, colonne dtype : Ex 'ROLE_ADMINISTRATEUR'
+		
 		Set<GrantedAuthority> ROLES = new HashSet<>(); 
+		
 		ROLES.add(new SimpleGrantedAuthority(utilisateurService.getUtilisateurRoleByUsername(username)));
 
 		return new org.springframework.security.core.userdetails.User(
 				utilisateur.getUsername(), 
 				utilisateur.getPassword(), 
 				ROLES);
-		
 	}
 }

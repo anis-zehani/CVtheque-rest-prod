@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// dont authenticate this particular request
 				.authorizeRequests().antMatchers("/api/utilisateur/authenticate", "/api/utilisateur/register", 
 						"/api/utilisateur/code-linkedin", "/api/utilisateur/redirect-linkedin/**").permitAll()
-				//.antMatchers("/api/partenaires/**").hasRole("Administrateur")
+				//.antMatchers("/api/partenaires/**").hasRole("ROLE_ADMINISTRATEUR")
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 				// all other requests need to be authenticated
 				.anyRequest().authenticated()

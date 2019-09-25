@@ -23,7 +23,7 @@ import lombok.Data;
 	
 @Data
 @Entity
-@DiscriminatorValue(value="Candidat")
+@DiscriminatorValue(value="ROLE_CANDIDAT")
 public class Candidat extends Utilisateur implements Serializable {
 	/**
 	 * 
