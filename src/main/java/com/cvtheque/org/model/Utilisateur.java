@@ -54,7 +54,7 @@ public class Utilisateur implements Serializable {
 	@Column
 	private String password;
 	
-	@Column
+	@Column(length = 1024)
 	private String urlPhoto;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)

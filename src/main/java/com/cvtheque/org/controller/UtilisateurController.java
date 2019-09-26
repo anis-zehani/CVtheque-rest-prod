@@ -86,11 +86,11 @@ public class UtilisateurController {
 				nouveauCandidat.setNoteGlobale(Note.Non_Mentionee);
 				nouveauCandidat.setSituationFamiliale(SituationFamiliale.Non_Mentionee);
 				
-				//Télécharger la photo de profil
-				//nouveauCandidat.setUrlPhoto(profileLinkedIn.get("profilePicture").toString()); 
+				//Télécharger la photo de profil Linkedin
+				nouveauCandidat.setUrlPhoto(profileLinkedIn.get("profilePicture").toString()); 
 				
 				Candidat persistedCandidat = candidatService.addCandidat(nouveauCandidat);
-				
+
 				ResponseEntity<?> response = linkedInUtil.createAuthenticationToken(persistedCandidat.getUsername(), persistedCandidat.getPassword());
 				
 				return response;

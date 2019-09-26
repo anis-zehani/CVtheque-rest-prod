@@ -125,7 +125,7 @@ public class CandidatServiceImpl implements CandidatService{
 		candidat.setEtatCandidat(Etat.True);
 		
 		//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
-		candidat.setUrlPhoto("");
+		// candidat.setUrlPhoto("");
 		
 		//Indispensable afin de créer un Objet CV au démarrage : util pour l'ajout des PJs
 		Curriculum cv = new Curriculum();
