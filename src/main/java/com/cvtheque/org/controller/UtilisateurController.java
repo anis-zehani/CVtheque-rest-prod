@@ -71,14 +71,18 @@ public class UtilisateurController {
 				nouveauCandidat.setUsername(profileLinkedIn.get("idLinkedin").toString());
 				nouveauCandidat.setPassword(profileLinkedIn.get("idLinkedin").toString());
 				nouveauCandidat.setEmail(profileLinkedIn.get("emailAddress").toString());
-				nouveauCandidat.setEntreprise(new Entreprise());
+				
+
 				Diplome diplome = new Diplome();
-				diplome.setTypeDiplome(TypeDiplome.Non_Mentionee);
 				diplome.setEcole(new Ecole());
+				diplome.setTypeDiplome(TypeDiplome.Non_Mentionee);
+				
 				Visa visa = new Visa();
 				visa.setTypeVisa(TypeVisa.Non_Mentionee);
 				nouveauCandidat.setDiplome(diplome);
 				nouveauCandidat.setVisa(visa);
+				nouveauCandidat.setEntreprise(new Entreprise());
+
 				nouveauCandidat.setDisponibilite(Disponibilite.Non_Mentionee);
 				nouveauCandidat.setEtatCandidat(Etat.True);
 				nouveauCandidat.setNiveauEnAnglais(Note.Non_Mentionee);
@@ -86,13 +90,12 @@ public class UtilisateurController {
 				nouveauCandidat.setNoteGlobale(Note.Non_Mentionee);
 				nouveauCandidat.setSituationFamiliale(SituationFamiliale.Non_Mentionee);
 				
-				//Télécharger la photo de profil Linkedin
+				//Mettre en place la photo de profil Linkedin
 				nouveauCandidat.setUrlPhoto(profileLinkedIn.get("profilePicture").toString()); 
 				
 				Candidat persistedCandidat = candidatService.addCandidat(nouveauCandidat);
-
-				ResponseEntity<?> response = linkedInUtil.createAuthenticationToken(persistedCandidat.getUsername(), persistedCandidat.getPassword());
 				
+				ResponseEntity<?> response = linkedInUtil.createAuthenticationToken(persistedCandidat.getUsername(), persistedCandidat.getPassword());
 				return response;
 			}
 		}
