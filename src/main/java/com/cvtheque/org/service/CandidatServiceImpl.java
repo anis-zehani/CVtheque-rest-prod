@@ -128,7 +128,8 @@ public class CandidatServiceImpl implements CandidatService{
 		//candidat.setUrlPhoto("");
 		
 		//Indispensable afin de créer un Objet CV au démarrage : util pour l'ajout des PJs
-		candidat.setCurriculum(new Curriculum());
+		Curriculum cv = new Curriculum();
+		candidat.setCurriculum(cv);
 			
 		//Entreprise : Si le user n'a pas ajouté une Entreprise
 		if(candidat.getEntreprise().getIdEntreprise() == null) {

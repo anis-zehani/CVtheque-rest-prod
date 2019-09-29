@@ -86,7 +86,7 @@ public class CandidatController {
 		return candidatService.addCandidat(candidat);
 	}
 	
-	@PostMapping("addPhoto/{id}")
+	@PostMapping("/addPhoto/{id}")
 	public Candidat addPhoto(@PathVariable Long id, @RequestParam("photo") MultipartFile photo) {
 		//la photo est placée sur le serveur
 	    String urlPhoto =  storageService.addPhoto(photo);
@@ -94,7 +94,7 @@ public class CandidatController {
 	    return candidatService.addPhotoToCandidat(id, urlPhoto);
 	}
 	
-	@PostMapping("addCvOdix/{id}")
+	@PostMapping("/addCvOdix/{id}")
 	public Candidat addCvOdix(@PathVariable Long id, @RequestParam("cvOdix") MultipartFile cvOdix) {	
 		//le CvOdix est placé sur le serveur
 	    String urlCvOdix =  storageService.addCvOdix(cvOdix);
@@ -102,7 +102,7 @@ public class CandidatController {
 	    return candidatService.addCvOdixToCandidat(id, urlCvOdix);
 	}
 	
-	@PostMapping("addCvOriginal/{id}")
+	@PostMapping("/addCvOriginal/{id}")
 	public Candidat addCvOriginal(@PathVariable Long id, @RequestParam("cvOriginal") MultipartFile cvOriginal) {
 		//le CvOriginal est placé sur le serveur
 	    String urlCvOriginal =  storageService.addCvOriginal(cvOriginal);
@@ -111,7 +111,7 @@ public class CandidatController {
 	}
 	
 	//Permet de lier des candidats à une opportunité récement créée
-	@PostMapping("addCandidatsToOpportunite/{idOpportunite}/{withDeletion}")
+	@PostMapping("/addCandidatsToOpportunite/{idOpportunite}/{withDeletion}")
 	public void addCandidatsToOpportunite(@PathVariable Long idOpportunite, @RequestBody ArrayList<Candidat> listeCandidats, @PathVariable boolean withDeletion) {
 
 		candidatService.addCandidatsToOpportunite(idOpportunite, listeCandidats, withDeletion);
@@ -134,7 +134,7 @@ public class CandidatController {
 			   candidatService.updateLinkCandidatEntreprise(idCandidat);
 	}
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	public void deleteCandidat(@PathVariable Long id) {
 			   candidatService.deleteCandidat(id);
 	}

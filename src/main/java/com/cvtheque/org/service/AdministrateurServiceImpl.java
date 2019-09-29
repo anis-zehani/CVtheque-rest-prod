@@ -27,9 +27,9 @@ public class AdministrateurServiceImpl implements AdministrateurService{
 		if(admin == null)
 		{
 			Administrateur superAdmin = new Administrateur();
-			superAdmin.setUsername("anis");
+			superAdmin.setUsername("odix");
 			superAdmin.setPassword("$2a$10$tWZVsDODx11zOTpm/jdVU.Aw6GV0iHy12KE58boDl6.80eodnqngS");
-			superAdmin.setIdentite("Anis Zaheni");
+			superAdmin.setIdentite("Odix");
 			superAdmin.setEmail("azaheni@smartgraphe.com");
 			administrateurRepository.save(superAdmin);
 		}
