@@ -124,9 +124,6 @@ public class CandidatServiceImpl implements CandidatService {
 		//Par défaut, le candidat est activé
 		candidat.setEtatCandidat(Etat.True);
 		
-		//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
-		//candidat.setUrlPhoto("");
-		
 		//Indispensable afin de créer un Objet CV au démarrage : util pour l'ajout des PJs
 		Curriculum cv = new Curriculum();
 		candidat.setCurriculum(cv);
@@ -228,7 +225,7 @@ public class CandidatServiceImpl implements CandidatService {
 			return null;
 		}
 	
-	//Modifier un candidat
+	//Modifier un candidat par L'administrateur
 	public Candidat editCandidat(Candidat candidat) {
 		
 		//L'Update url photo se fait en haut dans la fonction addPhotoToCandidat
@@ -327,6 +324,55 @@ public class CandidatServiceImpl implements CandidatService {
 		}
 		return null;
 	}
+	
+	//Modifier un candidat par lui même : AutoFill sur Espace Candidat
+	public Candidat editCandidatAutoFill(Candidat candidat) {
+		
+		//L'Update url photo se fait en haut dans la fonction addPhotoToCandidat
+		if(candidatRepository.existsById(candidat.getId()) && 
+				candidat.getIdentite() != "" &&
+				candidat.getUsername() != "" &&
+				candidat.getEmail() != "") {
+			
+			Candidat candidatToUpdateAutoFill = candidatRepository.getOne(candidat.getId());
+			
+			candidatToUpdateAutoFill.setTelephoneAutoFill(candidat.getTelephoneAutoFill());
+			candidatToUpdateAutoFill.setEmailAutoFill(candidat.getEmailAutoFill());
+			candidatToUpdateAutoFill.setPosteOccupeAutoFill(candidat.getPosteOccupeAutoFill());
+			candidatToUpdateAutoFill.setDescriptionDetailleeAutoFill(candidat.getDescriptionDetailleeAutoFill());
+			
+			/*
+			 * entreprise
+			 */
+			candidatToUpdateAutoFill.setEntrepriseAutoFill(candidat.getEntrepriseAutoFill());
+
+			candidatToUpdateAutoFill.setDateDeNaissanceAutoFill(candidat.getDateDeNaissanceAutoFill());
+			candidatToUpdateAutoFill.setAdresseAutoFill(candidat.getAdresseAutoFill());
+			candidatToUpdateAutoFill.setSituationFamilialeAutoFill(candidat.getSituationFamilialeAutoFill());
+			candidatToUpdateAutoFill.setNombreEnfantsAutoFill(candidat.getNombreEnfantsAutoFill());
+			candidatToUpdateAutoFill.setSalaireActuelAutoFill(candidat.getSalaireActuelAutoFill());
+			candidatToUpdateAutoFill.setPretentionSalarialeAutoFill(candidat.getPretentionSalarialeAutoFill());
+
+			candidatToUpdateAutoFill.setDisponibiliteAutoFill(candidat.getDisponibiliteAutoFill());
+
+			candidatToUpdateAutoFill.setDateDemarrageCarriereAutoFill(candidat.getDateDemarrageCarriereAutoFill());
+			candidatToUpdateAutoFill.setDateEpuisementPasseportAutoFill(candidat.getDateEpuisementPasseportAutoFill());
+			
+			/*
+			 * diplome
+			 */
+			// candidatToUpdateAutoFill.setDiplome(candidat.getDiplome());
+			
+			/*
+			 * visa
+			 */
+			// candidatToUpdateAutoFill.setVisa(candidat.getVisa());
+
+			return candidatRepository.save(candidatToUpdateAutoFill);
+		}
+		return null;
+	}
+	
 	
 	//Modifier l'état d'un Candidat : Actif/Inactif
 	public Candidat editEtatCandidat(Candidat candidat) {

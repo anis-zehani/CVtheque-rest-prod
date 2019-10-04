@@ -141,6 +141,9 @@ public class Candidat extends Utilisateur implements Serializable {
 	private String pretentionSalarialeAutoFill;
 	
 	@Column
+	private LocalDate dateDeNaissanceAutoFill;
+	
+	@Column
 	private String entrepriseAutoFill;
 	
 	@Column(length = 1024)
@@ -416,6 +419,14 @@ public class Candidat extends Utilisateur implements Serializable {
 
 	public void setPretentionSalarialeAutoFill(String pretentionSalarialeAutoFill) {
 		this.pretentionSalarialeAutoFill = pretentionSalarialeAutoFill;
+	}
+
+	public LocalDate getDateDeNaissanceAutoFill() {
+		return dateDeNaissanceAutoFill;
+	}
+
+	public void setDateDeNaissanceAutoFill(LocalDate dateDeNaissanceAutoFill) {
+		this.dateDeNaissanceAutoFill = dateDeNaissanceAutoFill;
 	}
 
 	public void setEntrepriseAutoFill(String entrepriseAutoFill) {
