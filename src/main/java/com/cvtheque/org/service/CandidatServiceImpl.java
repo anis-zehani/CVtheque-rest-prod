@@ -15,7 +15,7 @@ import com.cvtheque.org.util.Consts;
 import com.cvtheque.org.util.LocalStorageService;
 
 @Service
-public class CandidatServiceImpl implements CandidatService{
+public class CandidatServiceImpl implements CandidatService {
 	
 	private final CandidatRepository candidatRepository;
 	private final LocalStorageService storageService;

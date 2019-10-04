@@ -33,6 +33,16 @@ public class Visa implements Serializable {
 	
 	@Column
 	private LocalDate dateFinVisa;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private TypeVisa typeVisaAutoFill;
+	
+	@Column
+	private LocalDate dateDebutVisaAutoFill;
+	
+	@Column
+	private LocalDate dateFinVisaAutoFill;
 
 	public Visa() {
 		super();
@@ -69,5 +79,28 @@ public class Visa implements Serializable {
 	public void setDateFinVisa(LocalDate dateFinVisa) {
 		this.dateFinVisa = dateFinVisa;
 	}
-	
+
+	public TypeVisa getTypeVisaAutoFill() {
+		return typeVisaAutoFill;
+	}
+
+	public void setTypeVisaAutoFill(TypeVisa typeVisaAutoFill) {
+		this.typeVisaAutoFill = typeVisaAutoFill;
+	}
+
+	public LocalDate getDateDebutVisaAutoFill() {
+		return dateDebutVisaAutoFill;
+	}
+
+	public void setDateDebutVisaAutoFill(LocalDate dateDebutVisaAutoFill) {
+		this.dateDebutVisaAutoFill = dateDebutVisaAutoFill;
+	}
+
+	public LocalDate getDateFinVisaAutoFill() {
+		return dateFinVisaAutoFill;
+	}
+
+	public void setDateFinVisaAutoFill(LocalDate dateFinVisaAutoFill) {
+		this.dateFinVisaAutoFill = dateFinVisaAutoFill;
+	}
 }

@@ -35,6 +35,16 @@ public class Diplome implements Serializable {
     
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
 	Ecole ecole;
+    
+    @Column
+	@Enumerated(EnumType.STRING)
+	private TypeDiplome typeDiplomeAutoFill;
+    
+    @Column
+	private LocalDate dateObtentionDiplomeAutoFill;
+    
+    @Column
+    private String ecoleAutoFill;
 
 	public Diplome() {
 		super();
@@ -70,5 +80,29 @@ public class Diplome implements Serializable {
 
 	public void setEcole(Ecole ecole) {
 		this.ecole = ecole;
+	}
+
+	public TypeDiplome getTypeDiplomeAutoFill() {
+		return typeDiplomeAutoFill;
+	}
+
+	public void setTypeDiplomeAutoFill(TypeDiplome typeDiplomeAutoFill) {
+		this.typeDiplomeAutoFill = typeDiplomeAutoFill;
+	}
+
+	public LocalDate getDateObtentionDiplomeAutoFill() {
+		return dateObtentionDiplomeAutoFill;
+	}
+
+	public void setDateObtentionDiplomeAutoFill(LocalDate dateObtentionDiplomeAutoFill) {
+		this.dateObtentionDiplomeAutoFill = dateObtentionDiplomeAutoFill;
+	}
+
+	public String getEcoleAutoFill() {
+		return ecoleAutoFill;
+	}
+
+	public void setEcoleAutoFill(String ecoleAutoFill) {
+		this.ecoleAutoFill = ecoleAutoFill;
 	}
 }

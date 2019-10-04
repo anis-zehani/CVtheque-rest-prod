@@ -27,15 +27,15 @@ public class LocalStorageService {
 	  
 	  
 	  //Fonction qui crypte le nom de la photo et l'insére sur le disque
-	  public String addPhoto(MultipartFile file) {
+	  public String addPhoto(MultipartFile file1) {
 		  
 			String message = "";
-			String filename =UUID.randomUUID().toString()+getExtensionByStringHandling(file.getOriginalFilename());
+			String filename1 =UUID.randomUUID().toString()+getExtensionByStringHandling(file1.getOriginalFilename());
 			
 		    try 
 		    {
-		      this.savePhoto(file, filename);
-		      message = LocalStorageService.rootLocationPhoto.toString().replace("\"", "")+"/"+filename;
+		      this.savePhoto(file1, filename1);
+		      message = LocalStorageService.rootLocationPhoto.toString().replace("\"", "")+"/"+filename1;
 		      return message;
 		      
 		    } 
@@ -46,15 +46,15 @@ public class LocalStorageService {
 		}
 	  
 	  //Fonction qui crypte le nom du CvOdix et l'insére sur le disque
-	  public String addCvOdix(MultipartFile file) {
+	  public String addCvOdix(MultipartFile file2) {
 		  
 			String message = "";
-			String filename =UUID.randomUUID().toString()+getExtensionByStringHandling(file.getOriginalFilename());
+			String filename2 =UUID.randomUUID().toString()+getExtensionByStringHandling(file2.getOriginalFilename());
 			
 		    try 
 		    {
-		      this.saveCvOdix(file, filename);
-		      message = LocalStorageService.rootLocationCvOdix.toString().replace("\"", "")+"/"+filename;
+		      this.saveCvOdix(file2, filename2);
+		      message = LocalStorageService.rootLocationCvOdix.toString().replace("\"", "")+"/"+filename2;
 		      return message;
 		      
 		    } 
@@ -65,15 +65,15 @@ public class LocalStorageService {
 		}
 	  
 	  //Fonction qui crypte le nom du CvOriginal et l'insére sur le disque
-	  public String addCvOriginal(MultipartFile file) {
+	  public String addCvOriginal(MultipartFile file3) {
 		  
 			String message = "";
-			String filename =UUID.randomUUID().toString()+getExtensionByStringHandling(file.getOriginalFilename());
+			String filename3 =UUID.randomUUID().toString()+getExtensionByStringHandling(file3.getOriginalFilename());
 			
 		    try 
 		    {
-		      this.saveCvOriginal(file, filename);
-		      message = LocalStorageService.rootLocationCvOriginal.toString().replace("\"", "")+"/"+filename;
+		      this.saveCvOriginal(file3, filename3);
+		      message = LocalStorageService.rootLocationCvOriginal.toString().replace("\"", "")+"/"+filename3;
 		      return message;
 		      
 		    } 
@@ -114,10 +114,10 @@ public class LocalStorageService {
 		}
 	  
 	  //save Photo
-	  public void savePhoto(MultipartFile file, String filename ) {
+	  public void savePhoto(MultipartFile file1, String filename1 ) {
 	    try 
 	    {
-	      Files.copy(file.getInputStream(), LocalStorageService.rootLocationPhoto.resolve(filename));
+	      Files.copy(file1.getInputStream(), LocalStorageService.rootLocationPhoto.resolve(filename1));
 	    } 
 	    catch (Exception e) 
 	    {
@@ -126,10 +126,10 @@ public class LocalStorageService {
 	  }
 	  
 	  //save CvOdix
-	  public void saveCvOdix(MultipartFile file, String filename ) {
+	  public void saveCvOdix(MultipartFile file2, String filename2 ) {
 		    try 
 		    {
-		      Files.copy(file.getInputStream(), LocalStorageService.rootLocationCvOdix.resolve(filename));
+		      Files.copy(file2.getInputStream(), LocalStorageService.rootLocationCvOdix.resolve(filename2));
 		    } 
 		    catch (Exception e) 
 		    {
@@ -138,10 +138,10 @@ public class LocalStorageService {
 		  }
 	  
 	  //save CvOriginal
-	  public void saveCvOriginal(MultipartFile file, String filename ) {
+	  public void saveCvOriginal(MultipartFile file3, String filename3 ) {
 		    try 
 		    {
-		      Files.copy(file.getInputStream(), LocalStorageService.rootLocationCvOriginal.resolve(filename));
+		      Files.copy(file3.getInputStream(), LocalStorageService.rootLocationCvOriginal.resolve(filename3));
 		    } 
 		    catch (Exception e) 
 		    {

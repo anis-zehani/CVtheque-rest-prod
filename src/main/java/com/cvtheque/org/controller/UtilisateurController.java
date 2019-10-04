@@ -90,7 +90,7 @@ public class UtilisateurController {
 				nouveauCandidat.setNoteGlobale(Note.Non_Mentionee);
 				nouveauCandidat.setSituationFamiliale(SituationFamiliale.Non_Mentionee);
 				
-				//Mettre en place la photo de profil Linkedin
+				// Mettre en place la photo de profil Linkedin
 				nouveauCandidat.setUrlPhoto(profileLinkedIn.get("profilePicture").toString()); 
 				
 				Candidat persistedCandidat = candidatService.addCandidat(nouveauCandidat);

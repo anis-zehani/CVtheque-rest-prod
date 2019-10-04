@@ -123,6 +123,53 @@ public class Candidat extends Utilisateur implements Serializable {
 	inverseJoinColumns = { @JoinColumn(name = "id_certification") })
 	private List<Certification> listeCertifications;
 	
+	/*Paramètres AutoFill : le candidat remplira ça tout seul via son espace candidat*/
+	
+    @Column
+	private String telephoneAutoFill;
+    
+    @Column
+	private String emailAutoFill;
+    
+	@Column
+	private String posteOccupeAutoFill;
+	
+	@Column
+	private String salaireActuelAutoFill;
+	
+	@Column
+	private String pretentionSalarialeAutoFill;
+	
+	@Column
+	private String entrepriseAutoFill;
+	
+	@Column(length = 1024)
+	private String urlPhotoAutoFill;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private Disponibilite disponibiliteAutoFill;
+	
+	@Column
+	private Date dateDemarrageCarriereAutoFill;
+	
+	@Column
+	private Date dateEpuisementPasseportAutoFill;
+	
+	@Column(nullable = true)
+	@Enumerated(EnumType.STRING)
+	private SituationFamiliale situationFamilialeAutoFill;
+	
+	@Column
+	private String nombreEnfantsAutoFill;
+	
+	@Column
+	private String adresseAutoFill;
+	
+	@Column(length = 4096)
+	private String descriptionDetailleeAutoFill;
+	
+	
 	public Candidat() {
 		super();
 	}
@@ -295,4 +342,115 @@ public class Candidat extends Utilisateur implements Serializable {
 		this.listeCertifications = listeCertifications;
 	}
 
+	public String getTelephoneAutoFill() {
+		return telephoneAutoFill;
+	}
+
+	public String getEmailAutoFill() {
+		return emailAutoFill;
+	}
+
+	public String getPosteOccupeAutoFill() {
+		return posteOccupeAutoFill;
+	}
+
+	public String getSalaireActuelAutoFill() {
+		return salaireActuelAutoFill;
+	}
+
+	public String getPretentionSalarialeAutoFill() {
+		return pretentionSalarialeAutoFill;
+	}
+
+	public String getEntrepriseAutoFill() {
+		return entrepriseAutoFill;
+	}
+
+	public String getUrlPhotoAutoFill() {
+		return urlPhotoAutoFill;
+	}
+
+	public Disponibilite getDisponibiliteAutoFill() {
+		return disponibiliteAutoFill;
+	}
+
+	public Date getDateDemarrageCarriereAutoFill() {
+		return dateDemarrageCarriereAutoFill;
+	}
+
+	public Date getDateEpuisementPasseportAutoFill() {
+		return dateEpuisementPasseportAutoFill;
+	}
+
+	public SituationFamiliale getSituationFamilialeAutoFill() {
+		return situationFamilialeAutoFill;
+	}
+
+	public String getNombreEnfantsAutoFill() {
+		return nombreEnfantsAutoFill;
+	}
+
+	public String getAdresseAutoFill() {
+		return adresseAutoFill;
+	}
+
+	public String getDescriptionDetailleeAutoFill() {
+		return descriptionDetailleeAutoFill;
+	}
+
+	public void setTelephoneAutoFill(String telephoneAutoFill) {
+		this.telephoneAutoFill = telephoneAutoFill;
+	}
+
+	public void setEmailAutoFill(String emailAutoFill) {
+		this.emailAutoFill = emailAutoFill;
+	}
+
+	public void setPosteOccupeAutoFill(String posteOccupeAutoFill) {
+		this.posteOccupeAutoFill = posteOccupeAutoFill;
+	}
+
+	public void setSalaireActuelAutoFill(String salaireActuelAutoFill) {
+		this.salaireActuelAutoFill = salaireActuelAutoFill;
+	}
+
+	public void setPretentionSalarialeAutoFill(String pretentionSalarialeAutoFill) {
+		this.pretentionSalarialeAutoFill = pretentionSalarialeAutoFill;
+	}
+
+	public void setEntrepriseAutoFill(String entrepriseAutoFill) {
+		this.entrepriseAutoFill = entrepriseAutoFill;
+	}
+
+	public void setUrlPhotoAutoFill(String urlPhotoAutoFill) {
+		this.urlPhotoAutoFill = urlPhotoAutoFill;
+	}
+
+	public void setDisponibiliteAutoFill(Disponibilite disponibiliteAutoFill) {
+		this.disponibiliteAutoFill = disponibiliteAutoFill;
+	}
+
+	public void setDateDemarrageCarriereAutoFill(Date dateDemarrageCarriereAutoFill) {
+		this.dateDemarrageCarriereAutoFill = dateDemarrageCarriereAutoFill;
+	}
+
+	public void setDateEpuisementPasseportAutoFill(Date dateEpuisementPasseportAutoFill) {
+		this.dateEpuisementPasseportAutoFill = dateEpuisementPasseportAutoFill;
+	}
+
+	public void setSituationFamilialeAutoFill(SituationFamiliale situationFamilialeAutoFill) {
+		this.situationFamilialeAutoFill = situationFamilialeAutoFill;
+	}
+
+	public void setNombreEnfantsAutoFill(String nombreEnfantsAutoFill) {
+		this.nombreEnfantsAutoFill = nombreEnfantsAutoFill;
+	}
+
+	public void setAdresseAutoFill(String adresseAutoFill) {
+		this.adresseAutoFill = adresseAutoFill;
+	}
+
+	public void setDescriptionDetailleeAutoFill(String descriptionDetailleeAutoFill) {
+		this.descriptionDetailleeAutoFill = descriptionDetailleeAutoFill;
+	}
 }

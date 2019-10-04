@@ -27,6 +27,9 @@ public class Curriculum implements Serializable {
 	
 	@Column
 	private String urlCvOdix;
+	
+	@Column
+	private String urlCvOriginalAutoFill;
 
 	public Curriculum() {
 		super();
@@ -56,4 +59,11 @@ public class Curriculum implements Serializable {
 		this.urlCvOdix = urlCvOdix;
 	}
 
+	public String getUrlCvOriginalAutoFill() {
+		return urlCvOriginalAutoFill;
+	}
+
+	public void setUrlCvOriginalAutoFill(String urlCvOriginalAutoFill) {
+		this.urlCvOriginalAutoFill = urlCvOriginalAutoFill;
+	}
 }
