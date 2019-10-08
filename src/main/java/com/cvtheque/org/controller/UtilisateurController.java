@@ -71,7 +71,6 @@ public class UtilisateurController {
 				nouveauCandidat.setUsername(profileLinkedIn.get("idLinkedin").toString());
 				nouveauCandidat.setPassword(profileLinkedIn.get("idLinkedin").toString());
 				nouveauCandidat.setEmail(profileLinkedIn.get("emailAddress").toString());
-				
 
 				Diplome diplome = new Diplome();
 				diplome.setEcole(new Ecole());

@@ -168,6 +168,28 @@ public class CandidatServiceImpl implements CandidatService {
 		return null;
 	}
 	
+	//Affecter une photo à un candidat (fonction appelée en mode AutoFill dans espace Candidat)
+	public Candidat addPhotoToCandidatAutoFill(Long id, String urlPhoto) {
+			
+		if(candidatRepository.existsById(id))
+			{
+			Candidat candidat = candidatRepository.getOne(id);
+				
+			//delete ancienne photo AutoFill : si elle existe dans le cas d'un Update
+			if(candidat.getUrlPhotoAutoFill() != null)
+			{
+				storageService.deletePhoto(candidat.getUrlPhotoAutoFill());
+			}
+
+			//update URL photo avec nouveau nom
+			candidat.setUrlPhotoAutoFill(urlPhoto);
+
+			return candidatRepository.saveAndFlush(candidat);
+		}
+			
+		return null;
+	}	
+	
 	//Ajout du CV Odix
 	public Candidat addCvOdixToCandidat(Long idCandidat, String urlCvOdix) {
 		
@@ -225,6 +247,30 @@ public class CandidatServiceImpl implements CandidatService {
 			return null;
 		}
 	
+	//Ajout du CV Original en mode AutoFill
+	public Candidat addCvOriginalToCandidatAutoFill(Long idCandidat, String urlCvOriginal) {
+				
+		if(candidatRepository.existsById(idCandidat))
+			{
+			Candidat candidat = candidatRepository.getOne(idCandidat);
+			try 
+			{
+				//delete ancien CvOriginalAutoFill : s'il existe dans le cas d'un Update
+				if(candidat.getCurriculum() != null && candidat.getCurriculum().getUrlCvOriginalAutoFill()!= null)
+				{
+					storageService.deleteCvOriginal(candidat.getCurriculum().getUrlCvOriginalAutoFill());
+				}	
+				candidat.getCurriculum().setUrlCvOriginalAutoFill(urlCvOriginal);
+			}
+			catch(Exception e) 
+			{
+				System.out.print("Erreur durant CvOriginalAutoFill :"+e);
+			}
+			return candidatRepository.saveAndFlush(candidat);
+		}
+		return null;
+	}
+		
 	//Modifier un candidat par L'administrateur
 	public Candidat editCandidat(Candidat candidat) {
 		
@@ -361,12 +407,15 @@ public class CandidatServiceImpl implements CandidatService {
 			/*
 			 * diplome
 			 */
-			// candidatToUpdateAutoFill.setDiplome(candidat.getDiplome());
-			
+			 candidatToUpdateAutoFill.getDiplome().setTypeDiplomeAutoFill(candidat.getDiplome().getTypeDiplomeAutoFill());
+			 candidatToUpdateAutoFill.getDiplome().setDateObtentionDiplomeAutoFill(candidat.getDiplome().getDateObtentionDiplomeAutoFill());
+			 candidatToUpdateAutoFill.getDiplome().setEcoleAutoFill(candidat.getDiplome().getEcoleAutoFill());
 			/*
 			 * visa
 			 */
-			// candidatToUpdateAutoFill.setVisa(candidat.getVisa());
+			 candidatToUpdateAutoFill.getVisa().setTypeVisaAutoFill(candidat.getVisa().getTypeVisaAutoFill());
+			 candidatToUpdateAutoFill.getVisa().setDateDebutVisaAutoFill(candidat.getVisa().getDateDebutVisaAutoFill());
+			 candidatToUpdateAutoFill.getVisa().setDateFinVisaAutoFill(candidat.getVisa().getDateFinVisaAutoFill());
 
 			return candidatRepository.save(candidatToUpdateAutoFill);
 		}

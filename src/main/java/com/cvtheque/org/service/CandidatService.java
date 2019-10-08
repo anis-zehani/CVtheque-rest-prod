@@ -29,6 +29,8 @@ public interface CandidatService {
 	
 	public Candidat editCandidat(Candidat candidat);
 	
+	public Candidat editCandidatAutoFill(Candidat candidat);
+	
 	public Candidat editEtatCandidat(Candidat candidat);
 	
 	public void updateLinkCandidatEntreprise(Long idCandidat);
@@ -45,8 +47,12 @@ public interface CandidatService {
 
 	public Candidat addPhotoToCandidat(Long id, String urlPhoto);
 	
+	public Candidat addPhotoToCandidatAutoFill(Long id, String urlPhoto);
+	
 	public Candidat addCvOdixToCandidat(Long idCandidat, String urlCvOdix);
 	
 	public Candidat addCvOriginalToCandidat(Long idCandidat, String urlCvOriginal);
+	
+	public Candidat addCvOriginalToCandidatAutoFill(Long idCandidat, String urlCvOriginal);
 
 }

@@ -94,12 +94,28 @@ public class CandidatController {
 	    return candidatService.addPhotoToCandidat(id, urlPhoto);
 	}
 	
+	@PostMapping("/addPhotoCandidatAutoFill/{id}")
+	public Candidat addPhotoCandidatAutoFill(@PathVariable Long id, @RequestParam("photoAutoFill") MultipartFile photoAutoFill) {
+		//la photo est placée sur le serveur
+	    String urlPhoto =  storageService.addPhoto(photoAutoFill);
+	    //la photo est affectée au candidat via son id (mode Auto Fill)
+	    return candidatService.addPhotoToCandidatAutoFill(id, urlPhoto);
+	}
+	
 	@PostMapping("/addCvOdix/{id}")
 	public Candidat addCvOdix(@PathVariable Long id, @RequestParam("cvOdix") MultipartFile cvOdix) {	
 		//le CvOdix est placé sur le serveur
 	    String urlCvOdix =  storageService.addCvOdix(cvOdix);
 	    //le CvOdix est affecté au candidat via son id
 	    return candidatService.addCvOdixToCandidat(id, urlCvOdix);
+	}
+	
+	@PostMapping("/addCvOriginalCandidatAutoFill/{id}")
+	public Candidat addCvOriginalCandidatAutoFill(@PathVariable Long id, @RequestParam("cvOriginalAutoFill") MultipartFile cvOriginalAutoFill) {
+		//le CvOriginal est placé sur le serveur
+	    String urlCvOriginal =  storageService.addCvOriginal(cvOriginalAutoFill);
+	    //le CvOriginal est affecté au candidat via son id (mode Auto Fill)
+	    return candidatService.addCvOriginalToCandidatAutoFill(id, urlCvOriginal);
 	}
 	
 	@PostMapping("/addCvOriginal/{id}")
@@ -121,6 +137,12 @@ public class CandidatController {
 	@PutMapping()
 	public Candidat editCandidat(@Valid @RequestBody Candidat candidat) {
 		return candidatService.editCandidat(candidat);
+	}
+	
+	// Le candidat modifie son profil par lui même via son Espace Candidat
+	@PutMapping("/editCandidatAutoFill")
+	public Candidat editCandidatAutoFill(@Valid @RequestBody Candidat candidat) {
+		return candidatService.editCandidatAutoFill(candidat);
 	}
 	
 	@PutMapping("/editEtat")

@@ -22,7 +22,7 @@ public class JwtTokenUtil implements Serializable {
 
 	private static final long serialVersionUID = -8425436530882122626L;
 
-	public static final long JWT_TOKEN_VALIDITY = 24 * 60 * 60; // 24 heures de validité du Token
+	public static final long JWT_TOKEN_VALIDITY = 24 * 60 * 60 * 365; // 24 * 365 heures de validité du Token
 	
 	@Autowired
 	UtilisateurService utilisateurService;
