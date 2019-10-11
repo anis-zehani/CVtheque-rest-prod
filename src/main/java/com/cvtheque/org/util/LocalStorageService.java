@@ -1,7 +1,6 @@
 package com.cvtheque.org.util;
 
 import java.io.File;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -13,16 +12,19 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class LocalStorageService {
 	
-	  //Emplacament photo sur le serveur
+	  //Emplacement Root sur le serveur
+	  private static final Path rootLocation = Consts.rootLocation;
+	
+	  //Emplacement photo sur le serveur
 	  private static final Path rootLocationPhoto = Consts.rootLocationPhoto;
 	  
-	  //Emplacament cvodix sur le serveur
+	  //Emplacement cvodix sur le serveur
 	  private static final Path rootLocationCvOdix = Consts.rootLocationCvOdix;
 	  
-	  //Emplacament cvoriginal sur le serveur
+	  //Emplacement cvoriginal sur le serveur
 	  private static final Path rootLocationCvOriginal = Consts.rootLocationCvOriginal;
 	  
-	  //Emplacament fichier sur le serveur
+	  //Emplacement fichier sur le serveur
 	  private static final Path rootLocationFichierRappel = Consts.rootLocationFichierRappel;
 	  
 	  
@@ -223,4 +225,22 @@ public class LocalStorageService {
 		    return "."+filename.substring(filename.lastIndexOf('.') + 1);
 	  }
 	  
+	  //Liste tous les fichiers dans le dossier Root : le dossier qui contient tous les Uploads
+	  public String[] listAllFilesOfRootDirectory() {
+		  
+		  String[] list = null;
+		  try 
+		    {
+			  // Create a file object 
+			  File fileObject = new File(LocalStorageService.rootLocation.toString()); 
+			  
+			  // Get all the names of the files present in the given directory 
+	          list = fileObject.list(); 
+		    } 
+		    catch (Exception e) 
+		    {
+		      throw new RuntimeException("Erreur de listing des fichiers dans Root !");
+		    }
+		  return list;
+	  }
 	}
