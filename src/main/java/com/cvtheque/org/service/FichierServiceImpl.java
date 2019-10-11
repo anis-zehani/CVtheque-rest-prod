@@ -28,6 +28,7 @@ public class FichierServiceImpl implements FichierService {
 	        for (int i = 0; i < files.length; i++) { 
 	        	Fichier fichier = new Fichier();
 	        	fichier.setNomFichier(files[i]);
+	        	fichier.setUrlFichier("uploads/"+files[i]);
 	        	listeFichiers.add(fichier);
 	        } 
 	        return listeFichiers;

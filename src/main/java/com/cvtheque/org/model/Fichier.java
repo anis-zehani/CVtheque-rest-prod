@@ -21,6 +21,9 @@ public class Fichier implements Serializable {
 	
     @Column(unique=true)
     private String nomFichier;
+    
+    @Column(unique=true)
+    private String urlFichier;
 
 	public Fichier() {
 		super();
@@ -40,5 +43,13 @@ public class Fichier implements Serializable {
 
 	public void setNomFichier(String nomFichier) {
 		this.nomFichier = nomFichier;
+	}
+
+	public String getUrlFichier() {
+		return urlFichier;
+	}
+
+	public void setUrlFichier(String urlFichier) {
+		this.urlFichier = urlFichier;
 	}
 }
