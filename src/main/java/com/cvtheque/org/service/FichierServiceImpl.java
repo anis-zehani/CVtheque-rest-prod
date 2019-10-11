@@ -24,12 +24,19 @@ public class FichierServiceImpl implements FichierService {
 		
 		// Récupère les noms des fichiers, créé un objet Fichier, modifie le paramètres nomFichier de l'object
 		// puis l'insère dans la liste à retourner vers UI
-        for (int i = 0; i < files.length; i++) { 
-        	Fichier fichier = new Fichier();
-        	fichier.setNomFichier(files[i]);
-        	listeFichiers.add(fichier);
-        } 
-		return listeFichiers;
+		try {
+	        for (int i = 0; i < files.length; i++) { 
+	        	Fichier fichier = new Fichier();
+	        	fichier.setNomFichier(files[i]);
+	        	listeFichiers.add(fichier);
+	        } 
+	        return listeFichiers;
+		}catch (Exception e) {
+			
+			return listeFichiers;
+		}
+
+		
 	}
 
 }
