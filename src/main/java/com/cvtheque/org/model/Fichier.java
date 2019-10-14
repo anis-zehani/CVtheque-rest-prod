@@ -24,6 +24,12 @@ public class Fichier implements Serializable {
     
     @Column(unique=true)
     private String urlFichier;
+    
+    @Column(unique=true)
+    private String dateCreationFichier;
+    
+    @Column(unique=true)
+    private String tailleFichier;
 
 	public Fichier() {
 		super();
@@ -52,4 +58,21 @@ public class Fichier implements Serializable {
 	public void setUrlFichier(String urlFichier) {
 		this.urlFichier = urlFichier;
 	}
+
+	public String getDateCreationFichier() {
+		return dateCreationFichier;
+	}
+
+	public String getTailleFichier() {
+		return tailleFichier;
+	}
+
+	public void setDateCreationFichier(String dateCreationFichier) {
+		this.dateCreationFichier = dateCreationFichier;
+	}
+
+	public void setTailleFichier(String tailleFichier) {
+		this.tailleFichier = tailleFichier;
+	}
+	
 }
