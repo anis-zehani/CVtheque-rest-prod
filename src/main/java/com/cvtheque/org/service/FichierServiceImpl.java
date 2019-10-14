@@ -17,10 +17,11 @@ import com.cvtheque.org.util.LocalStorageService;
 
 @Service
 public class FichierServiceImpl implements FichierService {
+
+	private static final Path rootLocation = Consts.rootLocation;
 	
 	@Autowired
 	LocalStorageService localStorageService;
-	private static final Path rootLocation = Consts.rootLocation;
 	
 	@Override
 	public List<Fichier> getAllFichiers() {
@@ -53,5 +54,13 @@ public class FichierServiceImpl implements FichierService {
 
 		
 	}
+
+	@Override
+	public void deleteFichier(String nomFichier) {
+		localStorageService.deleteFichier(nomFichier);
+		
+	}
+	
+	
 
 }

@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public final class Consts {
-
+/*
 			//Emplacament photo sur le serveur physique : container Rest
 			public static final Path rootLocation = Paths.get("/uploads");
 		 
@@ -19,8 +19,8 @@ public final class Consts {
 		  
 			//Emplacament fichier sur le serveur physique : container Rest
 			public static final Path rootLocationFichierRappel = Paths.get("/uploads");
+*/
 
-/*
 			//Emplacament photo sur le serveur physique : container Rest
 			public static final Path rootLocation = Paths.get("/var/tmp/uploads/");
 		 
@@ -35,6 +35,6 @@ public final class Consts {
 		  
 			//Emplacament fichier sur le serveur physique : container Rest
 			public static final Path rootLocationFichierRappel = Paths.get("/var/tmp/uploads/");
-*/
+
 
 }
