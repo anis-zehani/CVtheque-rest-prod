@@ -8,6 +8,10 @@ public interface UtilisateurService {
 	
 	public Utilisateur getUtilisateurByUsername(String username);
 	
+	public Utilisateur getUtilisateurByEmail(String email);
+	
+	public Utilisateur resetPasswordUtilisateur(String email, String password);
+	
 	public String getUtilisateurRoleByUsername(String username);
 	
 }

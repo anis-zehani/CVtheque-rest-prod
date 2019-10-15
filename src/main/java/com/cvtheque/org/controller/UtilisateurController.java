@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +20,10 @@ import com.cvtheque.org.model.Note;
 import com.cvtheque.org.model.SituationFamiliale;
 import com.cvtheque.org.model.TypeDiplome;
 import com.cvtheque.org.model.TypeVisa;
+import com.cvtheque.org.model.Utilisateur;
 import com.cvtheque.org.model.Visa;
 import com.cvtheque.org.service.CandidatService;
+import com.cvtheque.org.service.UtilisateurService;
 import com.cvtheque.org.util.Linkedin;
 
 import net.minidev.json.JSONObject;
@@ -35,6 +38,9 @@ public class UtilisateurController {
 	
 	@Autowired
 	CandidatService candidatService;
+	
+	@Autowired
+	UtilisateurService utilisateurService;
 	
 	@GetMapping(value = "/code-linkedin")
 	public JSONObject codeLinkedin() {
@@ -102,4 +108,14 @@ public class UtilisateurController {
 		return null;
 	}
 
+	@GetMapping("/password-forgotten/{email}")
+	public Utilisateur getUtilisateurByEmail(@PathVariable String email) {
+		return utilisateurService.getUtilisateurByEmail(email);
+	}
+	
+	// L'utilisateur modifie son mot de passe oublié
+	@PutMapping("/password-reset/{email}/{password}")
+	public Utilisateur resetPasswordUtilisateur(@PathVariable String email, @PathVariable String password) {
+		return utilisateurService.resetPasswordUtilisateur(email, password);
+	}
 }

@@ -14,6 +14,8 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 	
 	Utilisateur findUtilisateurByUsername(@Param("username") String username);
 	
+	Utilisateur findUtilisateurByEmail(@Param("email") String email);
+	
 	@Query(value = "SELECT dtype FROM utilisateur u WHERE u.username like ?1 ", nativeQuery = true)
 	String findUtilisateurRoleByUsername(@Param("username") String username);
 }
