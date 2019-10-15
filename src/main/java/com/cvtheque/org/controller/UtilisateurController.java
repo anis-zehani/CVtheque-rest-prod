@@ -108,9 +108,16 @@ public class UtilisateurController {
 		return null;
 	}
 
+	// Vérifier si un utilisateur existe via son Email
 	@GetMapping("/password-forgotten/{email}")
 	public Utilisateur getUtilisateurByEmail(@PathVariable String email) {
 		return utilisateurService.getUtilisateurByEmail(email);
+	}
+	
+	// Envoi du mail à l'utilisateur avec un lien de réinitialisation
+	@GetMapping("/password-send-email-reset/{email}")
+	public Boolean envoiEmailResetPassword(@PathVariable String email) {
+		return utilisateurService.sendEmailResetPassword(email);
 	}
 	
 	// L'utilisateur modifie son mot de passe oublié

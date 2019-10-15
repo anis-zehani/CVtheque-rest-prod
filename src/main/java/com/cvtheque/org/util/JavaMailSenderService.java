@@ -26,6 +26,19 @@ public class JavaMailSenderService {
         message.setText(text);
         javaMailSender.send(message);
     }
+	
+	public void sendSimpleHtmlMessage(String to, String subject, String text) throws MessagingException, IOException {
+    	
+		MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		
+		helper.setTo(to); 
+		helper.setSubject(subject); 
+		// ,true = text/html
+		helper.setText(text, true);
+		
+        javaMailSender.send(message);
+    }
 
 	public void sendEmailWithAttachment(String to, String subject) throws MessagingException, IOException {
 

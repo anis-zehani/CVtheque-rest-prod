@@ -22,7 +22,7 @@ import com.cvtheque.org.security.UserDetailsServiceImpl;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/utilisateur")
+@RequestMapping("/api/authentication-controller")
 public class AuthenticationController {
 	
 	protected final Log logger = LogFactory.getLog(getClass());
@@ -42,6 +42,19 @@ public class AuthenticationController {
 		
 		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+
+		final String token = jwtTokenUtil.generateToken(userDetails);
+		
+		logger.warn("JWT Token has been created");
+
+		return ResponseEntity.ok(new JwtResponseModel(token));
+	}
+	
+	// Récupérer le Token quand un utilisateur réinitialise son Password et qu'il va être forwardé directement sans besoin d'authentification
+	@PostMapping("/authenticateByResetPassword")
+	public ResponseEntity<?> createAuthenticationTokenWhenResetPassword(@RequestBody JwtRequestModel authenticationRequest) throws Exception {
+		
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);

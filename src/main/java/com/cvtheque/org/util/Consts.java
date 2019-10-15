@@ -4,7 +4,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public final class Consts {
-/*
+	
+/*	
+			public static final String urlPlatformeResetPassword = "http://plateforme.odix.fr/reset-password/";
+			
+			public static final String urlPlatformeLoginPage = "http://plateforme.odix.fr/";
+
 			//Emplacament photo sur le serveur physique : container Rest
 			public static final Path rootLocation = Paths.get("/uploads");
 		 
@@ -21,6 +26,10 @@ public final class Consts {
 			public static final Path rootLocationFichierRappel = Paths.get("/uploads");
 */
 
+			public static final String urlPlatformeResetPassword = "http://localhost:4200/reset-password/";
+			
+			public static final String urlPlatformeLoginPage = "http://localhost:4200/";
+			
 			//Emplacament photo sur le serveur physique : container Rest
 			public static final Path rootLocation = Paths.get("/var/tmp/uploads/");
 		 
