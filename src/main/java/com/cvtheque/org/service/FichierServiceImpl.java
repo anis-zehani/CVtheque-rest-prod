@@ -35,6 +35,7 @@ public class FichierServiceImpl implements FichierService {
 		try {
 	        for (int i = 0; i < files.length; i++) { 
 	        	File file = new File(rootLocation.toString()+"/"+files[i]); 
+	        	
 	        	LocalDateTime dateCreationFichier = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault());
 	        	// Taille en Kb
 	        	Long tailleFichierKB = file.length() / 1024; // Pour le MB : il faut diviser par 1024;
@@ -57,8 +58,7 @@ public class FichierServiceImpl implements FichierService {
 
 	@Override
 	public void deleteFichier(String nomFichier) {
-		localStorageService.deleteFichier(nomFichier);
-		
+		localStorageService.deleteFichier(rootLocation.toString()+"/"+nomFichier);
 	}
 	
 	
