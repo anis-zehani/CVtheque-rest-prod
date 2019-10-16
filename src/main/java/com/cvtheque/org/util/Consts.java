@@ -45,5 +45,4 @@ public final class Consts {
 			//Emplacament fichier sur le serveur physique : container Rest
 			public static final Path rootLocationFichierRappel = Paths.get("/var/tmp/uploads/");
 
-
 }
