@@ -74,7 +74,7 @@ public class UtilisateurController {
 				Candidat nouveauCandidat = new Candidat();
 				nouveauCandidat.setIdLinkedin(profileLinkedIn.get("idLinkedin").toString());
 				nouveauCandidat.setIdentite(profileLinkedIn.get("firstName").toString() + " " + profileLinkedIn.get("lastName").toString());
-				nouveauCandidat.setUsername(profileLinkedIn.get("idLinkedin").toString());
+				nouveauCandidat.setUsername(profileLinkedIn.get("emailAddress").toString()); //username est l'adresse email en fait
 				nouveauCandidat.setPassword(profileLinkedIn.get("idLinkedin").toString());
 				nouveauCandidat.setEmail(profileLinkedIn.get("emailAddress").toString());
 

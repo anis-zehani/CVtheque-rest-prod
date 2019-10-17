@@ -8,6 +8,8 @@ public final class Consts {
 /*	
 			public static final String urlPlatformeResetPassword = "http://plateforme.odix.fr/reset-password/";
 			
+			public static final String urlPlatformeActivateCandidat = "http://plateforme.odix.fr/activation-compte/";
+			
 			public static final String urlPlatformeLoginPage = "http://plateforme.odix.fr/";
 
 			//Emplacament photo sur le serveur physique : container Rest
@@ -27,6 +29,8 @@ public final class Consts {
 */
 
 			public static final String urlPlatformeResetPassword = "http://localhost:4200/reset-password/";
+			
+			public static final String urlPlatformeActivateCandidat = "http://localhost:4200/activation-compte/";
 			
 			public static final String urlPlatformeLoginPage = "http://localhost:4200/";
 			

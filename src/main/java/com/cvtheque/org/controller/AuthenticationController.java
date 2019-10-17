@@ -63,5 +63,18 @@ public class AuthenticationController {
 
 		return ResponseEntity.ok(new JwtResponseModel(token));
 	}
+	
+	// Récupérer le Token quand un utilisateur vient de se créer via Formulaire HomePage, on le redirige directement sans besoin d'authentification
+	@PostMapping("/authenticateNewCreatedUser")
+	public ResponseEntity<?> createAuthenticationTokenWhenNewUserIsCreated(@RequestBody JwtRequestModel authenticationRequest) throws Exception {
+		
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+
+		final String token = jwtTokenUtil.generateToken(userDetails);
+		
+		logger.warn("JWT Token has been created");
+
+		return ResponseEntity.ok(new JwtResponseModel(token));
+	}
 }
 

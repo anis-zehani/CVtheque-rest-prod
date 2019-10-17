@@ -57,7 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
 				.authorizeRequests().antMatchers("/api/authentication-controller/authenticate", "/api/candidat-temporaire-controller",
+						"/api/candidat-temporaire-controller/mail-activation-candidat-temporaire/**", "/api/candidat-temporaire-controller/activation-compte-candidat-temporaire/**",
 						"/api/authentication-controller/authenticateByResetPassword", 
+						"/api/authentication-controller/authenticateNewCreatedUser", 
 						"/api/utilisateur/code-linkedin", "/api/utilisateur/password-forgotten/**", 
 						"/api/utilisateur/password-send-email-reset/**","/api/utilisateur/password-reset/**",
 						"/api/utilisateur/redirect-linkedin/**", "/api/utilisateur/register").permitAll()

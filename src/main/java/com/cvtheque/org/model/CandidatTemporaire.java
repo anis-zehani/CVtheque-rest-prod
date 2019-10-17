@@ -1,7 +1,7 @@
 package com.cvtheque.org.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,11 +32,11 @@ public class CandidatTemporaire  implements Serializable {
 	@Column
 	private String password;
 	
-    @Column(unique = true)
+    @Column
 	private String email;
     
 	@Column
-	private LocalDate dateAjout;
+	private LocalDateTime dateAjout;
 
 	public Long getId() {
 		return id;
@@ -58,7 +58,7 @@ public class CandidatTemporaire  implements Serializable {
 		return email;
 	}
 
-	public LocalDate getDateAjout() {
+	public LocalDateTime getDateAjout() {
 		return dateAjout;
 	}
 
@@ -82,7 +82,7 @@ public class CandidatTemporaire  implements Serializable {
 		this.email = email;
 	}
 
-	public void setDateAjout(LocalDate dateAjout) {
+	public void setDateAjout(LocalDateTime dateAjout) {
 		this.dateAjout = dateAjout;
 	}
 
