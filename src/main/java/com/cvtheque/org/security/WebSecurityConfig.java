@@ -60,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/api/candidat-temporaire-controller/mail-activation-candidat-temporaire/**", "/api/candidat-temporaire-controller/activation-compte-candidat-temporaire/**",
 						"/api/authentication-controller/authenticateByResetPassword", 
 						"/api/authentication-controller/authenticateNewCreatedUser", 
+						"/api/partenaire-temporaire-controller",
 						"/api/utilisateur/code-linkedin", "/api/utilisateur/password-forgotten/**", 
 						"/api/utilisateur/password-send-email-reset/**","/api/utilisateur/password-reset/**",
 						"/api/utilisateur/redirect-linkedin/**", "/api/utilisateur/register").permitAll()

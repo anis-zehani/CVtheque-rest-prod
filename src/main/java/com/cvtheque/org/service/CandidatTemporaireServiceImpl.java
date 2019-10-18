@@ -123,7 +123,7 @@ public class CandidatTemporaireServiceImpl implements CandidatTemporaireService 
 		String contenu = 
 				"Bonjour,"
 				+ "<br><br>"
-				+ "Votre compte été activé avec succès. Vos paramètres d'accès sont les suivants : "
+				+ "Votre compte est activé avec succès. Vos paramètres d'accès sont les suivants : "
 				+ "<br><br>"
 				+ "-Nom d'utilisateur : <b>" + lastAttemptedCandidat.getUsername() + "</b>"
 				+ "<br>"
@@ -134,7 +134,7 @@ public class CandidatTemporaireServiceImpl implements CandidatTemporaireService 
 				+ "<br><br>"
 				+ "Cordialement - Odix";
 		try {
-			mailService.sendSimpleHtmlMessage(email, "Odix : Votre compte a été activé", contenu);
+			mailService.sendSimpleHtmlMessage(email, "Odix : votre compte a été activé", contenu);
 			return true;
 		} catch (MessagingException e) {
 			e.printStackTrace();
