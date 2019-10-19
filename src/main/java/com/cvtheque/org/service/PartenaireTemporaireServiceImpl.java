@@ -2,13 +2,17 @@ package com.cvtheque.org.service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.cvtheque.org.model.Etat;
+import com.cvtheque.org.model.Partenaire;
 import com.cvtheque.org.model.PartenaireTemporaire;
 import com.cvtheque.org.repository.PartenaireTemporaireRepository;
 import com.cvtheque.org.util.Consts;
@@ -23,19 +27,35 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 	PartenaireTemporaireRepository partenaireTemporaireRepository;
 	
 	@Autowired
+	PartenaireService partenaireService;
+	
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
+	
+	@Autowired
 	JavaMailSenderService mailService;
 	
 	
-
+	// Retourne la liste des Partenaires Temporaires pas encore activés
 	@Override
 	public List<PartenaireTemporaire> getAllPartenairesTemporaires() {
-		// A Refaire : il faut retourner la dernière tentative pour chaque email 
-		List<PartenaireTemporaire> partenairesTemporaires = partenaireTemporaireRepository.findAll();
 		
-		return partenairesTemporaires;		
+		List<PartenaireTemporaire> listePartenairesDistincts = new ArrayList<PartenaireTemporaire>();
+		
+		//Selectionner les emails présents : Distinct
+		List<String> listEmails = partenaireTemporaireRepository.getListEmailsDistinct();
+		
+		//Parcourir les emails Distinct et retirer le dernier By Date de chacun
+		for(int i=0; i<listEmails.size(); i++) {
+			PartenaireTemporaire partenaireTemporaire = partenaireTemporaireRepository.getLastAttemptedPartenaireTemporaireByDateAndEmail(listEmails.get(i));
+			listePartenairesDistincts.add(partenaireTemporaire);
+		}
+		
+		return listePartenairesDistincts;		
 	}
 
 
+	// Ajoute un Partenaire Temporaire à la table temporaire
 	@Override
 	public PartenaireTemporaire addPartenaireTemporaire(PartenaireTemporaire partenaireTemporaire) {
 		
@@ -73,6 +93,65 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 		}
 		
 		return null;
+	}
+
+
+	
+	// Activer un Partenaire Temporaire : le supprimer de la table Temporaire et l'ajouter à la table Partenaire
+	@Override
+	public Boolean activatePartenaireTemporaire(String email) {
+		// Cherche un Partenaire Temporaire par Email et retourne le tout nouveau dans le cas de plusieurs tentatives via le même email
+		PartenaireTemporaire lastAttemptedPartenaire = partenaireTemporaireRepository.getLastAttemptedPartenaireTemporaireByDateAndEmail(email);
+		
+		// Créer et Sauvegarder un nouveau ojbet Partenaire
+		Partenaire partenaire = new Partenaire();
+		partenaire.setIdentite(lastAttemptedPartenaire.getIdentite());
+		partenaire.setUsername(lastAttemptedPartenaire.getUsername());
+		partenaire.setPassword(bcryptEncoder.encode(lastAttemptedPartenaire.getPassword()));
+		partenaire.setEmail(lastAttemptedPartenaire.getEmail());
+		partenaire.setTelephone(lastAttemptedPartenaire.getTelephone());
+		partenaire.setPosteOccupe(lastAttemptedPartenaire.getPosteOccupe());
+		partenaire.setDescriptionDetaillee(lastAttemptedPartenaire.getDescriptionDetaillee());
+		// ATTENTION : Entreprise : Manuellement ?
+		/*
+		 * 	if(partenaire.getEntreprise().getIdEntreprise() == null) {
+				partenaire.setEntreprise(null);
+			}
+		 */
+		partenaire.setEtatPartenaire(Etat.True);
+		partenaire.setUrlPhoto("");
+		
+		partenaireService.addPartenaire(partenaire);
+		
+		
+		// Supprimer tous les Partenaires Temporaires ayant l'adresse email venant d'être activée
+		partenaireTemporaireRepository.deleteAllPartenairesTemporairesByEmailAdresse(email);
+		
+		
+		// Envoi du mail de confirmation d'activation avec lien de connection (pas besoin de s'authentifier de nouveau)
+		String contenu = 
+				"Bonjour,"
+				+ "<br><br>"
+				+ "Votre compte est activé avec succès. Vos paramètres d'accès sont les suivants : "
+				+ "<br><br>"
+				+ "-Nom d'utilisateur : <b>" + lastAttemptedPartenaire.getUsername() + "</b>"
+				+ "<br>"
+				+ "-Mot de passe : <b>" + lastAttemptedPartenaire.getPassword() + "</b>"
+				+ "<br><br>"
+				+ "Pour accéder à la Plateforme, veuillez suivre ce lien : "
+				+ "<a href=\""+ urlPlatformeLoginPage + "\" target=\"_blank\">" + urlPlatformeLoginPage + "</a>"
+				+ "<br><br>"
+				+ "Cordialement - Odix";
+		try {
+			mailService.sendSimpleHtmlMessage(email, "Odix : votre compte a été activé", contenu);
+			return true;
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+
 	}
 
 	

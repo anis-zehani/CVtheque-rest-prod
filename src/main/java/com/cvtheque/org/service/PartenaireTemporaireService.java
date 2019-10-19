@@ -9,4 +9,6 @@ public interface PartenaireTemporaireService {
 	public List<PartenaireTemporaire> getAllPartenairesTemporaires();
 
 	public PartenaireTemporaire addPartenaireTemporaire(PartenaireTemporaire partenaireTemporaire);
+	
+	public Boolean activatePartenaireTemporaire(String email);
 }
