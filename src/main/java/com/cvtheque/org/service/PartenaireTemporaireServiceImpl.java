@@ -2,6 +2,7 @@ package com.cvtheque.org.service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.mail.MessagingException;
 
@@ -23,6 +24,17 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 	
 	@Autowired
 	JavaMailSenderService mailService;
+	
+	
+
+	@Override
+	public List<PartenaireTemporaire> getAllPartenairesTemporaires() {
+		// A Refaire : il faut retourner la dernière tentative pour chaque email 
+		List<PartenaireTemporaire> partenairesTemporaires = partenaireTemporaireRepository.findAll();
+		
+		return partenairesTemporaires;		
+	}
+
 
 	@Override
 	public PartenaireTemporaire addPartenaireTemporaire(PartenaireTemporaire partenaireTemporaire) {
@@ -46,9 +58,9 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 			try {
 				mailService.sendSimpleHtmlMessage(partenaireTemporaire.getEmail(), "Odix : demande d'adhésion en cours", contenu);
 				
-				//Ajouter le partenaire Pending à la liste des Partenaires Inactifs
-				//Puis quand on l'active à partir de "Gestion Partenaires" il recevra l'email de notification une seule fois
-				//S'il existe dans la table temporaire puis il sera effacé de là bas.
+				// Ajouter le partenaire Pending à la liste des Partenaires Inactifs
+				// Puis quand on l'active à partir de "Gestion Partenaires" il recevra l'email de notification une seule fois
+				// S'il existe dans la table temporaire puis il sera effacé de là bas.
 				
 				return partenairePending;
 			} catch (MessagingException e) {
