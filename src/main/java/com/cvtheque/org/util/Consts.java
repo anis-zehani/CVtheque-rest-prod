@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 
 public final class Consts {
 			
-			/*
+/*
 			
 			public static final String urlPlatformeResetPassword = "http://plateforme.odix.fr/reset-password/";
 			public static final String urlPlatformeActivateCandidat = "http://plateforme.odix.fr/activation-compte/";

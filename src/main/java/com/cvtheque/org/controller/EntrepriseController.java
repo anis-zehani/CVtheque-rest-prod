@@ -2,7 +2,6 @@ package com.cvtheque.org.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -38,7 +37,7 @@ public class EntrepriseController {
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Entreprise> getEntreprise(@PathVariable Long id) {
+	public Entreprise getEntreprise(@PathVariable Long id) {
 		return entrepriseService.getEntreprise(id);
 	}
 	
