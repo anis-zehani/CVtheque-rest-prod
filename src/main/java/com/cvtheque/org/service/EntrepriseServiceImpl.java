@@ -3,7 +3,6 @@ package com.cvtheque.org.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -24,8 +23,8 @@ public class EntrepriseServiceImpl implements EntrepriseService{
 		return entrepriseRepository.findAll();
 	}
 	
-	public Optional<Entreprise> getEntreprise(Long id){
-		return entrepriseRepository.findById(id);
+	public Entreprise getEntreprise(Long id){
+		return entrepriseRepository.getOne(id);
 	}
 	
 	//Ajouter une entreprise

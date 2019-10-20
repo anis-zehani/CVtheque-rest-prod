@@ -1,5 +1,6 @@
 package com.cvtheque.org.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,6 +139,9 @@ public class CandidatServiceImpl implements CandidatService {
 			//Obligatoire pour @ManyToOne
 			candidat.getDiplome().setEcole(null);
 		}
+		
+		candidat.setDateAjout(LocalDateTime.now());
+		
 		//Encoder le Password avant de l'insérer dans la base
 		candidat.setPassword(bcryptEncoder.encode(candidat.getPassword()));
 		

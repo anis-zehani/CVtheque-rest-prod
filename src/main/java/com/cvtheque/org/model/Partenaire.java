@@ -62,5 +62,4 @@ public class Partenaire extends Utilisateur implements Serializable {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-
 }

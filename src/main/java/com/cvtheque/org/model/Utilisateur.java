@@ -1,6 +1,7 @@
 package com.cvtheque.org.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -56,6 +57,9 @@ public class Utilisateur implements Serializable {
 	
 	@Column(length = 1024)
 	private String urlPhoto;
+	
+	@Column
+	private LocalDateTime dateAjout;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	Entreprise entreprise;
@@ -130,6 +134,14 @@ public class Utilisateur implements Serializable {
 
 	public void setUrlPhoto(String urlPhoto) {
 		this.urlPhoto = urlPhoto;
+	}
+
+	public LocalDateTime getDateAjout() {
+		return dateAjout;
+	}
+
+	public void setDateAjout(LocalDateTime dateAjout) {
+		this.dateAjout = dateAjout;
 	}
 
 	public Entreprise getEntreprise() {

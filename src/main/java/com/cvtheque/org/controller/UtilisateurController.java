@@ -1,5 +1,7 @@
 package com.cvtheque.org.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -97,6 +99,7 @@ public class UtilisateurController {
 				
 				// Mettre en place la photo de profil Linkedin
 				nouveauCandidat.setUrlPhoto(profileLinkedIn.get("profilePicture").toString()); 
+				nouveauCandidat.setDateAjout(LocalDateTime.now());
 				
 				Candidat persistedCandidat = candidatService.addCandidat(nouveauCandidat);
 				

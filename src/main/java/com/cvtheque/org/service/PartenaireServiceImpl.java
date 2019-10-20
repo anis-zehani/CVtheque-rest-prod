@@ -1,5 +1,6 @@
 package com.cvtheque.org.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -71,6 +72,8 @@ public class PartenaireServiceImpl implements PartenaireService{
 			
 			//On met l'image par défaut à tout le monde : elle pourra être écrasée plus tard
 			partenaire.setUrlPhoto("");
+			
+			partenaire.setDateAjout(LocalDateTime.now());
 			
 			if(partenaire.getPassword() != null) {
 				//Encoder le Password avant de l'insérer dans la base

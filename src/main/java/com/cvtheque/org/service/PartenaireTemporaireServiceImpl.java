@@ -8,10 +8,9 @@ import java.util.List;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.cvtheque.org.model.Etat;
+import com.cvtheque.org.model.Entreprise;
 import com.cvtheque.org.model.Partenaire;
 import com.cvtheque.org.model.PartenaireTemporaire;
 import com.cvtheque.org.repository.PartenaireTemporaireRepository;
@@ -30,7 +29,7 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 	PartenaireService partenaireService;
 	
 	@Autowired
-	private PasswordEncoder bcryptEncoder;
+	EntrepriseService entrepriseService;
 	
 	@Autowired
 	JavaMailSenderService mailService;
@@ -66,14 +65,16 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 			//Envoi du mail de confirmation au partenaire
 			// Envoi du mail avec lien d'activation du compte
 			String contenu = 
-					"Bonjour,"
+					"Bonjour, "+ partenaireTemporaire.getIdentite()
 					+ "<br><br>"
-					+ "Votre demande d'adhésion à notre Plateforme Odix est entrain d'être instruite par le service commercial."
+					+ "Votre demande d'adhésion à notre Plateforme Odix est entrain d'être instruite."
 					+ "<br>"
-					+ "Vous recevrez un email de confirmation dès activation de votre profil."
+					+ "Vous recevrez un email de confirmation dès l'activation de votre profil."
 					+ "<br><br>"
 					+ "<a href=\""+ urlPlatformeLoginPage + "\" target=\"_blank\">" + urlPlatformeLoginPage + "</a>"
-					+ "<br><br>"
+					+ "<br>"
+					+ "Merci pour votre intérêt,"
+					+ "<br>"
 					+ "A très vite - Odix";
 			try {
 				mailService.sendSimpleHtmlMessage(partenaireTemporaire.getEmail(), "Odix : demande d'adhésion en cours", contenu);
@@ -88,10 +89,7 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-
 		}
-		
 		return null;
 	}
 
@@ -99,7 +97,7 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 	
 	// Activer un Partenaire Temporaire : le supprimer de la table Temporaire et l'ajouter à la table Partenaire
 	@Override
-	public Boolean activatePartenaireTemporaire(String email) {
+	public Boolean activatePartenaireTemporaire(String email, Long idEntreprise) {
 		// Cherche un Partenaire Temporaire par Email et retourne le tout nouveau dans le cas de plusieurs tentatives via le même email
 		PartenaireTemporaire lastAttemptedPartenaire = partenaireTemporaireRepository.getLastAttemptedPartenaireTemporaireByDateAndEmail(email);
 		
@@ -107,19 +105,20 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 		Partenaire partenaire = new Partenaire();
 		partenaire.setIdentite(lastAttemptedPartenaire.getIdentite());
 		partenaire.setUsername(lastAttemptedPartenaire.getUsername());
-		partenaire.setPassword(bcryptEncoder.encode(lastAttemptedPartenaire.getPassword()));
+		partenaire.setPassword(lastAttemptedPartenaire.getPassword());
 		partenaire.setEmail(lastAttemptedPartenaire.getEmail());
 		partenaire.setTelephone(lastAttemptedPartenaire.getTelephone());
 		partenaire.setPosteOccupe(lastAttemptedPartenaire.getPosteOccupe());
 		partenaire.setDescriptionDetaillee(lastAttemptedPartenaire.getDescriptionDetaillee());
-		// ATTENTION : Entreprise : Manuellement ?
-		/*
-		 * 	if(partenaire.getEntreprise().getIdEntreprise() == null) {
-				partenaire.setEntreprise(null);
-			}
-		 */
-		partenaire.setEtatPartenaire(Etat.True);
-		partenaire.setUrlPhoto("");
+		
+		//Entreprise est recherchée via le paramètre entré
+		if(idEntreprise!= null) {
+			Entreprise entreprise = entrepriseService.getEntreprise(idEntreprise);
+			partenaire.setEntreprise(entreprise);
+		}else {
+			Entreprise entreprise = new Entreprise();
+			partenaire.setEntreprise(entreprise);
+		}
 		
 		partenaireService.addPartenaire(partenaire);
 		
@@ -130,9 +129,9 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 		
 		// Envoi du mail de confirmation d'activation avec lien de connection (pas besoin de s'authentifier de nouveau)
 		String contenu = 
-				"Bonjour,"
+				"Bonjour, "+ lastAttemptedPartenaire.getIdentite()
 				+ "<br><br>"
-				+ "Votre compte est activé avec succès. Vos paramètres d'accès sont les suivants : "
+				+ "Votre compte vient d'être activé avec succès. Vos paramètres d'accès sont les suivants : "
 				+ "<br><br>"
 				+ "-Nom d'utilisateur : <b>" + lastAttemptedPartenaire.getUsername() + "</b>"
 				+ "<br>"

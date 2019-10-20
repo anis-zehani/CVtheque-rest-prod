@@ -10,5 +10,5 @@ public interface PartenaireTemporaireService {
 
 	public PartenaireTemporaire addPartenaireTemporaire(PartenaireTemporaire partenaireTemporaire);
 	
-	public Boolean activatePartenaireTemporaire(String email);
+	public Boolean activatePartenaireTemporaire(String email, Long idEntreprise);
 }

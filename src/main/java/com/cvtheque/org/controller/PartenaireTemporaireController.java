@@ -41,8 +41,8 @@ public class PartenaireTemporaireController {
 		return partenaireTemporaireService.addPartenaireTemporaire(partenaireTemporaire);
 	}
 	
-	@PutMapping()
-	public Boolean activatePartenaireTemporaire(@Valid @PathVariable String email) {
-		return partenaireTemporaireService.activatePartenaireTemporaire(email);
+	@PutMapping("{email}/{idEntreprise}")
+	public Boolean activatePartenaireTemporaire(@Valid @PathVariable String email, @Valid @PathVariable Long idEntreprise) {
+		return partenaireTemporaireService.activatePartenaireTemporaire(email, idEntreprise);
 	}
 }
