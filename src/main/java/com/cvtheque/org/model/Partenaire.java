@@ -42,6 +42,38 @@ public class Partenaire extends Utilisateur implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	private Utilisateur utilisateur;
 	
+	/*Paramètres AutoFill : le partenaire remplira ça tout seul via son espace partenaire*/
+	
+    @Column
+	private String emailPartenaireAutoFill;
+    
+    @Column
+	private String telephonePartenaireAutoFill;
+    
+    @Column
+	private String entrepriseActuellePartenaireAutoFill;
+    
+	@Column
+	private String posteOccupePartenaireAutoFill;
+	
+    @Column
+	private String telephoneEntreprisePartenaireAutoFill;
+    
+    @Column
+	private String effectifEntreprisePartenaireAutoFill;
+    
+    @Column
+	private String siteInternetEntreprisePartenaireAutoFill;
+    
+    @Column
+	private String adresseEntreprisePartenaireAutoFill;
+	
+	@Column(length = 1024)
+	private String urlPhotoPartenaireAutoFill;
+	
+	@Column(length = 4096)
+	private String descriptionDetailleePartenaireAutoFill;
+	
 	
 	public Partenaire() {
 		super();
@@ -61,5 +93,85 @@ public class Partenaire extends Utilisateur implements Serializable {
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
+	}
+
+	public String getTelephonePartenaireAutoFill() {
+		return telephonePartenaireAutoFill;
+	}
+
+	public String getEmailPartenaireAutoFill() {
+		return emailPartenaireAutoFill;
+	}
+
+	public String getPosteOccupePartenaireAutoFill() {
+		return posteOccupePartenaireAutoFill;
+	}
+
+	public String getUrlPhotoPartenaireAutoFill() {
+		return urlPhotoPartenaireAutoFill;
+	}
+
+	public String getDescriptionDetailleePartenaireAutoFill() {
+		return descriptionDetailleePartenaireAutoFill;
+	}
+
+	public void setTelephonePartenaireAutoFill(String telephonePartenaireAutoFill) {
+		this.telephonePartenaireAutoFill = telephonePartenaireAutoFill;
+	}
+
+	public void setEmailPartenaireAutoFill(String emailPartenaireAutoFill) {
+		this.emailPartenaireAutoFill = emailPartenaireAutoFill;
+	}
+
+	public void setPosteOccupePartenaireAutoFill(String posteOccupePartenaireAutoFill) {
+		this.posteOccupePartenaireAutoFill = posteOccupePartenaireAutoFill;
+	}
+
+	public void setUrlPhotoPartenaireAutoFill(String urlPhotoPartenaireAutoFill) {
+		this.urlPhotoPartenaireAutoFill = urlPhotoPartenaireAutoFill;
+	}
+
+	public void setDescriptionDetailleePartenaireAutoFill(String descriptionDetailleePartenaireAutoFill) {
+		this.descriptionDetailleePartenaireAutoFill = descriptionDetailleePartenaireAutoFill;
+	}
+
+	public String getEntrepriseActuellePartenaireAutoFill() {
+		return entrepriseActuellePartenaireAutoFill;
+	}
+
+	public void setEntrepriseActuellePartenaireAutoFill(String entrepriseActuellePartenaireAutoFill) {
+		this.entrepriseActuellePartenaireAutoFill = entrepriseActuellePartenaireAutoFill;
+	}
+
+	public String getTelephoneEntreprisePartenaireAutoFill() {
+		return telephoneEntreprisePartenaireAutoFill;
+	}
+
+	public String getEffectifEntreprisePartenaireAutoFill() {
+		return effectifEntreprisePartenaireAutoFill;
+	}
+
+	public String getSiteInternetEntreprisePartenaireAutoFill() {
+		return siteInternetEntreprisePartenaireAutoFill;
+	}
+
+	public String getAdresseEntreprisePartenaireAutoFill() {
+		return adresseEntreprisePartenaireAutoFill;
+	}
+
+	public void setTelephoneEntreprisePartenaireAutoFill(String telephoneEntreprisePartenaireAutoFill) {
+		this.telephoneEntreprisePartenaireAutoFill = telephoneEntreprisePartenaireAutoFill;
+	}
+
+	public void setEffectifEntreprisePartenaireAutoFill(String effectifEntreprisePartenaireAutoFill) {
+		this.effectifEntreprisePartenaireAutoFill = effectifEntreprisePartenaireAutoFill;
+	}
+
+	public void setSiteInternetEntreprisePartenaireAutoFill(String siteInternetEntreprisePartenaireAutoFill) {
+		this.siteInternetEntreprisePartenaireAutoFill = siteInternetEntreprisePartenaireAutoFill;
+	}
+
+	public void setAdresseEntreprisePartenaireAutoFill(String adresseEntreprisePartenaireAutoFill) {
+		this.adresseEntreprisePartenaireAutoFill = adresseEntreprisePartenaireAutoFill;
 	}
 }

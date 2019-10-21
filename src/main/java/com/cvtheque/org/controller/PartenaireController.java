@@ -2,7 +2,6 @@ package com.cvtheque.org.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -46,7 +45,7 @@ public class PartenaireController {
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Partenaire> getPartenaire(@PathVariable Long id) {
+	public Partenaire getPartenaire(@PathVariable Long id) {
 		return partenaireService.getPartenaire(id);
 	}
 	
@@ -79,6 +78,19 @@ public class PartenaireController {
 	@PutMapping("/editEtat")
 	public Partenaire editEtatPartenaire(@Valid @RequestBody Partenaire partenaire) {
 		return partenaireService.editEtatPartenaire(partenaire);
+	}
+	
+	@PutMapping("/editPartenaireAutoFill")
+	public Partenaire editPartenaireAutoFill(@Valid @RequestBody Partenaire partenaire) {
+		return partenaireService.editPartenaireAutoFill(partenaire);
+	}
+	
+	@PostMapping("/addPhotoPartenaireAutoFill/{id}")
+	public Partenaire addPhotoPartenaireAutoFill(@PathVariable Long id, @RequestParam("photoPartenaireAutoFill") MultipartFile photoPartenaireAutoFill) {
+		//la photo est placée sur le serveur
+	    String urlPhoto =  storageService.addPhoto(photoPartenaireAutoFill);
+	    //la photo est affectée au partenaire via son id (mode Auto Fill)
+	    return partenaireService.addPhotoToPartenaireAutoFill(id, urlPhoto);
 	}
 	
 	//UPDATE le lien entre un partenaire et une entreprise : met entreprise à NULL

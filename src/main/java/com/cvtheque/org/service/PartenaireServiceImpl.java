@@ -3,7 +3,6 @@ package com.cvtheque.org.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -52,8 +51,8 @@ public class PartenaireServiceImpl implements PartenaireService{
 			
 			return partenaireRepository.findAllByEntreprise(entreprise);
 	}
-	public Optional<Partenaire> getPartenaire(Long id) {
-		return partenaireRepository.findById(id);
+	public Partenaire getPartenaire(Long id) {
+		return partenaireRepository.getOne(id);
 	}
 
 	//Ajouter un partenaire
@@ -112,7 +111,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 		//L'Update url photo se fait en haut dans la fonction addPhotoToPartenaire
 		if(partenaireRepository.existsById(partenaire.getId()) && 
 		   partenaire.getIdentite() != "" &&
-		   partenaire.getUsername() == "" &&
+		   partenaire.getUsername() != "" &&
 		   partenaire.getEmail() != "") {
 			
 			if(partenaire.getEntreprise().getIdEntreprise() == null) {
@@ -155,6 +154,54 @@ public class PartenaireServiceImpl implements PartenaireService{
 			return partenaireRepository.save(partenaireToUpdate);
 		}
 		return null;
+	}
+	
+	// AutoFill Edit Partenaire : à partir de son espace Partenaire 
+	@Override
+	public Partenaire editPartenaireAutoFill(Partenaire partenaire) {
+		//L'Update url photo se fait en haut dans la fonction addPhotoToPartenaire
+		if(partenaireRepository.existsById(partenaire.getId()) && 
+				partenaire.getIdentite() != "" && partenaire.getEmail() != "") {
+			
+			Partenaire partenaireToUpdateAutoFill = partenaireRepository.getOne(partenaire.getId());
+			
+			partenaireToUpdateAutoFill.setEmailPartenaireAutoFill(partenaire.getEmailPartenaireAutoFill());		
+			partenaireToUpdateAutoFill.setTelephonePartenaireAutoFill(partenaire.getTelephonePartenaireAutoFill());
+			partenaireToUpdateAutoFill.setEntrepriseActuellePartenaireAutoFill(partenaire.getEntrepriseActuellePartenaireAutoFill());
+			partenaireToUpdateAutoFill.setPosteOccupePartenaireAutoFill(partenaire.getPosteOccupePartenaireAutoFill());
+			partenaireToUpdateAutoFill.setTelephoneEntreprisePartenaireAutoFill(partenaire.getTelephoneEntreprisePartenaireAutoFill());
+			partenaireToUpdateAutoFill.setEffectifEntreprisePartenaireAutoFill(partenaire.getEffectifEntreprisePartenaireAutoFill());
+			partenaireToUpdateAutoFill.setSiteInternetEntreprisePartenaireAutoFill(partenaire.getSiteInternetEntreprisePartenaireAutoFill());
+			partenaireToUpdateAutoFill.setAdresseEntreprisePartenaireAutoFill(partenaire.getAdresseEntreprisePartenaireAutoFill());
+			partenaireToUpdateAutoFill.setDescriptionDetailleePartenaireAutoFill(partenaire.getDescriptionDetailleePartenaireAutoFill());
+			
+			return partenaireRepository.save(partenaireToUpdateAutoFill);
+				}
+		return null;
+	}
+	
+	
+
+	// AutoFill Edit PHOTO DE PROFIL Partenaire : à partir de son espace Partenaire
+	@Override
+	public Partenaire addPhotoToPartenaireAutoFill(Long id, String urlPhoto) {
+		
+		if(partenaireRepository.existsById(id))
+		{
+			Partenaire partenaire = partenaireRepository.getOne(id);
+			
+		//delete ancienne photo AutoFill : si elle existe dans le cas d'un Update
+		if(partenaire.getUrlPhotoPartenaireAutoFill() != null)
+		{
+			storageService.deletePhoto(partenaire.getUrlPhotoPartenaireAutoFill());
+		}
+
+		//update URL photo avec nouveau nom
+		partenaire.setUrlPhotoPartenaireAutoFill(urlPhoto);
+
+		return partenaireRepository.saveAndFlush(partenaire);
+	}
+	return null;
 	}
 
 	//UPDATE le lien entre un partenaire et une entreprise : met entreprise à NULL
