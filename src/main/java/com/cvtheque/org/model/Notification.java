@@ -50,6 +50,16 @@ public class Notification implements Serializable {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private Etat etatNotification;
+	
+	/*Paramètres d'informations supplémantaires pour l'affichage de la Pop-Up Notification*/
+	@Column
+	private Candidat candidatNotification;
+	
+	@Column
+	private PartenaireTemporaire partenaireNotification;
+	
+	@Column
+	private Opportunite opportuniteNotification;
 
 	public Long getId() {
 		return id;
@@ -105,5 +115,29 @@ public class Notification implements Serializable {
 
 	public void setEtatNotification(Etat etatNotification) {
 		this.etatNotification = etatNotification;
+	}
+
+	public Candidat getCandidatNotification() {
+		return candidatNotification;
+	}
+
+	public PartenaireTemporaire getPartenaireNotification() {
+		return partenaireNotification;
+	}
+
+	public Opportunite getOpportuniteNotification() {
+		return opportuniteNotification;
+	}
+
+	public void setCandidatNotification(Candidat candidatNotification) {
+		this.candidatNotification = candidatNotification;
+	}
+
+	public void setPartenaireNotification(PartenaireTemporaire partenaireNotification) {
+		this.partenaireNotification = partenaireNotification;
+	}
+
+	public void setOpportuniteNotification(Opportunite opportuniteNotification) {
+		this.opportuniteNotification = opportuniteNotification;
 	}
 }

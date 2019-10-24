@@ -7,8 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cvtheque.org.model.Candidat;
 import com.cvtheque.org.model.Etat;
 import com.cvtheque.org.model.Notification;
+import com.cvtheque.org.model.Opportunite;
+import com.cvtheque.org.model.PartenaireTemporaire;
 import com.cvtheque.org.model.Utilisateur;
 import com.cvtheque.org.repository.NotificationRepository;
 
@@ -21,7 +24,7 @@ public class NotificationServiceImpl implements NotificationService{
 	
 	// Lister les Notifications Actives = True et par ID consommateur de Notif
 	@Override
-	public List<Notification> getAllNotifications(Long idDestinataire, String etatNotification) {
+	public List<Notification> getAllNotificationsByUtilisateur(Long idDestinataire, String etatNotification) {
 		
 		List<Notification> listeNotifications = new ArrayList<Notification>();
 		
@@ -52,7 +55,10 @@ public class NotificationServiceImpl implements NotificationService{
 	public void generateSimpleNotification(String objetNotification, 
 									 	   String corpsNotification,
 									 	   List<Utilisateur> listeDestinatairesNotification, 
-									 	   Utilisateur generateurNotification) {
+									 	   Utilisateur generateurNotification,
+									 	   Candidat candidatNotification,
+									 	   PartenaireTemporaire partenaireNotification,
+									 	   Opportunite opportuniteNotification) {
 
 		Notification notification = new Notification();
 		
@@ -63,6 +69,10 @@ public class NotificationServiceImpl implements NotificationService{
 		
 		notification.setGenerateurNotification(generateurNotification);
 		notification.setListeDestinatairesNotification(listeDestinatairesNotification);
+		
+		notification.setCandidatNotification(candidatNotification);
+		notification.setPartenaireNotification(partenaireNotification);
+		notification.setOpportuniteNotification(opportuniteNotification);
 		
 		notificationRepository.save(notification);
 		

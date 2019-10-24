@@ -152,6 +152,8 @@ public class CandidatServiceImpl implements CandidatService {
 		//Encoder le Password avant de l'insérer dans la base
 		candidat.setPassword(bcryptEncoder.encode(candidat.getPassword()));
 		
+		Candidat savedCandidat = candidatRepository.save(candidat);
+		
 		// Si c'est un Candidat via Formulaire alors on envoi la notification ici, sinon ça sera dans UtilisateurController
 		if(candidat.getIdLinkedin() == "") 
 		{	
@@ -163,11 +165,14 @@ public class CandidatServiceImpl implements CandidatService {
 			// Notification générée par le système (ou bien disons par l'Admin) vers lui même (l'Admin)
 			notificationService.
 			generateSimpleNotification(Consts.objetMsgNotificationCandidatAjoute, 
-									   Consts.corpsMsgNotificationCandidatAjouteFormulaire + " : " + candidat.getIdentite(),
+									   Consts.corpsMsgNotificationCandidatAjouteFormulaire,
 									   listeDestinatairesNotification, 
-									   admin);
+									   admin,
+									   savedCandidat,
+									   null,
+									   null);
 		}
-		return  candidatRepository.save(candidat);
+		return  savedCandidat;
 		}
 	return null;
 	}

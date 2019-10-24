@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.cvtheque.org.model.Entreprise;
 import com.cvtheque.org.model.Partenaire;
 import com.cvtheque.org.model.PartenaireTemporaire;
+import com.cvtheque.org.model.Utilisateur;
 import com.cvtheque.org.repository.PartenaireTemporaireRepository;
 import com.cvtheque.org.util.Consts;
 import com.cvtheque.org.util.JavaMailSenderService;
@@ -33,6 +34,12 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 	
 	@Autowired
 	JavaMailSenderService mailService;
+	
+	@Autowired
+	NotificationService notificationService;
+	
+	@Autowired
+	UtilisateurService utilisateurService;
 	
 	
 	// Retourne la liste des Partenaires Temporaires pas encore activés
@@ -79,6 +86,21 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 			try {
 				mailService.sendSimpleHtmlMessage(partenaireTemporaire.getEmail(), "Odix : demande d'adhésion en cours", contenu);
 				
+				// Génération d'une Notification Destinée à l'Administrateur
+				Utilisateur admin = utilisateurService.getUtilisateurByRole("ROLE_ADMINISTRATEUR");
+				List<Utilisateur> listeDestinatairesNotification = new ArrayList<Utilisateur>();
+				listeDestinatairesNotification.add(admin);
+				
+				// Notification générée par le système (ou bien disons par l'Admin) vers lui même (l'Admin)
+				notificationService.
+				generateSimpleNotification(Consts.objetMsgNotificationDemandeAdhesionPartenaire, 
+										   Consts.corpsMsgNotificationDemandeAdhesionPartenaire, 
+										   listeDestinatairesNotification, 
+										   admin,
+										   null,
+										   partenairePending,
+										   null);
+				
 				// Ajouter le partenaire Pending à la liste des Partenaires Inactifs
 				// Puis quand on l'active à partir de "Gestion Partenaires" il recevra l'email de notification une seule fois
 				// S'il existe dans la table temporaire puis il sera effacé de là bas.
@@ -112,7 +134,7 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 		partenaire.setDescriptionDetaillee(lastAttemptedPartenaire.getDescriptionDetaillee());
 		
 		//Entreprise est recherchée via le paramètre entré
-		if(idEntreprise!= null) {
+		if(idEntreprise!= null && idEntreprise!= 0) {
 			Entreprise entreprise = entrepriseService.getEntreprise(idEntreprise);
 			partenaire.setEntreprise(entreprise);
 		}else {

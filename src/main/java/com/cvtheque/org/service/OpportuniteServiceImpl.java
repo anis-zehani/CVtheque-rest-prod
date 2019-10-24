@@ -5,24 +5,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cvtheque.org.model.Candidat;
 import com.cvtheque.org.model.Etat;
 import com.cvtheque.org.model.Opportunite;
+import com.cvtheque.org.model.Utilisateur;
 import com.cvtheque.org.model.Visibilite;
 import com.cvtheque.org.repository.OpportuniteRepository;
+import com.cvtheque.org.util.Consts;
 
 @Service
 public class OpportuniteServiceImpl implements OpportuniteService {
 	
 	private final OpportuniteRepository opportuniteRepository;
-	private final CandidatService candidatService;
 	
-	OpportuniteServiceImpl(OpportuniteRepository opportuniteRepository, CandidatService candidatService) {
+	@Autowired
+	CandidatService candidatService;
+	
+	@Autowired
+	NotificationService notificationService;
+	
+	@Autowired
+	UtilisateurService utilisateurService;
+	
+	OpportuniteServiceImpl(OpportuniteRepository opportuniteRepository) {
 		super();
 		this.opportuniteRepository = opportuniteRepository;
-		this.candidatService = candidatService;
 	}
 
 	public List<Opportunite> getAllOpportunites(String etatOpportunite) {
@@ -110,15 +120,34 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 
 			opportunite.setDateAjout(LocalDate.now());
 			
+			//On met l'image par défaut à toutes les opportunités : elle s'affiche si l'opportunité n'est liée à aucun partenaire
+			opportunite.setUrlPhotoOpportunite("");
+			
 			if(opportunite.getResponsableOpportunite().getId() == null)
 			{
 				opportunite.setResponsableOpportunite(null);
 			}
-			
-			//On met l'image par défaut à toutes les opportunités : elle s'affiche si l'opportunité n'est liée à aucun partenaire
-			opportunite.setUrlPhotoOpportunite("");
+			else 
+			{
+				// Génération d'une Notification Destinée à l'Administrateur : uniquement si Opportunité est ajoutée par un Partenaire
+				Utilisateur admin = utilisateurService.getUtilisateurByRole("ROLE_ADMINISTRATEUR");
+				List<Utilisateur> listeDestinatairesNotification = new ArrayList<Utilisateur>();
+				listeDestinatairesNotification.add(admin);
+				
+				// Notification générée par le système (ou bien disons par l'Admin) vers lui même (l'Admin)
+				notificationService.
+				generateSimpleNotification(Consts.objetMsgNotificationAjoutOpportunite, 
+										   Consts.corpsMsgNotificationAjoutOpportunite, 
+										   listeDestinatairesNotification, 
+										   opportunite.getResponsableOpportunite(),
+										   null,
+										   null,
+										   null);
+			}
 
-			return opportuniteRepository.save(opportunite);
+			Opportunite addedOpportunite =  opportuniteRepository.save(opportunite);
+			
+			return addedOpportunite;
 	}
 
 	//Modifier une opportunité
@@ -165,7 +194,26 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 				opportuniteToUpdate.setListeCertifications(opportunite.getListeCertifications());
 			}
 			
-			return opportuniteRepository.save(opportuniteToUpdate);
+			Opportunite editedOpportunite =  opportuniteRepository.save(opportuniteToUpdate);
+			
+			// On emet la Notification seulement s'il y a un Reponsable de l'Opportuntié
+			if(editedOpportunite.getResponsableOpportunite().getId() != null) {
+				// Génération d'une Notification Destinée à l'Administrateur
+				Utilisateur admin = utilisateurService.getUtilisateurByRole("ROLE_ADMINISTRATEUR");
+				List<Utilisateur> listeDestinatairesNotification = new ArrayList<Utilisateur>();
+				listeDestinatairesNotification.add(admin);
+				
+				// Notification générée par le système (ou bien disons par l'Admin) vers lui même (l'Admin)
+				notificationService.
+				generateSimpleNotification(Consts.objetMsgNotificationModificationOpportunite, 
+										   Consts.corpsMsgNotificationModificationOpportunite, 
+										   listeDestinatairesNotification, 
+										   opportunite.getResponsableOpportunite(),
+										   null,
+										   null,
+										   editedOpportunite);
+			}
+			return editedOpportunite;
 		}
 		
 		return null;

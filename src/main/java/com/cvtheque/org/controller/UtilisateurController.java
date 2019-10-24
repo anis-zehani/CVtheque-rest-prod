@@ -118,9 +118,12 @@ public class UtilisateurController {
 				// Notification générée par le système (ou bien disons par l'Admin) vers lui même (l'Admin)
 				notificationService.
 				generateSimpleNotification(Consts.objetMsgNotificationCandidatAjoute, 
-										   Consts.corpsMsgNotificationCandidatAjouteLinkedin + " : " + persistedCandidat.getIdentite(), 
+										   Consts.corpsMsgNotificationCandidatAjouteLinkedin, 
 										   listeDestinatairesNotification, 
-										   admin);
+										   admin,
+										   persistedCandidat,
+										   null,
+										   null);
 				
 				ResponseEntity<?> response = linkedInUtil.createAuthenticationToken(persistedCandidat.getUsername(), persistedCandidat.getPassword());
 				return response;

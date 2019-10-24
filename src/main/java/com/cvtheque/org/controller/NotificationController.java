@@ -23,7 +23,7 @@ public class NotificationController {
 	
 	@GetMapping("/all/{idDestinataire}/{etatNotification}")
 	public List<Notification> getAllNotifications(@PathVariable Long idDestinataire, @PathVariable String etatNotification) {
-	    return notificationService.getAllNotifications(idDestinataire, etatNotification);
+	    return notificationService.getAllNotificationsByUtilisateur(idDestinataire, etatNotification);
 	}
 	
 	@DeleteMapping("/{idNotification}")

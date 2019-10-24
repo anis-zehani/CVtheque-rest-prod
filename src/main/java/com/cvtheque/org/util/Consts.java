@@ -10,6 +10,14 @@ public final class Consts {
 			public static final String corpsMsgNotificationCandidatAjouteLinkedin = "Création d'un nouveau compte candidat via Linkedin";
 			public static final String corpsMsgNotificationCandidatAjouteFormulaire = "Création d'un nouveau compte candidat via formulaire";
 			
+			public static final String objetMsgNotificationDemandeAdhesionPartenaire = "Partenaire en attente";
+			public static final String corpsMsgNotificationDemandeAdhesionPartenaire = "Une nouvelle demande d'adhésion d'un partenaire est en attente de validation";
+			
+			public static final String objetMsgNotificationAjoutOpportunite = "Opportunité ajoutée";
+			public static final String corpsMsgNotificationAjoutOpportunite = "Une opportunité vient d'être ajoutée par un partenaire";
+			
+			public static final String objetMsgNotificationModificationOpportunite = "Opportunité modifiée";
+			public static final String corpsMsgNotificationModificationOpportunite = "Une opportunité vient d'être modifiée par un partenaire";
 			
 /*
 			// Pour les urls dans les emails envoyés
