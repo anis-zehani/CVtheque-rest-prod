@@ -1,6 +1,8 @@
 package com.cvtheque.org.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,9 @@ import com.cvtheque.org.model.TypeVisa;
 import com.cvtheque.org.model.Utilisateur;
 import com.cvtheque.org.model.Visa;
 import com.cvtheque.org.service.CandidatService;
+import com.cvtheque.org.service.NotificationService;
 import com.cvtheque.org.service.UtilisateurService;
+import com.cvtheque.org.util.Consts;
 import com.cvtheque.org.util.Linkedin;
 
 import net.minidev.json.JSONObject;
@@ -40,6 +44,9 @@ public class UtilisateurController {
 	
 	@Autowired
 	CandidatService candidatService;
+	
+	@Autowired
+	NotificationService notificationService;
 	
 	@Autowired
 	UtilisateurService utilisateurService;
@@ -102,6 +109,18 @@ public class UtilisateurController {
 				nouveauCandidat.setDateAjout(LocalDateTime.now());
 				
 				Candidat persistedCandidat = candidatService.addCandidat(nouveauCandidat);
+				
+				// Génération d'une Notification Destinée à l'Administrateur
+				Utilisateur admin = utilisateurService.getUtilisateurByRole("ROLE_ADMINISTRATEUR");
+				List<Utilisateur> listeDestinatairesNotification = new ArrayList<Utilisateur>();
+				listeDestinatairesNotification.add(admin);
+				
+				// Notification générée par le système (ou bien disons par l'Admin) vers lui même (l'Admin)
+				notificationService.
+				generateSimpleNotification(Consts.objetMsgNotificationCandidatAjoute, 
+										   Consts.corpsMsgNotificationCandidatAjouteLinkedin + " : " + persistedCandidat.getIdentite(), 
+										   listeDestinatairesNotification, 
+										   admin);
 				
 				ResponseEntity<?> response = linkedInUtil.createAuthenticationToken(persistedCandidat.getUsername(), persistedCandidat.getPassword());
 				return response;

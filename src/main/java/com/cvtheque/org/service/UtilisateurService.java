@@ -10,6 +10,8 @@ public interface UtilisateurService {
 	
 	public Utilisateur getUtilisateurByEmail(String email);
 	
+	public Utilisateur getUtilisateurByRole(String role);
+	
 	public Boolean sendEmailResetPassword(String email);
 	
 	public Utilisateur resetPasswordUtilisateur(String email, String password);

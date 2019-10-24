@@ -1,5 +1,71 @@
 package com.cvtheque.org.service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cvtheque.org.model.Etat;
+import com.cvtheque.org.model.Notification;
+import com.cvtheque.org.model.Utilisateur;
+import com.cvtheque.org.repository.NotificationRepository;
+
+@Service
 public class NotificationServiceImpl implements NotificationService{
+	
+	@Autowired
+	NotificationRepository notificationRepository;
+	
+	
+	// Lister les Notifications Actives = True et par ID consommateur de Notif
+	@Override
+	public List<Notification> getAllNotifications(Long idDestinataire, String etatNotification) {
+		
+		List<Notification> listeNotifications = new ArrayList<Notification>();
+		
+		//On filtre selon l'état : Actif / Inactif
+		if(etatNotification.equals("True")){
+			listeNotifications = notificationRepository.findByIdDestinataireAndEtatNotification(idDestinataire, Etat.True);
+		}else {
+			listeNotifications = notificationRepository.findByIdDestinataireAndEtatNotification(idDestinataire, Etat.False);
+		}
+		return listeNotifications;
+	}
+
+	// Desactiver une Notification
+	@Override
+	public Boolean deactivateNotification(Long idNotification) {
+		
+		try {
+			notificationRepository.deactivateNotification(idNotification);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
+	}
+
+
+	// Simple Notification : sans envoi de mail : juste insertion dans la base
+	@Override
+	public void generateSimpleNotification(String objetNotification, 
+									 	   String corpsNotification,
+									 	   List<Utilisateur> listeDestinatairesNotification, 
+									 	   Utilisateur generateurNotification) {
+
+		Notification notification = new Notification();
+		
+		notification.setObjetNotification(objetNotification);
+		notification.setCorpstNotification(corpsNotification);
+		notification.setDateAjout(LocalDateTime.now());
+		notification.setEtatNotification(Etat.True);
+		
+		notification.setGenerateurNotification(generateurNotification);
+		notification.setListeDestinatairesNotification(listeDestinatairesNotification);
+		
+		notificationRepository.save(notification);
+		
+	}
 
 }

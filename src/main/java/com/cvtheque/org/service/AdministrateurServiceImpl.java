@@ -30,7 +30,8 @@ public class AdministrateurServiceImpl implements AdministrateurService{
 			superAdmin.setUsername("odix");
 			superAdmin.setPassword("$2a$10$tWZVsDODx11zOTpm/jdVU.Aw6GV0iHy12KE58boDl6.80eodnqngS");
 			superAdmin.setIdentite("Odix");
-			superAdmin.setEmail("azaheni@smartgraphe.com");
+			superAdmin.setEmail("contact@odix.fr");
+			superAdmin.setUrlPhoto("https://media.licdn.com/dms/image/C4D03AQGvl_z8bsx2Ew/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=Fx9LN6el85eyVDPHiDIBUwPDbDiDa1zVO3bRc0obNt8");
 			administrateurRepository.save(superAdmin);
 		}
 		

@@ -4,6 +4,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public final class Consts {
+	
+	        // Mes messages de Notification
+			public static final String objetMsgNotificationCandidatAjoute = "Candidat ajouté";
+			public static final String corpsMsgNotificationCandidatAjouteLinkedin = "Création d'un nouveau compte candidat via Linkedin";
+			public static final String corpsMsgNotificationCandidatAjouteFormulaire = "Création d'un nouveau compte candidat via formulaire";
+			
 			
 /*
 			// Pour les urls dans les emails envoyés

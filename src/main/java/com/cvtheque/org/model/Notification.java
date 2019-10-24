@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import lombok.Data;
 
@@ -27,7 +29,7 @@ public class Notification implements Serializable {
 	@Id
     private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	
-	@OneToMany
+	@ManyToMany
 	@JoinTable(name = "notification_destinataire",
 	joinColumns = { @JoinColumn(name = "id_notification") },
 	inverseJoinColumns = { @JoinColumn(name = "id_destinataire") })
@@ -37,20 +39,24 @@ public class Notification implements Serializable {
 	private Utilisateur generateurNotification;
 	
 	@Column
-	private String objectNotification;
+	private String objetNotification;
 	
 	@Column(length = 1024)
 	private String corpstNotification;
 	
 	@Column
 	private LocalDateTime dateAjout;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private Etat etatNotification;
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getObjectNotification() {
-		return objectNotification;
+	public String getObjetNotification() {
+		return objetNotification;
 	}
 
 	public String getCorpstNotification() {
@@ -65,8 +71,8 @@ public class Notification implements Serializable {
 		this.id = id;
 	}
 
-	public void setObjectNotification(String objectNotification) {
-		this.objectNotification = objectNotification;
+	public void setObjetNotification(String objetNotification) {
+		this.objetNotification = objetNotification;
 	}
 
 	public void setCorpstNotification(String corpstNotification) {
@@ -75,5 +81,29 @@ public class Notification implements Serializable {
 
 	public void setDateAjout(LocalDateTime dateAjout) {
 		this.dateAjout = dateAjout;
+	}
+
+	public List<Utilisateur> getListeDestinatairesNotification() {
+		return listeDestinatairesNotification;
+	}
+
+	public Utilisateur getGenerateurNotification() {
+		return generateurNotification;
+	}
+
+	public void setListeDestinatairesNotification(List<Utilisateur> listeDestinatairesNotification) {
+		this.listeDestinatairesNotification = listeDestinatairesNotification;
+	}
+
+	public void setGenerateurNotification(Utilisateur generateurNotification) {
+		this.generateurNotification = generateurNotification;
+	}
+
+	public Etat getEtatNotification() {
+		return etatNotification;
+	}
+
+	public void setEtatNotification(Etat etatNotification) {
+		this.etatNotification = etatNotification;
 	}
 }

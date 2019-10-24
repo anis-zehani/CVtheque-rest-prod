@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.cvtheque.org.model.Candidat;
 import com.cvtheque.org.model.Curriculum;
 import com.cvtheque.org.model.Etat;
+import com.cvtheque.org.model.Utilisateur;
 import com.cvtheque.org.repository.CandidatRepository;
 import com.cvtheque.org.util.Consts;
 import com.cvtheque.org.util.LocalStorageService;
@@ -20,6 +21,12 @@ public class CandidatServiceImpl implements CandidatService {
 	
 	private final CandidatRepository candidatRepository;
 	private final LocalStorageService storageService;
+	
+	@Autowired
+	NotificationService notificationService;
+	
+	@Autowired
+	UtilisateurService utilisateurService;
 	
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
@@ -145,6 +152,21 @@ public class CandidatServiceImpl implements CandidatService {
 		//Encoder le Password avant de l'insérer dans la base
 		candidat.setPassword(bcryptEncoder.encode(candidat.getPassword()));
 		
+		// Si c'est un Candidat via Formulaire alors on envoi la notification ici, sinon ça sera dans UtilisateurController
+		if(candidat.getIdLinkedin() == "") 
+		{	
+			// Génération d'une Notification Destinée à l'Administrateur
+			Utilisateur admin = utilisateurService.getUtilisateurByRole("ROLE_ADMINISTRATEUR");
+			List<Utilisateur> listeDestinatairesNotification = new ArrayList<Utilisateur>();
+			listeDestinatairesNotification.add(admin);
+			
+			// Notification générée par le système (ou bien disons par l'Admin) vers lui même (l'Admin)
+			notificationService.
+			generateSimpleNotification(Consts.objetMsgNotificationCandidatAjoute, 
+									   Consts.corpsMsgNotificationCandidatAjouteFormulaire + " : " + candidat.getIdentite(),
+									   listeDestinatairesNotification, 
+									   admin);
+		}
 		return  candidatRepository.save(candidat);
 		}
 	return null;

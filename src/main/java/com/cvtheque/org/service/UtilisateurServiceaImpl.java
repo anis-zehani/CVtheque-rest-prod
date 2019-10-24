@@ -46,6 +46,13 @@ public class UtilisateurServiceaImpl implements UtilisateurService{
 		return utilisateurRepository.findUtilisateurByEmail(email);
 	}
 	
+
+	@Override
+	public Utilisateur getUtilisateurByRole(String role) {
+		return utilisateurRepository.findUtilisateurByDtype(role);
+	}
+
+
 	// Envoi du mail avec lien de réinitialisation à l'utilisateur
 	public Boolean sendEmailResetPassword(String email) {
 		String contenu = 
