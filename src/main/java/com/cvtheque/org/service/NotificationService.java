@@ -13,6 +13,9 @@ public interface NotificationService {
 	// Lister les Notifications Actives = True et par ID consommateur de Notif
 	public List<Notification> getAllNotificationsByUtilisateur(Long idDestinataire, String etatNotification); 
 	
+	// Désactive la Notification liée à l'activation d'un Partenaire Temporaire précis
+	public void deactivateNotificationsByPartenaireTemporaire(PartenaireTemporaire partenaireTemporaire); 
+	
 	// Desactiver une Notification
 	public Boolean deactivateNotification(Long idNotification);
 	

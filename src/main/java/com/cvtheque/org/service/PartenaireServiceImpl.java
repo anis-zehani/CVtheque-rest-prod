@@ -2,7 +2,6 @@ package com.cvtheque.org.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -213,7 +212,7 @@ public class PartenaireServiceImpl implements PartenaireService{
 	}
 	
 	//Supprimer un partenaire
-	public void deletePartenaire(Long id) {
+	public Boolean deletePartenaire(Long id) {
 		
 		if(partenaireRepository.existsById(id))
 		{
@@ -225,15 +224,17 @@ public class PartenaireServiceImpl implements PartenaireService{
 				if(partenaire.getUrlPhoto() != null)
 				{
 					storageService.deletePhoto(Consts.rootLocation+partenaire.getUrlPhoto());
+					//On supprime la ligne de la base
 				}
+				partenaireRepository.deleteById(id);
+				return true;
 			}
-			catch(NoSuchElementException e) 
+			catch(Exception e) 
 			{
 				System.out.print("Erreur durant deletePartenaire :"+e);
+				return false;	
 			}
-			
-			//On supprime la ligne de la base
-			partenaireRepository.deleteById(id);
 		}
+		return null;
 	}
 }

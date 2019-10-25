@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.cvtheque.org.model.Etat;
 import com.cvtheque.org.model.Notification;
+import com.cvtheque.org.model.PartenaireTemporaire;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 	
@@ -28,5 +29,7 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 			+ "SET etat_notification = 'False' "
 			+ "WHERE id = ?1 ", nativeQuery = true)
 	void deactivateNotification(@Param("idNotification") Long idNotification);
+	
+	Notification findByPartenaireTemporaireNotification(@Param("partenaireTemporaire") PartenaireTemporaire partenaireTemporaire);
 	
 }

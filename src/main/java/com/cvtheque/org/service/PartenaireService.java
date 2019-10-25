@@ -22,7 +22,7 @@ public interface PartenaireService {
 	
 	public void updateLinkPartenaireEntreprise(Long idPartenaire);
 	
-	public void deletePartenaire(Long id);
+	public Boolean deletePartenaire(Long id);
 
 	public Partenaire addPhotoToPartenaire(Long id, String urlPhoto);
 	

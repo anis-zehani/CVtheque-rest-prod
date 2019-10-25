@@ -37,6 +37,14 @@ public class NotificationServiceImpl implements NotificationService{
 		return listeNotifications;
 	}
 
+	// Retourne la Notification liée à l'activation d'un Partenaire Temporaire précis
+	@Override
+	public void deactivateNotificationsByPartenaireTemporaire(PartenaireTemporaire partenaireTemporaire) {
+		Notification notification = notificationRepository.findByPartenaireTemporaireNotification(partenaireTemporaire);
+		notificationRepository.deactivateNotification(notification.getId());
+	}
+
+
 	// Desactiver une Notification
 	@Override
 	public Boolean deactivateNotification(Long idNotification) {
@@ -71,7 +79,7 @@ public class NotificationServiceImpl implements NotificationService{
 		notification.setListeDestinatairesNotification(listeDestinatairesNotification);
 		
 		notification.setCandidatNotification(candidatNotification);
-		notification.setPartenaireNotification(partenaireNotification);
+		notification.setPartenaireTemporaireNotification(partenaireNotification);
 		notification.setOpportuniteNotification(opportuniteNotification);
 		
 		notificationRepository.save(notification);

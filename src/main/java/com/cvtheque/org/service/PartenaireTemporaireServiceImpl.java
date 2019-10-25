@@ -118,6 +118,7 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 
 	
 	// Activer un Partenaire Temporaire : le supprimer de la table Temporaire et l'ajouter à la table Partenaire
+	// Aussi Désactiver la Notification qui lui est liée : qui indique à Admin que ce Partenaire est en attente d'activation
 	@Override
 	public Boolean activatePartenaireTemporaire(String email, Long idEntreprise) {
 		// Cherche un Partenaire Temporaire par Email et retourne le tout nouveau dans le cas de plusieurs tentatives via le même email
@@ -134,7 +135,7 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 		partenaire.setDescriptionDetaillee(lastAttemptedPartenaire.getDescriptionDetaillee());
 		
 		//Entreprise est recherchée via le paramètre entré
-		if(idEntreprise!= null && idEntreprise!= 0) {
+		if(idEntreprise != null && idEntreprise != 0) {
 			Entreprise entreprise = entrepriseService.getEntreprise(idEntreprise);
 			partenaire.setEntreprise(entreprise);
 		}else {
@@ -142,9 +143,12 @@ public class PartenaireTemporaireServiceImpl implements PartenaireTemporaireServ
 			partenaire.setEntreprise(entreprise);
 		}
 		
+		// On ajoute le Partenaire Temporaire : il devient Partenaire
 		partenaireService.addPartenaire(partenaire);
 		
-		
+		// Désactiver la Notification liée à la demande d'activation de ce Partenaire Temporaire
+		notificationService.deactivateNotificationsByPartenaireTemporaire(lastAttemptedPartenaire);
+
 		// Supprimer tous les Partenaires Temporaires ayant l'adresse email venant d'être activée
 		partenaireTemporaireRepository.deleteAllPartenairesTemporairesByEmailAdresse(email);
 		

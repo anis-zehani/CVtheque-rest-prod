@@ -56,7 +56,7 @@ public class Notification implements Serializable {
 	private Candidat candidatNotification;
 	
 	@Column
-	private PartenaireTemporaire partenaireNotification;
+	private PartenaireTemporaire partenaireTemporaireNotification;
 	
 	@Column
 	private Opportunite opportuniteNotification;
@@ -121,10 +121,6 @@ public class Notification implements Serializable {
 		return candidatNotification;
 	}
 
-	public PartenaireTemporaire getPartenaireNotification() {
-		return partenaireNotification;
-	}
-
 	public Opportunite getOpportuniteNotification() {
 		return opportuniteNotification;
 	}
@@ -133,11 +129,16 @@ public class Notification implements Serializable {
 		this.candidatNotification = candidatNotification;
 	}
 
-	public void setPartenaireNotification(PartenaireTemporaire partenaireNotification) {
-		this.partenaireNotification = partenaireNotification;
-	}
-
 	public void setOpportuniteNotification(Opportunite opportuniteNotification) {
 		this.opportuniteNotification = opportuniteNotification;
 	}
+
+	public PartenaireTemporaire getPartenaireTemporaireNotification() {
+		return partenaireTemporaireNotification;
+	}
+
+	public void setPartenaireTemporaireNotification(PartenaireTemporaire partenaireTemporaireNotification) {
+		this.partenaireTemporaireNotification = partenaireTemporaireNotification;
+	}
+	
 }

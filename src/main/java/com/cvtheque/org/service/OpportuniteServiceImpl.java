@@ -139,7 +139,7 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 				generateSimpleNotification(Consts.objetMsgNotificationAjoutOpportunite, 
 										   Consts.corpsMsgNotificationAjoutOpportunite, 
 										   listeDestinatairesNotification, 
-										   opportunite.getResponsableOpportunite(),
+										   utilisateurService.getUtilisateurById(opportunite.getResponsableOpportunite().getId()),
 										   null,
 										   null,
 										   null);
@@ -208,7 +208,7 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 				generateSimpleNotification(Consts.objetMsgNotificationModificationOpportunite, 
 										   Consts.corpsMsgNotificationModificationOpportunite, 
 										   listeDestinatairesNotification, 
-										   opportunite.getResponsableOpportunite(),
+										   utilisateurService.getUtilisateurById(opportunite.getResponsableOpportunite().getId()),
 										   null,
 										   null,
 										   editedOpportunite);
