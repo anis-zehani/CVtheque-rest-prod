@@ -114,18 +114,22 @@ public class UtilisateurController {
 				Utilisateur admin = utilisateurService.getUtilisateurByRole("ROLE_ADMINISTRATEUR");
 				List<Utilisateur> listeDestinatairesNotification = new ArrayList<Utilisateur>();
 				listeDestinatairesNotification.add(admin);
-				
-				// Notification générée par le système (ou bien disons par l'Admin) vers lui même (l'Admin)
-				notificationService.
-				generateSimpleNotification(Consts.objetMsgNotificationCandidatAjoute, 
-										   Consts.corpsMsgNotificationCandidatAjouteLinkedin, 
-										   listeDestinatairesNotification, 
-										   admin,
-										   persistedCandidat,
-										   null,
-										   null);
-				
+		
 				ResponseEntity<?> response = linkedInUtil.createAuthenticationToken(persistedCandidat.getUsername(), persistedCandidat.getPassword());
+				
+				// Génération de la Notification si pas d'erreur
+				if (response != null) {
+					// Notification générée par le système (ou bien disons par l'Admin) vers lui même (l'Admin)
+					notificationService.
+					generateSimpleNotification(Consts.objetMsgNotificationCandidatAjoute, 
+											   Consts.corpsMsgNotificationCandidatAjouteLinkedin, 
+											   listeDestinatairesNotification, 
+											   admin,
+											   persistedCandidat,
+											   null,
+											   null);
+				}
+				
 				return response;
 			}
 		}

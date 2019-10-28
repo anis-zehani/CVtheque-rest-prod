@@ -71,36 +71,40 @@ public class Linkedin {
 		params.setScope(env.getProperty("linkedin.scope"));
 		params.setState(env.getProperty("linkedin.state"));
 		
-		AccessGrant accessToken = operations.exchangeForAccess(code, env.getProperty("linkedin.redirectUri"), params);
-		
-		System.out.println("AccessToken is : " + accessToken.getAccessToken());
-		
-		//### r_liteprofile
-		JSONObject jsonObject = (JSONObject)callToLinkedIn(env.getProperty("linkedin.urlLiteProfile"), accessToken); 
-		idLinkedin = (String)jsonObject.get("id");
-		firstName = (String)jsonObject.get("localizedFirstName");
-		lastName = (String)jsonObject.get("localizedLastName");
-		
-		//### r_emailaddress
-		jsonObject = (JSONObject)callToLinkedIn(env.getProperty("linkedin.urlEmailaddress"), accessToken); 
-		
-		for (Object object : (JSONArray)jsonObject.get("elements")) {
-			JSONObject objectCasted = (JSONObject) object;
-			JSONObject email = (JSONObject) objectCasted.get("handle~");
-			emailAddress = (String)email.get("emailAddress");
-		}
-		
-		//### ProfilePicture
-		jsonObject = (JSONObject)callToLinkedIn(env.getProperty("linkedin.urlProfilePicture"), accessToken); 
-		
-		JSONObject mapProfilePicture = (JSONObject)jsonObject.get("profilePicture");
-		JSONObject displayImage = (JSONObject) mapProfilePicture.get("displayImage~");
+		// Faire une boucle Try afin de traiter les bugs API LinkedIn
+		try {
+			AccessGrant accessToken = operations.exchangeForAccess(code, env.getProperty("linkedin.redirectUri"), params);
+			System.out.println("AccessToken is : " + accessToken.getAccessToken());
+			
+			//### r_liteprofile
+			JSONObject jsonObject = (JSONObject)callToLinkedIn(env.getProperty("linkedin.urlLiteProfile"), accessToken); 
+			idLinkedin = (String)jsonObject.get("id");
+			firstName = (String)jsonObject.get("localizedFirstName");
+			lastName = (String)jsonObject.get("localizedLastName");
+			
+			//### r_emailaddress
+			jsonObject = (JSONObject)callToLinkedIn(env.getProperty("linkedin.urlEmailaddress"), accessToken); 
+			
+			for (Object object : (JSONArray)jsonObject.get("elements")) {
+				JSONObject objectCasted = (JSONObject) object;
+				JSONObject email = (JSONObject) objectCasted.get("handle~");
+				emailAddress = (String)email.get("emailAddress");
+			}
+			
+			//### ProfilePicture
+			jsonObject = (JSONObject)callToLinkedIn(env.getProperty("linkedin.urlProfilePicture"), accessToken); 
+			
+			JSONObject mapProfilePicture = (JSONObject)jsonObject.get("profilePicture");
+			JSONObject displayImage = (JSONObject) mapProfilePicture.get("displayImage~");
 
-		for (Object object : (JSONArray)displayImage.get("elements")) {
-			JSONObject objectCasted = (JSONObject) object;
-			JSONArray identifiers = (JSONArray) objectCasted.get("identifiers");
-			JSONObject identifiers0 = (JSONObject) identifiers.get(0);
-			profilePicture = (String)identifiers0.get("identifier");
+			for (Object object : (JSONArray)displayImage.get("elements")) {
+				JSONObject objectCasted = (JSONObject) object;
+				JSONArray identifiers = (JSONArray) objectCasted.get("identifiers");
+				JSONObject identifiers0 = (JSONObject) identifiers.get(0);
+				profilePicture = (String)identifiers0.get("identifier");
+			}
+		}catch(Exception e) {
+			return null;
 		}
 		
 		//Remlissage du JSONObject Final
@@ -136,8 +140,6 @@ public class Linkedin {
 		
 		@SuppressWarnings("deprecation")
 		Object json = new JSONParser().parse(responseStrBuilder.toString()); 
-		
-		//System.out.println("Response is : " + responseStrBuilder.toString());
 		
 		return (JSONObject) json;
 	}
