@@ -94,11 +94,14 @@ public class RappelController {
 	
 	//le Fichier est placé sur le serveur : on récupére un ArrayList avec le nom original + le nom modifié
 	ArrayList<String> files = storageService.addFichierRappel(file);
-	String urlFichier =  files.get(0);
-	String nomFichier =  files.get(1);
-	
-	//le Fichier est affecté au rappel via son id
-	return rappelService.addFichierToRappel(id, urlFichier, nomFichier);
+	try {
+		String urlFichier =  files.get(0);
+		String nomFichier =  files.get(1);
+		//le Fichier est affecté au rappel via son id
+		return rappelService.addFichierToRappel(id, urlFichier, nomFichier);
+	}catch (Exception e) {
+		return null;
+	}
 	}
 	
 	@PutMapping()
