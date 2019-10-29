@@ -14,7 +14,7 @@ import com.cvtheque.org.util.Consts;
 import com.cvtheque.org.util.JavaMailSenderService;
 
 @Service
-public class UtilisateurServiceaImpl implements UtilisateurService{
+public class UtilisateurServiceImpl implements UtilisateurService{
 	
 	private final UtilisateurRepository utilisateurRepository;
 	
@@ -28,7 +28,7 @@ public class UtilisateurServiceaImpl implements UtilisateurService{
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
 	
-	public UtilisateurServiceaImpl(UtilisateurRepository utilisateurRepository) {
+	public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository) {
 		super();
 		this.utilisateurRepository = utilisateurRepository;
 	}
