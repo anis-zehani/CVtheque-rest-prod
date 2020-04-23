@@ -154,10 +154,10 @@ public class Candidat extends Utilisateur implements Serializable {
 	private Disponibilite disponibiliteAutoFill;
 	
 	@Column
-	private Date dateDemarrageCarriereAutoFill;
+	private LocalDate dateDemarrageCarriereAutoFill;
 	
 	@Column
-	private Date dateEpuisementPasseportAutoFill;
+	private LocalDate dateEpuisementPasseportAutoFill;
 	
 	@Column(nullable = true)
 	@Enumerated(EnumType.STRING)
@@ -377,11 +377,11 @@ public class Candidat extends Utilisateur implements Serializable {
 		return disponibiliteAutoFill;
 	}
 
-	public Date getDateDemarrageCarriereAutoFill() {
+	public LocalDate getDateDemarrageCarriereAutoFill() {
 		return dateDemarrageCarriereAutoFill;
 	}
 
-	public Date getDateEpuisementPasseportAutoFill() {
+	public LocalDate getDateEpuisementPasseportAutoFill() {
 		return dateEpuisementPasseportAutoFill;
 	}
 
@@ -441,11 +441,11 @@ public class Candidat extends Utilisateur implements Serializable {
 		this.disponibiliteAutoFill = disponibiliteAutoFill;
 	}
 
-	public void setDateDemarrageCarriereAutoFill(Date dateDemarrageCarriereAutoFill) {
+	public void setDateDemarrageCarriereAutoFill(LocalDate dateDemarrageCarriereAutoFill) {
 		this.dateDemarrageCarriereAutoFill = dateDemarrageCarriereAutoFill;
 	}
 
-	public void setDateEpuisementPasseportAutoFill(Date dateEpuisementPasseportAutoFill) {
+	public void setDateEpuisementPasseportAutoFill(LocalDate dateEpuisementPasseportAutoFill) {
 		this.dateEpuisementPasseportAutoFill = dateEpuisementPasseportAutoFill;
 	}
 

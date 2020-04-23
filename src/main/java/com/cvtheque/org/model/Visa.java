@@ -34,6 +34,8 @@ public class Visa implements Serializable {
 	@Column
 	private LocalDate dateFinVisa;
 	
+	/*Paramètres AutoFill : le candidat remplira ça tout seul via son espace candidat*/
+	
 	@Column
 	@Enumerated(EnumType.STRING)
 	private TypeVisa typeVisaAutoFill;

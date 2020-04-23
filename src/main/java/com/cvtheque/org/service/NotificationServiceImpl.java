@@ -45,7 +45,7 @@ public class NotificationServiceImpl implements NotificationService{
 	}
 
 
-	// Desactiver une Notification
+	// Désactiver une Notification
 	@Override
 	public Boolean deactivateNotification(Long idNotification) {
 		

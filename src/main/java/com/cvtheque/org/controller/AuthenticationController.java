@@ -19,10 +19,9 @@ import com.cvtheque.org.security.JwtResponseModel;
 import com.cvtheque.org.security.JwtTokenUtil;
 import com.cvtheque.org.security.UserDetailsServiceImpl;
 
-
 @CrossOrigin
 @RestController
-@RequestMapping("/api/authentication-controller")
+@RequestMapping("/api/gateway/authentication-controller")
 public class AuthenticationController {
 	
 	protected final Log logger = LogFactory.getLog(getClass());

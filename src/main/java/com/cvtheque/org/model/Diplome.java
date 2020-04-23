@@ -36,6 +36,8 @@ public class Diplome implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
 	Ecole ecole;
     
+    /*Paramètres AutoFill : le candidat remplira ça tout seul via son espace candidat*/
+    
     @Column
 	@Enumerated(EnumType.STRING)
 	private TypeDiplome typeDiplomeAutoFill;
