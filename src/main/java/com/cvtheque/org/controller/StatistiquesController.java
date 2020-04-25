@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cvtheque.org.service.ChiffresClesService;
+import com.cvtheque.org.service.StatistiquesService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/chiffrescles")
-public class ChiffresClesController {
+@RequestMapping("/api/statistiques")
+public class StatistiquesController {
 	
 	@Autowired
-	ChiffresClesService chiffresClesService;
+	StatistiquesService statistiquesService;
 	
 	//Retourne les 6 chiffres clés de base
 	@GetMapping("/all")
-	public Map<String, Long> getChiffreCles() {
-	    return chiffresClesService.getChiffreCles();
+	public Map<String, Long> getStatistiques() {
+	    return statistiquesService.getChiffreCles();
 	}
 }

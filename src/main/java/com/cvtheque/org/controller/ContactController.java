@@ -25,7 +25,7 @@ import com.cvtheque.org.util.LocalStorageService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/contact")
+@RequestMapping("/api/gateway/contact")
 public class ContactController {
 	
 	@Autowired

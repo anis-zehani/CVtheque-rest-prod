@@ -21,7 +21,7 @@ import com.cvtheque.org.service.CollaborateurService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/collaborateur")
+@RequestMapping("/api/gateway/collaborateur")
 public class CollaborateurController {
 	
 	@Autowired

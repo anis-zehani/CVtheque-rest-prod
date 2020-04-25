@@ -15,7 +15,7 @@ import com.cvtheque.org.service.CandidatTemporaireService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/candidat-temporaire-controller")
+@RequestMapping("/api/gateway/candidat-temporaire-controller")
 public class CandidatTemporaireController {
 	
 	@Autowired

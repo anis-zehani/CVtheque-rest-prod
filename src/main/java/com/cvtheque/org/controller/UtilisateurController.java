@@ -36,7 +36,7 @@ import net.minidev.json.JSONObject;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/utilisateur")
+@RequestMapping("/api/gateway/utilisateur")
 public class UtilisateurController {
 	
 	@Autowired

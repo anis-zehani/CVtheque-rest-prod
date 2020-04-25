@@ -13,7 +13,7 @@ import com.cvtheque.org.repository.PartenaireRepository;
 import com.cvtheque.org.repository.TechnologieRepository;
 
 @Service
-public class ChiffresClesServiceImpl implements ChiffresClesService {
+public class StatistiquesServiceImpl implements StatistiquesService {
 	
 	private final CandidatRepository candidatRepository;
 	private final OpportuniteRepository opportuniteRepository;
@@ -22,7 +22,7 @@ public class ChiffresClesServiceImpl implements ChiffresClesService {
 	private final TechnologieRepository technologieRepository;
 	private final EntrepriseRepository entrepriseRepository;
 	
-	public ChiffresClesServiceImpl(CandidatRepository candidatRepository, OpportuniteRepository opportuniteRepository,
+	public StatistiquesServiceImpl(CandidatRepository candidatRepository, OpportuniteRepository opportuniteRepository,
 			PartenaireRepository partenaireRepository, ContactRepository contactRepository,
 			TechnologieRepository technologieRepository, EntrepriseRepository entrepriseRepository) {
 		super();
