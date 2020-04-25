@@ -15,6 +15,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import com.google.common.collect.ImmutableList;
 
 @Configuration
 @EnableWebSecurity
@@ -36,7 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 - user for matching credentials
 		 - Use BCryptPasswordEncoder
 		 */
-
 		auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
 	}
 
@@ -54,26 +58,62 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		// We don't need CSRF for this example
-		httpSecurity.csrf().disable()
-				// dont authenticate this particular request
-				.authorizeRequests().antMatchers("/api/authentication-controller/authenticate", "/api/candidat-temporaire-controller",
-						"/api/candidat-temporaire-controller/mail-activation-candidat-temporaire/**", "/api/candidat-temporaire-controller/activation-compte-candidat-temporaire/**",
+		httpSecurity.cors().and().csrf().disable()
+				// Don't authenticate this particular request
+				.authorizeRequests()
+				.antMatchers(
+						"/api/authentication-controller/authenticate", 
+						"/api/candidat-temporaire-controller",
+						"/api/candidat-temporaire-controller/mail-activation-candidat-temporaire/**", 
+						"/api/candidat-temporaire-controller/activation-compte-candidat-temporaire/**",
 						"/api/authentication-controller/authenticateByResetPassword", 
 						"/api/authentication-controller/authenticateNewCreatedUser", 
 						"/api/partenaire-temporaire-controller",
-						"/api/utilisateur/code-linkedin", "/api/utilisateur/password-forgotten/**", 
-						"/api/utilisateur/password-send-email-reset/**","/api/utilisateur/password-reset/**",
-						"/api/utilisateur/redirect-linkedin/**", "/api/utilisateur/register").permitAll()
-				//.antMatchers("/api/partenaires/**").hasRole("ROLE_ADMINISTRATEUR")
+						"/api/utilisateur/code-linkedin", 
+						"/api/utilisateur/password-forgotten/**", 
+						"/api/utilisateur/password-send-email-reset/**",
+						"/api/utilisateur/password-reset/**",
+						"/api/utilisateur/redirect-linkedin/**", 
+						"/api/utilisateur/register",
+						"/actuator/**").permitAll()
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+				.antMatchers("/api/partenaire/**", "/api/partenaire-temporaire-controller/**").hasRole("ADMINISTRATEUR")
 				// all other requests need to be authenticated
 				.anyRequest().authenticated()
 				.and()
 				// make sure we use stateless session; session won't be used to store user's state.
-				.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+				.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+				.and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and()
+				.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
-		// Add a filter to validate the tokens with every request
-		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		/**Filtre 2 remplacé en haut par .antMatchers("/api/partenaire/**", "/api/partenaire-temporaire-controller/**").hasRole("ADMINISTRATEUR") ***/
+		// Filtres pour sécuriser l'accès au paramètrages des partenaires
+		/*httpSecurity
+		.antMatcher("/api/partenaire/**")
+		.authorizeRequests()
+		.anyRequest()
+		.hasRole("ADMINISTRATEUR")
+		.and()
+		.antMatcher("/api/partenaire-temporaire-controller/**")
+		.authorizeRequests()
+		.anyRequest()
+		.hasRole("ADMINISTRATEUR");
+		*/
 	}
+	
+		//CrossOrigin 
+	    @Bean
+	    public CorsConfigurationSource corsConfigurationSource() {
+	        final CorsConfiguration configuration = new CorsConfiguration();
+	        //configuration.setAllowedOrigins(ImmutableList.of("http://localhost:8080","http://localhost:8084"));
+	        configuration.setAllowedOrigins(ImmutableList.of("*"));
+	        configuration.setAllowedMethods(ImmutableList.of("GET", "POST", "PUT", "DELETE"));
+	        configuration.setAllowCredentials(true);
+	        configuration.setAllowedHeaders(ImmutableList.of("Authorization", "Cache-Control", "Content-Type"));
+	        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	        source.registerCorsConfiguration("/**", configuration);
+	        return source;
+	    }
 }
