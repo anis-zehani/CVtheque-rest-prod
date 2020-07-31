@@ -3,6 +3,7 @@ package com.cvtheque.org;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.cvtheque.org.service.AdministrateurService;
@@ -10,6 +11,7 @@ import com.cvtheque.org.util.AwsStorageService;
 
 @SpringBootApplication
 @EnableScheduling
+@EnableDiscoveryClient
 public class Application {
 	
 	@Autowired
